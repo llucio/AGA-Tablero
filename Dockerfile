@@ -3,7 +3,7 @@ FROM node:12 as build
 
 # URL de API de datos
 ARG API_URL=http://localhost:4000/v1/graphql
-ENV REACT_APP_API_URL=$DATA_APP_URL
+ENV REACT_APP_API_URL=$API_URL
 
 WORKDIR /app
 
