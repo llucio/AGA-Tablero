@@ -9,11 +9,12 @@ yarn install
 ```
 
 ## Configuración
-Crear archivo de configuración `.env` y editar si es necesario
+Redefinir cualquier variable de configuración de `.env` en un archivo `.env.local`
 (o bien fijar al sistema las variables de ambiente correspondientes)
 
 ```sh
-cp .env.sample .env
+cp .env .env.local
+# Editar .env.local
 ```
 
 ## Ejecutar
