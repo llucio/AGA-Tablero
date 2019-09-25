@@ -1,6 +1,6 @@
 # AGA/tablero
 
-Aplicación web SPA basada en React
+Aplicación web SPA basada en React, creada con [Create React App](https://github.com/facebook/create-react-app)
 
 
 ## Instalar deendencias
