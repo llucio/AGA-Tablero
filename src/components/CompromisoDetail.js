@@ -1,5 +1,4 @@
 import React from 'react';
-import { get } from 'lodash';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { DateTime } from 'luxon';

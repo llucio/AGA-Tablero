@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Container from 'react-bootstrap/Container';
+import React from 'react';
 import Row from 'react-bootstrap/Row';
 import CompromisoCard from './CompromisoCard';
 

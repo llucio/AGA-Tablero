@@ -1,38 +1,26 @@
 import React from 'react';
-import {
-  get,
-  keys,
-  pick,
-  has,
-  pickBy,
-  isObject,
-  isArray,
-  isBoolean,
-  isString
-} from 'lodash';
+import { get, keys, has, isObject, isArray, isBoolean, isString } from 'lodash';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const DataDisplay = ({ data, ...props }) => {
+  const { keyLabels, labelComponent = 'h3', valueComponent = Col } = props;
   if (isArray(data)) {
-    const ValueComponent = props.valueContainer || Col;
     return (
       <Row>
         {data.map(value => (
-          <ValueComponent key={value}>
+          <valueComponent key={value}>
             <DataDisplay key={value} data={value} {...props} />
-          </ValueComponent>
+          </valueComponent>
         ))}
       </Row>
     );
   } else if (isObject(data)) {
-    const Label = props.labelComponent || 'h3';
-    const dataKeys = keys(props.keys || data).filter(key => has(data, key));
-
+    const dataKeys = keys(keyLabels || data).filter(key => has(data, key));
     return dataKeys.map(key => (
       <Row key={key}>
         <Col xs="3">
-          <Label>{get(props.keys || {}, key, key)}</Label>
+          <labelComponent>{get(keyLabels || {}, key, key)}</labelComponent>
         </Col>
         <Col>
           <DataDisplay data={data[key]} {...props} />
@@ -44,7 +32,7 @@ const DataDisplay = ({ data, ...props }) => {
   } else if (isString(data)) {
     return <p>{data}</p>;
   } else {
-    console.log('ERROR', data);
+    console.error('Unexpected data', data);
     return null;
   }
 };

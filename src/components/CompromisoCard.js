@@ -1,7 +1,6 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import DataDisplay from './DataDisplay';
 import { Link } from 'react-router-dom';
 
@@ -19,6 +18,7 @@ const CompromisoCard = ({ compromiso }) => {
           className="rounded img-fluid"
           style={{ height: '230px' }}
           src="https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+          alt="Gobierno Abierto"
         />
         <header>
           <h2>{compromiso.titulo}</h2>
@@ -26,7 +26,7 @@ const CompromisoCard = ({ compromiso }) => {
         </header>
       </Link>
       <Row>
-        <DataDisplay data={compromiso.metadatos.descripcion} />
+        <DataDisplay data={compromiso.metadatos.descripcion} keyLabels={keyLabels} />
       </Row>
       <Row className="justify-content-center">
         <Link
