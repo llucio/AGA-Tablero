@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Instalar dependencias
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --production
 
 # Copiar el resto del código y construir proyecto
 COPY src src
