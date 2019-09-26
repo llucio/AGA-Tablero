@@ -3,12 +3,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import DataDisplay from './DataDisplay';
 import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 const keyLabels = {
   descripcion: 'Descripción',
-  valores: 'Vaores de AGA',
+  valores: 'Valores de AGA',
   adicional: 'Información adicional'
 };
+
+const defaultImage = 'https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
 
 const CompromisoCard = ({ compromiso }) => {
   return (
@@ -17,16 +20,16 @@ const CompromisoCard = ({ compromiso }) => {
         <img
           className="rounded img-fluid"
           style={{ height: '230px' }}
-          src="https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+          src={compromiso.metadatos.imagen || defaultImage}
           alt="Gobierno Abierto"
         />
         <header>
           <h2>{compromiso.titulo}</h2>
-          <span className="badge bg-red">SAGARPA</span>
+          <span className="badge bg-red">{compromiso.metadatos.dependencia}</span>
         </header>
       </Link>
       <Row>
-        <DataDisplay data={compromiso.metadatos.descripcion} keyLabels={keyLabels} />
+        <div style={{ minHeight: '200px' }}>{parse(compromiso.metadatos.descripcion)}</div>
       </Row>
       <Row className="justify-content-center">
         <Link
