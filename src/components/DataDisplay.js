@@ -43,7 +43,7 @@ const DataDisplay = ({ data, ...props }) => {
 
   // Un String renderea un párrafo
   else if (isString(data)) {
-    return parse(data);
+    return <span>{parse(data)}</span>;
   }
 
   // Valor de tipo desconocido

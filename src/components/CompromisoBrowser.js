@@ -26,7 +26,7 @@ const CompromisoBrowser = () => {
   return (
     <Row>
       <Col xs={12} className="ustify-content-end">
-        <CompromisoNav />
+        {false && <CompromisoNav />}
       </Col>
       <Col cs={12}>
         {loading || !compromisos ? (
