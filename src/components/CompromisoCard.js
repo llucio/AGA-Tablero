@@ -5,12 +5,6 @@ import DataDisplay from './DataDisplay';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 
-const keyLabels = {
-  descripcion: 'Descripción',
-  valores: 'Valores de AGA',
-  adicional: 'Información adicional'
-};
-
 const defaultImage = 'https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
 
 const CompromisoCard = ({ compromiso }) => {

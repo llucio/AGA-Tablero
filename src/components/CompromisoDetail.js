@@ -36,7 +36,8 @@ const Compromiso = ({ compromiso }) => {
       <DataDisplay
         data={compromiso.metadatos}
         labelComponent="h3"
-        keys={{
+        listItemComponent="li"
+        keyLabels={{
           descripcion: 'Descripción',
           valores: 'Valores',
           adicional: 'Información adicional',

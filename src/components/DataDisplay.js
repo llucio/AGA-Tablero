@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get, keys, has, isObject, isArray, isBoolean, isString } from 'lodash';
+import { get, keys, has, isPlainObject, isArray, isBoolean, isString } from 'lodash';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import parse from 'html-react-parser';
 
 const DataDisplay = ({ data, ...props }) => {
-  const { keyLabels, labelComponent = 'h3', valueComponent = Col } = props;
+  const { keyLabels, labelComponent = 'h3', listItemComponent: ListItemComponent = Col } = props;
 
   // Un objeto key/value renderea llave y un DataDisplay recursivo con el valor
-  if (isObject(data)) {
+  if (isPlainObject(data)) {
     const dataKeys = keys(keyLabels || data).filter(key => has(data, key));
     return dataKeys.map(key => (
       <Row key={key}>
@@ -27,9 +28,9 @@ const DataDisplay = ({ data, ...props }) => {
     return (
       <Row>
         {data.map(value => (
-          <valueComponent key={value}>
+          <ListItemComponent className="list-item" key={value}>
             <DataDisplay key={value} data={value} {...props} />
-          </valueComponent>
+          </ListItemComponent>
         ))}
       </Row>
     )
@@ -42,7 +43,7 @@ const DataDisplay = ({ data, ...props }) => {
 
   // Un String renderea un párrafo
   else if (isString(data)) {
-    return <p>{data}</p>;
+    return parse(data);
   }
 
   // Valor de tipo desconocido
