@@ -12,7 +12,7 @@ const CompromisoCard = ({ compromiso }) => {
     <Col xs={12} md={6} lg={4} className="post-item text-left">
       <Link to={`/compromiso/${compromiso.id}`} className="not-dotted">
         <img
-          className="rounded img-fluid"
+          className="rounded img-fluid shadow"
           style={{ height: '230px' }}
           src={compromiso.metadatos.imagen || defaultImage}
           alt="Gobierno Abierto"
