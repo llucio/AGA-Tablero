@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import * as Survey from "survey-react";
 //import Row from 'react-bootstrap/Row';
 //import Col from 'react-bootstrap/Col';
-import "survey-react/survey.css";
+//import "survey-react/survey.css";
 
 
 /*
@@ -27,7 +27,18 @@ class EncuestaBrowser extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isCompleted: false };
-    Survey.StylesManager.applyTheme("bootstrap");
+
+    //Survey.StylesManager.applyTheme("default");
+
+    //$.material.init();
+
+    Survey.defaultBootstrapMaterialCss.navigationButton = "btn btn-lg red darken-4";
+    Survey.defaultBootstrapMaterialCss.rating.item = "btn btn-lg btn-success";
+    Survey.defaultBootstrapMaterialCss.matrixdynamic.button = "red";
+    Survey.defaultBootstrapMaterialCss.matrixdynamic.buttonRemove = "red darken-4";
+    Survey.StylesManager.applyTheme("bootstrapmaterial");
+
+
     //this.onCompleteComponent = this.onCompleteComponent.bind(this);
     //console.log( 'LOGS: ' + props );
   }
@@ -38,18 +49,270 @@ class EncuestaBrowser extends React.Component {
   render() {
     var surveyJSON = {
 			
-    cookieName: "AGA-2",
-		title: "Que tecnologia utilizas", pages: [
-		  { name:"page1", questions: [ 
-		      { type: "radiogroup", choices: [ "Yes", "No" ], isRequired: true, name: "frameworkUsing",title: "Do you use any front-end framework like Bootstrap?" },
-		      { type: "checkbox", choices: ["Bootstrap","Foundation"], hasOther: true, isRequired: true, name: "framework", title: "What front-end framework do you use?", visibleIf: "{frameworkUsing} = 'Yes'" }
-		   ]},
-		  { name: "page2", questions: [
-		    { type: "radiogroup", choices: ["Yes","No"],isRequired: true, name: "mvvmUsing", title: "Do you use any MVVM framework?" },
-		    { type: "checkbox", choices: [ "AngularJS", "KnockoutJS", "React" ], hasOther: true, isRequired: true, name: "mvvm", title: "What MVVM framework do you use?", visibleIf: "{mvvmUsing} = 'Yes'" } ] },
-		  { name: "page3",questions: [
-		    { type: "comment", name: "about", title: "Please tell us about your main requirements for Survey library" } ] }
-		 ]
+    cookieName: "AGA-3",
+		title: "Que tecnologia utilizas",
+    "pages": [
+      {
+       "name": "page1",
+       "elements": [
+        {
+         "type": "dropdown",
+         "name": "question1",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
+        },
+        {
+         "type": "imagepicker",
+         "name": "question17",
+         "choices": [
+          {
+           "value": "lion",
+           "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          },
+          {
+           "value": "giraffe",
+           "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+          },
+          {
+           "value": "panda",
+           "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+          },
+          {
+           "value": "camel",
+           "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+          }
+         ]
+        },
+        {
+         "type": "expression",
+         "name": "question18",
+         "commentText": "Other (describe)"
+        },
+        {
+         "type": "expression",
+         "name": "question19",
+         "commentText": "Other (describe)"
+        },
+        {
+         "type": "rating",
+         "name": "question3"
+        },
+        {
+         "type": "comment",
+         "name": "question4"
+        },
+        {
+         "type": "dropdown",
+         "name": "question5",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
+        },
+        {
+         "type": "dropdown",
+         "name": "question10",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
+        },
+        {
+         "type": "comment",
+         "name": "question11"
+        },
+        {
+         "type": "multipletext",
+         "name": "question12",
+         "items": [
+          {
+           "name": "text1"
+          },
+          {
+           "name": "text2"
+          }
+         ]
+        },
+        {
+         "type": "matrix",
+         "name": "question13",
+         "columns": [
+          "Column 1",
+          "Column 2",
+          "Column 3"
+         ],
+         "rows": [
+          "Row 1",
+          "Row 2"
+         ]
+        },
+        {
+         "type": "matrixdropdown",
+         "name": "question14",
+         "columns": [
+          {
+           "name": "Column 1"
+          },
+          {
+           "name": "Column 2"
+          },
+          {
+           "name": "Column 3"
+          }
+         ],
+         "choices": [
+          1,
+          2,
+          3,
+          4,
+          5
+         ],
+         "rows": [
+          "Row 1",
+          "Row 2"
+         ]
+        },
+        {
+         "type": "boolean",
+         "name": "question25"
+        },
+        {
+         "type": "expression",
+         "name": "question26",
+         "commentText": "Other (describe)"
+        },
+        {
+         "type": "expression",
+         "name": "question27",
+         "commentText": "Other (describe)"
+        },
+        {
+         "type": "matrix",
+         "name": "question28",
+         "columns": [
+          "Column 1",
+          "Column 2",
+          "Column 3"
+         ],
+         "rows": [
+          "Row 1",
+          "Row 2"
+         ]
+        },
+        {
+         "type": "radiogroup",
+         "name": "question24",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
+        },
+        {
+         "type": "matrixdynamic",
+         "name": "question15",
+         "columns": [
+          {
+           "name": "Column 1"
+          },
+          {
+           "name": "Column 2"
+          },
+          {
+           "name": "Column 3"
+          }
+         ],
+         "choices": [
+          1,
+          2,
+          3,
+          4,
+          5
+         ]
+        },
+        {
+         "type": "multipletext",
+         "name": "question16",
+         "items": [
+          {
+           "name": "text1"
+          },
+          {
+           "name": "text2"
+          }
+         ]
+        },
+        {
+         "type": "comment",
+         "name": "question6"
+        },
+        {
+         "type": "dropdown",
+         "name": "question7",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
+        },
+        {
+         "type": "radiogroup",
+         "name": "question8",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
+        },
+        {
+         "type": "expression",
+         "name": "question9",
+         "commentText": "Other (describe)"
+        },
+        {
+         "type": "rating",
+         "name": "question2",
+         "rateValues": [
+          2,
+          3,
+          4,
+          5
+         ]
+        },
+        {
+         "type": "html",
+         "name": "question22"
+        },
+        {
+         "type": "radiogroup",
+         "name": "question20",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
+        },
+        {
+         "type": "comment",
+         "name": "question21"
+        },
+        {
+         "type": "dropdown",
+         "name": "question23",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
+        }
+       ]
+      }
+     ]
 			
     };
 
