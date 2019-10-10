@@ -1,264 +1,130 @@
 {
- "pages": [
-  {
-   "name": "page1",
-   "elements": [
+  "name": "hojaRuta",
+  "elements": [
     {
-     "type": "dropdown",
-     "name": "question1",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
+      "type": "text",
+      "name": "titulo",
+      "isRequired": true,
+      "title": "Título del compromiso"
     },
     {
-     "type": "imagepicker",
-     "name": "question17",
-     "choices": [
-      {
-       "value": "lion",
-       "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-      },
-      {
-       "value": "giraffe",
-       "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-      },
-      {
-       "value": "panda",
-       "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-      },
-      {
-       "value": "camel",
-       "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-      }
-     ]
+      "type": "multipletext",
+      "name": "fechas",
+      "title": "Fechas",
+      "items": [
+        {
+          "name": "fechaInicio",
+          "inputType": "date",
+          "title": "Fecha de inicio"
+        },
+        {
+          "name": "fechaConclusion",
+          "inputType": "date",
+          "title": "Fecha de conclusión"
+        }
+      ]
     },
     {
-     "type": "expression",
-     "name": "question18",
-     "commentText": "Other (describe)"
+      "type": "paneldynamic",
+      "name": "responsables",
+      "title": "Responsables",
+      "templateElements": [
+        {
+          "type": "text",
+          "name": "responsableNombre",
+          "title": "Nombre"
+        },
+        {
+          "type": "text",
+          "name": "responsableCargo",
+          "title": "Cargo"
+        },
+        {
+          "type": "dropdown",
+          "name": "responsableInstitucion",
+          "startWithNewLine": false,
+          "choices": ["item1", "item2", "item3"]
+        },
+        {
+          "type": "text",
+          "name": "responsableCorreo",
+          "title": "Correo electrónico",
+          "inputType": "email"
+        },
+        {
+          "type": "text",
+          "name": "responsableTelefono",
+          "startWithNewLine": false,
+          "title": "Teléfono",
+          "inputType": "tel"
+        }
+      ],
+      "panelCount": 1,
+      "minPanelCount": 1,
+      "panelAddText": "Añadir responsable"
     },
     {
-     "type": "expression",
-     "name": "question19",
-     "commentText": "Other (describe)"
+      "type": "panel",
+      "name": "compromiso",
+      "elements": [
+        {
+          "type": "comment",
+          "name": "descripcion",
+          "title": "¿Cuál es el compromiso?"
+        },
+        {
+          "type": "comment",
+          "name": "problematica",
+          "title": "¿Cuál es la problemática que el compromiso aborda?"
+        },
+        {
+          "type": "comment",
+          "name": "problematica_contribucion",
+          "title": " ¿Cómo contribuirá a resolver la problemática?"
+        },
+        {
+          "type": "comment",
+          "name": "relevancia_ogp",
+          "title": " ¿Por qué es relevante para los valores de OGP?"
+        }
+      ],
+      "title": "Descripción del compromiso"
     },
     {
-     "type": "rating",
-     "name": "question3"
+      "type": "matrixdynamic",
+      "name": "otros_actores",
+      "title": "Otros actores involucrados",
+      "description": "(OSC, sector privado, agencias multilaterales, grupos de trabajo)",
+      "columns": [
+        {
+          "name": "actor",
+          "title": "Actor"
+        }
+      ],
+      "cellType": "text",
+      "addRowText": "Añadir actor"
     },
     {
-     "type": "comment",
-     "name": "question4"
-    },
-    {
-     "type": "dropdown",
-     "name": "question5",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
-    },
-    {
-     "type": "dropdown",
-     "name": "question10",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
-    },
-    {
-     "type": "comment",
-     "name": "question11"
-    },
-    {
-     "type": "multipletext",
-     "name": "question12",
-     "items": [
-      {
-       "name": "text1"
-      },
-      {
-       "name": "text2"
-      }
-     ]
-    },
-    {
-     "type": "matrix",
-     "name": "question13",
-     "columns": [
-      "Column 1",
-      "Column 2",
-      "Column 3"
-     ],
-     "rows": [
-      "Row 1",
-      "Row 2"
-     ]
-    },
-    {
-     "type": "matrixdropdown",
-     "name": "question14",
-     "columns": [
-      {
-       "name": "Column 1"
-      },
-      {
-       "name": "Column 2"
-      },
-      {
-       "name": "Column 3"
-      }
-     ],
-     "choices": [
-      1,
-      2,
-      3,
-      4,
-      5
-     ],
-     "rows": [
-      "Row 1",
-      "Row 2"
-     ]
-    },
-    {
-     "type": "boolean",
-     "name": "question25"
-    },
-    {
-     "type": "expression",
-     "name": "question26",
-     "commentText": "Other (describe)"
-    },
-    {
-     "type": "expression",
-     "name": "question27",
-     "commentText": "Other (describe)"
-    },
-    {
-     "type": "matrix",
-     "name": "question28",
-     "columns": [
-      "Column 1",
-      "Column 2",
-      "Column 3"
-     ],
-     "rows": [
-      "Row 1",
-      "Row 2"
-     ]
-    },
-    {
-     "type": "radiogroup",
-     "name": "question24",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
-    },
-    {
-     "type": "matrixdynamic",
-     "name": "question15",
-     "columns": [
-      {
-       "name": "Column 1"
-      },
-      {
-       "name": "Column 2"
-      },
-      {
-       "name": "Column 3"
-      }
-     ],
-     "choices": [
-      1,
-      2,
-      3,
-      4,
-      5
-     ]
-    },
-    {
-     "type": "multipletext",
-     "name": "question16",
-     "items": [
-      {
-       "name": "text1"
-      },
-      {
-       "name": "text2"
-      }
-     ]
-    },
-    {
-     "type": "comment",
-     "name": "question6"
-    },
-    {
-     "type": "dropdown",
-     "name": "question7",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
-    },
-    {
-     "type": "radiogroup",
-     "name": "question8",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
-    },
-    {
-     "type": "expression",
-     "name": "question9",
-     "commentText": "Other (describe)"
-    },
-    {
-     "type": "rating",
-     "name": "question2",
-     "rateValues": [
-      2,
-      3,
-      4,
-      5
-     ]
-    },
-    {
-     "type": "html",
-     "name": "question22"
-    },
-    {
-     "type": "radiogroup",
-     "name": "question20",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
-    },
-    {
-     "type": "comment",
-     "name": "question21"
-    },
-    {
-     "type": "dropdown",
-     "name": "question23",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
+      "type": "paneldynamic",
+      "name": "hitos",
+      "title": "Hitos",
+      "templateElements": [
+        {
+          "type": "multipletext",
+          "name": "hito",
+          "title": "Hito",
+          "items": [
+            {
+              "name": "descripcion",
+              "title": "Descripción"
+            },
+            {
+              "name": "indicador",
+              "title": "Indicador"
+            }
+          ]
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

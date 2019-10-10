@@ -1,15 +1,14 @@
 import React from 'react';
-import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-import CompromisoBrowser from './components/CompromisoBrowser';
-import CompromisoDetail from './components/CompromisoDetail';
-import EncuestaBrowser from './components/EncuestaBrowser';
-//import Survey from './components/Survey';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { ThemeProvider } from 'styled-components';
+import CompromisoBrowser from './components/CompromisoBrowser';
+import CompromisoDetail from './components/CompromisoDetail';
+import EncuestaBrowser from './components/EncuestaBrowser';
+import { apolloClient } from './apollo';
 
 const theme = {
   calendarIcon: {
@@ -19,22 +18,9 @@ const theme = {
   }
 };
 
-const uri = process.env.REACT_APP_API_URL || 'http://localhost:4000/v1/graphql';
-
-const client = new ApolloClient({
-  uri,
-  request: operation => {
-    operation.setContext({
-      headers: {
-        'X-Hasura-Role': 'anonymous'
-      }
-    });
-  }
-});
-
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
         <Router>
           <Route

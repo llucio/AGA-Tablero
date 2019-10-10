@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { get, keys, has, isPlainObject, isArray, isBoolean, isString } from 'lodash';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import parse from 'html-react-parser';
+// import parse from 'html-react-parser';
 
 const DataDisplay = ({ data, ...props }) => {
   const { keyLabels, labelComponent = 'h3', listItemComponent: ListItemComponent = Col } = props;
@@ -43,7 +43,7 @@ const DataDisplay = ({ data, ...props }) => {
 
   // Un String renderea un párrafo
   else if (isString(data)) {
-    return <span>{parse(data)}</span>;
+    return <span>{data}</span>;
   }
 
   // Valor de tipo desconocido
