@@ -86,7 +86,7 @@ function App() {
                   }}
                 >
                   <h2 className="big shadow-text">
-                    Formulario de contacto
+                    Registro de compromiso.
                   </h2>
                 </Header>
                 <Content>
@@ -174,6 +174,9 @@ function Breadcrumbs({ match, ...props }) {
     <Breadcrumb>
       <LinkContainer to="/">
         <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
+      </LinkContainer>
+      <LinkContainer to="/formulario">
+        <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
       </LinkContainer>
       <Switch>
         <Route

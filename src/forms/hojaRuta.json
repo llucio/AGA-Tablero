@@ -42,6 +42,7 @@
         {
           "type": "dropdown",
           "name": "responsableInstitucion",
+          "title": "Institución",
           "startWithNewLine": false,
           "choices": ["item1", "item2", "item3"]
         },
@@ -84,7 +85,7 @@
         },
         {
           "type": "comment",
-          "name": "relevancia_ogp",
+          "name": "valores",
           "title": " ¿Por qué es relevante para los valores de OGP?"
         }
       ],
