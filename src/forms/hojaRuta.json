@@ -1,131 +1,146 @@
 {
-  "name": "hojaRuta",
-  "elements": [
+ "pages": [
+  {
+   "name": "page1",
+   "elements": [
     {
-      "type": "text",
-      "name": "titulo",
-      "isRequired": true,
-      "title": "Título del compromiso"
+     "type": "text",
+     "name": "titulo",
+     "title": "Título del compromiso",
+     "isRequired": true
     },
     {
-      "type": "multipletext",
-      "name": "fechas",
-      "title": "Fechas",
-      "items": [
-        {
-          "name": "fechaInicio",
-          "inputType": "date",
-          "title": "Fecha de inicio"
-        },
-        {
-          "name": "fechaConclusion",
-          "inputType": "date",
-          "title": "Fecha de conclusión"
-        }
-      ]
+     "type": "multipletext",
+     "name": "fechas",
+     "title": "Fechas",
+     "items": [
+      {
+       "name": "fechaInicio",
+       "inputType": "date",
+       "title": "Fecha de inicio"
+      },
+      {
+       "name": "fechaConclusion",
+       "inputType": "date",
+       "title": "Fecha de conclusión"
+      }
+     ]
     },
     {
-      "type": "paneldynamic",
-      "name": "responsables",
-      "title": "Responsables",
-      "templateElements": [
-        {
-          "type": "text",
-          "name": "responsableNombre",
-          "title": "Nombre"
-        },
-        {
-          "type": "text",
-          "name": "responsableCargo",
-          "title": "Cargo"
-        },
-        {
-          "type": "dropdown",
-          "name": "responsableInstitucion",
-          "title": "Institución",
-          "startWithNewLine": false,
-          "choices": ["item1", "item2", "item3"]
-        },
-        {
-          "type": "text",
-          "name": "responsableCorreo",
-          "title": "Correo electrónico",
-          "inputType": "email"
-        },
-        {
-          "type": "text",
-          "name": "responsableTelefono",
-          "startWithNewLine": false,
-          "title": "Teléfono",
-          "inputType": "tel"
-        }
-      ],
-      "panelCount": 1,
-      "minPanelCount": 1,
-      "panelAddText": "Añadir responsable"
+     "type": "paneldynamic",
+     "name": "responsables",
+     "title": "Responsables",
+     "templateElements": [
+      {
+       "type": "text",
+       "name": "responsableNombre",
+       "title": "Nombre"
+      },
+      {
+       "type": "text",
+       "name": "responsableCargo",
+       "title": "Cargo"
+      },
+      {
+       "type": "dropdown",
+       "name": "responsableInstitucion",
+       "startWithNewLine": false,
+       "title": "Institución",
+       "choicesByUrl": {
+        "url": "https://www.participa.gob.mx/api/v1/ministries",
+        "path": "ministries",
+        "valueName": "id",
+        "titleName": "name"
+       },
+       "optionsCaption": "Selecciona tu Institución"
+      },
+      {
+       "type": "text",
+       "name": "responsableCorreo",
+       "title": "Correo electrónico",
+       "inputType": "email"
+      },
+      {
+       "type": "text",
+       "name": "responsableTelefono",
+       "startWithNewLine": false,
+       "title": "Teléfono",
+       "inputType": "tel"
+      }
+     ],
+     "panelCount": 1,
+     "minPanelCount": 1,
+     "panelAddText": "Añadir responsable",
+     "panelRemoveText": "Eliminar responsable"
     },
     {
-      "type": "panel",
-      "name": "compromiso",
-      "elements": [
-        {
-          "type": "comment",
-          "name": "descripcion",
-          "title": "¿Cuál es el compromiso?"
-        },
-        {
-          "type": "comment",
-          "name": "problematica",
-          "title": "¿Cuál es la problemática que el compromiso aborda?"
-        },
-        {
-          "type": "comment",
-          "name": "problematica_contribucion",
-          "title": " ¿Cómo contribuirá a resolver la problemática?"
-        },
-        {
-          "type": "comment",
-          "name": "valores",
-          "title": " ¿Por qué es relevante para los valores de OGP?"
-        }
-      ],
-      "title": "Descripción del compromiso"
+     "type": "panel",
+     "name": "compromiso",
+     "elements": [
+      {
+       "type": "comment",
+       "name": "descripcion",
+       "title": "¿Cuál es el compromiso?"
+      },
+      {
+       "type": "comment",
+       "name": "problematica",
+       "title": "¿Cuál es la problemática que el compromiso aborda?"
+      },
+      {
+       "type": "comment",
+       "name": "problematica_contribucion",
+       "title": " ¿Cómo contribuirá a resolver la problemática?"
+      },
+      {
+       "type": "comment",
+       "name": "valores",
+       "title": " ¿Por qué es relevante para los valores de OGP?"
+      }
+     ],
+     "title": "Descripción del compromiso"
     },
     {
-      "type": "matrixdynamic",
-      "name": "otros_actores",
-      "title": "Otros actores involucrados",
-      "description": "(OSC, sector privado, agencias multilaterales, grupos de trabajo)",
-      "columns": [
-        {
-          "name": "actor",
-          "title": "Actor"
-        }
-      ],
-      "cellType": "text",
-      "addRowText": "Añadir actor"
+     "type": "matrixdynamic",
+     "name": "otros_actores",
+     "title": "Otros actores involucrados",
+     "description": "(OSC, sector privado, agencias multilaterales, grupos de trabajo)",
+     "columns": [
+      {
+       "name": "actor",
+       "title": "Actor"
+      }
+     ],
+     "cellType": "text",
+     "addRowText": "Añadir actor",
+     "removeRowText": "Eliminar"
     },
     {
-      "type": "paneldynamic",
-      "name": "hitos",
-      "title": "Hitos",
-      "templateElements": [
+     "type": "paneldynamic",
+     "name": "hitos",
+     "title": "Hitos",
+     "templateElements": [
+      {
+       "type": "multipletext",
+       "name": "hito",
+       "title": "Hito",
+       "items": [
         {
-          "type": "multipletext",
-          "name": "hito",
-          "title": "Hito",
-          "items": [
-            {
-              "name": "descripcion",
-              "title": "Descripción"
-            },
-            {
-              "name": "indicador",
-              "title": "Indicador"
-            }
-          ]
+         "name": "descripcion",
+         "title": "Descripción"
+        },
+        {
+         "name": "indicador",
+         "title": "Indicador"
         }
-      ]
+       ]
+      }
+     ],
+     "panelAddText": "Agregar",
+     "panelRemoveText": "Eliminar"
     }
-  ]
+   ]
+  }
+ ],
+ "completeText": "Enviar"
 }

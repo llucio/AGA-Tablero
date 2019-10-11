@@ -6,13 +6,15 @@ import Col from 'react-bootstrap/Col';
 import * as Survey from 'survey-react';
 import hojaRutaJson from '../forms/hojaRuta';
 
-import "survey-react/survey.css";
-// Survey.defaultBootstrapMaterialCss.navigationButton = 'btn btn-lg red darken-4';
-// Survey.defaultBootstrapMaterialCss.rating.item = 'btn btn-lg btn-success';
-// Survey.defaultBootstrapMaterialCss.matrixdynamic.button = 'red';
-// Survey.defaultBootstrapMaterialCss.matrixdynamic.buttonRemove = 'red darken-4';
-Survey.StylesManager.applyTheme('default');
-// Survey.StylesManager.applyTheme('bootstrapmaterial');
+//import "survey-react/survey.css";
+
+Survey.defaultBootstrapMaterialCss.navigationButton = "btn btn-lg red white-text";
+//Survey.defaultBootstrapMaterialCss.rating.item = "btn btn-lg red white-text";
+Survey.defaultBootstrapMaterialCss.matrixdynamic.button = "btn red white-text ";
+Survey.defaultBootstrapMaterialCss.matrixdynamic.buttonRemove = "btn red white-text ";
+Survey.StylesManager.applyTheme("bootstrapmaterial");
+Survey.Survey.defaultLocale = "es-ES";
+//Survey.Survey.defaultLocale("es-ES");
 
 const EncuestaBrowser = () => {
   const [insertCompromiso] = useMutation(INSERT_COMPROMISO_MUTATION);
