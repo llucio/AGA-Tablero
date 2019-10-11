@@ -1,12 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get, keys, has, isPlainObject, isArray, isBoolean, isString } from 'lodash';
+import {
+  get,
+  keys,
+  has,
+  isPlainObject,
+  isArray,
+  isBoolean,
+  isString
+} from 'lodash';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import RawHtml from './RawHtml';
 
-const DataDisplay = ({ data, ...props }) => {
-  const { keyLabels, labelComponent = 'h3', listItemComponent: ListItemComponent = Col } = props;
+const DataDisplay = props => {
+  const {
+    data,
+    keyLabels,
+    labelComponent: Label = 'h3',
+    listItemComponent: ListItem = 'div'
+  } = props;
 
   // Un objeto key/value renderea llave y un DataDisplay recursivo con el valor
   if (isPlainObject(data)) {
@@ -14,7 +27,7 @@ const DataDisplay = ({ data, ...props }) => {
     return dataKeys.map(key => (
       <Row key={key}>
         <Col xs="3">
-          <labelComponent>{get(keyLabels || {}, key, key)}</labelComponent>
+          <Label>{get(keyLabels || {}, key, key)}</Label>
         </Col>
         <Col>
           <DataDisplay data={data[key]} {...props} />
@@ -28,12 +41,12 @@ const DataDisplay = ({ data, ...props }) => {
     return (
       <Row>
         {data.map(value => (
-          <ListItemComponent className="list-item" key={value}>
+          <ListItem className="list-item" key={value}>
             <DataDisplay key={value} data={value} {...props} />
-          </ListItemComponent>
+          </ListItem>
         ))}
       </Row>
-    )
+    );
   }
 
   // Un Boolean renderea el texto "Sí" o "No"

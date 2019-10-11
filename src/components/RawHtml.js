@@ -6,18 +6,18 @@ Renderea HTML si 'children' es un string
 TODO: Sanitizar para evitar exponer a usuarios a araques XSS
 */
 
-const RawHtml = ({ children, as = 'div', ...props }) => {
+const RawHtml = ({ children, as: Component = 'div', ...props }) => {
   return isString(children) ? (
-    <as
+    <Component
       {...props}
       dangerouslySetInnerHTML={{
         __html: children.replace(/\n/g, '<br />')
       }}
     />
   ) : (
-    <div>
+    <Component>
       {children}
-    </div>
+    </Component>
   );
 };
 export default RawHtml;
