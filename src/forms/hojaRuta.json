@@ -1,8 +1,7 @@
 {
- "pages": [
-  {
-   "name": "page1",
-   "elements": [
+  "locale": "es",
+  "name": "hojaRuta",
+  "elements": [
     {
      "type": "text",
      "name": "titulo",
