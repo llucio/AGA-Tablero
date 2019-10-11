@@ -2,11 +2,11 @@ import React from 'react';
 import { get } from 'lodash';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import DataDisplay from './DataDisplay';
 import { Link } from 'react-router-dom';
-// import parse from 'html-react-parser';
+import RawHtml from './RawHtml';
 
-const defaultImage = 'https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
+const defaultImage =
+  'https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
 
 const CompromisoCard = ({ compromiso }) => {
   return (
@@ -20,11 +20,15 @@ const CompromisoCard = ({ compromiso }) => {
         />
         <header>
           <h2>{compromiso.titulo}</h2>
-          <span className="badge bg-red">{get(compromiso, 'metadatos.dependencia')}</span>
+          <span className="badge bg-red">
+            {get(compromiso, 'metadatos.dependencia')}
+          </span>
         </header>
       </Link>
       <Row>
-        <div style={{ minHeight: '200px' }}>{get(compromiso, 'metadatos.descripcion')}</div>
+        <div style={{ minHeight: '200px' }}>
+          <RawHtml>{get(compromiso, 'metadatos.descripcion')}</RawHtml>
+        </div>
       </Row>
       <Row className="justify-content-center">
         <Link
