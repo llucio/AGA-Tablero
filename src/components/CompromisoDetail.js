@@ -11,7 +11,7 @@ import DataDisplay from './DataDisplay';
 
 const CompromisoDetail = ({ match }) => {
   const { data: { compromiso } = {}, loading, error } = useQuery(
-    COMROMISO_QUERY,
+    COMPROMISO_QUERY,
     {
       variables: {
         id: match.params.id
@@ -71,35 +71,37 @@ const dateTheme = {
 const Hito = ({ hito }) => {
   const { descripcion, ...metadatos } = hito.metadatos;
   return (
-    <Col className="mt-5">
-      <Row>
-        <Col>
-          <h2>{descripcion}</h2>
-        </Col>
-        <Col xs="2">
-          <ThemeProvider theme={dateTheme}>
-            <CalendarIcon
-              date={DateTime.fromISO(hito.fecha_inicial).toJSDate()}
-              options={dateOptions}
-              theme={dateTheme}
-            />
-          </ThemeProvider>
-        </Col>
-      </Row>
-      <DataDisplay
-        data={metadatos}
-        labelComponent="h3"
-        keys={{
-          descripcion: 'Descripción',
-          valores: 'Valores',
-          adicional: 'Información adicional',
-          antecedentes: 'Antecedentes',
-          problematica: 'Problemática',
-          alineacion2030: 'Alineación 2030'
-        }}
-      />
-      <ActividadesTable actividades={hito.actividades} />
-    </Col>
+    <Row>
+      <Col className="mt-5">
+        <Row>
+          <Col>
+            <h2>{descripcion}</h2>
+          </Col>
+          <Col xs="2">
+            <ThemeProvider theme={dateTheme}>
+              <CalendarIcon
+                date={DateTime.fromISO(hito.fecha_inicial).toJSDate()}
+                options={dateOptions}
+                theme={dateTheme}
+              />
+            </ThemeProvider>
+          </Col>
+        </Row>
+        <DataDisplay
+          data={metadatos}
+          labelComponent="h3"
+          keys={{
+            descripcion: 'Descripción',
+            valores: 'Valores',
+            adicional: 'Información adicional',
+            antecedentes: 'Antecedentes',
+            problematica: 'Problemática',
+            alineacion2030: 'Alineación 2030'
+          }}
+        />
+        <ActividadesTable actividades={hito.actividades} />
+      </Col>
+    </Row>
   );
 };
 
@@ -108,7 +110,7 @@ const ActividadesTable = ({ actividades }) => {
 
   return (
     <Table striped bordered hover>
-      <thead>
+      <thead className="thead-dark text-uppercase">
         <tr>
           <th>#</th>
           <th>Actividad</th>
@@ -120,7 +122,11 @@ const ActividadesTable = ({ actividades }) => {
           <tr key={i}>
             <td>{i + 1}</td>
             <td>{actividad.titulo}</td>
-            <td />
+            <td>
+              <div class="progress">
+                <div class="progress-bar light-green progress-bar-animated w-50 progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" />
+              </div>
+            </td>
           </tr>
         ))}
       </tbody>
@@ -128,7 +134,7 @@ const ActividadesTable = ({ actividades }) => {
   );
 };
 
-const COMROMISO_QUERY = gql`
+const COMPROMISO_QUERY = gql`
   query CompromisoQuery($id: uuid!) {
     compromiso: compromiso_by_pk(id: $id) {
       id

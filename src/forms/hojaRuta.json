@@ -1,12 +1,13 @@
 {
   "locale": "es",
   "name": "hojaRuta",
+  "completeText": "Enviar",
   "elements": [
     {
       "type": "text",
       "name": "titulo",
-      "isRequired": true,
-      "title": "Título del compromiso"
+      "title": "Título del compromiso",
+      "isRequired": true
     },
     {
       "type": "multipletext",
@@ -43,9 +44,15 @@
         {
           "type": "dropdown",
           "name": "responsableInstitucion",
-          "title": "Institución",
           "startWithNewLine": false,
-          "choices": ["item1", "item2", "item3"]
+          "title": "Institución",
+          "choicesByUrl": {
+            "url": "https://www.participa.gob.mx/api/v1/ministries",
+            "path": "ministries",
+            "valueName": "id",
+            "titleName": "name"
+          },
+          "optionsCaption": "Selecciona tu Institución"
         },
         {
           "type": "text",
@@ -63,7 +70,8 @@
       ],
       "panelCount": 1,
       "minPanelCount": 1,
-      "panelAddText": "Añadir responsable"
+      "panelAddText": "Añadir responsable",
+      "panelRemoveText": "Eliminar responsable"
     },
     {
       "type": "panel",
@@ -104,7 +112,8 @@
         }
       ],
       "cellType": "text",
-      "addRowText": "Añadir actor"
+      "addRowText": "Añadir actor",
+      "removeRowText": "Eliminar"
     },
     {
       "type": "paneldynamic",
@@ -126,7 +135,9 @@
             }
           ]
         }
-      ]
+      ],
+      "panelAddText": "Agregar",
+      "panelRemoveText": "Eliminar"
     }
   ]
 }
