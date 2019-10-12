@@ -3,7 +3,7 @@
 Aplicación web SPA basada en React, creada con [Create React App](https://github.com/facebook/create-react-app)
 
 
-## Instalar deendencias
+## Instalar dependencias
 ```sh
 yarn install
 ```
