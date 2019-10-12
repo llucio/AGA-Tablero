@@ -29,29 +29,27 @@ const CompromisoDetail = ({ match }) => {
   );
 };
 
-const Compromiso = ({ compromiso }) => {
-  return (
-    <Col>
-      <h1>{compromiso.titulo}</h1>
-      <DataDisplay
-        data={compromiso.metadatos}
-        labelComponent="h3"
-        listItemComponent="li"
-        keyLabels={{
-          descripcion: 'Descripción',
-          valores: 'Valores',
-          adicional: 'Información adicional',
-          antecedentes: 'Antecedentes',
-          problematica: 'Problemática',
-          alineacion2030: 'Alineación 2030'
-        }}
-      />
-      {compromiso.hitos.map(hito => (
-        <Hito key={hito.id} hito={hito} />
-      ))}
-    </Col>
-  );
-};
+const Compromiso = ({ compromiso }) => (
+  <Col>
+    <h1>{compromiso.titulo}</h1>
+    <DataDisplay
+      data={compromiso.metadatos}
+      labelComponent="h3"
+      listItemComponent="li"
+      keyLabels={{
+        descripcion: 'Descripción',
+        valores: 'Valores',
+        adicional: 'Información adicional',
+        antecedentes: 'Antecedentes',
+        problematica: 'Problemática',
+        alineacion2030: 'Alineación 2030'
+      }}
+    />
+    {compromiso.hitos.map(hito => (
+      <Hito key={hito.id} hito={hito} />
+    ))}
+  </Col>
+);
 
 const dateOptions = {
   header: { month: 'long' },
@@ -124,7 +122,13 @@ const ActividadesTable = ({ actividades }) => {
             <td>{actividad.titulo}</td>
             <td>
               <div class="progress">
-                <div class="progress-bar light-green progress-bar-animated w-50 progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" />
+                <div
+                  class="progress-bar light-green progress-bar-animated w-50 progress-bar-striped"
+                  role="progressbar"
+                  aria-valuenow="10"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                />
               </div>
             </td>
           </tr>

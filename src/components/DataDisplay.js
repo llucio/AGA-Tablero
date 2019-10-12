@@ -13,13 +13,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import RawHtml from './RawHtml';
 
-const DataDisplay = props => {
+const DataDisplay = ({ data, ...rest }) => {
   const {
-    data,
     keyLabels,
     labelComponent: Label = 'h3',
     listItemComponent: ListItem = 'div'
-  } = props;
+  } = rest;
 
   // Un objeto key/value renderea llave y un DataDisplay recursivo con el valor
   if (isPlainObject(data)) {
@@ -30,7 +29,7 @@ const DataDisplay = props => {
           <Label>{get(keyLabels || {}, key, key)}</Label>
         </Col>
         <Col>
-          <DataDisplay data={data[key]} {...props} />
+          <DataDisplay data={data[key]} {...rest} />
         </Col>
       </Row>
     ));
@@ -42,7 +41,7 @@ const DataDisplay = props => {
       <Row>
         {data.map(value => (
           <ListItem className="list-item" key={value}>
-            <DataDisplay key={value} data={value} {...props} />
+            <DataDisplay key={value} data={value} {...rest} />
           </ListItem>
         ))}
       </Row>
@@ -51,7 +50,7 @@ const DataDisplay = props => {
 
   // Un Boolean renderea el texto "Sí" o "No"
   else if (isBoolean(data)) {
-    return <DataDisplay data={data ? 'Sí' : 'No'} {...props} />;
+    return <DataDisplay data={data ? 'Sí' : 'No'} {...rest} />;
   }
 
   // Un String renderea un párrafo
