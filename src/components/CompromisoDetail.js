@@ -123,8 +123,14 @@ const ActividadesTable = ({ actividades }) => {
             <td>{i + 1}</td>
             <td>{actividad.titulo}</td>
             <td>
-              <div class="progress">
-                <div class="progress-bar light-green progress-bar-animated w-50 progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" />
+              <div className="progress">
+                <div
+                  className="progress-bar light-green progress-bar-animated w-50 progress-bar-striped"
+                  role="progressbar"
+                  aria-valuenow="10"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                />
               </div>
             </td>
           </tr>
