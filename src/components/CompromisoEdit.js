@@ -14,9 +14,8 @@ Survey.defaultBootstrapMaterialCss.matrixdynamic.button = "btn red white-text ";
 Survey.defaultBootstrapMaterialCss.matrixdynamic.buttonRemove = "btn red white-text ";
 Survey.StylesManager.applyTheme("bootstrapmaterial");
 Survey.Survey.defaultLocale = "es-ES";
-//Survey.Survey.defaultLocale("es-ES");
 
-const EncuestaBrowser = () => {
+const CompromisoEdit = () => {
   const [insertCompromiso] = useMutation(INSERT_COMPROMISO_MUTATION);
   const history = useHistory();
 
@@ -64,4 +63,4 @@ const INSERT_COMPROMISO_MUTATION = gql`
   }
 `;
 
-export default EncuestaBrowser;
+export default CompromisoEdit;

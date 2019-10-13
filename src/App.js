@@ -7,7 +7,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { ThemeProvider } from 'styled-components';
 import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
-import EncuestaBrowser from './components/EncuestaBrowser';
+import CompromisoEdit from './components/CompromisoEdit';
 import { apolloClient } from './apollo';
 import { useKeycloak } from 'react-keycloak';
 
@@ -18,7 +18,8 @@ const routes = [
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto',
     subheading:
       'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
-    image: '/assets/images/planes_de_accion.jpg'
+    image: '/assets/images/planes_de_accion.jpg',
+    headerArrow: true
   },
   {
     path: '/compromiso/:id',
@@ -30,7 +31,7 @@ const routes = [
   },
   {
     path: '/formulario',
-    content: EncuestaBrowser,
+    content: CompromisoEdit,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium',
     image:
@@ -38,6 +39,7 @@ const routes = [
   }
 ];
 
+// bootstrap theme
 const theme = {
   calendarIcon: {
     textColor: 'white', // text color of the header and footer
@@ -58,12 +60,13 @@ const App = () => (
             subheading,
             headerClass,
             image,
-            headerNextLink = false
+            headerArrow = false,
+            exact = true
           }) => (
             <Route
               key={path}
               path={path}
-              exact
+              exact={exact}
               component={props => (
                 <React.Fragment>
                   <section
@@ -79,7 +82,7 @@ const App = () => (
                         )}
                       </header>
                     </div>
-                    {headerNextLink && (
+                    {headerArrow && (
                       <a href="#one" className="goto-next scrolly">
                         Siguiente
                       </a>
