@@ -3,8 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Keycloak from 'keycloak-js';
+import { KeycloakProvider } from 'react-keycloak';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const keycloak = new Keycloak();
+
+ReactDOM.render(
+  <KeycloakProvider keycloak={keycloak}>
+    <App />
+  </KeycloakProvider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
