@@ -7,6 +7,8 @@ ENV REACT_APP_API_URL=$API_URL
 
 ARG KEYCLOAK_CLIENT_CONFIG='{"realm":"aga","auth-server-url":"http://localhost:8080/auth","ssl-required":"external","resource":"web-app","public-client":true,"verify-token-audience":true,"use-resource-role-mappings":true,"confidential-port":0}'
 
+WORKDIR /app
+
 # Instalar dependencias
 COPY package.json yarn.lock ./
 RUN yarn install --production
