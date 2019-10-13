@@ -3,17 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import Col from 'react-bootstrap/Col';
-import * as Survey from 'survey-react';
+import Survey from '../survey';
 import hojaRutaJson from '../forms/hojaRuta';
-
-//import "survey-react/survey.css";
-
-Survey.defaultBootstrapMaterialCss.navigationButton = "btn btn-lg red white-text";
-//Survey.defaultBootstrapMaterialCss.rating.item = "btn btn-lg red white-text";
-Survey.defaultBootstrapMaterialCss.matrixdynamic.button = "btn red white-text ";
-Survey.defaultBootstrapMaterialCss.matrixdynamic.buttonRemove = "btn red white-text ";
-Survey.StylesManager.applyTheme("bootstrapmaterial");
-Survey.Survey.defaultLocale = "es-ES";
 
 const CompromisoEdit = () => {
   const [insertCompromiso] = useMutation(INSERT_COMPROMISO_MUTATION);
