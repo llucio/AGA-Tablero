@@ -1,9 +1,11 @@
 # Fase I: Construcción
-FROM node:12 as build
+FROM node:12-alpine as build
 
 # URL de API de datos
 ARG API_URL=http://localhost:4000/v1/graphql
 ENV REACT_APP_API_URL=$API_URL
+
+ARG KEYCLOAK_CLIENT_CONFIG='{"realm":"aga","auth-server-url":"http://localhost:8080/auth","ssl-required":"external","resource":"web-app","public-client":true,"verify-token-audience":true,"use-resource-role-mappings":true,"confidential-port":0}'
 
 WORKDIR /app
 
@@ -15,6 +17,8 @@ RUN yarn install --production
 COPY src src
 COPY public public
 RUN yarn run build --production
+
+RUN echo $KEYCLOAK_CLIENT_CONFIG > build/keycloak.json
 
 # Fase II: Ejecución
 FROM nginx:1.16-alpine

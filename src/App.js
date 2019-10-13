@@ -9,6 +9,7 @@ import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
 import EncuestaBrowser from './components/EncuestaBrowser';
 import { apolloClient } from './apollo';
+import { useKeycloak } from 'react-keycloak';
 
 const routes = [
   {
@@ -56,7 +57,8 @@ const App = () => (
             heading,
             subheading,
             headerClass,
-            image
+            image,
+            headerNextLink = false
           }) => (
             <Route
               key={path}
@@ -64,20 +66,26 @@ const App = () => (
               exact
               component={props => (
                 <React.Fragment>
-                  <Header
-                    nextLink
+                  <section
+                    id="banner"
                     className={headerClass}
                     style={{ backgroundImage: `url(${image})` }}
                   >
-                    <h2 className="big shadow-text">{heading}</h2>
-                    {subheading && (
-                      <h4 className="mt-4 lead shadow-text">{subheading}</h4>
+                    <div className="content">
+                      <header>
+                        <h2 className="big shadow-text">{heading}</h2>
+                        {subheading && (
+                          <h4 className="mt-4 lead shadow-text">{subheading}</h4>
+                        )}
+                      </header>
+                    </div>
+                    {headerNextLink && (
+                      <a href="#one" className="goto-next scrolly">
+                        Siguiente
+                      </a>
                     )}
-                  </Header>
-                  <section
-                    id="one"
-                    className="wrapper style1 special top"
-                  >
+                  </section>
+                  <section id="one" className="wrapper style1 special top">
                     <Container>
                       <Breadcrumbs {...props} />
                       <Content {...props} />
@@ -93,34 +101,34 @@ const App = () => (
   </ApolloProvider>
 );
 
-const Header = ({ image, children, nextLink, ...props }) => (
-  <section id="banner" {...props}>
-    <div className="content">
-      <header>{children}</header>
-    </div>
-    {nextLink && (
-      <a href="#one" className="goto-next scrolly">
-        Siguiente
-      </a>
-    )}
-  </section>
-);
+const Breadcrumbs = ({ match, ...props }) => {
+  const [keycloak, initialized] = useKeycloak();
 
-const Breadcrumbs = ({ match, ...props }) => (
-  <Breadcrumb>
-    <LinkContainer to="/">
-      <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
-    </LinkContainer>
-    <LinkContainer to="/formulario">
-      <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
-    </LinkContainer>
-    <Switch>
-      <Route
-        path="/compromiso"
-        component={() => <Breadcrumb.Item active>Compromiso</Breadcrumb.Item>}
-      />
-    </Switch>
-  </Breadcrumb>
-);
+  return (
+    <Breadcrumb>
+      {keycloak.authenticated ? console.log(keycloak) || (
+        <button type="button" onClick={() => keycloak.logout()}>
+          Logout
+        </button>
+      ) : (
+        <button type="button" onClick={() => keycloak.login()}>
+          Login
+        </button>
+      )}
+      <LinkContainer to="/">
+        <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
+      </LinkContainer>
+      <LinkContainer to="/formulario">
+        <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
+      </LinkContainer>
+      <Switch>
+        <Route
+          path="/compromiso"
+          component={() => <Breadcrumb.Item active>Compromiso</Breadcrumb.Item>}
+        />
+      </Switch>
+    </Breadcrumb>
+  );
+};
 
 export default App;
