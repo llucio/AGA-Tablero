@@ -1,15 +1,15 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
+import { useKeycloak } from 'react-keycloak';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import { ThemeProvider } from 'styled-components';
+import { apolloClient } from './apollo';
 import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
-import EncuestaBrowser from './components/EncuestaBrowser';
-import { apolloClient } from './apollo';
-import { useKeycloak } from 'react-keycloak';
+import CompromisoEdit from './components/CompromisoEdit';
 
 const routes = [
   {
@@ -18,26 +18,25 @@ const routes = [
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto',
     subheading:
       'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
-    image: '/assets/images/planes_de_accion.jpg'
+    image: '/assets/images/planes_de_accion.jpg',
+  },
+  {
+    path: ['/compromiso/nuevo', '/compromiso/:id/editar'],
+    content: CompromisoEdit,
+    heading: 'Hoja de Ruta',
+    subheading:
+      'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
+    headerClass: 'medium',
   },
   {
     path: '/compromiso/:id',
     content: CompromisoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium',
-    image:
-      'https://images.unsplash.com/photo-1453749024858-4bca89bd9edc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=707&q=80'
-  },
-  {
-    path: '/formulario',
-    content: EncuestaBrowser,
-    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
-    headerClass: 'medium',
-    image:
-      'https://images.unsplash.com/photo-1453749024858-4bca89bd9edc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=707&q=80'
   }
 ];
 
+// bootstrap theme
 const theme = {
   calendarIcon: {
     textColor: 'white', // text color of the header and footer
@@ -57,34 +56,39 @@ const App = () => (
             heading,
             subheading,
             headerClass,
-            image,
-            headerNextLink = false
+            image = '/assets/images/decorativa2.jpg',
+            headerArrow = false,
+            exact = true
           }) => (
             <Route
               key={path}
               path={path}
-              exact
+              exact={exact}
               component={props => (
                 <React.Fragment>
-                  <section
-                    id="banner"
-                    className={headerClass}
-                    style={{ backgroundImage: `url(${image})` }}
-                  >
-                    <div className="content">
-                      <header>
-                        <h2 className="big shadow-text">{heading}</h2>
-                        {subheading && (
-                          <h4 className="mt-4 lead shadow-text">{subheading}</h4>
-                        )}
-                      </header>
-                    </div>
-                    {headerNextLink && (
-                      <a href="#one" className="goto-next scrolly">
-                        Siguiente
-                      </a>
-                    )}
-                  </section>
+                  {!!heading && (
+                    <section
+                      id="banner"
+                      className={headerClass}
+                      style={{ backgroundImage: `url(${image})` }}
+                    >
+                      <div className="content">
+                        <header>
+                          <h2 className="big shadow-text">{heading}</h2>
+                          {subheading && (
+                            <h4 className="mt-4 lead shadow-text">
+                              {subheading}
+                            </h4>
+                          )}
+                        </header>
+                      </div>
+                      {headerArrow && (
+                        <a href="#one" className="goto-next scrolly">
+                          Siguiente
+                        </a>
+                      )}
+                    </section>
+                  )}
                   <section id="one" className="wrapper style1 special top">
                     <Container>
                       <Breadcrumbs {...props} />
@@ -104,12 +108,16 @@ const App = () => (
 const Breadcrumbs = ({ match, ...props }) => {
   const [keycloak, initialized] = useKeycloak();
 
+  if (!initialized) return null;
+
   return (
     <Breadcrumb>
-      {keycloak.authenticated ? console.log(keycloak) || (
-        <button type="button" onClick={() => keycloak.logout()}>
-          Logout
-        </button>
+      {keycloak.authenticated ? (
+        console.log(keycloak) || (
+          <button type="button" onClick={() => keycloak.logout()}>
+            Logout
+          </button>
+        )
       ) : (
         <button type="button" onClick={() => keycloak.login()}>
           Login
@@ -118,7 +126,7 @@ const Breadcrumbs = ({ match, ...props }) => {
       <LinkContainer to="/">
         <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
       </LinkContainer>
-      <LinkContainer to="/formulario">
+      <LinkContainer to="/compromiso/nuevo">
         <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
       </LinkContainer>
       <Switch>
