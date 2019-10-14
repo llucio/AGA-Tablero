@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRoles } from '../hooks';
-import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -10,7 +9,7 @@ const UserMenu = () => {
   if (loading) return null;
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card>
       {authenticated ? (
         <Card.Body>
           <Card.Title>{usuario.name}</Card.Title>
