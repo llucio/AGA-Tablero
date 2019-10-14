@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
+import { useRoles } from '../hooks';
 import DataDisplay from './DataDisplay';
 
 const COMPROMISO_QUERY = loader('../queries/CompromisoQuery.graphql');
@@ -21,7 +22,8 @@ const CompromisoDetail = ({ match }) => {
       variables: {
         id: match.params.id,
         full: true
-      }
+      },
+      fetchPolicy: 'cache-and-network'
     }
   );
 
@@ -35,32 +37,39 @@ const CompromisoDetail = ({ match }) => {
   );
 };
 
-const Compromiso = ({ compromiso }) => (
-  <Col>
-    <Row>
-      <LinkContainer to={`/compromiso/${compromiso.id}/editar`}>
-        <Button>Editar</Button>
-      </LinkContainer>
-    </Row>
-    <h1>{compromiso.titulo}</h1>
-    <DataDisplay
-      data={compromiso.metadatos}
-      labelComponent="h3"
-      listItemComponent="li"
-      keyLabels={{
-        descripcion: 'Descripción',
-        valores: 'Valores',
-        adicional: 'Información adicional',
-        antecedentes: 'Antecedentes',
-        problematica: 'Problemática',
-        alineacion2030: 'Alineación 2030'
-      }}
-    />
-    {compromiso.hitos.map(hito => (
-      <Hito key={hito.id} hito={hito} />
-    ))}
-  </Col>
-);
+const Compromiso = ({ compromiso }) => {
+  const { administrador } = useRoles();
+
+  return (
+    <Col>
+      {administrador && (
+        <Row>
+          <LinkContainer to={`/compromiso/${compromiso.id}/editar`}>
+            <Button>Editar</Button>
+          </LinkContainer>
+        </Row>
+      )}
+
+      <h1>{compromiso.titulo}</h1>
+      <DataDisplay
+        data={compromiso.metadatos}
+        labelComponent="h3"
+        listItemComponent="li"
+        keyLabels={{
+          descripcion: 'Descripción',
+          valores: 'Valores',
+          adicional: 'Información adicional',
+          antecedentes: 'Antecedentes',
+          problematica: 'Problemática',
+          alineacion2030: 'Alineación 2030'
+        }}
+      />
+      {compromiso.hitos.map(hito => (
+        <Hito key={hito.id} hito={hito} />
+      ))}
+    </Col>
+  );
+};
 
 const dateOptions = {
   header: { month: 'long' },

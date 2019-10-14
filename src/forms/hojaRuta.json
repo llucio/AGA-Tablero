@@ -67,8 +67,11 @@
      ],
      "panelCount": 1,
      "minPanelCount": 1,
+     "panelsState": "collapsed",
      "panelAddText": "Añadir responsable",
-     "panelRemoveText": "Eliminar responsable"
+     "panelRemoveText": "Eliminar responsable",
+     "panelPrevText": "Responsable anterior",
+     "panelNextText": "Siguiente responsable"
     },
     {
      "type": "panel",
@@ -77,13 +80,8 @@
       {
        "type": "comment",
        "name": "descripcion",
-       "title": {
-        "default": "¿Cuál es el compromiso?",
-        "es": "Descripción"
-       },
-       "description": {
-        "es": "¿Cuál es el compromiso?"
-       }
+       "title": "Descripción",
+       "description": "¿Cuál es el compromiso?"
       },
       {
        "type": "comment",
@@ -101,10 +99,8 @@
        "title": " ¿Por qué es relevante para los valores de OGP?"
       }
      ],
-     "title": {
-      "default": "Descripción del compromiso",
-      "es": "Metadatos del compromiso"
-     }
+     "title": "Metadatos del compromiso",
+     "state": "collapsed"
     },
     {
      "type": "matrixdynamic",
@@ -127,23 +123,39 @@
      "title": "Hitos",
      "templateElements": [
       {
-       "type": "multipletext",
-       "name": "hito",
-       "title": "Hito",
-       "items": [
+       "type": "comment",
+       "name": "descripcion",
+       "title": "Descripción"
+      },
+      {
+       "type": "text",
+       "name": "indicador",
+       "title": "indicador"
+      },
+      {
+       "type": "paneldynamic",
+       "name": "actividades",
+       "title": "Actividades",
+       "templateElements": [
         {
-         "name": "descripcion",
-         "title": "Descripción"
-        },
-        {
-         "name": "indicador",
-         "title": "Indicador"
+         "type": "text",
+         "name": "titulo",
+         "title": "Título"
         }
-       ]
+       ],
+       "panelCount": 1,
+       "panelAddText": "Añadir actividad",
+       "panelRemoveText": "Eliminar actividad",
+       "panelPrevText": "Actividad anterior",
+       "panelNextText": "Siguiente actividad"
       }
      ],
-     "panelAddText": "Agregar",
-     "panelRemoveText": "Eliminar"
+     "panelCount": 1,
+     "confirmDelete": true,
+     "panelAddText": "Añadir hito",
+     "panelRemoveText": "Eliminar hito",
+     "panelPrevText": "Hito anterior",
+     "panelNextText": "Siguiente hito"
     }
    ]
   }
