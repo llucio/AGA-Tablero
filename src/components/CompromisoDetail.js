@@ -1,5 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
+import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { DateTime } from 'luxon';
 import { CalendarIcon } from 'react-calendar-icon';
@@ -8,6 +9,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import DataDisplay from './DataDisplay';
+
+const COMPROMISO_QUERY = loader('../queries/CompromisoQuery.graphql');
 
 const CompromisoDetail = ({ match }) => {
   const { data: { compromiso } = {}, loading, error } = useQuery(
@@ -137,43 +140,5 @@ const ActividadesTable = ({ actividades }) => {
     </Table>
   );
 };
-
-const COMPROMISO_QUERY = gql`
-  query CompromisoQuery($id: uuid!) {
-    compromiso: compromiso_by_pk(id: $id) {
-      id
-      titulo
-      fecha_creacion
-      metadatos
-      hitos_aggregate {
-        aggregate {
-          count
-        }
-      }
-      hitos(order_by: { fecha_inicial: asc }) {
-        id
-        metadatos
-        titulo
-        fecha_inicial
-        fecha_final
-        actividades_aggregate {
-          aggregate {
-            count
-            min {
-              fecha_finalizacion
-            }
-          }
-        }
-        actividades(order_by: { orden: asc }) {
-          id
-          orden
-          titulo
-          fecha_finalizacion
-          metadatos
-        }
-      }
-    }
-  }
-`;
 
 export default CompromisoDetail;

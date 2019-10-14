@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import Keycloak from 'keycloak-js';
 import { KeycloakProvider } from 'react-keycloak';
 
-const keycloak = new Keycloak();
+const keycloak = new Keycloak('/keycloak.json');
 
 ReactDOM.render(
   <KeycloakProvider keycloak={keycloak}>

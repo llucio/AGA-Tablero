@@ -1,0 +1,35 @@
+query CompromisoQuery($id: uuid!) {
+  compromiso: compromiso_by_pk(id: $id) {
+    id
+    titulo
+    fecha_creacion
+    metadatos
+    hitos_aggregate {
+      aggregate {
+        count
+      }
+    }
+    hitos(order_by: { fecha_inicial: asc }) {
+      id
+      metadatos
+      titulo
+      fecha_inicial
+      fecha_final
+      actividades_aggregate {
+        aggregate {
+          count
+          min {
+            fecha_finalizacion
+          }
+        }
+      }
+      actividades(order_by: { orden: asc }) {
+        id
+        orden
+        titulo
+        fecha_finalizacion
+        metadatos
+      }
+    }
+  }
+}
