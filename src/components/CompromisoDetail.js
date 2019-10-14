@@ -38,11 +38,11 @@ const CompromisoDetail = ({ match }) => {
 };
 
 const Compromiso = ({ compromiso }) => {
-  const { administrador } = useRoles();
+  const { usuario } = useRoles();
 
   return (
     <Col>
-      {administrador && (
+      {usuario.administrador && (
         <Row>
           <LinkContainer to={`/compromiso/${compromiso.id}/editar`}>
             <Button>Editar</Button>
