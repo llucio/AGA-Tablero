@@ -15,15 +15,20 @@ const useRoles = () => {
     (_, key) => key.replace('x-hasura-', '').replace('-', '_')
   );
 
+  const usuario = {
+    ...tokenParsed,
+    claims,
+    institucion: claims.institucion_id,
+    organizacion: claims.organizacion_id,
+    administrador: _.get(claims, 'allowed_roles', []).includes('administrador'),  
+  };
+
   return {
     login,
     logout,
     authenticated,
+    usuario,
     loading: !initialized,
-    usuario: { ...tokenParsed, claims },
-    institucion: claims.institucion_id,
-    organizacion: claims.organizacion_id,
-    administrador: _.get(claims, 'allowed_roles', []).includes('administrador'),
   }
 };
 

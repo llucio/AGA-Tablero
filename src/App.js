@@ -122,14 +122,14 @@ const Heading = ({ className, image, heading, subheading, headerArrow }) => (
 );
 
 const Breadcrumbs = ({ match, ...props }) => {
-  const { administrador } = useRoles();
+  const { usuario } = useRoles();
 
   return (
     <Breadcrumb>
       <LinkContainer to="/">
         <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
       </LinkContainer>
-      {administrador && (
+      {usuario.administrador && (
         <LinkContainer to="/compromiso/nuevo">
           <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
         </LinkContainer>
