@@ -1,12 +1,12 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { useKeycloak } from 'react-keycloak';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { apolloClient } from './apollo';
+import { useRoles } from './hooks';
 import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
 import CompromisoEdit from './components/CompromisoEdit';
@@ -18,7 +18,7 @@ const routes = [
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto',
     subheading:
       'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
-    image: '/assets/images/planes_de_accion.jpg',
+    image: '/assets/images/planes_de_accion.jpg'
   },
   {
     path: ['/compromiso/nuevo', '/compromiso/:id/editar'],
@@ -26,13 +26,13 @@ const routes = [
     heading: 'Hoja de Ruta',
     subheading:
       'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
-    headerClass: 'medium',
+    headerClass: 'medium'
   },
   {
     path: '/compromiso/:id',
     content: CompromisoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
-    headerClass: 'medium',
+    headerClass: 'medium'
   }
 ];
 
@@ -106,29 +106,29 @@ const App = () => (
 );
 
 const Breadcrumbs = ({ match, ...props }) => {
-  const [keycloak, initialized] = useKeycloak();
+  const { authenticated, administrador, loading, login, logout } = useRoles();
 
-  if (!initialized) return null;
+  if (loading) return null;
 
   return (
     <Breadcrumb>
-      {keycloak.authenticated ? (
-        console.log(keycloak) || (
-          <button type="button" onClick={() => keycloak.logout()}>
-            Logout
-          </button>
-        )
+      {!!authenticated ? (
+        <button type="button" onClick={() => logout()}>
+          Logout
+        </button>
       ) : (
-        <button type="button" onClick={() => keycloak.login()}>
+        <button type="button" onClick={() => login()}>
           Login
         </button>
       )}
       <LinkContainer to="/">
         <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
       </LinkContainer>
-      <LinkContainer to="/compromiso/nuevo">
-        <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
-      </LinkContainer>
+      {administrador && (
+        <LinkContainer to="/compromiso/nuevo">
+          <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
+        </LinkContainer>
+      )}
       <Switch>
         <Route
           path="/compromiso"

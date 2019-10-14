@@ -1,4 +1,5 @@
 import * as Survey from 'survey-react';
+// import 'survey-react/survey.css';
 
 Survey.defaultBootstrapMaterialCss.navigationButton = "btn btn-lg red white-text";
 //Survey.defaultBootstrapMaterialCss.rating.item = "btn btn-lg red white-text";
