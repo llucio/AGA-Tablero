@@ -1,20 +1,14 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
+import { AUTH_TOKEN_STORAGE_KEY } from './constants';
 import createPersistedState from 'use-persisted-state';
 import { useKeycloak } from 'react-keycloak';
 
-const useTokenState = createPersistedState('tokenp');
+const useTokenState = createPersistedState(AUTH_TOKEN_STORAGE_KEY);
 
-export const useRoles = () => {
-  const [__, setToken] = useTokenState('');
+const useRoles = () => {
   const [keycloak, initialized] = useKeycloak();
   const { login, logout, authenticated, tokenParsed, idToken } = keycloak;
-
-  // useEffect(() => {
-  //   if (initialized && idToken) {
-  //     setToken(idToken); 
-  //   }
-  // }, [idToken, initialized]);
 
   const claims = _.mapKeys(
     _.get(tokenParsed, ['https://hasura.io/jwt/claims'], {}),
@@ -32,3 +26,8 @@ export const useRoles = () => {
     administrador: _.get(claims, 'allowed_roles', []).includes('administrador'),
   }
 };
+
+export {
+  useRoles,
+  useTokenState
+}

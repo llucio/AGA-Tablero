@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import { KeycloakProvider, keycloak } from './keycloak';
+import AuthProvider from './keycloak';
 import { useRoles } from './hooks';
 import { apolloClient } from './apollo';
 import CompromisoBrowser from './components/CompromisoBrowser';
@@ -48,13 +48,13 @@ const theme = {
 };
 
 const App = () => (
-  <KeycloakProvider keycloak={keycloak}>
+  <AuthProvider>
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
         <AppRouter />
       </ThemeProvider>
     </ApolloProvider>
-  </KeycloakProvider>
+  </AuthProvider>
 );
 
 const AppRouter = () => (
