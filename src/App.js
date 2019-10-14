@@ -126,7 +126,7 @@ const Breadcrumbs = ({ match, ...props }) => {
       <LinkContainer to="/">
         <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
       </LinkContainer>
-      <LinkContainer to="/formulario">
+      <LinkContainer to="/compromiso/nuevo">
         <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
       </LinkContainer>
       <Switch>

@@ -5,6 +5,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { DateTime } from 'luxon';
 import { CalendarIcon } from 'react-calendar-icon';
 import { ThemeProvider } from 'styled-components';
+import { LinkContainer } from 'react-router-bootstrap';
+import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
@@ -17,7 +19,8 @@ const CompromisoDetail = ({ match }) => {
     COMPROMISO_QUERY,
     {
       variables: {
-        id: match.params.id
+        id: match.params.id,
+        full: true
       }
     }
   );
@@ -34,6 +37,11 @@ const CompromisoDetail = ({ match }) => {
 
 const Compromiso = ({ compromiso }) => (
   <Col>
+    <Row>
+      <LinkContainer to={`/compromiso/${compromiso.id}/editar`}>
+        <Button>Editar</Button>
+      </LinkContainer>
+    </Row>
     <h1>{compromiso.titulo}</h1>
     <DataDisplay
       data={compromiso.metadatos}

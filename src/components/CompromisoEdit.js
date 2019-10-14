@@ -10,7 +10,6 @@ import hojaRutaJson from '../forms/hojaRuta';
 
 const COMPROMISO_QUERY = loader('../queries/CompromisoQuery.graphql');
 
-// Por el momento guardar JSON completo en el campo metadatos
 const INSERT_COMPROMISO_MUTATION = gql`
   mutation($titulo: String!, $metadatos: jsonb!) {
     insert_compromiso(
@@ -30,9 +29,10 @@ const INSERT_COMPROMISO_MUTATION = gql`
 
 const CompromisoEdit = ({ match }) => {
   const [insertCompromiso] = useMutation(INSERT_COMPROMISO_MUTATION);
-
+  const history = useHistory();
+  // Si se especifica id de compromiso en URL, entonces editar, si no, crear nuevo
   const compromisoId = get(match, 'params.id');
-  const { data: { compromiso } = {}, loading, error } = useQuery(
+  const { data: { compromiso = {} } = {}, loading, error } = useQuery(
     COMPROMISO_QUERY,
     {
       skip: !compromisoId,
@@ -41,8 +41,6 @@ const CompromisoEdit = ({ match }) => {
       }
     }
   );
-  const history = useHistory();
-
 
   const onComplete = survey => {
     const { titulo, ...metadatos } = survey.data;
@@ -65,7 +63,7 @@ const CompromisoEdit = ({ match }) => {
   return (
     <Col>
       <h1>Hoja de ruta</h1>
-      <Survey.Survey json={hojaRutaJson} onComplete={onComplete} />
+      <Survey.Survey data={compromiso} json={hojaRutaJson} onComplete={onComplete} />
     </Col>
   );
 };
