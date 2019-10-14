@@ -19,27 +19,20 @@ const routes = [
     subheading:
       'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
     image: '/assets/images/planes_de_accion.jpg',
-    headerArrow: true
+  },
+  {
+    path: ['/compromiso/nuevo', '/compromiso/:id/editar'],
+    content: CompromisoEdit,
+    heading: 'Hoja de Ruta',
+    subheading:
+      'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
+    headerClass: 'medium',
   },
   {
     path: '/compromiso/:id',
     content: CompromisoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium',
-    image:
-      'https://images.unsplash.com/photo-1453749024858-4bca89bd9edc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=707&q=80'
-  },
-  {
-  path: ['/formulario/:id', '/formulario'],
-    content: CompromisoEdit,
-    heading: 'Hoja de Ruta',
-    exact: false,
-    subheading:
-      'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
-    image: '/assets/images/planes_de_accion.jpg',
-    headerClass: 'medium',
-    image:
-      'https://images.unsplash.com/photo-1453749024858-4bca89bd9edc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=707&q=80'
   }
 ];
 
@@ -63,7 +56,7 @@ const App = () => (
             heading,
             subheading,
             headerClass,
-            image,
+            image = '/assets/images/decorativa2.jpg',
             headerArrow = false,
             exact = true
           }) => (
