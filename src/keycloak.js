@@ -12,11 +12,16 @@ const initConfig = {
 const Provider = ({ children }) => {
   const [_, setToken] = useTokenState('');
 
+  const resetToken = () => setToken('');
+
   return (
     <KeycloakProvider
       keycloak={keycloak}
       onTokens={({ token }) => setToken(token)}
-      onAuthLogout={() => setToken('')}
+      onAuthLogout={resetToken}
+      onTokenExpired={resetToken}
+      onAuthRefreshError={resetToken}
+      onAuthError={resetToken}
       initConfig={initConfig}
     >
       {children}

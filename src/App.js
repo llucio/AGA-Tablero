@@ -6,8 +6,9 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import AuthProvider from './keycloak';
-import { useRoles } from './hooks';
 import { apolloClient } from './apollo';
+import { useRoles } from './hooks';
+import UserMenu from './components/UserMenu';
 import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
 import CompromisoEdit from './components/CompromisoEdit';
@@ -77,28 +78,17 @@ const AppRouter = () => (
           component={props => (
             <React.Fragment>
               {!!heading && (
-                <section
-                  id="banner"
+                <Heading
+                  heading={heading}
+                  subheading={subheading}
+                  headerArrow={headerArrow}
+                  image={image}
                   className={headerClass}
-                  style={{ backgroundImage: `url(${image})` }}
-                >
-                  <div className="content">
-                    <header>
-                      <h2 className="big shadow-text">{heading}</h2>
-                      {subheading && (
-                        <h4 className="mt-4 lead shadow-text">{subheading}</h4>
-                      )}
-                    </header>
-                  </div>
-                  {headerArrow && (
-                    <a href="#one" className="goto-next scrolly">
-                      Siguiente
-                    </a>
-                  )}
-                </section>
+                />
               )}
               <section id="one" className="wrapper style1 special top">
                 <Container>
+                  <UserMenu />
                   <Breadcrumbs {...props} />
                   <Content {...props} />
                 </Container>
@@ -111,22 +101,31 @@ const AppRouter = () => (
   </Router>
 );
 
-const Breadcrumbs = ({ match, ...props }) => {
-  const { authenticated, administrador, loading, login, logout } = useRoles();
+const Heading = ({ className, image, heading, subheading, headerArrow }) => (
+  <section
+    id="banner"
+    className={className}
+    style={{ backgroundImage: `url(${image})` }}
+  >
+    <div className="content">
+      <header>
+        <h2 className="big shadow-text">{heading}</h2>
+        {subheading && <h4 className="mt-4 lead shadow-text">{subheading}</h4>}
+      </header>
+    </div>
+    {headerArrow && (
+      <a href="#one" className="goto-next scrolly">
+        Siguiente
+      </a>
+    )}
+  </section>
+);
 
-  if (loading) return null;
+const Breadcrumbs = ({ match, ...props }) => {
+  const { administrador } = useRoles();
 
   return (
     <Breadcrumb>
-      {!!authenticated ? (
-        <button type="button" onClick={() => logout()}>
-          Logout
-        </button>
-      ) : (
-        <button type="button" onClick={() => login()}>
-          Login
-        </button>
-      )}
       <LinkContainer to="/">
         <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
       </LinkContainer>
