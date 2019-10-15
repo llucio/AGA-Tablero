@@ -1,7 +1,7 @@
 import React from 'react';
 import Keycloak from 'keycloak-js';
 import { KeycloakProvider } from 'react-keycloak';
-import { useTokenState } from './hooks';
+import { AUTH_TOKEN_STORAGE_KEY } from './constants';
 
 const keycloak = new Keycloak('/keycloak.json');
 
@@ -10,19 +10,28 @@ const initConfig = {
 };
 
 const Provider = ({ children }) => {
-  const [_, setToken] = useTokenState('');
+  const onEvent = event => {
+    console.log('removiendo item', event)
+    // alert(event);
+    // window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
+  }
 
-  const resetToken = () => setToken('');
+  const removeToken = () => {
+    console.log('removiendo item1!!!')
+    // alert('aaa');
+    // window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
+  }
+
+  const setToken = ({ token }) => {
+    window.localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
+  }
 
   return (
     <KeycloakProvider
-      keycloak={keycloak}
-      onTokens={({ token }) => setToken(token)}
-      onAuthLogout={resetToken}
-      onTokenExpired={resetToken}
-      onAuthRefreshError={resetToken}
-      onAuthError={resetToken}
       initConfig={initConfig}
+      keycloak={keycloak}
+      onTokens={setToken}
+      onEvent={onEvent}
     >
       {children}
     </KeycloakProvider>
@@ -30,4 +39,4 @@ const Provider = ({ children }) => {
 };
 
 export default Provider;
-export { KeycloakProvider, keycloak, useTokenState };
+export { KeycloakProvider, keycloak };

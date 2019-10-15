@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
 import { AUTH_TOKEN_STORAGE_KEY } from './constants';
-import createPersistedState from 'use-persisted-state';
 import { useKeycloak } from 'react-keycloak';
-
-const useTokenState = createPersistedState(AUTH_TOKEN_STORAGE_KEY);
 
 const useRoles = () => {
   const [keycloak, initialized] = useKeycloak();
@@ -25,7 +22,7 @@ const useRoles = () => {
 
   return {
     login,
-    logout,
+    logout: () => { window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY); logout() },
     authenticated,
     usuario,
     loading: !initialized,
@@ -34,5 +31,4 @@ const useRoles = () => {
 
 export {
   useRoles,
-  useTokenState
 }
