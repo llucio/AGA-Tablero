@@ -10,18 +10,6 @@ const initConfig = {
 };
 
 const Provider = ({ children }) => {
-  const onEvent = event => {
-    console.log('removiendo item', event)
-    // alert(event);
-    // window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
-  }
-
-  const removeToken = () => {
-    console.log('removiendo item1!!!')
-    // alert('aaa');
-    // window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
-  }
-
   const setToken = ({ token }) => {
     window.localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
   }
@@ -31,7 +19,6 @@ const Provider = ({ children }) => {
       initConfig={initConfig}
       keycloak={keycloak}
       onTokens={setToken}
-      onEvent={onEvent}
     >
       {children}
     </KeycloakProvider>
