@@ -13,61 +13,28 @@ import Table from 'react-bootstrap/Table';
 import { useRoles } from '../hooks';
 import DataDisplay from './DataDisplay';
 
-const COMPROMISO_QUERY = loader('../queries/CompromisoQuery.graphql');
+const HITO_QUERY = loader('../queries/HitoQuery.graphql');
 
-const CompromisoDetail = ({ match }) => {
-  const { data: { compromiso } = {}, loading, error } = useQuery(
-    COMPROMISO_QUERY,
+console.log(HITO_QUERY)
+
+const HitoDetail = ({ match }) => {
+  const { data: { hito } = {}, loading, error } = useQuery(
+    HITO_QUERY,
     {
       variables: {
-        id: match.params.id,
-        full: true
+        id: match.params.id
       },
       fetchPolicy: 'cache-and-network'
     }
   );
 
   if (loading) return <div>Cargando...</div>;
-  if (error || !compromiso) return <h1>No encontrado</h1>;
+  if (error || !hito) return <h1>No encontrado</h1>;
 
   return (
     <Row>
-      <Compromiso compromiso={compromiso} />
+      <Hito hito={hito} />
     </Row>
-  );
-};
-
-const Compromiso = ({ compromiso }) => {
-  const { usuario } = useRoles();
-
-  return (
-    <Col>
-      {usuario.administrador && (
-        <Row>
-          <LinkContainer to={`/compromiso/${compromiso.id}/editar`}>
-            <Button>Editar</Button>
-          </LinkContainer>
-        </Row>
-      )}
-
-      <h1>{compromiso.titulo}</h1>
-      <DataDisplay
-        data={compromiso.metadatos}
-        labelComponent="h3"
-        listItemComponent="li"
-        keyLabels={{
-          descripcion: 'Descripción',
-          valores: 'Valores',
-          adicional: 'Información adicional',
-          antecedentes: 'Antecedentes',
-          problematica: 'Problemática',
-          alineacion2030: 'Alineación 2030'
-        }}
-      />
-      {compromiso.hitos.map(hito => (
-        <Hito key={hito.id} hito={hito} />
-      ))}
-    </Col>
   );
 };
 
@@ -93,9 +60,7 @@ const Hito = ({ hito }) => {
       <Col className="mt-5">
         <Row>
           <Col>
-            <LinkContainer to={`/hito/${hito.id}`}>
-              <h2>{descripcion}</h2>
-            </LinkContainer>
+            <h2>{descripcion}</h2>
           </Col>
           <Col xs="2">
             <ThemeProvider theme={dateTheme}>
@@ -160,4 +125,4 @@ const ActividadesTable = ({ actividades }) => {
   );
 };
 
-export default CompromisoDetail;
+export default HitoDetail;
