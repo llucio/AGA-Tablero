@@ -12,6 +12,7 @@ import UserMenu from './components/UserMenu';
 import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
 import CompromisoEdit from './components/CompromisoEdit';
+import HitoDetail from './components/HitoDetail';
 
 const routes = [
   {
@@ -34,6 +35,12 @@ const routes = [
   {
     path: '/compromiso/:id',
     content: CompromisoDetail,
+    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
+    headerClass: 'medium'
+  },
+  {
+    path: ['/hito/:id', '/hito/:id/editar'],
+    content: HitoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium'
   }

@@ -1,3 +1,5 @@
+#import "./fragments.graphql"
+
 query CompromisoQuery($id: uuid!, $full: Boolean! = false) {
   compromiso: compromiso_by_pk(id: $id) {
     id
@@ -10,73 +12,7 @@ query CompromisoQuery($id: uuid!, $full: Boolean! = false) {
       }
     }
     hitos(order_by: { fecha_inicial: asc }) @include(if: $full) {
-      id
-      titulo
-      fecha_creacion
-      metadatos
-      fecha_inicial
-      fecha_final
-      compromiso_id
-      entregables_aggregate {
-        aggregate {
-          min {
-            fecha_creacion
-          }
-          max {
-            fecha_creacion
-          }
-        }
-      }
-      entregables {
-        id
-        titulo
-        fecha_creacion
-        archivos
-        metadatos
-        hito_id
-        revisiones_aggregate {
-          aggregate {
-            count
-            min {
-              fecha_creacion
-            }
-            max {
-              fecha_creacion
-            }
-          }
-        }
-        revisiones {
-          id
-          fecha_creacion
-          metadatos
-          aprobado
-          comentario
-          parent_id
-          entregable_id
-        }
-      }
-      actividades_aggregate {
-        aggregate {
-          count
-          min {
-            fecha_creacion
-            fecha_finalizacion
-          }
-          max {
-            fecha_creacion
-            fecha_finalizacion
-          }
-        }
-      }
-      actividades(order_by: { orden: asc }) {
-        id
-        titulo
-        fecha_creacion
-        metadatos
-        orden
-        fecha_finalizacion
-        hito_id
-      }
+      ...Hito
     }
   }
 }
