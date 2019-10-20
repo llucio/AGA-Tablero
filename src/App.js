@@ -95,8 +95,8 @@ const AppRouter = () => (
               )}
               <section id="one" className="wrapper style1 special top">
                 <Container>
-                  <Breadcrumbs {...props} />
                   <UserMenu />
+                  <Breadcrumbs {...props} />
                   <Content {...props} />
                 </Container>
               </section>
