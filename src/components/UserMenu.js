@@ -3,7 +3,6 @@ import { useRoles } from '../hooks';
 //import Card from 'react-bootstrap/Card';
 //import Button from 'react-bootstrap/Button';
 
-
 import { makeStyles } from '@material-ui/core/styles';
 //import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -14,7 +13,6 @@ import Fab from '@material-ui/core/Fab';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PolicyIcon from '@material-ui/icons/Policy';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 
 
@@ -68,16 +66,14 @@ const UserMenu = () => {
           alignItems="center"
           spacing={5}
         >
-          <Grid container item xs={12} sm={5} spacing={2}>
-            <Fab
-              variant="contained"
-              className={classes.button}
-              color="secondary"
-            >
-              {usuario.name} ({usuario.email})
-            </Fab>
-          </Grid>
-          <Grid container item xs={12} sm={1} spacing={2}>
+
+          <Grid 
+            container 
+            item 
+            xs={12} 
+            sm={1} 
+            spacing={2}
+          >
             {usuario.administrador ? (
               <Fab
                 variant="contained"
@@ -96,28 +92,25 @@ const UserMenu = () => {
               </Fab>
             )}
           </Grid>
-          <Grid container item xs={12} sm={3} spacing={2}>
+
+          <Grid
+            container 
+            direction="row" 
+            item 
+            xs={12} 
+            sm={3} 
+            spacing={2} 
+            alignItems="center"
+          >
             <Fab
-              onClick={() => logout()}
-              color="secondary"
-              variant="extended"
-              aria-label="delete"
-              className={classes.fab}
-            >
-              Cerrar sesión <AccountCircleIcon />
-            </Fab>
-          </Grid>
-          <Grid container direction="row" item xs={12} sm={3} spacing={2} justify="flex-end" alignItems="center">
-            Mi sesión  &nbsp;
-            <Fab
-              variant="contained"
+              variant="container"
               color="secondary"
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}
-              size="small"
             >
-              <MoreVertIcon />
+              <AccountCircleIcon className={classes.extendedIcon} />
+              Mi sesión
             </Fab>
             <Menu
               id="simple-menu"
