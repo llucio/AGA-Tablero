@@ -13,6 +13,8 @@ import Fab from '@material-ui/core/Fab';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PolicyIcon from '@material-ui/icons/Policy';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import FaceIcon from '@material-ui/icons/Face';
+
 
 
 
@@ -88,7 +90,7 @@ const UserMenu = () => {
                 className={classes.button}
                 color="primary"
               >
-                <NotificationsIcon />
+                <FaceIcon />
               </Fab>
             )}
           </Grid>

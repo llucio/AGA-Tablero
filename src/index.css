@@ -1,3 +1,6 @@
+@import url("colores.css");
+
+
 html, body {
   margin: 0;
   font-family: 'Roboto', sans-serif !important;
@@ -24,6 +27,26 @@ strong, .strong, .bold {
   font-weight: 900!important;
 }
 
+.box-4{
+  -webkit-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+}
+.box-6{
+  -webkit-border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+
+hr.line{
+  margin: 10px 0 4%;
+  width: 5rem;
+  border: 3px solid #8bc34a;
+}
+
+.shadow-text {
+  text-shadow: 1px 1px 1px #222 !important;
+}
+
 
 /*
  * Reset estilos gobabierto
@@ -47,6 +70,4 @@ a:hover, a:hover > * {
 
 
 
-.shadow-text {
-  text-shadow: 1px 1px 1px #222 !important;
-}
+
