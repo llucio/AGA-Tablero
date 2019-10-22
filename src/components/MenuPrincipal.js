@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2)
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    className: "shadow-text",
   },
   media: {
     height: 55,
@@ -72,9 +73,9 @@ const MenuPrincipal = props => {
                 image="/assets/images/logo.png"
                 title="Gobierno Abierto"
               />
-              <Typography variant="h7" className={classes.title}>
-                <strong>Alianza</strong> para el <br />
-                <strong>Gobierno Abierto MX</strong>
+              <Typography variant="subtitle1" className={classes.title}>
+                <strong>Alianza</strong> para el <strong> Gobierno<br />
+                Abierto MX</strong>
               </Typography>
               <Button color="inherit" className="normal">
                 Inicio

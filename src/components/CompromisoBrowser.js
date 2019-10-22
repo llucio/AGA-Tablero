@@ -7,6 +7,9 @@ import CompromisoNav from './CompromisoNav';
 import CompromisoGrid from './CompromisoGrid';
 import LoadingIndicator from './LoadingIndicator';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
 const COMROMISOS_QUERY = gql`
   query CompromisosQuery {
     compromisos: compromiso {
@@ -18,25 +21,38 @@ const COMROMISOS_QUERY = gql`
   }
 `;
 
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+}));
+
+
 const CompromisoBrowser = () => {
+  const classes = useStyles();
   const { data: { compromisos } = {}, loading, error } = useQuery(
     COMROMISOS_QUERY
   );
   if (error) return <div>Error</div>;
 
   return (
-    <Row>
-      <Col xs={12} className="ustify-content-end">
-        {false && <CompromisoNav />}
-      </Col>
-      <Col cs={12}>
-        {loading || !compromisos ? (
-          <LoadingIndicator />
-        ) : (
-          <CompromisoGrid compromisos={compromisos} />
-        )}
-      </Col>
-    </Row>
+    
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          {false && <CompromisoNav />}
+        </Grid>
+        <Grid item xs={12}>
+          {loading || !compromisos ? (
+            <LoadingIndicator />
+          ) : (
+            <CompromisoGrid compromisos={compromisos} />
+          )}
+        </Grid>
+      </Grid>
+    </div>
+
   );
 };
 

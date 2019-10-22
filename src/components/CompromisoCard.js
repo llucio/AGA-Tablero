@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import RawHtml from './RawHtml';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -21,11 +22,16 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 const defaultImage =
   'https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
   card: {
-    maxWidth: 345
-  }
-});
+    maxWidth: 340
+  },
+}));
+
 
 //const LinkCompromiso = React.forwardRef((props, ref) => (
 //  <RouterLink innerRef={ref} to={`${compromiso.id}`} {...props} />
@@ -35,15 +41,21 @@ const CompromisoCard = ({ compromiso }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Gobierno Abierto"
-          height="140"
-          image={compromiso.metadatos.imagen || defaultImage}
-          title="Gobierno Abierto"
-        />
+
+
+
+    <Grid item xs={4}>
+
+      <Card className={classes.card} left>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt="Gobierno Abierto"
+            height="140"
+            image={compromiso.metadatos.imagen || defaultImage}
+            title="Gobierno Abierto"
+          />
+        </CardActionArea>
         <CardContent>
           <Link to={`/compromiso/${compromiso.id}`} className="text-uppercase">
             <Typography gutterBottom variant="h5" component="h2">
@@ -54,17 +66,19 @@ const CompromisoCard = ({ compromiso }) => {
             <RawHtml>{get(compromiso, 'metadatos.descripcion')}</RawHtml>
           </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Fab
-          href={`/compromiso/${compromiso.id}`}
-          color="primary"
-          variant="contained"
-        >
-          Ver detalles <ChevronRightIcon />
-        </Fab>
-      </CardActions>
-    </Card>
+        <CardActions>
+          <Fab
+            href={`/compromiso/${compromiso.id}`}
+            color="primary"
+            variant="contained"
+          >
+            Ver detalles <ChevronRightIcon />
+          </Fab>
+        </CardActions>
+      </Card>
+    </Grid>
+
+
   );
 };
 

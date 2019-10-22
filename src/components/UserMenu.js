@@ -84,6 +84,7 @@ const UserMenu = () => {
             <MenuItem onClick={handleClose}>
               {usuario.name} ({usuario.email})
             </MenuItem>
+            <MenuItem onClick={handleClose}>Crear compromiso</MenuItem>
             <MenuItem onClick={handleClose}>Administrador</MenuItem>
             <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
           </Menu>
