@@ -66,7 +66,7 @@ const CompromisoEdit = ({ match }) => {
       });
   };
 
-  console.log(compromiso)
+  console.log(compromiso);
 
   return (
     <Col>

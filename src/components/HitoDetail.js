@@ -12,23 +12,21 @@ import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import { useRoles } from '../hooks';
 import DataDisplay from './DataDisplay';
+import LoadingIndicator from './LoadingIndicator';
 
 const HITO_QUERY = loader('../queries/HitoQuery.graphql');
 
-console.log(HITO_QUERY)
+console.log(HITO_QUERY);
 
 const HitoDetail = ({ match }) => {
-  const { data: { hito } = {}, loading, error } = useQuery(
-    HITO_QUERY,
-    {
-      variables: {
-        id: match.params.id
-      },
-      fetchPolicy: 'cache-and-network'
-    }
-  );
+  const { data: { hito } = {}, loading, error } = useQuery(HITO_QUERY, {
+    variables: {
+      id: match.params.id
+    },
+    fetchPolicy: 'cache-and-network'
+  });
 
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <LoadingIndicator />;
   if (error || !hito) return <h1>No encontrado</h1>;
 
   return (

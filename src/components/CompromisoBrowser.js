@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import CompromisoNav from './CompromisoNav';
 import CompromisoGrid from './CompromisoGrid';
+import LoadingIndicator from './LoadingIndicator';
 
 const COMROMISOS_QUERY = gql`
   query CompromisosQuery {
@@ -30,7 +31,7 @@ const CompromisoBrowser = () => {
       </Col>
       <Col cs={12}>
         {loading || !compromisos ? (
-          <Col>Cargando...</Col>
+          <LoadingIndicator />
         ) : (
           <CompromisoGrid compromisos={compromisos} />
         )}

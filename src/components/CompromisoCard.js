@@ -18,14 +18,13 @@ import Typography from '@material-ui/core/Typography';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-
 const defaultImage =
   'https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 345,
-  },
+    maxWidth: 345
+  }
 });
 
 //const LinkCompromiso = React.forwardRef((props, ref) => (
@@ -33,11 +32,9 @@ const useStyles = makeStyles({
 //));
 
 const CompromisoCard = ({ compromiso }) => {
-
   const classes = useStyles();
 
   return (
-
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
@@ -48,10 +45,7 @@ const CompromisoCard = ({ compromiso }) => {
           title="Gobierno Abierto"
         />
         <CardContent>
-          <Link
-            to={`/compromiso/${compromiso.id}`}
-            className="text-uppercase"
-          >
+          <Link to={`/compromiso/${compromiso.id}`} className="text-uppercase">
             <Typography gutterBottom variant="h5" component="h2">
               {compromiso.titulo}
             </Typography>
@@ -69,10 +63,8 @@ const CompromisoCard = ({ compromiso }) => {
         >
           Ver detalles <ChevronRightIcon />
         </Fab>
-
       </CardActions>
     </Card>
-
   );
 };
 

@@ -23,22 +23,20 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   fab: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1)
   },
   extendedIcon: {
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(1)
   },
   button: {
-    margin: theme.spacing(1),
-  },
+    margin: theme.spacing(1)
+  }
 }));
 
-
 const UserMenu = () => {
-
   const classes = useStyles();
   const { loading, authenticated, usuario, login, logout } = useRoles();
 
@@ -55,7 +53,6 @@ const UserMenu = () => {
   return (
     <div className={classes.root}>
       {authenticated ? (
-
         <Grid
           container
           direction="row"
@@ -84,28 +81,25 @@ const UserMenu = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>{usuario.name} ({usuario.email})</MenuItem>
+            <MenuItem onClick={handleClose}>
+              {usuario.name} ({usuario.email})
+            </MenuItem>
             <MenuItem onClick={handleClose}>Administrador</MenuItem>
             <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
           </Menu>
         </Grid>
-
       ) : (
-
         <Fab
           variant="container"
           color="secondary"
           aria-haspopup="true"
           aria-label="login"
           onClick={() => login()}
-
         >
           <AccountCircleIcon className={classes.extendedIcon} />
           Identifícate
         </Fab>
-
       )}
-
     </div>
   );
   return;

@@ -15,9 +15,7 @@ const RawHtml = ({ children, as: Component = 'div', ...props }) => {
       }}
     />
   ) : (
-    <Component>
-      {children}
-    </Component>
+    <Component>{children}</Component>
   );
 };
 export default RawHtml;
