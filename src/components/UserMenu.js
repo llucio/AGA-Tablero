@@ -15,15 +15,10 @@ import PolicyIcon from '@material-ui/icons/Policy';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import FaceIcon from '@material-ui/icons/Face';
 
-
-
-
-
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    className: 'vertical-margin-bottom'
   },
   paper: {
     padding: theme.spacing(1),
@@ -66,80 +61,48 @@ const UserMenu = () => {
           direction="row"
           justify="flex-end"
           alignItems="center"
-          spacing={5}
+          spacing={1}
         >
-
-          <Grid 
-            container 
-            item 
-            xs={12} 
-            sm={1} 
-            spacing={2}
+          <Fab
+            variant="container"
+            color="secondary"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
           >
             {usuario.administrador ? (
-              <Fab
-                variant="contained"
-                className={classes.button}
-                color="secondary"
-              >
-                <PolicyIcon />
-              </Fab>
+              <PolicyIcon className={classes.extendedIcon} />
             ) : (
-              <Fab
-                variant="contained"
-                className={classes.button}
-                color="primary"
-              >
-                <FaceIcon />
-              </Fab>
+              <FaceIcon className={classes.extendedIcon} />
             )}
-          </Grid>
-
-          <Grid
-            container 
-            direction="row" 
-            item 
-            xs={12} 
-            sm={3} 
-            spacing={2} 
-            alignItems="center"
+            Mi sesión
+          </Fab>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
           >
-            <Fab
-              variant="container"
-              color="secondary"
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              <AccountCircleIcon className={classes.extendedIcon} />
-              Mi sesión
-            </Fab>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>{usuario.name} ({usuario.email})</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
-            </Menu>
-          </Grid>
+            <MenuItem onClick={handleClose}>{usuario.name} ({usuario.email})</MenuItem>
+            <MenuItem onClick={handleClose}>Administrador</MenuItem>
+            <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
+          </Menu>
         </Grid>
 
       ) : (
 
-          <Fab
-            onClick={() => login()}
-            color="secondary"
-            variant="extended"
-            aria-label="delete"
-            className={classes.fab}
-          >
-            <AccountCircleIcon className={classes.extendedIcon} />
-            Identifícate
-          </Fab>
+        <Fab
+          variant="container"
+          color="secondary"
+          aria-haspopup="true"
+          aria-label="login"
+          onClick={() => login()}
+
+        >
+          <AccountCircleIcon className={classes.extendedIcon} />
+          Identifícate
+        </Fab>
 
       )}
 

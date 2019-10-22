@@ -47,6 +47,28 @@ hr.line{
   text-shadow: 1px 1px 1px #222 !important;
 }
 
+.vertical-margin{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.vertical-margin-top{
+  margin-top: 40px;
+}
+.vertical-margin-top-middle{
+  margin-top: 20px;
+}
+.vertical-margin-bottom{
+  margin-bottom: 40px;
+}
+
+
+.menu-transparente{
+  /*background-color: inherit !important;*/
+  background-color: rgba(0,0,0,.7) !important;
+}
+
+
+
 
 /*
  * Reset estilos gobabierto

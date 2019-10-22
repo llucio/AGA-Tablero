@@ -11,7 +11,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 //import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -61,13 +62,13 @@ const CompromisoCard = ({ compromiso }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
+        <Fab
           href={`/compromiso/${compromiso.id}`}
           color="primary"
           variant="contained"
         >
           Ver detalles <ChevronRightIcon />
-        </Button>
+        </Fab>
 
       </CardActions>
     </Card>

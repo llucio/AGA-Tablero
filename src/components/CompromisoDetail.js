@@ -13,9 +13,11 @@ import Table from 'react-bootstrap/Table';
 import { useRoles } from '../hooks';
 import DataDisplay from './DataDisplay';
 
-
+import Grid from '@material-ui/core/Grid';
+import SwipeableViews from 'react-swipeable-views';
+import Fab from '@material-ui/core/Fab';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -27,6 +29,8 @@ import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import VerticalSplitIcon from '@material-ui/icons/VerticalSplit';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -44,8 +48,9 @@ function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`scrollable-force-tabpanel-${index}`}
-      aria-labelledby={`scrollable-force-tab-${index}`}
-      className="blue-grey darken-4 text-white"
+      //aria-labelledby={`scrollable-force-tab-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      //className="blue-grey darken-4 text-white"
       {...other}
     >
       <Box p={3} fontWeight="fontWeightLight" fontSize={20}>{children}</Box>
@@ -61,8 +66,11 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `scrollable-force-tab-${index}`,
-    'aria-controls': `scrollable-force-tabpanel-${index}`,
+    //id: `scrollable-force-tab-${index}`,
+    //'aria-controls': `scrollable-force-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
+
   };
 }
 
@@ -71,6 +79,15 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
+  },
+  root_grid: {
+    flexGrow: 1,
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
   },
 }));
 
@@ -103,18 +120,33 @@ const Compromiso = ({ compromiso }) => {
   const { usuario } = useRoles();
 
   const classes = useStyles();
+  const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleChangeIndex = index => {
+    setValue(index);
   };
 
   return (
 
     <div>
       {usuario.administrador && (
-        <LinkContainer to={`/compromiso/${compromiso.id}/editar`}>
-          <Button>Editar</Button>
-        </LinkContainer>
+
+        <Fab
+          href={`/compromiso/${compromiso.id}/editar`} 
+          variant="extended" 
+          color="primary" 
+          aria-label="add" 
+          className={classes.margin}
+        >
+          <EditIcon className={classes.extendedIcon} />
+          Editar
+        </Fab>
+
       )}
       <h1>{compromiso.titulo}</h1>
       <hr className="line" />
@@ -138,25 +170,36 @@ const Compromiso = ({ compromiso }) => {
             <Tab label="Alineación 2030" icon={<VerticalSplitIcon />} {...a11yProps(5)} />
           </Tabs>
         </AppBar>
-        <TabPanel value={value} index={0}>
-          {compromiso.metadatos.descripcion}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {compromiso.metadatos.valores}
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          {compromiso.metadatos.adicional}
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          {compromiso.metadatos.antecedentes}
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          {compromiso.metadatos.problematica}
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          {compromiso.metadatos.alineacion2030}
-        </TabPanel>
+
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            {compromiso.metadatos.descripcion}
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            {compromiso.metadatos.valores}
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            {compromiso.metadatos.adicional}
+          </TabPanel>
+          <TabPanel value={value} index={3} dir={theme.direction}>
+            {compromiso.metadatos.antecedentes}
+          </TabPanel>
+          <TabPanel value={value} index={4} dir={theme.direction}>
+            {compromiso.metadatos.problematica}
+          </TabPanel>
+          <TabPanel value={value} index={5} dir={theme.direction}>
+            {compromiso.metadatos.alineacion2030}
+          </TabPanel>
+
+        </SwipeableViews>
+
       </div>
+      
       {compromiso.hitos.map(hito => (
         <Hito key={hito.id} hito={hito} />
       ))}
@@ -185,41 +228,29 @@ const dateTheme = {
 };
 
 const Hito = ({ hito }) => {
+  
   const { descripcion, ...metadatos } = hito.metadatos;
+  const classes = useStyles();
+
   return (
-    <div>
-      <div className="mt-5">
-        <div>
-          <div>
-            <LinkContainer to={`/hito/${hito.id}`}>
-              <h2>{descripcion}</h2>
-            </LinkContainer>
-          </div>
-          <div xs="2">
-            <ThemeProvider theme={dateTheme}>
-              <CalendarIcon
-                date={DateTime.fromISO(hito.fecha_inicial).toJSDate()}
-                options={dateOptions}
-                theme={dateTheme}
-              />
-            </ThemeProvider>
-          </div>
-        </div>
-        <DataDisplay
-          data={metadatos}
-          labelComponent="h3"
-          keys={{
-            descripcion: 'Descripción',
-            valores: 'Valores',
-            adicional: 'Información adicional',
-            antecedentes: 'Antecedentes',
-            problematica: 'Problemática',
-            alineacion2030: 'Alineación 2030'
-          }}
-        />
+
+    <div className="vertical-margin">
+      <Grid container className={classes.root_grid} spacing={2}>
+        
+        <Grid item xs={10}>
+          <LinkContainer to={`/hito/${hito.id}`}>
+            <h3>{descripcion}</h3>
+          </LinkContainer>
+        </Grid>
+        <Grid item xs={2}>
+          { (hito.fecha_inicial) }
+        </Grid>
+
         <ActividadesTable actividades={hito.actividades} />
-      </div>
+
+      </Grid>
     </div>
+
   );
 };
 
@@ -228,7 +259,7 @@ const ActividadesTable = ({ actividades }) => {
 
   return (
     <Table striped bordered hover>
-      <thead className="blue-grey darken-4 text-white text-uppercase">
+      <thead className="thead-dark text-uppercase">
         <tr>
           <th>#</th>
           <th>Actividad</th>
