@@ -57,7 +57,7 @@ const CompromisoCard = ({ compromiso }) => {
           />
         </CardActionArea>
         <CardContent>
-          <Link to={`/compromiso/${compromiso.id}`} className="text-uppercase">
+          <Link to={`/compromiso/${compromiso.id}`} className="text-uppercase-">
             <Typography gutterBottom variant="h5" component="h2">
               {compromiso.titulo}
             </Typography>

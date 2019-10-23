@@ -1,8 +1,8 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+//import Col from 'react-bootstrap/Col';//
+//import Row from 'react-bootstrap/Row';
 import CompromisoNav from './CompromisoNav';
 import CompromisoGrid from './CompromisoGrid';
 import LoadingIndicator from './LoadingIndicator';
