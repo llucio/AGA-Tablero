@@ -19,8 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-const defaultImage =
-  'https://images.unsplash.com/photo-1498661367879-c2085689eed4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
+const defaultImage = 'https://picsum.photos/200/300';
 
 
 const useStyles = makeStyles(theme => ({
@@ -37,6 +36,8 @@ const useStyles = makeStyles(theme => ({
 //  <RouterLink innerRef={ref} to={`${compromiso.id}`} {...props} />
 //));
 
+const chars = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"];
+
 const CompromisoCard = ({ compromiso }) => {
   const classes = useStyles();
 
@@ -52,7 +53,7 @@ const CompromisoCard = ({ compromiso }) => {
             component="img"
             alt="Gobierno Abierto"
             height="140"
-            image={compromiso.metadatos.imagen || defaultImage}
+            image={compromiso.metadatos.imagen || defaultImage + '?' + [...Array(10)].map(i=>chars[Math.random()*chars.length|0]).join`` }
             title="Gobierno Abierto"
           />
         </CardActionArea>
