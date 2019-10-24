@@ -1,14 +1,34 @@
 import React from 'react';
-import Row from 'react-bootstrap/Row';
+//import Row from 'react-bootstrap/Row';
 import CompromisoCard from './CompromisoCard';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+}));
 
 const CompromisoGrid = ({ compromisos }) => {
+  
+  const classes = useStyles();
+
   return (
-    <Row>
-      {compromisos.map(compromiso => (
-        <CompromisoCard key={compromiso.id} compromiso={compromiso} />
-      ))}
-    </Row>
+    <div className="vertical-margin-bottom">
+    	<h2>Compromisos</h2>
+    	<hr className="line" />
+      <Grid
+			  container
+			  direction="row"
+			  justify="space-between"
+			  alignItems="flex-start"
+      >
+	      {compromisos.map(compromiso => (
+	        <CompromisoCard key={compromiso.id} compromiso={compromiso} />
+	      ))}
+      </Grid>
+    </div>
   );
 };
 

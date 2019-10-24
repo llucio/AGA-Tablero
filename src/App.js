@@ -8,7 +8,9 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import AuthProvider from './keycloak';
 import { apolloClient } from './apollo';
 import { useRoles } from './hooks';
+import MenuPrincipal from './components/MenuPrincipal';
 import UserMenu from './components/UserMenu';
+import Footer from './components/Footer';
 import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
 import CompromisoEdit from './components/CompromisoEdit';
@@ -84,6 +86,9 @@ const AppRouter = () => (
           exact={exact}
           component={props => (
             <React.Fragment>
+              
+              <MenuPrincipal />
+
               {!!heading && (
                 <Heading
                   heading={heading}
@@ -93,13 +98,16 @@ const AppRouter = () => (
                   className={headerClass}
                 />
               )}
-              <section id="one" className="wrapper style1 special top">
-                <Container>
+              
+              <section id="one" className="vertical-margin-top-middle">
+                <Container>  
                   <Breadcrumbs {...props} />
-                  <UserMenu />
                   <Content {...props} />
                 </Container>
               </section>
+
+              <Footer />
+
             </React.Fragment>
           )}
         />

@@ -31,7 +31,6 @@ const CompromisoNav = props => {
       </NavDropdown>
     </Nav>
   );
-}
+};
 
 export default CompromisoNav;
-
