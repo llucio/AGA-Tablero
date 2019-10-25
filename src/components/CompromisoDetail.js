@@ -167,7 +167,17 @@ const Hito = ({ hito }) => {
           </LinkContainer>
         </Grid>
         <Grid item xs={2}>
-          {hito.fecha_inicial}
+
+
+            <ThemeProvider theme={dateTheme}>
+              <CalendarIcon
+                date={DateTime.fromISO(hito.fecha_inicial).toJSDate()}
+                options={dateOptions}
+                theme={dateTheme}
+              />
+            </ThemeProvider>
+
+
         </Grid>
 
         <ActividadesTable actividades={hito.actividades} />
