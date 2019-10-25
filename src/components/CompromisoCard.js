@@ -7,11 +7,12 @@ import RawHtml from './RawHtml';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+//import Card from '@material-ui/core/Card';
+//import CardActionArea from '@material-ui/core/CardActionArea';
+//import CardActions from '@material-ui/core/CardActions';
+//import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Box from '@material-ui/core/Box';
 //import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 //import Link from '@material-ui/core/Link';
@@ -25,6 +26,8 @@ const defaultImage = 'https://picsum.photos/200/300';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    padding: theme.spacing(1),
+    maxHeight: 340,
   },
   card: {
     maxWidth: 340
@@ -45,40 +48,30 @@ const CompromisoCard = ({ compromiso }) => {
 
 
 
-    <Grid item xs={4}>
-
-      <Card className={classes.card} left>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            alt="Gobierno Abierto"
-            height="140"
-            image={compromiso.metadatos.imagen || defaultImage + '?' + [...Array(10)].map(i=>chars[Math.random()*chars.length|0]).join`` }
-            title="Gobierno Abierto"
-          />
-        </CardActionArea>
-        <CardContent>
-          <Link to={`/compromiso/${compromiso.id}`} className="text-uppercase-">
-            <Typography gutterBottom variant="h5" component="h2">
+    <Grid
+      item
+      xs={12} md={4} lg={4}
+      className={classes.root}
+    >
+        <Box
+          boxShadow={3}
+          className="box-4 item-compromisos"
+          style={{ 
+            backgroundImage: `url(http://placeimg.com/350/320/any)`, 
+            backgroundSize: 'cover', 
+            height: '320px',
+          }}
+        >
+          <Link
+            to={`/compromiso/${compromiso.id}`}
+            className="white-text shadow-text"
+          >
+            <Typography gutterBottom variant="h4" className="image-over strong" >
               {compromiso.titulo}
             </Typography>
           </Link>
-          <Typography variant="body2" color="textSecondary" component="p">
-            <RawHtml>{get(compromiso, 'metadatos.descripcion')}</RawHtml>
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Fab
-            href={`/compromiso/${compromiso.id}`}
-            color="primary"
-            variant="contained"
-          >
-            Ver detalles <ChevronRightIcon />
-          </Fab>
-        </CardActions>
-      </Card>
+        </Box>
     </Grid>
-
 
   );
 };

@@ -10,7 +10,7 @@ import { apolloClient } from './apollo';
 import { useRoles } from './hooks';
 import MenuPrincipal from './components/MenuPrincipal';
 import UserMenu from './components/UserMenu';
-import Footer from './components/Footer';
+//import Footer from './components/Footer';
 import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
 import CompromisoEdit from './components/CompromisoEdit';
@@ -106,7 +106,7 @@ const AppRouter = () => (
                 </Container>
               </section>
 
-              <Footer />
+              
 
             </React.Fragment>
           )}
