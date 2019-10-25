@@ -68,6 +68,46 @@ hr.line{
 }
 
 
+.image-over{
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(to bottom,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.8) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+  -webkit-border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
+  height: 320px;
+  padding: 30px;
+  display: flex;
+  justify-content: left;
+  align-items: flex-end;
+
+}
+
+
+
+/*
+ * Personalizando MuI
+ */
+
+.MuiTypography-h4 {
+    font-size: 1.5rem !important;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.05!important;
+    letter-spacing: 0.00em!important;
+}
+
+.item-compromisos{}
+.item-compromisos a:hover,
+.item-compromisos a:hover > * {
+    color: #f4ff81;
+    -webkit-transition: none;
+    transition: none;
+    border-bottom-color: transparent;
+    text-decoration: none;
+    -webkit-transform: none;
+    transform: none;
+}
 
 
 /*
@@ -79,7 +119,7 @@ hr.line{
 }
 
 a:hover, a:hover > * {
-    color: #09f;
+    color: #03a9f4;
     -webkit-transition: none;
     transition: none;
     border-bottom-color: transparent;
