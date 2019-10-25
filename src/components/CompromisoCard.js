@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     padding: theme.spacing(1),
-    maxHeight: 340
   },
   card: {
     maxWidth: 340
@@ -45,14 +44,18 @@ const CompromisoCard = ({ compromiso }) => {
           height: '320px'
         }}
       >
-        <Link
-          to={`/compromiso/${compromiso.id}`}
-          className="white-text shadow-text"
+        <Box
+          className="pattern3"
         >
-          <Typography gutterBottom variant="h4" className="image-over strong">
-            {compromiso.titulo}
-          </Typography>
-        </Link>
+          <Link
+            to={`/compromiso/${compromiso.id}`}
+            className="white-text shadow-text"
+          >
+            <Typography gutterBottom variant="h4" className="image-over extra-bold">
+              {compromiso.titulo}
+            </Typography>
+          </Link>
+        </Box>
       </Box>
     </Grid>
   );

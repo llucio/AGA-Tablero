@@ -5,6 +5,7 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,11 +16,15 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     backgroundColor: 'black',
   },
+  link: {
+    margin: theme.spacing(1),
+  },
 }));
 
 const Footer = props => {
 
 	const classes = useStyles();
+	const preventDefault = event => event.preventDefault();
 
 	return (
 
@@ -35,15 +40,15 @@ const Footer = props => {
 				>
 	        <Grid item xs={2}>
 	          <Paper className={classes.paper}>
-
-              <CardMedia
-                component="img"
-                alt="Gobierno Abierto"
-                className={classes.media}
-                image="/assets/images/logo_sfp_vertical_blanco.svg"
-                title="Gobierno Abierto"
-              />
-
+	          	<Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+	              <CardMedia
+	                component="img"
+	                alt="Gobierno Abierto"
+	                className={classes.media}
+	                image="/assets/images/logo_sfp_vertical_blanco.svg"
+	                title="Gobierno Abierto"
+	              />
+              </Link>
 	          </Paper>
 	        </Grid>
 	        <Grid item xs={2}>
