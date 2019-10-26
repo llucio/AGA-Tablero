@@ -4,7 +4,7 @@ import { useRoles } from '../hooks';
 import UserMenu from './UserMenu';
 
 import PropTypes from 'prop-types';
-import Box from '@material-ui/core/Box';
+
 import CardMedia from '@material-ui/core/CardMedia';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Container from '@material-ui/core/Container';
@@ -15,7 +15,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(theme => ({
@@ -84,7 +83,10 @@ const MenuPrincipal = props => {
                     <strong>Alianza</strong> para el <strong> Gobierno<br />
                     Abierto MX</strong>
                   </Typography>
-                  <Fab color="inherit" className="black">
+                  <Fab
+                    color="inherit"
+                    className="black"
+                  >
                     <MenuIcon />
                   </Fab>
                 </Toolbar>
@@ -125,7 +127,6 @@ const MenuPrincipal = props => {
                   <Button color="inherit" className="normal">
                     Contacto
                   </Button>
-                  <UserMenu />
                 </Toolbar>
               </Hidden>
 

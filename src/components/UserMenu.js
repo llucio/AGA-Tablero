@@ -1,24 +1,20 @@
 import React from 'react';
 import { useRoles } from '../hooks';
-//import Card from 'react-bootstrap/Card';
-//import Button from 'react-bootstrap/Button';
 
 import { makeStyles } from '@material-ui/core/styles';
-//import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PersonIcon from '@material-ui/icons/Person';
 import PolicyIcon from '@material-ui/icons/Policy';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import FaceIcon from '@material-ui/icons/Face';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    className: 'vertical-margin-bottom'
+    padding: theme.spacing(4, 1),
   },
   paper: {
     padding: theme.spacing(1),
@@ -31,9 +27,7 @@ const useStyles = makeStyles(theme => ({
   extendedIcon: {
     marginRight: theme.spacing(1)
   },
-  button: {
-    margin: theme.spacing(1)
-  }
+
 }));
 
 const UserMenu = () => {
@@ -51,7 +45,7 @@ const UserMenu = () => {
   if (loading) return null;
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       {authenticated ? (
         <Grid
           container
@@ -62,7 +56,7 @@ const UserMenu = () => {
         >
           <Fab
             variant="container"
-            color="secondary"
+            className="grey darken-4 grey-text text-darken-1"
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleClick}
@@ -72,7 +66,7 @@ const UserMenu = () => {
             ) : (
               <FaceIcon className={classes.extendedIcon} />
             )}
-            Mi sesión
+             Mi sesión
           </Fab>
           <Menu
             id="simple-menu"
@@ -90,20 +84,20 @@ const UserMenu = () => {
           </Menu>
         </Grid>
       ) : (
+
         <Fab
           variant="container"
-          color="secondary"
+          className="grey darken-4 grey-text text-darken-1"
           aria-haspopup="true"
           aria-label="login"
           onClick={() => login()}
         >
-          <AccountCircleIcon className={classes.extendedIcon} />
-          Identifícate
+          <PersonIcon className={classes.extendedIcon} /> Identifícate
         </Fab>
+
       )}
-    </div>
+    </Box>
   );
-  return;
 };
 
 export default UserMenu;

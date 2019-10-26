@@ -5,14 +5,18 @@ import { DateTime } from 'luxon';
 import { CalendarIcon } from 'react-calendar-icon';
 import { ThemeProvider } from 'styled-components';
 import { LinkContainer } from 'react-router-bootstrap';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Table from 'react-bootstrap/Table';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import SwipeableViews from 'react-swipeable-views';
 import Fab from '@material-ui/core/Fab';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+
 import InfoIcon from '@material-ui/icons/Info';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
@@ -21,6 +25,7 @@ import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import VerticalSplitIcon from '@material-ui/icons/VerticalSplit';
 import EditIcon from '@material-ui/icons/Edit';
+
 import { useRoles } from '../hooks';
 import DataDisplay from './DataDisplay';
 import TabPanel from './TabPanel';
@@ -43,7 +48,13 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   margin: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(2)
+  },
+  descripcion: {
+    padding: theme.spacing(0, 0, 6, 0),
+  },
+  institucion: {
+    padding: theme.spacing(0, 0, 6, 0),
   },
   extendedIcon: {
     marginRight: theme.spacing(1)
@@ -87,7 +98,7 @@ const Compromiso = ({ compromiso }) => {
   const handleChangeIndex = index => setTabIndex(index);
 
   return (
-    <div>
+    <Box>
       {usuario.administrador && (
         <Fab
           href={`/compromiso/${compromiso.id}/editar`}
@@ -102,7 +113,17 @@ const Compromiso = ({ compromiso }) => {
       )}
       <h1>{compromiso.titulo}</h1>
       <hr className="line" />
-      <div className={classes.root}>
+
+      <Box
+        className={classes.descripcion}
+        p={3}
+        fontWeight="fontWeightLight"
+        fontSize={20}
+      >
+        {compromiso.metadatos.descripcion}
+      </Box>
+
+      <Box className={classes.root}>
         <AppBar position="static" color="default">
           <Tabs
             value={tabIndex}
@@ -130,12 +151,12 @@ const Compromiso = ({ compromiso }) => {
             </TabPanel>
           ))}
         </SwipeableViews>
-      </div>
+      </Box>
 
       {compromiso.hitos.map(hito => (
         <Hito key={hito.id} hito={hito} />
       ))}
-    </div>
+    </Box>
   );
 };
 
@@ -159,7 +180,7 @@ const Hito = ({ hito }) => {
   const classes = useStyles();
 
   return (
-    <div className="vertical-margin">
+    <Box className="vertical-margin">
       <Grid container className={classes.root_grid} spacing={2}>
         <Grid item xs={10}>
           <LinkContainer to={`/hito/${hito.id}`}>
@@ -167,22 +188,17 @@ const Hito = ({ hito }) => {
           </LinkContainer>
         </Grid>
         <Grid item xs={2}>
-
-
-            <ThemeProvider theme={dateTheme}>
-              <CalendarIcon
-                date={DateTime.fromISO(hito.fecha_inicial).toJSDate()}
-                options={dateOptions}
-                theme={dateTheme}
-              />
-            </ThemeProvider>
-
-
+          <ThemeProvider theme={dateTheme}>
+            <CalendarIcon
+              date={DateTime.fromISO(hito.fecha_inicial).toJSDate()}
+              options={dateOptions}
+              theme={dateTheme}
+            />
+          </ThemeProvider>
         </Grid>
-
         <ActividadesTable actividades={hito.actividades} />
       </Grid>
-    </div>
+    </Box>
   );
 };
 
@@ -204,15 +220,15 @@ const ActividadesTable = ({ actividades }) => {
             <td>{i + 1}</td>
             <td>{actividad.titulo}</td>
             <td>
-              <div className="progress">
-                <div
+              <Box className="progress">
+                <Box
                   className="progress-bar light-green progress-bar-animated w-50 progress-bar-striped"
                   role="progressbar"
                   aria-valuenow="10"
                   aria-valuemin="0"
                   aria-valuemax="100"
                 />
-              </div>
+              </Box>
             </td>
           </tr>
         ))}

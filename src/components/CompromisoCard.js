@@ -1,15 +1,11 @@
 import React from 'react';
-import { get } from 'lodash';
+//import { get } from 'lodash';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import CardMedia from '@material-ui/core/CardMedia';
 import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import RawHtml from './RawHtml';
+//import RawHtml from './RawHtml';
 
 // Para imágenes aleatorias (provisional)
 const defaultImage = 'https://picsum.photos/300/300';
@@ -45,7 +41,7 @@ const CompromisoCard = ({ compromiso }) => {
         }}
       >
         <Box
-          className="pattern3"
+          className="pattern3 box-4"
         >
           <Link
             to={`/compromiso/${compromiso.id}`}
