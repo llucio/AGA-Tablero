@@ -65,6 +65,7 @@ hr.line{
 .menu-transparente{
   /*background-color: inherit !important;*/
   background-color: rgba(0,0,0,.7) !important;
+  z-index: 9999!important;
 }
 
 
@@ -92,6 +93,41 @@ hr.line{
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAD0lEQVQImWNgwARStBAAABpPAIPQzAGMAAAAAElFTkSuQmCC) repeat;
 }
 
+
+
+.curson-default{
+  cursor: default!important;
+}
+.curson-crosshair{
+  cursor: crosshair!important;
+}
+.curson-pointer{
+  cursor: pointer!important;
+}
+.curson-move{
+  cursor: move!important;
+}
+.curson-nw-resize{
+  cursor: nw-resize!important;
+}
+.curson-ne-resize{
+  cursor: ne-resize!important;
+}
+.curson-n-resize{
+  cursor: n-resize!important;
+}
+.curson-e-resize{
+  cursor: e-resize!important;
+}
+.curson-help{
+  cursor: help!important;
+}
+.curson-text{
+  cursor: text!important;
+}
+.curson-wait{
+  cursor: wait!important;
+}
 
 
 /*

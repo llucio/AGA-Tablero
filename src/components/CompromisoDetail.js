@@ -8,7 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Table from 'react-bootstrap/Table';
+//import Table from 'react-bootstrap/Table';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import SwipeableViews from 'react-swipeable-views';
@@ -16,6 +16,10 @@ import Fab from '@material-ui/core/Fab';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Link from '@material-ui/core/Link';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 
 import InfoIcon from '@material-ui/icons/Info';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
@@ -25,6 +29,12 @@ import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import VerticalSplitIcon from '@material-ui/icons/VerticalSplit';
 import EditIcon from '@material-ui/icons/Edit';
+import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import LinkIcon from '@material-ui/icons/Link';
+
 
 import { useRoles } from '../hooks';
 import DataDisplay from './DataDisplay';
@@ -58,7 +68,23 @@ const useStyles = makeStyles(theme => ({
   },
   extendedIcon: {
     marginRight: theme.spacing(1)
-  }
+  },
+  box_panel: {
+    padding: theme.spacing(5, 0, 10, 0),
+  },
+  panel: {
+    width: '100%',
+  },
+  panel_heading: {
+    fontSize: theme.typography.pxToRem(18),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  },
 }));
 
 const CompromisoDetail = ({ match }) => {
@@ -80,12 +106,15 @@ const CompromisoDetail = ({ match }) => {
 };
 
 const compromisoTabs = [
-  { key: 'descripcion', label: 'Descripción', icon: <InfoIcon /> },
+  //{ key: 'descripcion', label: 'Descripción', icon: <InfoIcon /> },
   { key: 'valores', label: 'Valores', icon: <VerifiedUserIcon /> },
-  { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> },
+  { key: 'adicional', label: 'Información', icon: <MenuBookIcon /> },
   { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
   { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
-  { key: 'alineacion2030', label: 'Alineación 2030', icon: <VerticalSplitIcon /> }
+  { key: 'alineacion2030', label: 'Alineación 2030', icon: <VerticalSplitIcon /> },
+  { key: 'solucionPlanteada', label: 'Solución', icon: <WbIncandescentIcon /> },
+  { key: 'analisisRiesgo', label: 'Analisís de Riesgo', icon: <ListAltIcon /> },
+  { key: 'otrosActores', label: 'Otros actores', icon: <PeopleAltIcon /> },
 ];
 
 const Compromiso = ({ compromiso }) => {
@@ -153,9 +182,12 @@ const Compromiso = ({ compromiso }) => {
         </SwipeableViews>
       </Box>
 
-      {compromiso.hitos.map(hito => (
-        <Hito key={hito.id} hito={hito} />
-      ))}
+      <Box className={classes.box_panel}>
+        {compromiso.hitos.map(hito => (
+          <Hito key={hito.id} hito={hito} />
+        ))}
+      </Box>
+
     </Box>
   );
 };
@@ -179,62 +211,56 @@ const Hito = ({ hito }) => {
   const { descripcion } = hito.metadatos;
   const classes = useStyles();
 
+
   return (
-    <Box className="vertical-margin">
-      <Grid container className={classes.root_grid} spacing={2}>
-        <Grid item xs={10}>
-          <LinkContainer to={`/hito/${hito.id}`}>
-            <h3>{descripcion}</h3>
-          </LinkContainer>
-        </Grid>
-        <Grid item xs={2}>
-          <ThemeProvider theme={dateTheme}>
-            <CalendarIcon
-              date={DateTime.fromISO(hito.fecha_inicial).toJSDate()}
-              options={dateOptions}
-              theme={dateTheme}
-            />
-          </ThemeProvider>
-        </Grid>
-        <ActividadesTable actividades={hito.actividades} />
-      </Grid>
+    <Box className={classes.panel}>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          className="grey lighten-5 text-uppercase"
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.panel_heading}>
+            <span className="semi-bold">{descripcion}</span>
+          </Typography>
+        </ExpansionPanelSummary>
+        <ActividadesPanel actividades={hito.actividades} hito={hito.id} />
+      </ExpansionPanel>
     </Box>
   );
+
 };
 
-const ActividadesTable = ({ actividades }) => {
-  // const { descripcion, ...metadatos } = actividad.metadatos;
 
+const ActividadesPanel = ({ actividades, hito }) => {
   return (
-    <Table striped bordered hover>
-      <thead className="thead-dark text-uppercase">
-        <tr>
-          <th>#</th>
-          <th>Actividad</th>
-          <th>Progreso</th>
-        </tr>
-      </thead>
-      <tbody>
+
+    <ExpansionPanelDetails>
+      <Grid container spacing={3}>
         {actividades.map((actividad, i) => (
-          <tr key={i}>
-            <td>{i + 1}</td>
-            <td>{actividad.titulo}</td>
-            <td>
-              <Box className="progress">
-                <Box
-                  className="progress-bar light-green progress-bar-animated w-50 progress-bar-striped"
-                  role="progressbar"
-                  aria-valuenow="10"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                />
-              </Box>
-            </td>
-          </tr>
+          <Grid
+            item
+            xs={12}
+            key={i}
+          >
+            <Typography className="light" display="block">
+              <Link
+                component="button"
+                href={`/hito/${hito}`}
+              >
+                {i + 1} . 
+                {actividad.titulo}
+                <LinkIcon />
+              </Link>
+            </Typography>
+          </Grid>
         ))}
-      </tbody>
-    </Table>
+      </Grid>
+    </ExpansionPanelDetails>
+
   );
 };
+
 
 export default CompromisoDetail;
