@@ -211,7 +211,6 @@ const Hito = ({ hito }) => {
   const { descripcion } = hito.metadatos;
   const classes = useStyles();
 
-
   return (
     <Box className={classes.panel}>
       <ExpansionPanel>
