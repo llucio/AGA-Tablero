@@ -1,18 +1,10 @@
 import React from 'react';
-//import Row from 'react-bootstrap/Row';
 import CompromisoCard from './CompromisoCard';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-}));
+
 
 const CompromisoGrid = ({ compromisos }) => {
-  
-  const classes = useStyles();
 
   return (
     <div className="vertical-margin-bottom">

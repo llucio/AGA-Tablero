@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
+import Box from '@material-ui/core/Box';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import AuthProvider from './keycloak';
 import { apolloClient } from './apollo';
 import { useRoles } from './hooks';
 import MenuPrincipal from './components/MenuPrincipal';
-import UserMenu from './components/UserMenu';
-//import Footer from './components/Footer';
+import Footer from './components/Footer';
 import CompromisoBrowser from './components/CompromisoBrowser';
 import CompromisoDetail from './components/CompromisoDetail';
 import CompromisoEdit from './components/CompromisoEdit';
@@ -86,7 +86,7 @@ const AppRouter = () => (
           exact={exact}
           component={props => (
             <React.Fragment>
-              
+
               <MenuPrincipal />
 
               {!!heading && (
@@ -98,7 +98,7 @@ const AppRouter = () => (
                   className={headerClass}
                 />
               )}
-              
+
               <section id="one" className="vertical-margin-top-middle">
                 <Container>  
                   <Breadcrumbs {...props} />
@@ -106,7 +106,7 @@ const AppRouter = () => (
                 </Container>
               </section>
 
-              
+              <Footer />
 
             </React.Fragment>
           )}
@@ -122,12 +122,12 @@ const Heading = ({ className, image, heading, subheading, headerArrow }) => (
     className={className}
     style={{ backgroundImage: `url(${image})` }}
   >
-    <div className="content">
+    <Box className="content">
       <header>
         <h2 className="big shadow-text">{heading}</h2>
         {subheading && <h4 className="mt-4 lead shadow-text">{subheading}</h4>}
       </header>
-    </div>
+    </Box>
     {headerArrow && (
       <a href="#one" className="goto-next scrolly">
         Siguiente
