@@ -57,8 +57,17 @@ hr.line{
 .vertical-margin-top-middle{
   margin-top: 20px;
 }
+.vertical-margin-top-small{
+  margin-top: 10px;
+}
 .vertical-margin-bottom{
   margin-bottom: 40px;
+}
+.vertical-margin-bottom-middle{
+  margin-bottom: 20px;
+}
+.vertical-margin-bottom-small{
+  margin-bottom: 10px;
 }
 
 

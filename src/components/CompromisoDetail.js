@@ -213,9 +213,9 @@ const Hito = ({ hito }) => {
 
   return (
     <Box className={classes.panel}>
-      <ExpansionPanel>
+      <ExpansionPanel className="vertical-margin-bottom-middle">
         <ExpansionPanelSummary
-          className="grey lighten-5 text-uppercase"
+          className="grey lighten-4 text-uppercase"
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
