@@ -14,6 +14,13 @@ import { useRoles } from '../hooks';
 import DataDisplay from './DataDisplay';
 import LoadingIndicator from './LoadingIndicator';
 
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+//import Table from 'react-bootstrap/Table';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+
+
 const HITO_QUERY = loader('../queries/HitoQuery.graphql');
 
 console.log(HITO_QUERY);
@@ -30,9 +37,9 @@ const HitoDetail = ({ match }) => {
   if (error || !hito) return <h1>No encontrado</h1>;
 
   return (
-    <Row>
+
       <Hito hito={hito} />
-    </Row>
+
   );
 };
 
@@ -54,12 +61,13 @@ const dateTheme = {
 const Hito = ({ hito }) => {
   const { descripcion, ...metadatos } = hito.metadatos;
   return (
-    <Row>
+    <Box>
+
+      <h2>{descripcion}</h2>
+      <hr className="line" />
+
       <Col className="mt-5">
         <Row>
-          <Col>
-            <h2>{descripcion}</h2>
-          </Col>
           <Col xs="2">
             <ThemeProvider theme={dateTheme}>
               <CalendarIcon
@@ -84,7 +92,7 @@ const Hito = ({ hito }) => {
         />
         <ActividadesTable actividades={hito.actividades} />
       </Col>
-    </Row>
+    </Box>
   );
 };
 

@@ -243,14 +243,17 @@ const ActividadesPanel = ({ actividades, hito }) => {
             xs={12}
             key={i}
           >
-            <Typography className="light" display="block">
+            <Typography
+              className="light"
+              display="block"
+            >
               <Link
-                component="button"
-                href={`/hito/${hito}`}
+                variant="body2"
+                href={`/hito/${hito}`} 
               >
                 {i + 1} . 
                 {actividad.titulo}
-                <LinkIcon />
+                <LinkIcon fontSize="small" />
               </Link>
             </Typography>
           </Grid>

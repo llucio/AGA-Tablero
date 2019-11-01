@@ -44,7 +44,7 @@ const Footer = props => {
 				  spacing={4}
           className={classes.root}
 				>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
 	          	<Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
 	              <CardMedia
@@ -57,7 +57,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -70,7 +70,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -93,7 +93,7 @@ const Footer = props => {
 				  spacing={4}
 
 				>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -106,7 +106,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -119,7 +119,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -132,7 +132,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_two}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -145,7 +145,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -158,7 +158,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -181,7 +181,7 @@ const Footer = props => {
 				  spacing={4}
 
 				>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -194,7 +194,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -207,7 +207,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_two}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -220,7 +220,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -233,7 +233,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -246,7 +246,7 @@ const Footer = props => {
               </Link>
 	          </Box>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item xs={4}  sm={2}>
 	          <Box className={classes.box_one}>
               <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
                 <CardMedia
@@ -267,7 +267,7 @@ const Footer = props => {
           justify="center"
           alignItems="flex-start"
         >
-          <Grid item xs={3}>
+          <Grid item xs={6} sm={4}>
             <Box className={classes.box_one}>
             <UserMenu />
             </Box>
