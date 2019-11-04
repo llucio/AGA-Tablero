@@ -8,16 +8,17 @@ export const apolloClient = new ApolloClient({
   uri,
   request: operation => {
     const token = window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
-    if (token) {
-      const decoded = jwt.decode(token);
-      const expired = Math.floor(Date.now() / 1000) >= decoded.exp;
-      if (!expired) {
-        operation.setContext({
-          headers: {
-            authorization: `Bearer ${token}`
-          }
-        });
-      }
-    }
+    if (!token) return;
+
+    const decoded = jwt.decode(token);
+    if (!decoded) return console.error('Error decodificando token:', token);
+
+    const expired = Math.floor(Date.now() / 1000) >= decoded.exp;
+    !expired &&
+      operation.setContext({
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      });
   }
 });
