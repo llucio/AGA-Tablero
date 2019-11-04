@@ -21,13 +21,11 @@ const COMROMISOS_QUERY = gql`
   }
 `;
 
-
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 }));
-
 
 const CompromisoBrowser = () => {
   const classes = useStyles();
@@ -35,24 +33,20 @@ const CompromisoBrowser = () => {
     COMROMISOS_QUERY
   );
   if (error) return <div>Error</div>;
+  if (loading) return <LoadingIndicator />;
+  if (!compromisos) return <h1>Sin datos</h1>;
 
   return (
-    
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          {false && <CompromisoNav />}
+          {/* {<CompromisoNav />} */}
         </Grid>
         <Grid item xs={12}>
-          {loading || !compromisos ? (
-            <LoadingIndicator />
-          ) : (
-            <CompromisoGrid compromisos={compromisos} />
-          )}
+          <CompromisoGrid compromisos={compromisos} />
         </Grid>
       </Grid>
     </div>
-
   );
 };
 

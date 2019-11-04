@@ -9,7 +9,7 @@ const CompromisoNav = props => {
     <Nav variant="pills" activeKey="1" onSelect={handleSelect}>
       <Nav.Item>
         <Nav.Link eventKey="1" href="#/home">
-          NavLink 1 content
+          Editar encabezado
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
@@ -22,12 +22,12 @@ const CompromisoNav = props => {
           NavLink 3 content
         </Nav.Link>
       </Nav.Item>
-      <NavDropdown title="Dropdown" id="nav-dropdown">
-        <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-        <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
+      <NavDropdown title="Añadir" id="nav-dropdown">
+        <NavDropdown.Item eventKey="4.1">Compromiso</NavDropdown.Item>
+        <NavDropdown.Item eventKey="4.2">Hito</NavDropdown.Item>
+        <NavDropdown.Item eventKey="4.3">Entregable</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
+        <NavDropdown.Item eventKey="4.4">Ayuda</NavDropdown.Item>
       </NavDropdown>
     </Nav>
   );
