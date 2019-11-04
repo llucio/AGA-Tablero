@@ -55,7 +55,7 @@ const UserMenu = () => {
           spacing={1}
         >
           <Fab
-            variant="container"
+            variant="extended"
             className="grey darken-4 grey-text text-darken-1"
             aria-controls="simple-menu"
             aria-haspopup="true"
@@ -86,7 +86,7 @@ const UserMenu = () => {
       ) : (
 
         <Fab
-          variant="container"
+          variant="extended"
           className="grey darken-4 grey-text text-darken-1"
           aria-haspopup="true"
           aria-label="login"

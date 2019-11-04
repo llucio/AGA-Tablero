@@ -11,8 +11,8 @@ const initConfig = {
 
 const Provider = ({ children }) => {
   const setToken = ({ token }) => {
-    window.localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
-  }
+    !!token && window.localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
+  };
 
   return (
     <KeycloakProvider

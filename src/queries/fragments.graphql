@@ -53,11 +53,13 @@ fragment Hito on hito {
       count
       min {
         fecha_creacion
-        fecha_finalizacion
+        fecha_inicial
+        fecha_final
       }
       max {
         fecha_creacion
-        fecha_finalizacion
+        fecha_inicial
+        fecha_final
       }
     }
   }
@@ -67,7 +69,8 @@ fragment Hito on hito {
     fecha_creacion
     metadatos
     orden
-    fecha_finalizacion
+    fecha_inicial
+    fecha_final
     hito_id
   }
 }

@@ -14,7 +14,7 @@ const chars = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'];
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing(1),
+    padding: theme.spacing(1)
   },
   card: {
     maxWidth: 340
@@ -40,9 +40,7 @@ const CompromisoCard = ({ compromiso }) => {
           height: '320px'
         }}
       >
-        <Box
-          className="pattern3 box-4"
-        >
+        <Box className="pattern3 box-4">
           <Link
             to={`/compromiso/${compromiso.id}`}
             className="white-text shadow-text"
