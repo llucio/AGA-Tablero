@@ -8,7 +8,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-//import Table from 'react-bootstrap/Table';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import SwipeableViews from 'react-swipeable-views';
