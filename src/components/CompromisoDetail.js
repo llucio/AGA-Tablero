@@ -234,7 +234,17 @@ const Hito = ({ hito, refetch }) => {
               valueType="timestamptz"
               onUpdate={refetch}
             >
-              {hito.fecha_inicial}
+              <strong>{hito.fecha_inicial}</strong>
+            </Editable>
+            <Editable
+              adminOnly
+              object={hito}
+              path="fecha_final"
+              valueType="timestamptz"
+              onUpdate={refetch}
+            >
+              <strong>{hito.fecha_inicial}</strong>
+              {hito.fecha_final}
             </Editable>
           </Typography>
         </ExpansionPanelSummary>

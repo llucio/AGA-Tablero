@@ -79,7 +79,7 @@ const Editable = ({
     setValue(value);
   };
 
-  const toggle = event => {
+  const handleToggle = event => {
     event.stopPropagation();
     setOpen(!open);
   }
@@ -88,7 +88,7 @@ const Editable = ({
     if (queryResult) {
       setValue(_.get(queryResult, path, ''));
     }
-  }, [queryResult, path]);
+  }, [queryResult, path, open]);
 
   if (!administrador) {
     return !adminOnly && <div>{children}</div>;
@@ -98,7 +98,7 @@ const Editable = ({
     <div>
       {children}
       <div className={classes.root}>
-        <IconButton onClick={toggle} color={open ? 'secondary' : 'primary'} className={classes.iconButton}>
+        <IconButton onClick={handleToggle} color={open ? 'secondary' : 'primary'} className={classes.iconButton}>
           {open ? <CloseIcon /> : <EditIcon />}
         </IconButton>
         <span className={classes.editLabel}>{subField || field}</span>
