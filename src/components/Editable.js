@@ -40,6 +40,7 @@ const Editable = ({
   path,
   valueType = 'String',
   onUpdate,
+  autoClose = true,
   adminOnly = false,
   children
 }) => {
@@ -69,9 +70,8 @@ const Editable = ({
         value: subField ? { [subField]: value } : value
       }
     }).then(() => {
-      if (onUpdate) {
-        onUpdate({ id, value });
-      }
+      onUpdate && onUpdate({ id, value });
+      autoClose && setOpen(false);
     });
   };
 
@@ -90,11 +90,13 @@ const Editable = ({
     }
   }, [queryResult, path]);
 
-  if (!administrador) return !adminOnly && <div>{children}</div>;
+  if (!administrador) {
+    return !adminOnly && <div>{children}</div>;
+  }
 
   return (
     <div>
-      {!adminOnly && children}
+      {children}
       <div className={classes.root}>
         <IconButton onClick={toggle} color={open ? 'secondary' : 'primary'} className={classes.iconButton}>
           {open ? <CloseIcon /> : <EditIcon />}
@@ -157,6 +159,7 @@ Editable.propTypes = {
   valueType: PropTypes.string,
   onUpdate: PropTypes.func,
   adminOnly: PropTypes.bool,
+  autoClose: PropTypes.bool,
   object: PropTypes.shape({
     __typename: PropTypes.string.isRequired,
     id: PropTypes.any.isRequired

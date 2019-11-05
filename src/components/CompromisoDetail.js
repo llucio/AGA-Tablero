@@ -122,13 +122,10 @@ const CompromisoDetail = ({ match }) => {
           Editar
         </Fab>
       )} */}
-      <h1>
-        <Editable object={compromiso} path="titulo" onUpdate={refetchComptomiso}>
-          {compromiso.titulo}
-        </Editable>
-      </h1>
+      <Editable object={compromiso} path="titulo" onUpdate={refetchComptomiso}>
+        <h1>{compromiso.titulo}</h1>
+      </Editable>
       <hr className="line" />
-
       <Editable
         object={compromiso}
         path="metadatos.descripcion"
@@ -163,8 +160,7 @@ const CompromisoDetail = ({ match }) => {
 
         <SwipeableViews index={tabIndex} onChangeIndex={handleChangeIndex}>
           {compromisoTabs.map(
-            ({ key }, i) =>
-              console.log(compromiso) || (
+            ({ key }, i) => (
                 <TabPanel key={i} index={i} value={tabIndex} dir={theme.direction}>
                   <Editable
                     object={compromiso}
@@ -230,6 +226,15 @@ const Hito = ({ hito, refetch }) => {
           <Typography className={classes.panel_heading}>
             <Editable object={hito} path="metadatos.descripcion" onUpdate={refetch}>
               <span className="semi-bold">{descripcion}</span>
+            </Editable>
+            <Editable
+              adminOnly
+              object={hito}
+              path="fecha_inicial"
+              valueType="timestamptz"
+              onUpdate={refetch}
+            >
+              {hito.fecha_inicial}
             </Editable>
           </Typography>
         </ExpansionPanelSummary>

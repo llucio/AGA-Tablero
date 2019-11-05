@@ -48,7 +48,6 @@ const CompromisoEdit = ({ match }) => {
 
   const onComplete = survey => {
     const { titulo, hitos, ...metadatos } = survey.data;
-    console.log('survey', metadatos);
     upsertCompromiso({
       variables: {
         id: match.params.id,
@@ -65,8 +64,6 @@ const CompromisoEdit = ({ match }) => {
         console.warn('Algo no salió bien', error);
       });
   };
-
-  console.log(compromiso);
 
   return (
     <Col>
