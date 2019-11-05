@@ -193,7 +193,7 @@ const compromisoTabs = [
   { key: 'adicional', label: 'Información', icon: <MenuBookIcon /> },
   { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
   { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
-  { key: 'alineacion2030', label: 'Alineación 2030', icon: <VerticalSplitIcon /> },
+  { key: 'alineacion2030', label: 'Agenda 2030', icon: <VerticalSplitIcon /> },
   { key: 'solucionPlanteada', label: 'Solución', icon: <WbIncandescentIcon /> },
   { key: 'analisisRiesgo', label: 'Analisís de Riesgo', icon: <ListAltIcon /> },
   { key: 'otrosActores', label: 'Otros actores', icon: <PeopleAltIcon /> }
