@@ -9,18 +9,22 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import { useRoles } from '../hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: '0.5em 0 2em 0',
+    margin: '0 0 2em 0',
     display: 'flex',
     alignItems: 'center'
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1
+  },
+  editLabel: {
+    color: '#333333'
   },
   iconButton: {
     padding: 10
@@ -36,9 +40,11 @@ const Editable = ({
   path,
   valueType = 'String',
   onUpdate,
+  autoClose = true,
+  adminOnly = false,
   children
 }) => {
-  const classes = useStyles();
+  const [open, setOpen] = useState(false);
   const { usuario: { administrador } = {} } = useRoles();
   const [value, setValue] = useState();
   const [field, subField] = path.split('.');
@@ -48,23 +54,24 @@ const Editable = ({
     error: queryError
   } = useQuery(getQuery({ typename, field, subField }), {
     variables: { id },
-    skip: !administrador
+    skip: open && !administrador
   });
+  const classes = useStyles();
 
   const [executeMutation, { data: mutationData }] = useMutation(
     getMutation({ typename, field, subField, valueType })
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = event => {
+    event.stopPropagation();
     executeMutation({
       variables: {
         id,
         value: subField ? { [subField]: value } : value
       }
     }).then(() => {
-      if (onUpdate) {
-        onUpdate({ id, value });
-      }
+      onUpdate && onUpdate({ id, value });
+      autoClose && setOpen(false);
     });
   };
 
@@ -72,36 +79,46 @@ const Editable = ({
     setValue(value);
   };
 
+  const handleToggle = event => {
+    event.stopPropagation();
+    setOpen(!open);
+  }
+
   useEffect(() => {
     if (queryResult) {
       setValue(_.get(queryResult, path, ''));
     }
-  }, [queryResult, path]);
+  }, [queryResult, path, open]);
 
-  if (!administrador) return <div>{children}</div>;
+  if (!administrador) {
+    return !adminOnly && <div>{children}</div>;
+  }
 
   return (
     <div>
       {children}
-      <Paper className={classes.root}>
-       <EditIcon />
-        <TextareaAutosize
-          value={value}
-          aria-label="minimum height"
-          rows={1}
-          fullWidth
-          label={subField || field}
-          placeholder={subField || field}
-          onChange={({ target: { value } = {} }) => handleChange(value)}
-        />
-        <IconButton onClick={handleSubmit} className={classes.iconButton}>
-          <SaveIcon />
+      <div className={classes.root}>
+        <IconButton onClick={handleToggle} color={open ? 'secondary' : 'primary'} className={classes.iconButton}>
+          {open ? <CloseIcon /> : <EditIcon />}
         </IconButton>
-        <Divider className={classes.divider} orientation="vertical" />
-        {/* <IconButton color="primary" className={classes.iconButton} aria-label="directions">
-          <DirectionsIcon />
-        </IconButton> */}
-      </Paper>
+        <span className={classes.editLabel}>{subField || field}</span>
+        {open && (
+          <>
+            <TextareaAutosize
+              value={value}
+              autoFocus
+              aria-label="minimum height"
+              rows={1}
+              label={subField || field}
+              placeholder={subField || field}
+              onChange={({ target: { value } = {} }) => handleChange(value)}
+            />
+            <IconButton onClick={handleSubmit} className={classes.iconButton}>
+              <SaveIcon />
+            </IconButton>
+          </>
+        )}
+      </div>
     </div>
   );
 };
@@ -141,6 +158,8 @@ Editable.propTypes = {
   metadatos: PropTypes.object,
   valueType: PropTypes.string,
   onUpdate: PropTypes.func,
+  adminOnly: PropTypes.bool,
+  autoClose: PropTypes.bool,
   object: PropTypes.shape({
     __typename: PropTypes.string.isRequired,
     id: PropTypes.any.isRequired

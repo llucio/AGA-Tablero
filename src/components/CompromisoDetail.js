@@ -122,13 +122,10 @@ const CompromisoDetail = ({ match }) => {
           Editar
         </Fab>
       )} */}
-      <h1>
-        <Editable object={compromiso} path="titulo" onUpdate={refetchComptomiso}>
-          {compromiso.titulo}
-        </Editable>
-      </h1>
+      <Editable object={compromiso} path="titulo" onUpdate={refetchComptomiso}>
+        <h1>{compromiso.titulo}</h1>
+      </Editable>
       <hr className="line" />
-
       <Editable
         object={compromiso}
         path="metadatos.descripcion"
@@ -163,8 +160,7 @@ const CompromisoDetail = ({ match }) => {
 
         <SwipeableViews index={tabIndex} onChangeIndex={handleChangeIndex}>
           {compromisoTabs.map(
-            ({ key }, i) =>
-              console.log(compromiso) || (
+            ({ key }, i) => (
                 <TabPanel key={i} index={i} value={tabIndex} dir={theme.direction}>
                   <Editable
                     object={compromiso}
@@ -193,7 +189,7 @@ const compromisoTabs = [
   { key: 'adicional', label: 'Información', icon: <MenuBookIcon /> },
   { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
   { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
-  { key: 'alineacion2030', label: 'Alineación 2030', icon: <VerticalSplitIcon /> },
+  { key: 'alineacion2030', label: 'Agenda 2030', icon: <VerticalSplitIcon /> },
   { key: 'solucionPlanteada', label: 'Solución', icon: <WbIncandescentIcon /> },
   { key: 'analisisRiesgo', label: 'Analisís de Riesgo', icon: <ListAltIcon /> },
   { key: 'otrosActores', label: 'Otros actores', icon: <PeopleAltIcon /> }
@@ -230,6 +226,25 @@ const Hito = ({ hito, refetch }) => {
           <Typography className={classes.panel_heading}>
             <Editable object={hito} path="metadatos.descripcion" onUpdate={refetch}>
               <span className="semi-bold">{descripcion}</span>
+            </Editable>
+            <Editable
+              adminOnly
+              object={hito}
+              path="fecha_inicial"
+              valueType="timestamptz"
+              onUpdate={refetch}
+            >
+              <strong>{hito.fecha_inicial}</strong>
+            </Editable>
+            <Editable
+              adminOnly
+              object={hito}
+              path="fecha_final"
+              valueType="timestamptz"
+              onUpdate={refetch}
+            >
+              <strong>{hito.fecha_inicial}</strong>
+              {hito.fecha_final}
             </Editable>
           </Typography>
         </ExpansionPanelSummary>
