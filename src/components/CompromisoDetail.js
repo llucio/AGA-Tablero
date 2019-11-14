@@ -39,6 +39,10 @@ import DataDisplay from './DataDisplay';
 import TabPanel from './TabPanel';
 import LoadingIndicator from './LoadingIndicator';
 
+import moment from 'moment';
+import 'moment/locale/es';
+moment.locale('es');
+
 const COMPROMISO_QUERY = loader('../queries/CompromisoQuery.graphql');
 
 const a11yProps = index => ({
@@ -279,21 +283,21 @@ const Hito = ({ hito, refetch }) => {
               adminOnly
               object={hito}
               path="fecha_inicial"
+              type="date"
               valueType="timestamptz"
               onUpdate={refetch}
             >
-              <strong>{hito.fecha_inicial}</strong>
-              {hito.fecha_final}
+              <strong>{!!hito.fecha_inicial && moment(hito.fecha_inicial).format('LL')}</strong>
             </Editable>
             <Editable
               adminOnly
               object={hito}
               path="fecha_final"
+              type="date"
               valueType="timestamptz"
               onUpdate={refetch}
             >
-              <strong>{hito.fecha_inicial}</strong>
-              {hito.fecha_final}
+              <strong>{!!hito.fecha_final && moment(hito.fecha_final).format('LL')}</strong>
             </Editable>
           </Typography>
         </ExpansionPanelSummary>
