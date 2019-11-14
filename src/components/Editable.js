@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Input from '@material-ui/core/Input';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,12 +14,19 @@ import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import { useRoles } from '../hooks';
 import ColorHash from 'color-hash';
+import moment from 'moment';
+import 'moment/locale/es';
+
+moment.locale('es');
+
 
 const colorHash = new ColorHash();
 
 const useStyles = makeStyles(theme => ({
   adminWrapper: {
-    border: `1px solid`
+    border: `1px solid`,
+    padding: '1em',
+    margin: '3px'
   },
   root: {
     margin: '0 0 2em 0',
@@ -48,7 +56,8 @@ const Editable = ({
   onUpdate,
   autoClose = true,
   adminOnly = false,
-  children
+  children,
+  type
 }) => {
   const [open, setOpen] = useState(false);
   const { usuario: { administrador } = {} } = useRoles();
@@ -78,6 +87,7 @@ const Editable = ({
     }).then(() => {
       onUpdate && onUpdate({ id, value });
       autoClose && setOpen(false);
+      setValue(value);
     });
   };
 
@@ -94,7 +104,7 @@ const Editable = ({
     if (queryResult) {
       setValue(_.get(queryResult, path, ''));
     }
-  }, [queryResult, path, open]);
+  }, [queryResult, path]);
 
   if (!administrador) {
     return !adminOnly && <div>{children}</div>;
@@ -105,7 +115,7 @@ const Editable = ({
       style={administrador ? { borderColor: colorHash.hex(typename) } : {}}
       className={administrador ? classes.adminWrapper : ''}
     >
-      {children}
+      {children || value}
       <div className={classes.root}>
         <IconButton
           onClick={handleToggle}
@@ -117,15 +127,26 @@ const Editable = ({
         <span className={classes.editLabel}>{subField || field}</span>
         {open && (
           <>
-            <TextareaAutosize
-              value={value}
-              autoFocus
-              aria-label="minimum height"
-              rows={1}
-              label={subField || field}
-              placeholder={subField || field}
-              onChange={({ target: { value } = {} }) => handleChange(value)}
-            />
+            {!!type ? (
+              <Input
+                type={type}
+                value={value && value.replace('T00:00:00+00:00', '')}
+                autoFocus
+                label={subField || field}
+                placeholder={subField || field}
+                onChange={({ target: { value } = {} }) => handleChange(value)}
+              />
+            ) : (
+              <TextareaAutosize
+                value={value}
+                autoFocus
+                aria-label="minimum height"
+                rows={1}
+                label={subField || field}
+                placeholder={subField || field}
+                onChange={({ target: { value } = {} }) => handleChange(value)}
+              />
+            )}
             <IconButton onClick={handleSubmit} className={classes.iconButton}>
               <SaveIcon />
             </IconButton>
