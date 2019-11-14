@@ -278,6 +278,16 @@ const Hito = ({ hito, refetch }) => {
             <Editable
               adminOnly
               object={hito}
+              path="fecha_inicial"
+              valueType="timestamptz"
+              onUpdate={refetch}
+            >
+              <strong>{hito.fecha_inicial}</strong>
+              {hito.fecha_final}
+            </Editable>
+            <Editable
+              adminOnly
+              object={hito}
               path="fecha_final"
               valueType="timestamptz"
               onUpdate={refetch}
@@ -300,6 +310,12 @@ const ActividadesPanel = ({ hito, refetch }) => {
         {hito.actividades.map((actividad, i) => (
           <Grid item xs={12} key={i}>
             <Typography className="light" display="block">
+              <Editable object={actividad} path="titulo" onUpdate={refetch}>
+                <Link variant="body2" href={`/hito/${hito.id}`}>
+                  {i + 1}. {actividad.titulo}
+                  <LinkIcon fontSize="small" />
+                </Link>
+              </Editable>
               <Editable
                 adminOnly
                 object={actividad}
@@ -310,17 +326,11 @@ const ActividadesPanel = ({ hito, refetch }) => {
               <Editable
                 adminOnly
                 object={actividad}
-                path="metadatos.medio_verificacion"
+                path="medio_verificacion"
                 valueType="String"
                 onUpdate={refetch}
               >
-                <strong>{hito.metadatos.ponderacion}</strong>
-              </Editable>
-              <Editable object={actividad} path="titulo" onUpdate={refetch}>
-                <Link variant="body2" href={`/hito/${hito.id}`}>
-                  {i + 1}. {actividad.titulo}
-                  <LinkIcon fontSize="small" />
-                </Link>
+                <strong>{actividad.medio_verificacion}</strong>
               </Editable>
             </Typography>
           </Grid>
