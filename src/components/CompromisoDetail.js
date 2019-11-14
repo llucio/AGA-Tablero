@@ -287,7 +287,7 @@ const Hito = ({ hito, refetch }) => {
               valueType="timestamptz"
               onUpdate={refetch}
             >
-              <strong>{!!hito.fecha_inicial && moment(hito.fecha_inicial).format('LL')}</strong>
+              <strong>{!!hito.fecha_inicial && moment(hito.fecha_inicial).utc().format('D [de] MMMM [de] YYYY')}</strong>
             </Editable>
             <Editable
               adminOnly
@@ -297,7 +297,7 @@ const Hito = ({ hito, refetch }) => {
               valueType="timestamptz"
               onUpdate={refetch}
             >
-              <strong>{!!hito.fecha_final && moment(hito.fecha_final).format('LL')}</strong>
+              <strong>{!!hito.fecha_final && moment(hito.fecha_final).utc().format('D [de] MMMM [de] YYYY')}</strong>
             </Editable>
           </Typography>
         </ExpansionPanelSummary>

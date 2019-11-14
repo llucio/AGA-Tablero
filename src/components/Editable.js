@@ -130,7 +130,7 @@ const Editable = ({
             {!!type ? (
               <Input
                 type={type}
-                value={value && value.replace('T00:00:00+00:00', '')}
+                value={type === 'date' ? value && moment(value).utc().format(moment.HTML5_FMT.DATE) : value}
                 autoFocus
                 label={subField || field}
                 placeholder={subField || field}
