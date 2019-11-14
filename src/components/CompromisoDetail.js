@@ -306,7 +306,7 @@ const ActividadesPanel = ({ hito, refetch }) => {
                 path="orden"
                 valueType="Int"
                 onUpdate={refetch}
-              >
+              />
               <Editable
                 adminOnly
                 object={actividad}
