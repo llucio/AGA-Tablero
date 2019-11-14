@@ -12,8 +12,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import { useRoles } from '../hooks';
+import ColorHash from 'color-hash';
+
+const colorHash = new ColorHash();
 
 const useStyles = makeStyles(theme => ({
+  adminWrapper: {
+    border: `1px solid`
+  },
   root: {
     margin: '0 0 2em 0',
     display: 'flex',
@@ -82,7 +88,7 @@ const Editable = ({
   const handleToggle = event => {
     event.stopPropagation();
     setOpen(!open);
-  }
+  };
 
   useEffect(() => {
     if (queryResult) {
@@ -95,10 +101,17 @@ const Editable = ({
   }
 
   return (
-    <div>
+    <div
+      style={administrador ? { borderColor: colorHash.hex(typename) } : {}}
+      className={administrador ? classes.adminWrapper : ''}
+    >
       {children}
       <div className={classes.root}>
-        <IconButton onClick={handleToggle} color={open ? 'secondary' : 'primary'} className={classes.iconButton}>
+        <IconButton
+          onClick={handleToggle}
+          color={open ? 'secondary' : 'primary'}
+          className={classes.iconButton}
+        >
           {open ? <CloseIcon /> : <EditIcon />}
         </IconButton>
         <span className={classes.editLabel}>{subField || field}</span>
@@ -154,7 +167,10 @@ const getMutation = ({ typename, field, subField, valueType = 'String' }) => {
 };
 
 Editable.propTypes = {
-  field: PropTypes.oneOf([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  field: PropTypes.oneOf([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]),
   metadatos: PropTypes.object,
   valueType: PropTypes.string,
   onUpdate: PropTypes.func,
