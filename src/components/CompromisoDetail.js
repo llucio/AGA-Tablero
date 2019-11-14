@@ -140,6 +140,43 @@ const CompromisoDetail = ({ match }) => {
           {compromiso.metadatos.descripcion}
         </Box>
       </Editable>
+      <Editable
+        adminOnly
+        object={compromiso}
+        path="metadatos.imagen"
+        onUpdate={refetchComptomiso}
+      >
+        {compromiso.metadatos.imagen}
+      </Editable>
+      <Editable
+        object={compromiso}
+        path="metadatos.descarga"
+        onUpdate={refetchComptomiso}
+      >
+        {compromiso.metadatos.descarga}
+      </Editable>
+      <Editable
+        object={compromiso}
+        path="metadatos.descarga"
+        onUpdate={refetchComptomiso}
+      >
+        {compromiso.metadatos.descarga}
+      </Editable>
+      <Editable
+        object={compromiso}
+        path="metadatos.responsables"
+        onUpdate={refetchComptomiso}
+      >
+        {compromiso.metadatos.responsables}
+      </Editable>
+      <Editable
+        adminOnly
+        object={compromiso}
+        path="metadatos.observaciones"
+        onUpdate={refetchComptomiso}
+      >
+        {compromiso.metadatos.observaciones}
+      </Editable>
 
       <Box className={classes.root}>
         <AppBar position="static" color="default">
@@ -159,19 +196,17 @@ const CompromisoDetail = ({ match }) => {
         </AppBar>
 
         <SwipeableViews index={tabIndex} onChangeIndex={handleChangeIndex}>
-          {compromisoTabs.map(
-            ({ key }, i) => (
-                <TabPanel key={i} index={i} value={tabIndex} dir={theme.direction}>
-                  <Editable
-                    object={compromiso}
-                    path={`metadatos.${key}`}
-                    onUpdate={refetchComptomiso}
-                  >
-                    <DataDisplay data={_.get(compromiso, ['metadatos', key], '')} />
-                  </Editable>
-                </TabPanel>
-              )
-          )}
+          {compromisoTabs.map(({ key }, i) => (
+            <TabPanel key={i} index={i} value={tabIndex} dir={theme.direction}>
+              <Editable
+                object={compromiso}
+                path={`metadatos.${key}`}
+                onUpdate={refetchComptomiso}
+              >
+                <DataDisplay data={_.get(compromiso, ['metadatos', key], '')} />
+              </Editable>
+            </TabPanel>
+          ))}
         </SwipeableViews>
       </Box>
 
@@ -224,17 +259,21 @@ const Hito = ({ hito, refetch }) => {
           id="panel1a-header"
         >
           <Typography className={classes.panel_heading}>
-            <Editable object={hito} path="metadatos.descripcion" onUpdate={refetch}>
+            <Editable
+              object={hito}
+              path="metadatos.descripcion"
+              onUpdate={refetch}
+            >
               <span className="semi-bold">{descripcion}</span>
             </Editable>
             <Editable
               adminOnly
               object={hito}
-              path="fecha_inicial"
-              valueType="timestamptz"
+              path="metadatos.ponderacion"
+              valueType="Int"
               onUpdate={refetch}
             >
-              <strong>{hito.fecha_inicial}</strong>
+              <strong>{hito.metadatos.ponderacion}</strong>
             </Editable>
             <Editable
               adminOnly
@@ -262,10 +301,22 @@ const ActividadesPanel = ({ hito, refetch }) => {
           <Grid item xs={12} key={i}>
             <Typography className="light" display="block">
               <Editable
+                adminOnly
                 object={actividad}
-                path="titulo"
+                path="orden"
+                valueType="Int"
                 onUpdate={refetch}
               >
+              <Editable
+                adminOnly
+                object={actividad}
+                path="metadatos.medio_verificacion"
+                valueType="String"
+                onUpdate={refetch}
+              >
+                <strong>{hito.metadatos.ponderacion}</strong>
+              </Editable>
+              <Editable object={actividad} path="titulo" onUpdate={refetch}>
                 <Link variant="body2" href={`/hito/${hito.id}`}>
                   {i + 1}. {actividad.titulo}
                   <LinkIcon fontSize="small" />
