@@ -64,8 +64,8 @@ const ActividadCard = ({ item: actividad, refetch }) => {
       <Typography className="light" display="block">
         <Editable item={actividad} path="titulo" onUpdate={refetch}>
           <Link variant="body2" to={`/hito/${actividad.id}`}>
-            {i + 1}. {actividad.titulo}
-            <LinkIcon fontSize="small" />
+            <strong>{actividad.titulo}</strong>
+          <LinkIcon fontSize="small" />
           </Link>
         </Editable>
         <Editable
