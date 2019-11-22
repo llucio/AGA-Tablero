@@ -1,0 +1,7 @@
+#import "./fragments.graphql"
+
+query CompromisoGet($id: uuid!) {
+  item: compromiso_by_pk(id: $id) {
+    ...Compromiso
+  }
+}

@@ -7,40 +7,30 @@ import { CalendarIcon } from 'react-calendar-icon';
 import { ThemeProvider } from 'styled-components';
 import { LinkContainer } from 'react-router-bootstrap';
 import Button from 'react-bootstrap/Button';
+import Box from '@material-ui/core/Box';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
-import { useRoles } from '../hooks';
-import DataDisplay from './DataDisplay';
-import LoadingIndicator from './LoadingIndicator';
-
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useRoles } from '../../hooks';
+import DataDisplay from '../DataDisplay';
+import LoadingIndicator from '../LoadingIndicator';
 import Typography from '@material-ui/core/Typography';
-//import Table from 'react-bootstrap/Table';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 
-
-const HITO_QUERY = loader('../queries/HitoQuery.graphql');
-
-console.log(HITO_QUERY);
+const GET_QUERY = loader('../../queries/HitoGet.graphql');
 
 const HitoDetail = ({ match }) => {
-  const { data: { hito } = {}, loading, error } = useQuery(HITO_QUERY, {
+  const { data: { item } = {}, loading, error } = useQuery(GET_QUERY, {
     variables: {
       id: match.params.id
     },
     fetchPolicy: 'cache-and-network'
   });
 
-  if (loading) return <LoadingIndicator />;
-  if (error || !hito) return <h1>No encontrado</h1>;
+  if (error) return <div>Error</div>;
+  if (loading && !item) return <LoadingIndicator />;
+  if (!item) return null;
 
-  return (
-
-      <Hito hito={hito} />
-
-  );
+  return <Hito hito={item} />;
 };
 
 const dateOptions = {
@@ -62,7 +52,6 @@ const Hito = ({ hito }) => {
   const { descripcion, ...metadatos } = hito.metadatos;
   return (
     <Box>
-
       <h2>{descripcion}</h2>
       <hr className="line" />
 
@@ -100,7 +89,7 @@ const ActividadesTable = ({ actividades }) => {
   // const { descripcion, ...metadatos } = actividad.metadatos;
 
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hoFver>
       <thead className="thead-dark text-uppercase">
         <tr>
           <th>#</th>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRoles } from '../hooks';
+import { useRoles } from '../../hooks';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -78,7 +78,6 @@ const UserMenu = () => {
             <MenuItem onClick={handleClose}>
               {usuario.name} ({usuario.email})
             </MenuItem>
-            <MenuItem onClick="compromiso/nuevo">Crear compromiso</MenuItem>
             <MenuItem onClick={handleClose}>Administrador</MenuItem>
             <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
           </Menu>

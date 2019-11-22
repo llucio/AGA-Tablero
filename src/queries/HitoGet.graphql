@@ -1,0 +1,7 @@
+#import "./fragments.graphql"
+
+query HitoGet($id: uuid!) {
+  item: hito_by_pk(id: $id) {
+    ...Hito
+  }
+}

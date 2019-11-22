@@ -1,9 +1,8 @@
 import React from 'react';
-//import { get } from 'lodash';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 //import RawHtml from './RawHtml';
 
@@ -21,13 +20,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CompromisoCard = ({ compromiso }) => {
+const CompromisoCard = ({ item: compromiso }) => {
   const classes = useStyles();
 
   // Imagen con caracteres aleatorios para evitar cache de navegador
-  const imageUrl = `${defaultImage}?${[...Array(10)].map(
-    i => chars[(Math.random() * chars.length) | 0]
-  ).join``}`;
+  const imageUrl = `${defaultImage}?${compromiso.id}`;
 
   return (
     <Grid item xs={12} md={4} lg={4} className={classes.root}>

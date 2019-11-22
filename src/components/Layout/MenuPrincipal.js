@@ -1,10 +1,5 @@
 import React from 'react';
-import { useRoles } from '../hooks';
-
-import UserMenu from './UserMenu';
-
 import PropTypes from 'prop-types';
-
 import CardMedia from '@material-ui/core/CardMedia';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Container from '@material-ui/core/Container';
@@ -16,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useRoles } from '../../hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {

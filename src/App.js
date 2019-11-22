@@ -9,31 +9,31 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import AuthProvider from './keycloak';
 import { apolloClient } from './apollo';
 import { useRoles } from './hooks';
-import MenuPrincipal from './components/MenuPrincipal';
-import Footer from './components/Footer';
-import CompromisoBrowser from './components/CompromisoBrowser';
-import CompromisoDetail from './components/CompromisoDetail';
-import CompromisoEdit from './components/CompromisoEdit';
-import HitoDetail from './components/HitoDetail';
+import MenuPrincipal from './components/Layout/MenuPrincipal';
+import Footer from './components/Layout/Footer';
+import CompromisoList from './components/Compromiso/CompromisoList';
+import CompromisoDetail from './components/Compromiso/CompromisoDetail';
+// import CompromisoEdit from './components/Compromiso/Edit';
+import HitoDetail from './components/Hito/HitoDetail';
 
 const routes = [
   {
     path: '/',
-    content: CompromisoBrowser,
+    content: CompromisoList,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto',
     subheading:
       'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
     image: '/assets/images/planes_de_accion.jpg',
     headerClass: 'medium'
   },
-  {
-    path: ['/compromiso/nuevo', '/compromiso/:id/editar'],
-    content: CompromisoEdit,
-    heading: 'Hoja de Ruta',
-    subheading:
-      'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
-    headerClass: 'medium'
-  },
+  // {
+  //   path: ['/compromiso/nuevo', '/compromiso/:id/editar'],
+  //   content: CompromisoEdit,
+  //   heading: 'Hoja de Ruta',
+  //   subheading:
+  //     'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
+  //   headerClass: 'medium'
+  // },
   {
     path: '/compromiso/:id',
     content: CompromisoDetail,
@@ -144,11 +144,6 @@ const Breadcrumbs = ({ match, ...props }) => {
       <LinkContainer to="/">
         <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
       </LinkContainer>
-      {usuario.administrador && (
-        <LinkContainer to="/compromiso/nuevo">
-          <Breadcrumb.Item>Crear compromiso</Breadcrumb.Item>
-        </LinkContainer>
-      )}
       <Switch>
         <Route
           path="/compromiso"

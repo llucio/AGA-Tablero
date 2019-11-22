@@ -1,0 +1,7 @@
+#import "./fragments.graphql"
+
+query ActividadGet($id: uuid!) {
+  item: actividad_by_pk(id: $id) {
+    ...Actividad
+  }
+}

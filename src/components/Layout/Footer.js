@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import UserMenu from './UserMenu';
-
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import Link from '@material-ui/core/Link';
+import UserMenu from './UserMenu';
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -1,0 +1,10 @@
+#import "./fragments.graphql"
+
+query ActividadList($where: actividad_bool_exp) {
+    items: actividad(
+      where: $where
+      order_by: [{ orden: asc }, { fecha_creacion: asc }]
+    ) {
+      ...Actividad
+    }
+  }

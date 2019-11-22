@@ -1,3 +1,28 @@
+fragment Compromiso on compromiso {
+  id
+  orden
+  titulo
+  plan_id
+  fecha_creacion
+  metadatos
+  hitos_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+
+fragment Actividad on actividad {
+  id
+  hito_id
+  orden
+  titulo
+  fecha_creacion
+  metadatos
+  fecha_inicial
+  fecha_final
+}
+
 fragment Entregable on entregable {
   id
   titulo
@@ -29,12 +54,16 @@ fragment Entregable on entregable {
 
 fragment Hito on hito {
   id
-  titulo
+  compromiso_id
   fecha_creacion
+  orden
+  titulo
   metadatos
   fecha_inicial
   fecha_final
-  compromiso_id
+  entregables {
+    ...Entregable
+  }
   entregables_aggregate {
     aggregate {
       min {
@@ -45,8 +74,8 @@ fragment Hito on hito {
       }
     }
   }
-  entregables {
-    ...Entregable
+  actividades(order_by: { orden: asc }) {
+    ...Actividad
   }
   actividades_aggregate {
     aggregate {
@@ -62,15 +91,5 @@ fragment Hito on hito {
         fecha_final
       }
     }
-  }
-  actividades(order_by: { orden: asc }) {
-    id
-    titulo
-    fecha_creacion
-    metadatos
-    orden
-    fecha_inicial
-    fecha_final
-    hito_id
   }
 }

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import _ from 'lodash';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,30 +12,30 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
-import { useRoles } from '../hooks';
 import ColorHash from 'color-hash';
-import moment from 'moment';
-import 'moment/locale/es';
-
-moment.locale('es');
-
+import { useRoles } from '../hooks';
+import HtmlEditor from './HtmlEditor';
+import moment from '../utils/moment';
 
 const colorHash = new ColorHash();
 
 const useStyles = makeStyles(theme => ({
   adminWrapper: {
-    border: `1px solid`,
-    padding: '1em',
-    margin: '3px'
+    border: `1px dashed`,
+    marginLef: '2em',
+    width: '100%'
+    // margin: '3px'
   },
   root: {
-    margin: '0 0 2em 0',
+    // margin: '0 0 2em 0',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%'
   },
   input: {
     marginLeft: theme.spacing(1),
-    flex: 1
+    flex: 1,
+    width: '100%'
   },
   editLabel: {
     color: '#333333'
@@ -50,13 +50,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Editable = ({
-  object: { __typename: typename, id } = {},
+  item: { __typename: typename, id } = {},
   path,
   valueType = 'String',
   onUpdate,
   autoClose = true,
   adminOnly = false,
   children,
+  html = false,
   type
 }) => {
   const [open, setOpen] = useState(false);
@@ -66,10 +67,12 @@ const Editable = ({
   const {
     data: { queryResult } = {},
     loading: queryLoading,
-    error: queryError
+    error: queryError,
+    refetch
   } = useQuery(getQuery({ typename, field, subField }), {
     variables: { id },
-    skip: open && !administrador
+    skip: !id || (open && !administrador)
+    // fetchPolicy: 'network-only'
   });
   const classes = useStyles();
 
@@ -85,9 +88,12 @@ const Editable = ({
         value: subField ? { [subField]: value } : value
       }
     }).then(() => {
-      onUpdate && onUpdate({ id, value });
+      onUpdate && onUpdate();
       autoClose && setOpen(false);
       setValue(value);
+      // refetch && refetch().then(() => {
+      //   console.log('ais')
+      // });
     });
   };
 
@@ -104,18 +110,19 @@ const Editable = ({
     if (queryResult) {
       setValue(_.get(queryResult, path, ''));
     }
-  }, [queryResult, path]);
+  }, [queryResult, path, open]);
 
   if (!administrador) {
-    return !adminOnly && <div>{children}</div>;
+    return !adminOnly && <span>{children}</span>;
   }
 
   return (
     <div
       style={administrador ? { borderColor: colorHash.hex(typename) } : {}}
       className={administrador ? classes.adminWrapper : ''}
+      onClick={event => event.stopPropagation()}
     >
-      {children || value}
+      {!open && (children || value)}
       <div className={classes.root}>
         <IconButton
           onClick={handleToggle}
@@ -124,16 +131,28 @@ const Editable = ({
         >
           {open ? <CloseIcon /> : <EditIcon />}
         </IconButton>
-        <span className={classes.editLabel}>{subField || field}</span>
+        {!open && <span className={classes.editLabel}>{subField || field}</span>}
         {open && (
-          <>
+          <Fragment>
             {!!type ? (
               <Input
                 type={type}
-                value={type === 'date' ? value && moment(value).utc().format(moment.HTML5_FMT.DATE) : value}
+                value={
+                  type === 'date'
+                    ? value &&
+                      moment(value)
+                        .utc()
+                        .format(moment.HTML5_FMT.DATE)
+                    : value
+                }
                 autoFocus
                 label={subField || field}
                 placeholder={subField || field}
+                onChange={({ target: { value } = {} }) => handleChange(value)}
+              />
+            ) : html ? (
+              <HtmlEditor
+                value={value}
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
             ) : (
@@ -150,7 +169,7 @@ const Editable = ({
             <IconButton onClick={handleSubmit} className={classes.iconButton}>
               <SaveIcon />
             </IconButton>
-          </>
+          </Fragment>
         )}
       </div>
     </div>
@@ -197,7 +216,7 @@ Editable.propTypes = {
   onUpdate: PropTypes.func,
   adminOnly: PropTypes.bool,
   autoClose: PropTypes.bool,
-  object: PropTypes.shape({
+  item: PropTypes.shape({
     __typename: PropTypes.string.isRequired,
     id: PropTypes.any.isRequired
   })

@@ -1,7 +1,0 @@
-#import "./fragments.graphql"
-
-query HitoQuery($id: uuid!) {
-  hito: hito_by_pk(id: $id) {
-    ...Hito
-  }
-}
