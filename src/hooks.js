@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import _ from 'lodash';
 import {
   AUTH_TOKEN_STORAGE_KEY,
@@ -9,7 +9,7 @@ import { useKeycloak } from 'react-keycloak';
 
 const useRoles = () => {
   const [keycloak, initialized] = useKeycloak();
-  const { login, logout, authenticated, tokenParsed, idToken } = keycloak;
+  const { login, logout, authenticated, tokenParsed } = keycloak;
 
   const claims = _.mapKeys(
     _.get(tokenParsed, ['https://hasura.io/jwt/claims'], {}),

@@ -4,10 +4,8 @@ import _ from 'lodash';
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
@@ -66,8 +64,6 @@ const Editable = ({
   const [field, subField] = path.split('.');
   const {
     data: { queryResult } = {},
-    loading: queryLoading,
-    error: queryError,
     refetch
   } = useQuery(getQuery({ typename, field, subField }), {
     variables: { id },
@@ -76,7 +72,7 @@ const Editable = ({
   });
   const classes = useStyles();
 
-  const [executeMutation, { data: mutationData }] = useMutation(
+  const [executeMutation] = useMutation(
     getMutation({ typename, field, subField, valueType })
   );
 
@@ -91,9 +87,9 @@ const Editable = ({
       onUpdate && onUpdate();
       autoClose && setOpen(false);
       setValue(value);
-      // refetch && refetch().then(() => {
-      //   console.log('ais')
-      // });
+      refetch && refetch().then(() => {
+        // console.log('ais')
+      }).catch(() => console.error('error'));
     });
   };
 

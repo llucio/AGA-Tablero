@@ -4,11 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-//import RawHtml from './RawHtml';
 
 // Para imágenes aleatorias (provisional)
 const defaultImage = 'https://picsum.photos/300/300';
-const chars = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'];
 
 const useStyles = makeStyles(theme => ({
   root: {

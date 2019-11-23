@@ -8,7 +8,7 @@ import ActividadCard from './ActividadCard';
 const LIST_QUERY = loader('../../queries/ActividadList.graphql');
 
 const ActividadList = ({ where }) => {
-  const { data: { items: actividades = [] } = {}, loading, error, refetch } = useQuery(
+  const { data: { items: actividades = [] } = {}, loading, error } = useQuery(
     LIST_QUERY,
     {
       variables: {

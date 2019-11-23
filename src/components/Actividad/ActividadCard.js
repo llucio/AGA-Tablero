@@ -1,17 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import LinkIcon from '@material-ui/icons/Link';
 import Typography from '@material-ui/core/Typography';
-import moment from '../../utils/moment';
 import Editable from '../Editable';
-import ActividadList from '../Actividad/ActividadList';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,13 +47,10 @@ const useStyles = makeStyles(theme => ({
 
 const ActividadCard = ({ item: actividad, refetch }) => {
   const classes = useStyles();
-
   const { metadatos = {} } = actividad;
 
-  const i = 1;
-
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} className={classes.root}>
       <Typography className="light" display="block">
         <Editable item={actividad} path="titulo" onUpdate={refetch}>
           <Link variant="body2" to={`/hito/${actividad.id}`}>

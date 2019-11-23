@@ -127,6 +127,12 @@ const CompromisoDetail = ({ match }) => {
       <Editable item={item} path="metadatos.dependencia" onUpdate={refetch}>
         {metadatos.dependencia}
       </Editable>
+      <Editable item={item} path="metadatos.dependencia2" onUpdate={refetch}>
+        {metadatos.dependencia2}
+      </Editable>
+      <Editable item={item} path="metadatos.dependencia3" onUpdate={refetch}>
+        {metadatos.dependencia3}
+      </Editable>
       <Editable item={item} path="metadatos.responsables" onUpdate={refetch}>
         <DataDisplay data={metadatos.responsables} />
       </Editable>

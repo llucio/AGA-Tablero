@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
-import { useRoles } from '../../hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,7 +50,6 @@ ElevationScroll.propTypes = {
 
 const MenuPrincipal = props => {
   const classes = useStyles();
-  const { loading, authenticated, usuario, login, logout } = useRoles();
 
   return (
     <div className={classes.root}>

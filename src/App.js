@@ -8,7 +8,6 @@ import Box from '@material-ui/core/Box';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import AuthProvider from './keycloak';
 import { apolloClient } from './apollo';
-import { useRoles } from './hooks';
 import MenuPrincipal from './components/Layout/MenuPrincipal';
 import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
@@ -137,8 +136,6 @@ const Heading = ({ className, image, heading, subheading, headerArrow }) => (
 );
 
 const Breadcrumbs = ({ match, ...props }) => {
-  const { usuario } = useRoles();
-
   return (
     <Breadcrumb>
       <LinkContainer to="/">

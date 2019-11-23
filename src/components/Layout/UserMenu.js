@@ -1,6 +1,4 @@
 import React from 'react';
-import { useRoles } from '../../hooks';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +8,7 @@ import Fab from '@material-ui/core/Fab';
 import PersonIcon from '@material-ui/icons/Person';
 import PolicyIcon from '@material-ui/icons/Policy';
 import FaceIcon from '@material-ui/icons/Face';
+import { useRoles } from '../../hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {

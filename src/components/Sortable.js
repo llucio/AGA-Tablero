@@ -2,17 +2,10 @@ import React, { useState } from 'react';
 import _ from 'lodash';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import arrayMove from 'array-move';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useRoles } from '../hooks';
-
-const useStyles = makeStyles(theme => ({
-  box_panel: {
-    padding: theme.spacing(5, 0, 10, 0)
-  }
-}));
 
 const SortableList = ({
   items,
@@ -26,7 +19,6 @@ const SortableList = ({
   console.log('rendeting list');
   const typename = _.get(items, '0.__typename', '');
   const [loading, setLoading] = useState(false);
-  const classes = useStyles();
   const { usuario } = useRoles();
   const [mutateOrden] = useMutation(
     gql`

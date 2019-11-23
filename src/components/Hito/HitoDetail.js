@@ -1,20 +1,15 @@
 import React from 'react';
-import { gql } from 'apollo-boost';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { DateTime } from 'luxon';
 import { CalendarIcon } from 'react-calendar-icon';
 import { ThemeProvider } from 'styled-components';
-import { LinkContainer } from 'react-router-bootstrap';
-import Button from 'react-bootstrap/Button';
 import Box from '@material-ui/core/Box';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
-import { useRoles } from '../../hooks';
 import DataDisplay from '../DataDisplay';
 import LoadingIndicator from '../LoadingIndicator';
-import Typography from '@material-ui/core/Typography';
 
 const GET_QUERY = loader('../../queries/HitoGet.graphql');
 
