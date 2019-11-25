@@ -14,6 +14,7 @@ import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetail';
 // import CompromisoEdit from './components/Compromiso/Edit';
 import HitoDetail from './components/Hito/HitoDetail';
+import HitoPreview from './components/Hito/HitoPreview';
 
 const routes = [
   {
@@ -41,10 +42,16 @@ const routes = [
   },
   {
     path: ['/hito/:id', '/hito/:id/editar'],
-    content: HitoDetail,
+    content: HitoPreview,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium'
-  }
+  },
+  {
+    path: ['/hito/preview/:id'],
+    content: HitoPreview,
+    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
+    headerClass: 'medium'
+  },
 ];
 
 // bootstrap theme
