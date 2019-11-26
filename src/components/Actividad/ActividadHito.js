@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
 import Sortable from '../Sortable';
 import ActividadHitoTable from './ActividadHitoTable';
+import EntregableList from '../Entregable/EntregableList';
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -14,11 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
 
-import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
 
 const LIST_QUERY = loader('../../queries/ActividadList.graphql');
@@ -96,8 +93,9 @@ const ActividadHito = ({ where }) => {
 	              	<CheckCircleIcon className="light-green-text" />
 	              </StyledTableCell>
 	              <StyledTableCell align="center">
-	              	<PictureAsPdfIcon />
-	              	<PictureAsPdfIcon />
+	              	
+	              	<EntregableList where={{ hito_id: { _eq: actividad.hito_id } }} />
+
 	              </StyledTableCell>
 	            </StyledTableRow>
 	          ))}

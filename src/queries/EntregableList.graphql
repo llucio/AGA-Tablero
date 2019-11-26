@@ -3,7 +3,7 @@
 query EntregableList($where: entregable_bool_exp) {
     items: entregable(
       where: $where
-      order_by: [{ orden: asc }, { fecha_creacion: asc }]
+      order_by: [{ fecha_creacion: asc }]
     ) {
       ...Entregable
     }
