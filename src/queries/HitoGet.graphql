@@ -3,6 +3,10 @@
 query HitoGet($id: uuid!) {
   item: hito_by_pk(id: $id) {
     ...Hito
+    compromiso {
+      id
+      titulo
+    }
     actividades(order_by: { orden: asc }) {
       id
       orden

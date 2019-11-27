@@ -11,11 +11,9 @@ import { apolloClient } from './apollo';
 import MenuPrincipal from './components/Layout/MenuPrincipal';
 import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
-import CompromisoDetail from './components/Compromiso/CompromisoDetail';
-import CompromisoDetailNew from './components/Compromiso/CompromisoDetailNew';
-// import CompromisoEdit from './components/Compromiso/Edit';
+import CompromisoDetail from './components/Compromiso/CompromisoDetailNew';
 import HitoDetail from './components/Hito/HitoDetail';
-import HitoPreview from './components/Hito/HitoPreview';
+
 
 const routes = [
   {
@@ -27,23 +25,9 @@ const routes = [
     image: '/assets/images/planes_de_accion.jpg',
     headerClass: 'medium'
   },
-  // {
-  //   path: ['/compromiso/nuevo', '/compromiso/:id/editar'],
-  //   content: CompromisoEdit,
-  //   heading: 'Hoja de Ruta',
-  //   subheading:
-  //     'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
-  //   headerClass: 'medium'
-  // },
-  {
-    path: '/compromiso2/:id',
-    content: CompromisoDetail,
-    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
-    headerClass: 'medium'
-  },
   {
     path: '/compromiso/:id',
-    content: CompromisoDetailNew,
+    content: CompromisoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     subheading: 'NEW',
     headerClass: 'medium'
