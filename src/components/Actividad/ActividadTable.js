@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ActividadHito = ({ where }) => {
+const ActividadTable = ({ where }) => {
   const classes = useStyles();
 
   const {
@@ -71,7 +71,8 @@ const ActividadHito = ({ where }) => {
 
   return (
     <div className="vertical-margin">
-      <Box />
+
+
       <Box className={classes.rootTable}>
         <Table className={classes.table} aria-label="table">
           <TableHead>
@@ -123,4 +124,4 @@ const ActividadHito = ({ where }) => {
   );
 };
 
-export default ActividadHito;
+export default ActividadTable;

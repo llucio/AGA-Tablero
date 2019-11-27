@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2)
   },
   descripcion: {
-    padding: theme.spacing(0, 0, 6, 0)
+    // padding: theme.spacing(0, 0, 6, 0)
   },
   institucion: {
     padding: theme.spacing(0, 0, 6, 0)
