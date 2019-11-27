@@ -13,9 +13,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
-
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
+import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 
 const LIST_QUERY = loader('../../queries/ActividadList.graphql');
@@ -71,15 +71,15 @@ const ActividadTable = ({ where }) => {
 
   return (
     <div className="vertical-margin">
-
-
       <Box className={classes.rootTable}>
         <Table className={classes.table} aria-label="table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Actividades</StyledTableCell>
               <StyledTableCell align="center">Estatus</StyledTableCell>
-              <StyledTableCell align="center">Archivos</StyledTableCell>
+              <StyledTableCell align="center">
+                Medio de verificación
+              </StyledTableCell>
             </TableRow>
           </TableHead>
 
@@ -96,7 +96,7 @@ const ActividadTable = ({ where }) => {
                     path="metadatos.descripcion"
                     onUpdate={refetch}
                   >
-                    <span>{actividad.metadatos.descripcion}</span>
+                    <DataDisplay data={actividad.metadatos.descripcion || ''} />
                   </Editable>
                   <Editable
                     html
@@ -114,6 +114,16 @@ const ActividadTable = ({ where }) => {
                   <EntregableList
                     where={{ hito_id: { _eq: actividad.hito_id } }}
                   />
+
+                  <Editable
+                    adminOnly
+                    item={actividad}
+                    path="metadatos.medio_verificacion"
+                    valueType="String"
+                    onUpdate={refetch}
+                  >
+                    <strong>{actividad.metadatos.medio_verificacion}</strong>
+                  </Editable>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

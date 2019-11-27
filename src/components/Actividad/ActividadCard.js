@@ -57,15 +57,6 @@ const ActividadCard = ({ item: actividad, refetch }) => {
             <span>{actividad.titulo || 'Sin título'}</span>
             </Link>
             <span>{metadatos.descripcion}</span>
-          <Editable
-            adminOnly
-            item={actividad}
-            path="metadatos.medio_verificacion"
-            valueType="String"
-            onUpdate={refetch}
-          >
-            <strong>{metadatos.medio_verificacion}</strong>
-          </Editable>
         </Typography>
       </li>
     </Grid>

@@ -28,6 +28,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Editable from '../Editable';
+import Sortable from '../Sortable';
 import DataDisplay from '../DataDisplay';
 import TabPanel from '../TabPanel';
 import LoadingIndicator from '../LoadingIndicator';
@@ -121,15 +122,21 @@ const CompromisoDetailNew = ({ match }) => {
                 distanceFromBottom,
                 calculatedHeight
               }) => (
-                <Box fontSize={18} style={style} className={isSticky ? classes.sticky : ''}>
-                  <p className="active">
-                    <Link href="#top">{item.titulo}</Link>
-                  </p>
-                  {(item.hitos || []).map(({ id, titulo, descripcion, metadatos: { pdescripcion } = {} }, i) => (
-                    <p key={`sidebar-${id}`}>
-                      <Link href={`#hito-${id}`}>{titulo}</Link>
-                    </p>
-                  ))}
+                <Box
+                  fontSize={18}
+                  style={style}
+                  className={isSticky ? classes.sticky : ''}
+                >
+                  <Sortable
+                    items={item.hitos}
+                    refetch={refetch}
+                    itemComponent={({ item: { titulo, id } }) => (
+                      <p key={`sidebar-${id}`}>
+                        <Link href={`#hito-${id}`}>{titulo || 'Sin título'}</Link>
+                      </p>
+                    )}
+                    axis="y"
+                  />
                 </Box>
               )}
             </Sticky>

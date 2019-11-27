@@ -35,19 +35,9 @@ const HitoCard = ({ item: hito, refetch }) => {
           </Editable>
         </h4>
         <div>
-          <Editable
-            html
-            item={hito}
-            path="metadatos.descripcion"
-            onUpdate={refetch}
-          >
-            <span>{metadatos.descripcion}</span>
-          </Editable>
         </div>
         <div>
-          <ol>
-            <ActividadList where={{ hito_id: { _eq: hito.id } }} />
-          </ol>
+          <ActividadList where={{ hito_id: { _eq: hito.id } }} />
         </div>
       </Box>
     </Box>

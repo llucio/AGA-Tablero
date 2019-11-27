@@ -14,7 +14,6 @@ import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetailNew';
 import HitoDetail from './components/Hito/HitoDetail';
 
-
 const routes = [
   {
     path: '/',
@@ -139,6 +138,11 @@ const Breadcrumbs = ({ match, ...props }) => {
           path="/compromiso"
           component={() => <Breadcrumb.Item active>Compromiso</Breadcrumb.Item>}
         />
+        <Route
+          path="/hito"
+          component={() => <Breadcrumb.Item active>Hito</Breadcrumb.Item>}
+        />
+
       </Switch>
     </Breadcrumb>
   );
