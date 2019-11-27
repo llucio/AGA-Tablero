@@ -1,7 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { loader } from 'graphql.macro';
-import LoadingIndicator from '../LoadingIndicator';import Grid from '@material-ui/core/Grid';
+import LoadingIndicator from '../LoadingIndicator';
+import Grid from '@material-ui/core/Grid';
 import Sortable from '../Sortable';
 import HitoCard from './HitoCard';
 
@@ -23,7 +24,7 @@ const HitoList = ({ where }) => {
   if (!hitos) return null;
 
   return (
-    <div className="vertical-margin-bottom">
+    <div className="vertical-margin">
       <h2>Hitos</h2>
       <hr className="line" />
       <Sortable
@@ -45,4 +46,3 @@ const HitoList = ({ where }) => {
 };
 
 export default HitoList;
-
