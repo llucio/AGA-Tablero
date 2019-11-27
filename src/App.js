@@ -13,6 +13,7 @@ import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetailNew';
 import HitoDetail from './components/Hito/HitoDetail';
+import ScrollToTop from './components/ScrollToTop';
 
 const routes = [
   {
@@ -60,6 +61,7 @@ const App = () => (
 
 const AppRouter = () => (
   <Router>
+    <ScrollToTop />
     {routes.map(
       ({
         path,
