@@ -14,6 +14,7 @@ import ColorHash from 'color-hash';
 import { useRoles } from '../hooks';
 import HtmlEditor from './HtmlEditor';
 import moment from '../utils/moment';
+import DataDisplay from './DataDisplay';
 
 const colorHash = new ColorHash();
 

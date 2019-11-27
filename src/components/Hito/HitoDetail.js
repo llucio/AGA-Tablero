@@ -16,6 +16,7 @@ import Box from '@material-ui/core/Box';
 
 import Table from 'react-bootstrap/Table';
 
+import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 import moment from '../../utils/moment';
 import ActividadTable from '../Actividad/ActividadTable';
@@ -26,6 +27,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     margin: theme.spacing(3, 0)
+  },
+  header: {
+    marginBottom: '2em'
   },
   containerHito: {
     flexGrow: 1
@@ -58,13 +62,21 @@ const HitoDetail = ({ match, id }) => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={classes.header}>
         <HitoHeader hito={hito} refetch={refetch} />
       </Grid>
 
       <Grid container spacing={2}>
-        <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
+        <Editable
+          html
+          item={hito}
+          path="metadatos.descripcion"
+          onUpdate={refetch}
+        >
+          <DataDisplay data={metadatos.descripcion} />
+        </Editable>
       </Grid>
+      <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
     </div>
   );
 };
@@ -83,26 +95,45 @@ const dateTheme = {
 };
 
 const HitoHeader = ({ hito, refetch }) => {
-  const { titulo, descripcion, ...metadatos } = hito.metadatos;
+  const { metadatos } = hito;
   return (
-    <div>
+    <Grid container spacing={2}>
       <Grid
         item
         xs={3}
         md={2}
         className="widget-calendar light-blue-text text-uppercase bold"
       >
-        <ThemeProvider theme={dateTheme}>
-          <CalendarIcon
-            date={DateTime.fromISO(hito.fecha_inicial).toJSDate()}
-            options={dateOptions}
-            theme={dateTheme}
-            className="elevation-1"
-          />
-        </ThemeProvider>
+        <Editable
+          item={hito}
+          path="fecha_inicial"
+          type="date"
+          valueType="timestamptz"
+          onUpdate={refetch}
+        >
+          <ThemeProvider theme={dateTheme}>
+            <CalendarIcon
+              date={
+                !!hito.fecha_inicial &&
+                moment(hito.fecha_inicial)
+                  .utc()
+                  .toDate()
+              }
+              options={dateOptions}
+              theme={dateTheme}
+              className="elevation-1"
+            />
+          </ThemeProvider>
+        </Editable>
       </Grid>
       <Grid item xs={6} md={7}>
-        <h3 className="extra-bold">{descripcion}</h3>
+        <Editable
+          item={hito}
+          path="titulo"
+          onUpdate={refetch}
+        >
+          <h3 className="extra-bold">{hito.titulo}</h3>
+        </Editable>
       </Grid>
       <Grid item xs={3} md={3}>
         <div className="progress">
@@ -116,49 +147,9 @@ const HitoHeader = ({ hito, refetch }) => {
         </div>
       </Grid>
       <Grid>
-        <Box>
-          <Editable
-            adminOnly
-            item={hito}
-            path="metadatos.ponderacion"
-            valueType="Int"
-            onUpdate={refetch}
-          >
-            <strong>{metadatos.ponderacion}</strong>
-          </Editable>
-          <Editable
-            adminOnly
-            item={hito}
-            path="fecha_inicial"
-            type="date"
-            valueType="timestamptz"
-            onUpdate={refetch}
-          >
-            <strong>
-              {!!hito.fecha_inicial &&
-                moment(hito.fecha_inicial)
-                  .utc()
-                  .format('D [de] MMMM [de] YYYY')}
-            </strong>
-          </Editable>
-          <Editable
-            adminOnly
-            item={hito}
-            path="fecha_final"
-            type="date"
-            valueType="timestamptz"
-            onUpdate={refetch}
-          >
-            <strong>
-              {!!hito.fecha_final &&
-                moment(hito.fecha_final)
-                  .utc()
-                  .format('D [de] MMMM [de] YYYY')}
-            </strong>
-          </Editable>
-        </Box>
+        <Box />
       </Grid>
-    </div>
+    </Grid>
   );
 };
 
