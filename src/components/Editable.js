@@ -87,7 +87,7 @@ const Editable = ({
       onUpdate && onUpdate();
       autoClose && setOpen(false);
       setValue(value);
-      refetch &&
+      _.isFunction(refetch) &&
         refetch()
           .then(() => {
             // console.log('ais')

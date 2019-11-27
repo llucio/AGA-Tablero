@@ -125,9 +125,14 @@ const CompromisoDetailNew = ({ match }) => {
                   <p className="active">
                     <Link href="#top">{item.titulo}</Link>
                   </p>
-                  {compromisoTabs.map(({ label }, i) => (
+                  {/*{compromisoTabs.map(({ label }, i) => (
                     <p key={label}>
                       <Link href="#{i}">{label}</Link>
+                    </p>
+                  ))}*/}
+                  {(item.hitos || []).map(({ id, titulo, descripcion, metadatos: { pdescripcion } = {} }, i) => (
+                    <p key={`sidebar-${id}`}>
+                      <Link href={`#hito-${id}`}>p {titulo} {descripcion} </Link>
                     </p>
                   ))}
                 </Box>
@@ -202,7 +207,6 @@ const CompromisoDetailNew = ({ match }) => {
               {compromisoTabs.map(({ key, label }, i) => (
                 <ExpansionPanel className="elevation-0" key={i}>
                   <ExpansionPanelSummary
-                    className=""
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls={`panel-content.${key}`}
                     id={`panel-content-${key}`}

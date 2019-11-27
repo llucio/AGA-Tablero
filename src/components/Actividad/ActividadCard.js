@@ -53,10 +53,16 @@ const ActividadCard = ({ item: actividad, refetch }) => {
     <Grid item xs={12} className={classes.root}>
       <li>
         <Typography className="light" display="block">
-          <Editable item={actividad} path="titulo" onUpdate={refetch}>
             <Link variant="body2" to={`/hito/${actividad.hito_id}`}>
-              <span>{actividad.titulo}</span>
+            <span>{actividad.titulo || 'Sin título'}</span>
             </Link>
+          <Editable
+            html
+            item={actividad}
+            path="metadatos.descripcion"
+            onUpdate={refetch}
+          >
+            <span>{metadatos.descripcion}</span>
           </Editable>
           <Editable
             adminOnly
