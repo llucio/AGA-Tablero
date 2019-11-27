@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     color: '#333333'
   },
   iconButton: {
-    padding: 10
+    padding: '2px'
   },
   divider: {
     height: 28,
@@ -125,13 +125,14 @@ const Editable = ({
       {!open && (children || value)}
       <div className={classes.root}>
         <IconButton
+        fontSize="small"
           onClick={handleToggle}
           color={open ? 'secondary' : 'primary'}
           className={classes.iconButton}
         >
           {open ? <CloseIcon /> : <EditIcon />}
         </IconButton>
-        {!open && <span className={classes.editLabel}>{subField || field}</span>}
+        {!open && <span className={classes.editLabel}><small>{subField || field}</small></span>}
         {open && (
           <Fragment>
             {!!type ? (
@@ -166,7 +167,7 @@ const Editable = ({
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
             )}
-            <IconButton onClick={handleSubmit} className={classes.iconButton}>
+            <IconButton  onClick={handleSubmit} className={classes.iconButton}>
               <SaveIcon />
             </IconButton>
           </Fragment>

@@ -124,14 +124,14 @@ const HitoHeader = ({ hito, refetch }) => {
         </Editable>
       </Grid>
       <Grid item xs={6} md={7}>
-        <div>
+        <strong>
           <em>
             Compromiso:{' '}
             <Link to={`/compromiso/${hito.compromiso.id}`}>
               {hito.compromiso.titulo}
             </Link>
           </em>
-        </div>
+        </strong>
         <Editable item={hito} path="titulo" onUpdate={refetch}>
           <h3 className="extra-bold">{hito.titulo}</h3>
         </Editable>
