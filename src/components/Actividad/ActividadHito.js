@@ -53,15 +53,17 @@ const useStyles = makeStyles(theme => ({
 const ActividadHito = ({ where }) => {
   const classes = useStyles();
 
-  const { data: { items: actividades = [] } = {}, loading, refetch, error } = useQuery(
-    LIST_QUERY,
-    {
-      variables: {
-        where
-      },
-      fetchPolicy: 'cache-and-network'
-    }
-  );
+  const {
+    data: { items: actividades = [] } = {},
+    loading,
+    refetch,
+    error
+  } = useQuery(LIST_QUERY, {
+    variables: {
+      where
+    },
+    fetchPolicy: 'cache-and-network'
+  });
 
   if (error) return <div>Error</div>;
   if (loading && !actividades) return <LoadingIndicator />;
@@ -69,6 +71,7 @@ const ActividadHito = ({ where }) => {
 
   return (
     <div className="vertical-margin">
+      <Box />
       <Box className={classes.rootTable}>
         <Table className={classes.table} aria-label="table">
           <TableHead>
@@ -85,6 +88,22 @@ const ActividadHito = ({ where }) => {
                 <StyledTableCell component="th" scope="actividad">
                   <Editable item={actividad} path="titulo" onUpdate={refetch}>
                     {actividad.titulo || 'Sin título'}
+                  </Editable>
+                  <Editable
+                    html
+                    item={actividad}
+                    path="metadatos.descripcion"
+                    onUpdate={refetch}
+                  >
+                    <span>{actividad.metadatos.descripcion}</span>
+                  </Editable>
+                  <Editable
+                    html
+                    item={actividad}
+                    path="medio_verificacion"
+                    onUpdate={refetch}
+                  >
+                    <span>{actividad.medio_verificacion}</span>
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">

@@ -125,14 +125,9 @@ const CompromisoDetailNew = ({ match }) => {
                   <p className="active">
                     <Link href="#top">{item.titulo}</Link>
                   </p>
-                  {/*{compromisoTabs.map(({ label }, i) => (
-                    <p key={label}>
-                      <Link href="#{i}">{label}</Link>
-                    </p>
-                  ))}*/}
                   {(item.hitos || []).map(({ id, titulo, descripcion, metadatos: { pdescripcion } = {} }, i) => (
                     <p key={`sidebar-${id}`}>
-                      <Link href={`#hito-${id}`}>p {titulo} {descripcion} </Link>
+                      <Link href={`#hito-${id}`}>{titulo}</Link>
                     </p>
                   ))}
                 </Box>

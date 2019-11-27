@@ -49,14 +49,8 @@ const routes = [
     headerClass: 'medium'
   },
   {
-    path: ['/hito/:id', '/hito/:id/editar'],
-    content: HitoPreview,
-    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
-    headerClass: 'medium'
-  },
-  {
-    path: ['/hito/preview/:id'],
-    content: HitoPreview,
+    path: ['/hito/:id'],
+    content: HitoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium'
   },

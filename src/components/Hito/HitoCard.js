@@ -29,17 +29,13 @@ const HitoCard = ({ item: hito, refetch }) => {
     <Box className={classes.panel}>
       <Box className="vertical-margin-bottom-middle">
         <a name={`hito-${hito.id}`} />
-        <h4 className="extra-bold" >
-          <Editable
-            item={hito}
-            path="titulo"
-            onUpdate={refetch}
-          >
+        <h4 className="extra-bold">
+          <Editable item={hito} path="titulo" onUpdate={refetch}>
             <span>{hito.titulo || 'Sin título'}</span>
           </Editable>
         </h4>
         <div>
-        <Editable
+          <Editable
             html
             item={hito}
             path="metadatos.descripcion"
@@ -49,50 +45,10 @@ const HitoCard = ({ item: hito, refetch }) => {
           </Editable>
         </div>
         <div>
-          <Editable
-            adminOnly
-            item={hito}
-            path="metadatos.ponderacion"
-            valueType="Int"
-            onUpdate={refetch}
-          >
-            <strong>{metadatos.ponderacion}</strong>
-          </Editable>
-          <Editable
-            adminOnly
-            item={hito}
-            path="fecha_inicial"
-            type="date"
-            valueType="timestamptz"
-            onUpdate={refetch}
-          >
-            <strong>
-              {!!hito.fecha_inicial &&
-                moment(hito.fecha_inicial)
-                  .utc()
-                  .format('D [de] MMMM [de] YYYY')}
-            </strong>
-          </Editable>
-          <Editable
-            adminOnly
-            item={hito}
-            path="fecha_final"
-            type="date"
-            valueType="timestamptz"
-            onUpdate={refetch}
-          >
-            <strong>
-              {!!hito.fecha_final &&
-                moment(hito.fecha_final)
-                  .utc()
-                  .format('D [de] MMMM [de] YYYY')}
-            </strong>
-          </Editable>
           <ol>
             <ActividadList where={{ hito_id: { _eq: hito.id } }} />
           </ol>
         </div>
-
       </Box>
     </Box>
   );

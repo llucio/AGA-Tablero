@@ -56,14 +56,7 @@ const ActividadCard = ({ item: actividad, refetch }) => {
             <Link variant="body2" to={`/hito/${actividad.hito_id}`}>
             <span>{actividad.titulo || 'Sin título'}</span>
             </Link>
-          <Editable
-            html
-            item={actividad}
-            path="metadatos.descripcion"
-            onUpdate={refetch}
-          >
             <span>{metadatos.descripcion}</span>
-          </Editable>
           <Editable
             adminOnly
             item={actividad}
