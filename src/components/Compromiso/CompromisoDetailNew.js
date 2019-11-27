@@ -19,6 +19,7 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import { StickyContainer, Sticky } from 'react-sticky';
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -81,6 +82,9 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     display: 'none'
+  },
+  sticky: {
+    marginTop: '100px'
   }
 }));
 
@@ -104,122 +108,129 @@ const CompromisoDetailNew = ({ match }) => {
   const handleChangeIndex = index => setTabIndex(index);
 
   return (
-    <Box>
+    <div className={classes.root_grid}>
+      <StickyContainer>
+        <Grid container spacing={3}>
+          <Grid className="menuSidebar" item xs={12} sm={3}>
+            <Sticky bottomOffset={200}>
+              {({
+                style,
+                isSticky,
+                wasSticky,
+                distanceFromTop,
+                distanceFromBottom,
+                calculatedHeight
+              }) => (
+                <Box fontSize={18} style={style} className={isSticky ? classes.sticky : ''}>
+                  <p className="active">
+                    <Link href="#top">{item.titulo}</Link>
+                  </p>
+                  {compromisoTabs.map(({ label }, i) => (
+                    <p>
+                      <Link href="#{i}">{label}</Link>
+                    </p>
+                  ))}
+                </Box>
+              )}
+            </Sticky>
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            <Editable item={item} path="titulo" onUpdate={refetch}>
+              <h1 className="extra-bold">{item.titulo}</h1>
+            </Editable>
 
+            <Box className={classes.descripcion}>
+              <Editable
+                html
+                item={item}
+                path="metadatos.descripcion"
+                onUpdate={refetch}
+              >
+                <DataDisplay data={metadatos.descripcion} />
+              </Editable>
+            </Box>
 
-      <div className={classes.root_grid}>
-	      <Grid container spacing={3}>
-	        <Grid
-	        	className='menuSidebar'
-	        	item
-	        	xs={12}
-	        	sm={3}
-	        >
-			      <Box fontSize={18}>
-		        	<p className="active">
-		        		<Link href="#top">
-		        			{item.titulo}
-		        		</Link>
-		        	</p>
-	            {compromisoTabs.map(({ label }, i) => (
-	              <p>
-		              <Link
-		              	href="#{i}"
-		              >
-		              	{label}
-		              </Link>
-	              </p>
-	            ))}
-	          </Box>
-	        </Grid>
-	        <Grid item xs={12} sm={9}>
+            <Editable
+              adminOnly
+              item={item}
+              path="metadatos.imagen"
+              onUpdate={refetch}
+            >
+              {metadatos.imagen}
+            </Editable>
+            <Editable item={item} path="metadatos.descarga" onUpdate={refetch}>
+              {metadatos.descarga}
+            </Editable>
+            <Editable
+              item={item}
+              path="metadatos.dependencia"
+              onUpdate={refetch}
+            >
+              {metadatos.dependencia}
+            </Editable>
+            <Editable
+              item={item}
+              path="metadatos.dependencia2"
+              onUpdate={refetch}
+            >
+              {metadatos.dependencia2}
+            </Editable>
+            <Editable
+              item={item}
+              path="metadatos.dependencia3"
+              onUpdate={refetch}
+            >
+              {metadatos.dependencia3}
+            </Editable>
+            <Editable
+              item={item}
+              path="metadatos.responsables"
+              onUpdate={refetch}
+            >
+              <DataDisplay data={metadatos.responsables} />
+            </Editable>
+            <Editable
+              adminOnly
+              item={item}
+              path="metadatos.observaciones"
+              onUpdate={refetch}
+            >
+              <DataDisplay data={metadatos.observaciones} />
+            </Editable>
 
-			      <Editable item={item} path="titulo" onUpdate={refetch}>
-			        <h1 className="extra-bold">{item.titulo}</h1>
-			      </Editable>
-
-			      <Box
-			        className={classes.descripcion}
-
-			      >
-			        <Editable html item={item} path="metadatos.descripcion" onUpdate={refetch}>
-			          <DataDisplay data={metadatos.descripcion} />
-			        </Editable>
-			      </Box>
-
-			      <Editable adminOnly item={item} path="metadatos.imagen" onUpdate={refetch}>
-			        {metadatos.imagen}
-			      </Editable>
-			      <Editable item={item} path="metadatos.descarga" onUpdate={refetch}>
-			        {metadatos.descarga}
-			      </Editable>
-			      <Editable item={item} path="metadatos.dependencia" onUpdate={refetch}>
-			        {metadatos.dependencia}
-			      </Editable>
-			      <Editable item={item} path="metadatos.dependencia2" onUpdate={refetch}>
-			        {metadatos.dependencia2}
-			      </Editable>
-			      <Editable item={item} path="metadatos.dependencia3" onUpdate={refetch}>
-			        {metadatos.dependencia3}
-			      </Editable>
-			      <Editable item={item} path="metadatos.responsables" onUpdate={refetch}>
-			        <DataDisplay data={metadatos.responsables} />
-			      </Editable>
-			      <Editable
-			        adminOnly
-			        item={item}
-			        path="metadatos.observaciones"
-			        onUpdate={refetch}
-			      >
-			        <DataDisplay data={metadatos.observaciones} />
-			      </Editable>
-
-
-				    <div className={classes.panel}>
-
-		          {compromisoTabs.map(({ key }, i) => (
-
-					      <ExpansionPanel className="elevation-0"  key={i}>
-					        <ExpansionPanelSummary
-					        	className=""
-					          expandIcon={<ExpandMoreIcon />}
-					          aria-controls={`panel-content.${key}`}
-					          id={`panel-content-${key}`}
-					        >
-			              <Typography className="panel_heading extra-bold " >
-
-											{key == 'valores' ? 'Valores' : ''}
-											{key == 'adicional' ? 'Información' : ''}
-											{key == 'antecedentes' ? 'Antecedentes' : ''}
-											{key == 'problematica' ? 'Problemática' : ''}
-											{key == 'alineacion2030' ? 'Agenda 2030' : ''}
-											{key == 'solucionPlanteada' ? 'Solución' : ''}
-											{key == 'analisisRiesgo' ? 'Analisís de Riesgo' : ''}
-											{key == 'otrosActores' ? 'Otros actores' : ''}
-
-			              </Typography>
-
-					        </ExpansionPanelSummary>
-					        <ExpansionPanelDetails>
-					          <Typography className="light">
-					            <DataDisplay data={_.get(item, ['metadatos', key], '')} />
-					          </Typography>
-					        </ExpansionPanelDetails>
-					      </ExpansionPanel>
-
-		          ))}
-				      
-				    </div>
-
-
-			      <HitoList where={{ compromiso_id: { _eq: item.id } }} />
-
-
-	        </Grid>
-	      </Grid>
-      </div>
-
-    </Box>
+            <div className={classes.panel}>
+              {compromisoTabs.map(({ key }, i) => (
+                <ExpansionPanel className="elevation-0" key={i}>
+                  <ExpansionPanelSummary
+                    className=""
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls={`panel-content.${key}`}
+                    id={`panel-content-${key}`}
+                  >
+                    <Typography className="panel_heading extra-bold ">
+                      {key == 'valores' ? 'Valores' : ''}
+                      {key == 'adicional' ? 'Información' : ''}
+                      {key == 'antecedentes' ? 'Antecedentes' : ''}
+                      {key == 'problematica' ? 'Problemática' : ''}
+                      {key == 'alineacion2030' ? 'Agenda 2030' : ''}
+                      {key == 'solucionPlanteada' ? 'Solución' : ''}
+                      {key == 'analisisRiesgo' ? 'Analisís de Riesgo' : ''}
+                      {key == 'otrosActores' ? 'Otros actores' : ''}
+                    </Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <Typography className="light">
+                      <DataDisplay data={_.get(item, ['metadatos', key], '')} />
+                    </Typography>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              ))}
+            </div>
+            <HitoList where={{ compromiso_id: { _eq: item.id } }} />
+          </Grid>
+        </Grid>
+      </StickyContainer>
+    </div>
   );
 };
 
@@ -233,6 +244,5 @@ const compromisoTabs = [
   { key: 'analisisRiesgo', label: 'Analisís de Riesgo', icon: <ListAltIcon /> },
   { key: 'otrosActores', label: 'Otros actores', icon: <PeopleAltIcon /> }
 ];
-
 
 export default CompromisoDetailNew;
