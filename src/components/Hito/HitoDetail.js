@@ -1,13 +1,11 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
-
 import { DateTime } from 'luxon';
 import { CalendarIcon } from 'react-calendar-icon';
 import { ThemeProvider } from 'styled-components';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -111,27 +109,30 @@ const HitoHeader = ({ hito, refetch }) => {
           valueType="timestamptz"
           onUpdate={refetch}
         >
-          <ThemeProvider theme={dateTheme}>
-            <CalendarIcon
-              date={
-                !!hito.fecha_inicial &&
-                moment(hito.fecha_inicial)
+          {!!hito.fecha_inicial && (
+            <ThemeProvider theme={dateTheme}>
+              <CalendarIcon
+                date={moment(hito.fecha_inicial)
                   .utc()
-                  .toDate()
-              }
-              options={dateOptions}
-              theme={dateTheme}
-              className="elevation-1"
-            />
-          </ThemeProvider>
+                  .toDate()}
+                options={dateOptions}
+                theme={dateTheme}
+                className="elevation-1"
+              />
+            </ThemeProvider>
+          )}
         </Editable>
       </Grid>
       <Grid item xs={6} md={7}>
-        <Editable
-          item={hito}
-          path="titulo"
-          onUpdate={refetch}
-        >
+        <div>
+          <em>
+            Compromiso:{' '}
+            <Link to={`/compromiso/${hito.compromiso.id}`}>
+              {hito.compromiso.titulo}
+            </Link>
+          </em>
+        </div>
+        <Editable item={hito} path="titulo" onUpdate={refetch}>
           <h3 className="extra-bold">{hito.titulo}</h3>
         </Editable>
       </Grid>
