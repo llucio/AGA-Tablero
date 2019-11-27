@@ -36,13 +36,13 @@ const routes = [
   //   headerClass: 'medium'
   // },
   {
-    path: '/compromiso/:id',
+    path: '/compromiso2/:id',
     content: CompromisoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium'
   },
   {
-    path: '/compromiso/new/:id',
+    path: '/compromiso/:id',
     content: CompromisoDetailNew,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     subheading: 'NEW',

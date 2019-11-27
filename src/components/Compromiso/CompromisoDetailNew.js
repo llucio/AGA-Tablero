@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   margin: {
     margin: theme.spacing(2)
@@ -126,7 +126,7 @@ const CompromisoDetailNew = ({ match }) => {
                     <Link href="#top">{item.titulo}</Link>
                   </p>
                   {compromisoTabs.map(({ label }, i) => (
-                    <p>
+                    <p key={label}>
                       <Link href="#{i}">{label}</Link>
                     </p>
                   ))}
@@ -146,7 +146,7 @@ const CompromisoDetailNew = ({ match }) => {
                 path="metadatos.descripcion"
                 onUpdate={refetch}
               >
-                <DataDisplay data={metadatos.descripcion} />
+                <DataDisplay data={metadatos.descripcion || ''} />
               </Editable>
             </Box>
 
@@ -187,7 +187,7 @@ const CompromisoDetailNew = ({ match }) => {
               path="metadatos.responsables"
               onUpdate={refetch}
             >
-              <DataDisplay data={metadatos.responsables} />
+              <DataDisplay data={metadatos.responsables || ''} />
             </Editable>
             <Editable
               adminOnly
@@ -199,7 +199,7 @@ const CompromisoDetailNew = ({ match }) => {
             </Editable>
 
             <div className={classes.panel}>
-              {compromisoTabs.map(({ key }, i) => (
+              {compromisoTabs.map(({ key, label }, i) => (
                 <ExpansionPanel className="elevation-0" key={i}>
                   <ExpansionPanelSummary
                     className=""
@@ -208,14 +208,7 @@ const CompromisoDetailNew = ({ match }) => {
                     id={`panel-content-${key}`}
                   >
                     <Typography className="panel_heading extra-bold ">
-                      {key == 'valores' ? 'Valores' : ''}
-                      {key == 'adicional' ? 'Información' : ''}
-                      {key == 'antecedentes' ? 'Antecedentes' : ''}
-                      {key == 'problematica' ? 'Problemática' : ''}
-                      {key == 'alineacion2030' ? 'Agenda 2030' : ''}
-                      {key == 'solucionPlanteada' ? 'Solución' : ''}
-                      {key == 'analisisRiesgo' ? 'Analisís de Riesgo' : ''}
-                      {key == 'otrosActores' ? 'Otros actores' : ''}
+                      {label}
                     </Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
