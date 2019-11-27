@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   panel: {
     width: '100%'
   },
+  item: {
+    margin: '0.3em 1em'
+  },
   panel_heading: {
     fontSize: theme.typography.pxToRem(18),
     fontWeight: theme.typography.fontWeightRegular
@@ -51,12 +54,9 @@ const ActividadCard = ({ item: actividad, refetch }) => {
 
   return (
     <Grid item xs={12} className={classes.root}>
-      <li>
+      <li className={classes.item}>
         <Typography className="light" display="block">
-            <Link variant="body2" to={`/hito/${actividad.hito_id}`}>
-            <span>{actividad.titulo || 'Sin título'}</span>
-            </Link>
-            <span>{metadatos.descripcion}</span>
+          <span>{actividad.titulo}</span>
         </Typography>
       </li>
     </Grid>
