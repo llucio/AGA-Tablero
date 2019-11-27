@@ -25,7 +25,6 @@ const EntregableList = ({ where }) => {
 
   if (error) return <div>Error</div>;
   if (loading && !entregables) return <LoadingIndicator />;
-  
   if (!entregables) return null;
 
   return (

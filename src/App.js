@@ -12,6 +12,7 @@ import MenuPrincipal from './components/Layout/MenuPrincipal';
 import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetail';
+import CompromisoDetailNew from './components/Compromiso/CompromisoDetailNew';
 // import CompromisoEdit from './components/Compromiso/Edit';
 import HitoDetail from './components/Hito/HitoDetail';
 import HitoPreview from './components/Hito/HitoPreview';
@@ -38,6 +39,13 @@ const routes = [
     path: '/compromiso/:id',
     content: CompromisoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
+    headerClass: 'medium'
+  },
+  {
+    path: '/compromiso/new/:id',
+    content: CompromisoDetailNew,
+    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
+    subheading: 'NEW',
     headerClass: 'medium'
   },
   {

@@ -27,21 +27,17 @@ const HitoCard = ({ item: hito, refetch }) => {
 
   return (
     <Box className={classes.panel}>
-      <ExpansionPanel className="vertical-margin-bottom-middle">
-        <ExpansionPanelSummary
-          className={`grey lighten-4 text-uppercase ${classes.panel}`}
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-        >
-          
-            <Editable
-              item={hito}
-              path="metadatos.descripcion"
-              onUpdate={refetch}
-            >
-              <span className="semi-bold">{metadatos.descripcion}</span>
-            </Editable>
-        </ExpansionPanelSummary>
+      <Box className="vertical-margin-bottom-middle">
+
+        <h4 className="extra-bold" >
+          <Editable
+            item={hito}
+            path="metadatos.descripcion"
+            onUpdate={refetch}
+          >
+            <span>{metadatos.descripcion}</span>
+          </Editable>
+        </h4>
         <div>
           <Editable
             adminOnly
@@ -82,9 +78,12 @@ const HitoCard = ({ item: hito, refetch }) => {
                   .format('D [de] MMMM [de] YYYY')}
             </strong>
           </Editable>
-          <ActividadList where={{ hito_id: { _eq: hito.id } }} />
+          <ol>
+            <ActividadList where={{ hito_id: { _eq: hito.id } }} />
+          </ol>
         </div>
-      </ExpansionPanel>
+
+      </Box>
     </Box>
   );
 };

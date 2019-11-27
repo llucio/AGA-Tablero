@@ -4,6 +4,7 @@
 html, body {
   margin: 0;
   font-family: 'Montserrat', sans-serif !important;
+  font-size: 16px!important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -88,6 +89,7 @@ hr.line{
 }
 
 
+
 .image-over{
   background: -moz-linear-gradient(top,  rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
   background: -webkit-linear-gradient(top,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.8) 100%);
@@ -163,9 +165,40 @@ hr.line{
     }
 
 
-table.MuiTable-root{
+.menuSidebar {}
+  .menuSidebar a:hover {
+    color: #0099ff;
+    font-weight: 700;
+  }
+  .menuSidebar p {
+    padding: 4px 4px 4px 10px;
+    border-left: #eceff1 6px solid;
+  }
+  .menuSidebar p:hover,
+  .menuSidebar p.active {
+    padding: 4px 4px 4px 10px;
+    border-left: #0099ff 6px solid;
+  }
 
+.panel_heading-{}
+  .panel_heading{
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 24px!important;
+    width: 100%
+  }
+  .panel_line{
+    border-bottom: 1px #e2e8ee solid;
+    padding-bottom: 5px;
+  }
+.MuiExpansionPanelSummary-root {
+    padding: 0px!important;
 }
+.MuiExpansionPanelDetails-root {
+  font-family: 'Montserrat', sans-serif !important;
+  padding: 8px 0px 24px !important;
+}
+
+table.MuiTable-root{}
   thead{}
   thead.MuiTableHead-root{
     text-transform: uppercase;

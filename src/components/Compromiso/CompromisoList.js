@@ -1,23 +1,13 @@
 import React from 'react';
-import { gql } from 'apollo-boost';
+import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
-import LoadingIndicator from '../LoadingIndicator';import Grid from '@material-ui/core/Grid';
+import LoadingIndicator from '../LoadingIndicator';
+
+import Grid from '@material-ui/core/Grid';
 import Sortable from '../Sortable';
 import CompromisoCard from './CompromisoCard';
 
-const LIST_QUERY = gql`
-  query CompromisosQuery($where: compromiso_bool_exp) {
-    items: compromiso(
-      where: $where
-      order_by: [{ orden: asc }, { fecha_creacion: asc }]
-    ) {
-      id
-      titulo
-      fecha_creacion
-      metadatos
-    }
-  }
-`;
+const LIST_QUERY = loader('../../queries/CompromisoList.graphql');
 
 const CompromisoList = ({ where }) => {
   const { data: { items } = {}, loading, error, refetch } = useQuery(

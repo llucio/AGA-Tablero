@@ -23,7 +23,7 @@ const HitoList = ({ where }) => {
   if (!hitos) return null;
 
   return (
-    <div className="vertical-margin-bottom">
+    <div className="vertical-margin">
       <h2>Hitos</h2>
       <hr className="line" />
       <Sortable

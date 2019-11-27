@@ -51,23 +51,24 @@ const ActividadCard = ({ item: actividad, refetch }) => {
 
   return (
     <Grid item xs={12} className={classes.root}>
-      <Typography className="light" display="block">
-        <Editable item={actividad} path="titulo" onUpdate={refetch}>
-          <Link variant="body2" to={`/hito/${actividad.id}`}>
-            <strong>{actividad.titulo}</strong>
-          <LinkIcon fontSize="small" />
-          </Link>
-        </Editable>
-        <Editable
-          adminOnly
-          item={actividad}
-          path="metadatos.medio_verificacion"
-          valueType="String"
-          onUpdate={refetch}
-        >
-          <strong>{metadatos.medio_verificacion}</strong>
-        </Editable>
-      </Typography>
+      <li>
+        <Typography className="light" display="block">
+          <Editable item={actividad} path="titulo" onUpdate={refetch}>
+            <Link variant="body2" to={`/hito/${actividad.hito_id}`}>
+              <span>{actividad.titulo}</span>
+            </Link>
+          </Editable>
+          <Editable
+            adminOnly
+            item={actividad}
+            path="metadatos.medio_verificacion"
+            valueType="String"
+            onUpdate={refetch}
+          >
+            <strong>{metadatos.medio_verificacion}</strong>
+          </Editable>
+        </Typography>
+      </li>
     </Grid>
   );
 };

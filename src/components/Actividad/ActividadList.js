@@ -24,8 +24,6 @@ const ActividadList = ({ where }) => {
 
   return (
     <div className="vertical-margin-bottom">
-      <h2>Actividades</h2>
-      <hr className="line" />
       <Sortable
         items={actividades}
         itemComponent={ActividadCard}
