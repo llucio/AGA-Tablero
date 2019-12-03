@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   panel: {
     width: '100%'
   },
+  item: {
+    margin: '0.3em 1em'
+  },
   panel_heading: {
     fontSize: theme.typography.pxToRem(18),
     fontWeight: theme.typography.fontWeightRegular
@@ -51,23 +54,11 @@ const ActividadCard = ({ item: actividad, refetch }) => {
 
   return (
     <Grid item xs={12} className={classes.root}>
-      <Typography className="light" display="block">
-        <Editable item={actividad} path="titulo" onUpdate={refetch}>
-          <Link variant="body2" to={`/hito/${actividad.id}`}>
-            <strong>{actividad.titulo}</strong>
-          <LinkIcon fontSize="small" />
-          </Link>
-        </Editable>
-        <Editable
-          adminOnly
-          item={actividad}
-          path="metadatos.medio_verificacion"
-          valueType="String"
-          onUpdate={refetch}
-        >
-          <strong>{metadatos.medio_verificacion}</strong>
-        </Editable>
-      </Typography>
+      <li className={classes.item}>
+        <Typography className="light" display="block">
+          <span>{actividad.titulo}</span>
+        </Typography>
+      </li>
     </Grid>
   );
 };

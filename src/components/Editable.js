@@ -14,6 +14,7 @@ import ColorHash from 'color-hash';
 import { useRoles } from '../hooks';
 import HtmlEditor from './HtmlEditor';
 import moment from '../utils/moment';
+import DataDisplay from './DataDisplay';
 
 const colorHash = new ColorHash();
 
@@ -39,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     color: '#333333'
   },
   iconButton: {
-    padding: 10
+    padding: '2px'
   },
   divider: {
     height: 28,
@@ -62,14 +63,14 @@ const Editable = ({
   const { usuario: { administrador } = {} } = useRoles();
   const [value, setValue] = useState();
   const [field, subField] = path.split('.');
-  const {
-    data: { queryResult } = {},
-    refetch
-  } = useQuery(getQuery({ typename, field, subField }), {
-    variables: { id },
-    skip: !id || (open && !administrador)
-    // fetchPolicy: 'network-only'
-  });
+  const { data: { queryResult } = {}, refetch } = useQuery(
+    getQuery({ typename, field, subField }),
+    {
+      variables: { id },
+      skip: !id || (open && !administrador)
+      // fetchPolicy: 'network-only'
+    }
+  );
   const classes = useStyles();
 
   const [executeMutation] = useMutation(
@@ -87,9 +88,12 @@ const Editable = ({
       onUpdate && onUpdate();
       autoClose && setOpen(false);
       setValue(value);
-      refetch && refetch().then(() => {
-        // console.log('ais')
-      }).catch(() => console.error('error'));
+      _.isFunction(refetch) &&
+        refetch()
+          .then(() => {
+            // console.log('ais')
+          })
+          .catch(() => console.error('error'));
     });
   };
 
@@ -121,13 +125,14 @@ const Editable = ({
       {!open && (children || value)}
       <div className={classes.root}>
         <IconButton
+        fontSize="small"
           onClick={handleToggle}
           color={open ? 'secondary' : 'primary'}
           className={classes.iconButton}
         >
           {open ? <CloseIcon /> : <EditIcon />}
         </IconButton>
-        {!open && <span className={classes.editLabel}>{subField || field}</span>}
+        {!open && <span className={classes.editLabel}><small>{subField || field}</small></span>}
         {open && (
           <Fragment>
             {!!type ? (
@@ -162,7 +167,7 @@ const Editable = ({
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
             )}
-            <IconButton onClick={handleSubmit} className={classes.iconButton}>
+            <IconButton  onClick={handleSubmit} className={classes.iconButton}>
               <SaveIcon />
             </IconButton>
           </Fragment>
@@ -191,7 +196,6 @@ const getMutation = ({ typename, field, subField, valueType = 'String' }) => {
         where: {
           id: { _eq: $id }
         }
-
         ${subField ? '_append' : '_set'}: {
           ${field}: $value
         }
@@ -213,8 +217,8 @@ Editable.propTypes = {
   adminOnly: PropTypes.bool,
   autoClose: PropTypes.bool,
   item: PropTypes.shape({
-    __typename: PropTypes.string.isRequired,
-    id: PropTypes.any.isRequired
+    __typename: PropTypes.string,
+    id: PropTypes.any
   })
 };
 

@@ -17,7 +17,7 @@ const HtmlEditor = ({ value, onChange }) => {
         ContentState.createFromBlockArray(htmlToDraft(value || ''))
       )
     );
-  }, [value, editorState]);
+  }, [value]);
 
   return (
     <div className="rich-editor">
