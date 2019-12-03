@@ -40,11 +40,10 @@ const routes = [
   },
 ];
 
-// bootstrap theme
 const theme = {
   calendarIcon: {
-    textColor: 'white', // text color of the header and footer
-    primaryColor: '#0da472', // background of the header and footer
+    textColor: 'white',
+    primaryColor: '#0da472',
     backgroundColor: '#fafafa'
   }
 };
