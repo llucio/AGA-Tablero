@@ -9,8 +9,7 @@ const HtmlEditor = ({ value, onChange }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
-    if (toHtml(editorState) === value) return; //added
-
+    if (toHtml(editorState) === value) return;
     setEditorState(
       EditorState.push(
         editorState,
@@ -33,7 +32,7 @@ const HtmlEditor = ({ value, onChange }) => {
 
   function onEditorStateChange(es) {
     setEditorState(es);
-    const html = toHtml(es); //added
+    const html = toHtml(es);
     if (value !== html) {
       onChange({ target: { name: 'text', value: html } });
     }

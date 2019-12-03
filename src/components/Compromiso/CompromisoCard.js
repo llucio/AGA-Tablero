@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CompromisoCard = ({ item: compromiso }) => {
+const CompromisoCard = ({ item: compromiso, index }) => {
   const classes = useStyles();
 
   // Imagen con caracteres aleatorios para evitar cache de navegador
@@ -40,8 +40,12 @@ const CompromisoCard = ({ item: compromiso }) => {
             to={`/compromiso/${compromiso.id}`}
             className="white-text shadow-text"
           >
-            <Typography gutterBottom variant="h4" className="image-over extra-bold">
-              {compromiso.titulo}
+            <Typography
+              gutterBottom
+              variant="h4"
+              className="image-over extra-bold"
+            >
+              {index + 1}. {compromiso.titulo}
             </Typography>
           </Link>
         </Box>

@@ -30,16 +30,17 @@ const SortableList = ({
   `
   );
   const onSort = ({ oldIndex, newIndex }) => {
-    console.log('onSort now');
     setLoading(true);
     Promise.all(
-      arrayMove(items, oldIndex, newIndex)
-        .map(({ id, orden }, index) => {
-          if (orden === index) {
-            return Promise.resolve();
-          }
-          return mutateOrden({ awaitRefetchQueries: true, variables: { id, orden: index } })
-        })
+      arrayMove(items, oldIndex, newIndex).map(({ id, orden }, index) => {
+        if (orden === index) {
+          return Promise.resolve();
+        }
+        return mutateOrden({
+          awaitRefetchQueries: true,
+          variables: { id, orden: index }
+        });
+      })
     )
       .then(() => {
         refetch().then(() => setLoading(false));
