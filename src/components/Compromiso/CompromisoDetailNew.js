@@ -180,6 +180,14 @@ const CompromisoDetailNew = ({ match }) => {
             </Editable>
             <Editable
               item={item}
+              upload
+              path="metadatos.imagen"
+              onUpdate={refetch}
+            >
+              {metadatos.imagen}
+            </Editable>
+            <Editable
+              item={item}
               path="metadatos.dependencia"
               onUpdate={refetch}
             >
@@ -212,7 +220,7 @@ const CompromisoDetailNew = ({ match }) => {
               path="metadatos.observaciones"
               onUpdate={refetch}
             >
-              <DataDisplay data={metadatos.observaciones} />
+              <DataDisplay data={metadatos.observaciones || ''} />
             </Editable>
 
             <div className={classes.panel}>

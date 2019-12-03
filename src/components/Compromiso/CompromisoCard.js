@@ -45,7 +45,7 @@ const CompromisoCard = ({ item: compromiso, index }) => {
               variant="h4"
               className="image-over extra-bold"
             >
-              {index + 1}. {compromiso.titulo}
+              {compromiso.titulo}
             </Typography>
           </Link>
         </Box>

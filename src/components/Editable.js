@@ -13,6 +13,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import ColorHash from 'color-hash';
 import { useRoles } from '../hooks';
 import HtmlEditor from './HtmlEditor';
+import UploadButton from './UploadButton';
 import moment from '../utils/moment';
 import DataDisplay from './DataDisplay';
 
@@ -57,6 +58,7 @@ const Editable = ({
   adminOnly = false,
   children,
   html = false,
+  upload = false,
   type
 }) => {
   const [open, setOpen] = useState(false);
@@ -125,14 +127,18 @@ const Editable = ({
       {!open && (children || value)}
       <div className={classes.root}>
         <IconButton
-        fontSize="small"
+          fontSize="small"
           onClick={handleToggle}
           color={open ? 'secondary' : 'primary'}
           className={classes.iconButton}
         >
           {open ? <CloseIcon /> : <EditIcon />}
         </IconButton>
-        {!open && <span className={classes.editLabel}><small>{subField || field}</small></span>}
+        {!open && (
+          <span className={classes.editLabel}>
+            <small>{subField || field}</small>
+          </span>
+        )}
         {open && (
           <Fragment>
             {!!type ? (
@@ -156,6 +162,11 @@ const Editable = ({
                 value={value}
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
+            ) : upload ? (
+              <div>
+                <UploadButton value={value} handleSubmit={handleSubmit} />
+                {value && <img src={value} height={100} />}
+              </div>
             ) : (
               <TextareaAutosize
                 value={value}
@@ -167,7 +178,7 @@ const Editable = ({
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
             )}
-            <IconButton  onClick={handleSubmit} className={classes.iconButton}>
+            <IconButton onClick={handleSubmit} className={classes.iconButton}>
               <SaveIcon />
             </IconButton>
           </Fragment>

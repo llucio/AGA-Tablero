@@ -19,7 +19,9 @@ const BreadcrumbBar = ({ match, ...props }) => {
         />
         <Route
           path="/hito"
-          component={() => <Breadcrumb.Item active>Hito</Breadcrumb.Item>}
+          component={() => (
+            <Breadcrumb.Item active>Acción clave</Breadcrumb.Item>
+          )}
         />
       </Switch>
     </Breadcrumb>
