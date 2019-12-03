@@ -224,7 +224,16 @@ const CompromisoDetailNew = ({ match }) => {
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
                     <Typography className="light">
-                      <DataDisplay data={_.get(item, ['metadatos', key], '')} />
+                      <Editable
+                        item={item}
+                        html
+                        path={`metadatos.${key}`}
+                        onUpdate={refetch}
+                      >
+                        <DataDisplay
+                          data={_.get(item, ['metadatos', key], '')}
+                        />
+                      </Editable>
                     </Typography>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
