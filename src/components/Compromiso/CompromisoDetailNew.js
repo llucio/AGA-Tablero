@@ -132,7 +132,9 @@ const CompromisoDetailNew = ({ match }) => {
                     refetch={refetch}
                     itemComponent={({ item: { titulo, id } }) => (
                       <p key={`sidebar-${id}`}>
-                        <Link href={`#hito-${id}`}>{titulo || 'Sin título'}</Link>
+                        <Link href={`#hito-${id}`}>
+                          {titulo || 'Sin título'}
+                        </Link>
                       </p>
                     )}
                     axis="y"
@@ -146,7 +148,10 @@ const CompromisoDetailNew = ({ match }) => {
               <h1 className="extra-bold">{item.titulo}</h1>
             </Editable>
 
+            <hr className="line" />
+
             <Box className={classes.descripcion}>
+              <h4>¿Cuál es el compromiso?</h4>
               <Editable
                 html
                 item={item}

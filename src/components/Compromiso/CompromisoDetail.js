@@ -107,13 +107,20 @@ const CompromisoDetail = ({ match }) => {
 
       <hr className="line" />
 
+      <h3>¿Cuál es el compromiso?</h3>
+
       <Box
         className={classes.descripcion}
         p={3}
         fontWeight="fontWeightLight"
         fontSize={20}
       >
-        <Editable html item={item} path="metadatos.descripcion" onUpdate={refetch}>
+        <Editable
+          html
+          item={item}
+          path="metadatos.descripcion"
+          onUpdate={refetch}
+        >
           <DataDisplay data={metadatos.descripcion} />
         </Editable>
       </Box>
@@ -165,7 +172,12 @@ const CompromisoDetail = ({ match }) => {
         <SwipeableViews index={tabIndex} onChangeIndex={handleChangeIndex}>
           {compromisoTabs.map(({ key }, i) => (
             <TabPanel key={i} index={i} value={tabIndex} dir={theme.direction}>
-              <Editable html item={item} path={`metadatos.${key}`} onUpdate={refetch}>
+              <Editable
+                html
+                item={item}
+                path={`metadatos.${key}`}
+                onUpdate={refetch}
+              >
                 <DataDisplay data={_.get(item, ['metadatos', key], '')} />
               </Editable>
             </TabPanel>
