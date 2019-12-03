@@ -13,6 +13,7 @@ import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetailNew';
 import HitoDetail from './components/Hito/HitoDetail';
+import ScrollToTop from './components/ScrollToTop';
 
 const routes = [
   {
@@ -39,11 +40,10 @@ const routes = [
   },
 ];
 
-// bootstrap theme
 const theme = {
   calendarIcon: {
-    textColor: 'white', // text color of the header and footer
-    primaryColor: '#0da472', // background of the header and footer
+    textColor: 'white',
+    primaryColor: '#0da472',
     backgroundColor: '#fafafa'
   }
 };
@@ -60,6 +60,7 @@ const App = () => (
 
 const AppRouter = () => (
   <Router>
+    <ScrollToTop />
     {routes.map(
       ({
         path,
