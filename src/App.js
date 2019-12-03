@@ -14,6 +14,7 @@ import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetailNew';
 import HitoDetail from './components/Hito/HitoDetail';
 import ScrollToTop from './components/ScrollToTop';
+import BreadcrumbBar from './components/BreadcrumbBar';
 
 const routes = [
   {
@@ -37,7 +38,7 @@ const routes = [
     content: HitoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium'
-  },
+  }
 ];
 
 const theme = {
@@ -78,7 +79,6 @@ const AppRouter = () => (
           exact={exact}
           component={props => (
             <React.Fragment>
-
               <MenuPrincipal />
 
               {!!heading && (
@@ -92,14 +92,13 @@ const AppRouter = () => (
               )}
 
               <section id="one" className="vertical-margin-top-middle">
-                <Container>  
-                  <Breadcrumbs {...props} />
+                <Container>
+                  <BreadcrumbBar {...props} />
                   <Content {...props} />
                 </Container>
               </section>
 
               <Footer />
-
             </React.Fragment>
           )}
         />
@@ -127,26 +126,5 @@ const Heading = ({ className, image, heading, subheading, headerArrow }) => (
     )}
   </section>
 );
-
-const Breadcrumbs = ({ match, ...props }) => {
-  return (
-    <Breadcrumb>
-      <LinkContainer to="/">
-        <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
-      </LinkContainer>
-      <Switch>
-        <Route
-          path="/compromiso"
-          component={() => <Breadcrumb.Item active>Compromiso</Breadcrumb.Item>}
-        />
-        <Route
-          path="/hito"
-          component={() => <Breadcrumb.Item active>Hito</Breadcrumb.Item>}
-        />
-
-      </Switch>
-    </Breadcrumb>
-  );
-};
 
 export default App;

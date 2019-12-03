@@ -127,6 +127,11 @@ const CompromisoDetailNew = ({ match }) => {
                   style={style}
                   className={isSticky ? classes.sticky : ''}
                 >
+                  {isSticky && (
+                    <h5>
+                      <strong>{item.titulo}</strong>
+                    </h5>
+                  )}
                   <Sortable
                     items={item.hitos}
                     refetch={refetch}
