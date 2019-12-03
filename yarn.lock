@@ -1564,6 +1564,16 @@
     semver "^6.3.0"
     tsutils "^3.17.1"
 
+"@uppy/aws-s3@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@uppy/aws-s3/-/aws-s3-1.3.3.tgz#c0024d9b9b32d9a10772666a27f24e2ac7e3ec47"
+  integrity sha512-P+y2dLfQafEEQnmyer3lxcE+aMR7GFxX0ThH8fwAkzfPHVMDIboV6krgPeLKR8TuLlUz3Ddqky3FB7TX4sYK7w==
+  dependencies:
+    "@uppy/companion-client" "^1.4.1"
+    "@uppy/utils" "^2.1.0"
+    "@uppy/xhr-upload" "^1.4.0"
+    url-parse "^1.4.7"
+
 "@uppy/companion-client@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@uppy/companion-client/-/companion-client-1.4.1.tgz#138032c145ef0961f7f3a047b36b593d6fc772d2"
@@ -1619,6 +1629,11 @@
   dependencies:
     "@uppy/utils" "^2.1.0"
     preact "8.2.9"
+
+"@uppy/locales@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@uppy/locales/-/locales-1.9.0.tgz#75d60ed64c9d654536ac0dc70c0bdfcfb1acefab"
+  integrity sha512-dZpMBxzulgIcHNzmJKZYohYEEprkTgrHE68j+HWba+2ViaWZF5LT9h0wAolNjrAuwmU42A2JODlMLyMlTsxdSQ==
 
 "@uppy/progress-bar@^1.3.2":
   version "1.3.2"
@@ -12341,7 +12356,7 @@ url-parse-lax@^3.0.0:
   dependencies:
     prepend-http "^2.0.0"
 
-url-parse@^1.4.3:
+url-parse@^1.4.3, url-parse@^1.4.7:
   version "1.4.7"
   resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.7.tgz#a8a83535e8c00a316e403a5db4ac1b9b853ae278"
   integrity sha512-d3uaVyzDB9tQoSXFvuSUNFibTd9zxd2bkVrDRvF5TmvWWQwqE4lgYJ5m+x1DbecWkw+LK4RNl2CU1hHuOKPVlg==

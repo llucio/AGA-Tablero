@@ -12,10 +12,7 @@ const TabPanel = ({ children, value, index, ...rest }) => (
     aria-labelledby={`full-width-tab-${index}`}
     {...rest}
   >
-    <Box
-      p={3}
-      fontSize={17}
-    >
+    <Box p={3} fontSize={17}>
       {children}
     </Box>
   </Typography>
