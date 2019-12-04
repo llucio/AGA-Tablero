@@ -252,9 +252,10 @@ const CompromisoDetail = ({ match }) => {
                       <Typography className="light">
                         <Editable
                           item={item}
-                          html
+                          label={label}
                           path={`metadatos.${key}`}
                           onUpdate={refetch}
+                          html
                         >
                           <DataDisplay
                             data={_.get(item, ['metadatos', key], '')}
