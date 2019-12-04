@@ -194,7 +194,7 @@ const CompromisoDetail = ({ match }) => {
               label="Dependencia"
               onUpdate={refetch}
             >
-              <DataDisplay data={metadatos.dependencias || ''} />
+              <DataDisplay data={metadatos.dependencia || ''} />
             </Editable>
             <Editable
               html
