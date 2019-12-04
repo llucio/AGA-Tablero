@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -22,7 +23,11 @@ const CompromisoCard = ({ item: compromiso, index }) => {
   const classes = useStyles();
 
   // Imagen con caracteres aleatorios para evitar cache de navegador
-  const imageUrl = `${defaultImage}?${compromiso.id}`;
+  const imageUrl = _.get(
+    compromiso,
+    'metadatos.imagen',
+    `${defaultImage}?${compromiso.id}`
+  );
 
   return (
     <Grid item xs={12} md={4} lg={4} className={classes.root}>
