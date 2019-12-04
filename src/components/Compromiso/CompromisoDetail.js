@@ -187,46 +187,49 @@ const CompromisoDetail = ({ match }) => {
                 <DataDisplay data={metadatos.descripcion || ''} />
               </Editable>
             </Box>
-            <Editable
-              item={item}
-              html
-              path="metadatos.dependencia"
-              label="Dependencia"
-              onUpdate={refetch}
-            >
-              <DataDisplay data={metadatos.dependencia || ''} />
-            </Editable>
-            <Editable
-              html
-              item={item}
-              path="metadatos.dependencia2"
-              onUpdate={refetch}
-            >
-              <DataDisplay data={metadatos.dependencia2 || ''} />
-            </Editable>
-            <Editable
-              html
-              item={item}
-              path="metadatos.dependencia3"
-              onUpdate={refetch}
-            >
-              <DataDisplay data={metadatos.dependencia3 || ''} />
-            </Editable>
-            <Editable
-              item={item}
-              html
-              path="metadatos.responsables"
-              label="Responsables"
-              onUpdate={refetch}
-            >
-              <DataDisplay data={metadatos.responsables || ''} />
-            </Editable>
+            <Box className={classes.descripcion}>
+              <h4>Dependencias resposables</h4>
+              <Editable
+                item={item}
+                html
+                path="metadatos.dependencia"
+                label="Dependencia"
+                onUpdate={refetch}
+              >
+                <DataDisplay data={metadatos.dependencia || ''} />
+              </Editable>
+              <Editable
+                html
+                item={item}
+                path="metadatos.dependencia2"
+                onUpdate={refetch}
+              >
+                <DataDisplay data={metadatos.dependencia2 || ''} />
+              </Editable>
+              <Editable
+                html
+                item={item}
+                path="metadatos.dependencia3"
+                onUpdate={refetch}
+              >
+                <DataDisplay data={metadatos.dependencia3 || ''} />
+              </Editable>
+              <Editable
+                item={item}
+                html
+                path="metadatos.responsables"
+                label="Responsables"
+                onUpdate={refetch}
+              >
+                <DataDisplay data={metadatos.responsables || ''} />
+              </Editable>
+            </Box>
             <div className={classes.panel}>
               {compromisoTabs
                 .filter(({ key }) => {
                   return (
                     administrador ||
-                    (_.get(item, ['metadatos', key], '') || '').replace(
+                    `${_.get(item, ['metadatos', key], '') || ''}`.replace(
                       /\s*<p>\s*<\/p>\s*/g,
                       ''
                     )

@@ -28,6 +28,24 @@ const SortableList = ({
     }
   `
   );
+  // const [mutateEliminar] = useMutation(
+  //   gql`
+  //   mutation setOrden($id: uuid!, $orden: Int!) {
+  //     update_${typename}(where: { id: { _eq: $id } }, _set: { orden: $orden }) {
+  //       affected_rows
+  //     }
+  //   }
+  // `
+  // );
+  // const [mutateInsertar] = useMutation(
+  //   gql`
+  //   mutation Insertar() {
+  //     insert_${typename}(where: { id: { _eq: $id } }, _set: { orden: $orden }) {
+  //       affected_rows
+  //     }
+  //   }
+  // `
+  // );
   const onSort = ({ oldIndex, newIndex }) => {
     setLoading(true);
     Promise.all(
