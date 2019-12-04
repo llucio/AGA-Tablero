@@ -217,11 +217,11 @@ const CompromisoDetail = ({ match }) => {
               <Editable
                 item={item}
                 html
-                path="metadatos.responsables"
-                label="Responsables"
+                path="metadatos.corresponsable"
+                label="Organización corresponsable"
                 onUpdate={refetch}
               >
-                <DataDisplay data={metadatos.responsables || ''} />
+                <DataDisplay data={metadatos.corresponsable || ''} />
               </Editable>
             </Box>
             <div className={classes.panel}>
