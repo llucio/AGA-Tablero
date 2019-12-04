@@ -61,6 +61,8 @@ const Editable = ({
   children,
   html = false,
   upload = false,
+  label,
+  uploadType = 'image',
   type
 }) => {
   const [open, setOpen] = useState(false);
@@ -71,7 +73,8 @@ const Editable = ({
     getQuery({ typename, field, subField }),
     {
       variables: { id },
-      skip: !id || (open && !administrador)
+      skip: !id || (open && !administrador),
+      fetchPolicy: 'cache-and-network'
     }
   );
   const classes = useStyles();
@@ -91,13 +94,8 @@ const Editable = ({
     }).then(() => {
       onUpdate && onUpdate();
       autoClose && setOpen(false);
-      setValue(value);
-      _.isFunction(refetch) &&
-        refetch()
-          .then(() => {
-            // console.log('ais')
-          })
-          .catch(() => console.error('error'));
+      setValue(finalValue);
+      _.isFunction(refetch) && refetch().catch(() => console.error('error'));
     });
   };
 
@@ -142,7 +140,7 @@ const Editable = ({
         </IconButton>
         {!open && (
           <span className={classes.editLabel}>
-            <small>{subField || field}</small>
+            <small>{label || subField || field}</small>
           </span>
         )}
         {open && (
@@ -159,8 +157,8 @@ const Editable = ({
                     : value
                 }
                 autoFocus
-                label={subField || field}
-                placeholder={subField || field}
+                label={label || subField || field}
+                placeholder={label || subField || field}
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
             ) : html ? (
@@ -170,8 +168,25 @@ const Editable = ({
               />
             ) : upload ? (
               <div>
-                <UploadButton value={value} handleChange={handleChange} />
-                {value && <img src={value} height={100} alt="imagen" />}
+                {value &&
+                  (uploadType === 'image' ? (
+                    <img src={value} height={100} alt="imagen" />
+                  ) : (
+                    <p>
+                      Archivo actual:
+                      <br />
+                      <a href={value} target="_blank" download>
+                        {value}
+                      </a>
+                    </p>
+                  ))}
+                <UploadButton
+                  value={value}
+                  handleChange={value => {
+                    setValue(value);
+                    handleSubmit(null, value);
+                  }}
+                />
               </div>
             ) : (
               <TextareaAutosize
@@ -179,8 +194,8 @@ const Editable = ({
                 autoFocus
                 aria-label="minimum height"
                 rows={1}
-                label={subField || field}
-                placeholder={subField || field}
+                label={label || subField || field}
+                placeholder={label || subField || field}
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
             )}

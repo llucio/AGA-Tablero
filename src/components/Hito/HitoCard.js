@@ -36,7 +36,9 @@ const HitoCard = ({ item: hito, refetch }) => {
           </Editable>
         </h4>
         <Box>
-        <Link variant="body2" to={`/hito/${hito.id}`}><span>Detalles</span></Link>
+          <Link variant="body2" to={`/accion-clave/${hito.id}`}>
+            <span>Detalles</span>
+          </Link>
         </Box>
         <div>
           <ActividadList where={{ hito_id: { _eq: hito.id } }} />
