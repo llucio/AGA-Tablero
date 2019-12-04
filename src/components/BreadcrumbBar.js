@@ -10,20 +10,25 @@ const BreadcrumbBar = ({ match, ...props }) => {
   return (
     <Breadcrumb>
       <LinkContainer to="/">
-        <Breadcrumb.Item>4&ordm; Plan de Acción</Breadcrumb.Item>
+        <Breadcrumb.Item active={match.path === '/'}>
+          4&ordm; Plan de Acción
+        </Breadcrumb.Item>
       </LinkContainer>
-      <Switch>
-        <Route
-          path="/compromiso"
-          component={() => <Breadcrumb.Item active>Compromiso</Breadcrumb.Item>}
-        />
-        <Route
-          path="/hito"
-          component={() => (
+      <Route
+        path="/compromiso"
+        component={() => (
+          <Breadcrumb.Item active>Compromisofcons</Breadcrumb.Item>
+        )}
+      />
+      <Route
+        path="/accion-clave/"
+        component={({ match }) => (
+          <>
+            <Breadcrumb.Item>Compromiso</Breadcrumb.Item>
             <Breadcrumb.Item active>Acción clave</Breadcrumb.Item>
-          )}
-        />
-      </Switch>
+          </>
+        )}
+      />
     </Breadcrumb>
   );
 };

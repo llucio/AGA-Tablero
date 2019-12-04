@@ -34,7 +34,7 @@ const routes = [
     headerClass: 'medium'
   },
   {
-    path: ['/hito/:id'],
+    path: ['/accion-clave/:id'],
     content: HitoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
     headerClass: 'medium'
