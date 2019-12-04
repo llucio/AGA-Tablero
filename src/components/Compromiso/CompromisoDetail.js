@@ -293,6 +293,7 @@ const compromisoTabs = [
           href="https://www.undp.org/content/undp/es/home/sustainable-development-goals.html"
           edge="start"
           size="small"
+          title="Consulta la lista de Objetivos de desarrollo Sostenible"
           aria-label="Consulta la lista de Objetivos de desarrollo Sostenible"
         >
           <HelpIcon />

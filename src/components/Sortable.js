@@ -16,7 +16,6 @@ const SortableList = ({
   itemProps = {},
   ...options
 }) => {
-  console.log('rendeting list');
   const typename = _.get(items, '0.__typename', '');
   const [loading, setLoading] = useState(false);
   const { usuario } = useRoles();
