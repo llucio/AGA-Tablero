@@ -270,14 +270,19 @@ const CompromisoDetail = ({ match }) => {
 };
 
 const compromisoTabs = [
+  {
+    key: 'objetivoSexenio',
+    label: 'Objetivo al finalizar el sexenio',
+    icon: <BookmarksIcon />
+  },
   { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
-  { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
   {
     key: 'solucionPlanteada',
     label: '¿Cómo contribuye a resolver el problema?',
     icon: <WbIncandescentIcon />
   },
   { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
+  { key: 'indicadorGlobal', label: 'Indicador global', icon: <BookmarksIcon /> },
   {
     key: 'valores',
     label: 'Valores de Gobierno Abierto',
@@ -312,12 +317,12 @@ const compromisoTabs = [
     label: 'Eje del Plan Nacional de Desarrollo',
     icon: <PeopleAltIcon />
   },
-  { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> },
   {
     key: 'otrosActores',
     label: 'Otros actores involucrados',
     icon: <PeopleAltIcon />
-  }
+  },
+  { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> }
 ];
 
 export default CompromisoDetail;
