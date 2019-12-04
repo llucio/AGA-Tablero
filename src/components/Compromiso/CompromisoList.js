@@ -37,6 +37,7 @@ const CompromisoList = ({ where }) => {
       <Editable
         upload
         item={plan}
+        label="Descarga de plan de acción"
         path="metadatos.descarga"
         uploadType="file"
         onUpdate={refetch}

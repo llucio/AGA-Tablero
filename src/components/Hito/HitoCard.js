@@ -31,7 +31,7 @@ const HitoCard = ({ item: hito, refetch }) => {
       <Box className="vertical-margin-bottom-middle">
         <a name={`hito-${hito.id}`} />
         <h4 className="extra-bold">
-          <Editable item={hito} path="titulo" onUpdate={refetch}>
+          <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
             <span>{hito.titulo || 'Sin título'}</span>
           </Editable>
         </h4>

@@ -13,6 +13,8 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
 import VerticalSplitIcon from '@material-ui/icons/VerticalSplit';
+import HelpIcon from '@material-ui/icons/Help';
+import IconButton from '@material-ui/core/IconButton';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
@@ -49,17 +51,6 @@ const useStyles = makeStyles(theme => ({
   },
   root_grid: {
     flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary
-  },
-  margin: {
-    margin: theme.spacing(2)
-  },
-  descripcion: {
-    // padding: theme.spacing(0, 0, 6, 0)
   },
   institucion: {
     padding: theme.spacing(0, 0, 6, 0)
@@ -280,7 +271,24 @@ const compromisoTabs = [
   { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> },
   { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
   { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
-  { key: 'alineacion2030', label: 'Agenda 2030', icon: <VerticalSplitIcon /> },
+  {
+    key: 'alineacion2030',
+    label: (
+      <span>
+        Agenda 2030{' '}
+        <IconButton
+          target="_blank"
+          href="https://www.undp.org/content/undp/es/home/sustainable-development-goals.html"
+          edge="start"
+          size="small"
+          aria-label="Consulta la lista de Objetivos de desarrollo Sostenible"
+        >
+          <HelpIcon />
+        </IconButton>
+      </span>
+    ),
+    icon: <VerticalSplitIcon />
+  },
   { key: 'solucionPlanteada', label: 'Solución', icon: <WbIncandescentIcon /> },
   { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
   {

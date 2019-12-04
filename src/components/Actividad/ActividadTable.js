@@ -87,13 +87,19 @@ const ActividadTable = ({ where }) => {
             {actividades.map(actividad => (
               <StyledTableRow key={actividad.id}>
                 <StyledTableCell component="th" scope="actividad">
-                  <Editable item={actividad} path="titulo" onUpdate={refetch}>
+                  <Editable
+                    item={actividad}
+                    path="titulo"
+                    label="Tíulo"
+                    onUpdate={refetch}
+                  >
                     {actividad.titulo || 'Sin título'}
                   </Editable>
                   <Editable
                     html
                     item={actividad}
                     path="metadatos.descripcion"
+                    label="Descripción"
                     onUpdate={refetch}
                   >
                     <DataDisplay data={actividad.metadatos.descripcion || ''} />
@@ -101,6 +107,7 @@ const ActividadTable = ({ where }) => {
                   <Editable
                     html
                     item={actividad}
+                    label="Medio de verificación"
                     path="medio_verificacion"
                     onUpdate={refetch}
                   >
