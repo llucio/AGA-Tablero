@@ -189,6 +189,7 @@ const CompromisoDetail = ({ match }) => {
             </Box>
             <Editable
               item={item}
+              html
               path="metadatos.dependencia"
               label="Dependencia"
               onUpdate={refetch}
@@ -196,6 +197,7 @@ const CompromisoDetail = ({ match }) => {
               {metadatos.dependencia}
             </Editable>
             <Editable
+              html
               item={item}
               path="metadatos.dependencia2"
               onUpdate={refetch}
@@ -203,6 +205,7 @@ const CompromisoDetail = ({ match }) => {
               {metadatos.dependencia2}
             </Editable>
             <Editable
+              html
               item={item}
               path="metadatos.dependencia3"
               onUpdate={refetch}
