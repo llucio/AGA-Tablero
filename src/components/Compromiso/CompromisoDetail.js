@@ -22,7 +22,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { StickyContainer, Sticky } from 'react-sticky';
-
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -35,6 +34,7 @@ import DataDisplay from '../DataDisplay';
 import TabPanel from '../TabPanel';
 import LoadingIndicator from '../LoadingIndicator';
 import HitoList from '../Hito/HitoList.js';
+import { useRoles } from '../../hooks';
 
 const GET_QUERY = loader('../../queries/CompromisoGet.graphql');
 
@@ -83,6 +83,7 @@ const useStyles = makeStyles(theme => ({
 const CompromisoDetail = ({ match }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const { usuario: { administrador } = {} } = useRoles();
   const [tabIndex, setTabIndex] = useState(0);
   const { data: { item } = {}, loading, error, refetch } = useQuery(GET_QUERY, {
     variables: {
@@ -226,33 +227,43 @@ const CompromisoDetail = ({ match }) => {
             </Editable>
 
             <div className={classes.panel}>
-              {compromisoTabs.map(({ key, label }, i) => (
-                <ExpansionPanel className="elevation-0" key={i}>
-                  <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls={`panel-content.${key}`}
-                    id={`panel-content-${key}`}
-                  >
-                    <Typography className="panel_heading extra-bold ">
-                      {label}
-                    </Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <Typography className="light">
-                      <Editable
-                        item={item}
-                        html
-                        path={`metadatos.${key}`}
-                        onUpdate={refetch}
-                      >
-                        <DataDisplay
-                          data={_.get(item, ['metadatos', key], '')}
-                        />
-                      </Editable>
-                    </Typography>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-              ))}
+              {compromisoTabs
+                .filter(({ key }) => {
+                  return (
+                    administrador ||
+                    _.get(item, ['metadatos', key], '').replace(
+                      /\s*<p>\s*<\/p>\s*/g,
+                      ''
+                    )
+                  );
+                })
+                .map(({ key, label }, i) => (
+                  <ExpansionPanel className="elevation-0" key={i}>
+                    <ExpansionPanelSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls={`panel-content.${key}`}
+                      id={`panel-content-${key}`}
+                    >
+                      <Typography className="panel_heading extra-bold ">
+                        {label}
+                      </Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Typography className="light">
+                        <Editable
+                          item={item}
+                          html
+                          path={`metadatos.${key}`}
+                          onUpdate={refetch}
+                        >
+                          <DataDisplay
+                            data={_.get(item, ['metadatos', key], '')}
+                          />
+                        </Editable>
+                      </Typography>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                ))}
             </div>
             <HitoList where={{ compromiso_id: { _eq: item.id } }} />
           </Grid>
