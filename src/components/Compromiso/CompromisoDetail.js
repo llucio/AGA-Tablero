@@ -272,7 +272,11 @@ const CompromisoDetail = ({ match }) => {
 const compromisoTabs = [
   { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
   { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
-  { key: 'solucionPlanteada', label: 'Solución', icon: <WbIncandescentIcon /> },
+  {
+    key: 'solucionPlanteada',
+    label: '¿Cómo contribuye a resolver el problema?',
+    icon: <WbIncandescentIcon />
+  },
   { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
   {
     key: 'valores',
