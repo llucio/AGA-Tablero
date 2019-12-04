@@ -214,27 +214,19 @@ const CompromisoDetail = ({ match }) => {
             </Editable>
             <Editable
               item={item}
+              html
               path="metadatos.responsables"
               label="Responsables"
               onUpdate={refetch}
             >
               <DataDisplay data={metadatos.responsables || ''} />
             </Editable>
-            <Editable
-              adminOnly
-              item={item}
-              path="metadatos.observaciones"
-              onUpdate={refetch}
-            >
-              <DataDisplay data={metadatos.observaciones || ''} />
-            </Editable>
-
             <div className={classes.panel}>
               {compromisoTabs
                 .filter(({ key }) => {
                   return (
                     administrador ||
-                    _.get(item, ['metadatos', key], '').replace(
+                    (_.get(item, ['metadatos', key], '') || '').replace(
                       /\s*<p>\s*<\/p>\s*/g,
                       ''
                     )
