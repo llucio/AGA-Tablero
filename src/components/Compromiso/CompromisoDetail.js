@@ -214,6 +214,7 @@ const CompromisoDetail = ({ match }) => {
               >
                 <DataDisplay data={metadatos.dependencia3 || ''} />
               </Editable>
+              <h4>Organización Corresposable</h4>
               <Editable
                 item={item}
                 html
