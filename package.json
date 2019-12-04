@@ -12,6 +12,8 @@
     "@uppy/dashboard": "^1.5.0",
     "@uppy/locales": "^1.9.0",
     "@uppy/react": "^1.4.0",
+    "@uppy/url": "^1.4.0",
+    "@uppy/webcam": "^1.4.0",
     "@uppy/xhr-upload": "^1.4.0",
     "@welldone-software/why-did-you-render": "^3.3.9",
     "apollo-boost": "^0.4.4",
@@ -41,7 +43,8 @@
     "react-sortable-hoc": "^1.10.1",
     "react-sticky": "^6.0.3",
     "react-swipeable-views": "^0.13.3",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",

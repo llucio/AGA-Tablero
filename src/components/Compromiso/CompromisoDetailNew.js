@@ -153,6 +153,15 @@ const CompromisoDetailNew = ({ match }) => {
               <h1 className="extra-bold">{item.titulo}</h1>
             </Editable>
 
+            <Editable
+              upload
+              item={item}
+              path="metadatos.descarga"
+              onUpdate={refetch}
+            >
+              <a href={metadatos.descarga}>Descarga compromiso</a>
+            </Editable>
+
             <hr className="line" />
 
             <Box className={classes.descripcion}>
@@ -166,25 +175,14 @@ const CompromisoDetailNew = ({ match }) => {
                 <DataDisplay data={metadatos.descripcion || ''} />
               </Editable>
             </Box>
-
             <Editable
+              item={item}
               adminOnly
-              item={item}
-              path="metadatos.imagen"
-              onUpdate={refetch}
-            >
-              {metadatos.imagen}
-            </Editable>
-            <Editable item={item} path="metadatos.descarga" onUpdate={refetch}>
-              {metadatos.descarga}
-            </Editable>
-            <Editable
-              item={item}
               upload
               path="metadatos.imagen"
               onUpdate={refetch}
             >
-              {metadatos.imagen}
+              <img src={metadatos.imagen} alt="compromiso" height={100} />
             </Editable>
             <Editable
               item={item}

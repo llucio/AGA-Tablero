@@ -128,8 +128,27 @@ const CompromisoDetail = ({ match }) => {
       <Editable adminOnly item={item} path="metadatos.imagen" onUpdate={refetch}>
         {metadatos.imagen}
       </Editable>
-      <Editable item={item} path="metadatos.descarga" onUpdate={refetch}>
+      <Editable
+        admiOnly
+        item={item}
+        path="metadatos.descarga"
+        onUpdate={refetch}
+      >
         {metadatos.descarga}
+      </Editable>
+      <Editable item={item} path="metadatos.responsables" onUpdate={refetch}>
+        <DataDisplay data={metadatos.responsables} />
+      </Editable>
+      <Editable
+        item={item}
+        html
+        path="metadatos.responsables"
+        onUpdate={refetch}
+      >
+        {metadatos.responsbles}
+      </Editable>
+      <Editable item={item} path="metadatos.dependencia" onUpdate={refetch}>
+        {metadatos.dependencia}
       </Editable>
       <Editable item={item} path="metadatos.dependencia" onUpdate={refetch}>
         {metadatos.dependencia}
@@ -139,9 +158,6 @@ const CompromisoDetail = ({ match }) => {
       </Editable>
       <Editable item={item} path="metadatos.dependencia3" onUpdate={refetch}>
         {metadatos.dependencia3}
-      </Editable>
-      <Editable item={item} path="metadatos.responsables" onUpdate={refetch}>
-        <DataDisplay data={metadatos.responsables} />
       </Editable>
       <Editable
         adminOnly

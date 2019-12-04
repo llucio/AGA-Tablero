@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
+import ClearIcon from '@material-ui/icons/Delete';
 import ColorHash from 'color-hash';
 import { useRoles } from '../hooks';
 import HtmlEditor from './HtmlEditor';
@@ -22,8 +23,9 @@ const colorHash = new ColorHash();
 const useStyles = makeStyles(theme => ({
   adminWrapper: {
     border: `1px dashed`,
-    marginLef: '2em',
-    width: '100%'
+    width: '100%',
+    margin: '6px 0',
+    padding: '3px'
     // margin: '3px'
   },
   root: {
@@ -70,7 +72,6 @@ const Editable = ({
     {
       variables: { id },
       skip: !id || (open && !administrador)
-      // fetchPolicy: 'network-only'
     }
   );
   const classes = useStyles();
@@ -79,12 +80,13 @@ const Editable = ({
     getMutation({ typename, field, subField, valueType })
   );
 
-  const handleSubmit = event => {
-    event.stopPropagation();
+  const handleSubmit = (event, val) => {
+    if (event) event.stopPropagation();
+    const finalValue = val || value;
     executeMutation({
       variables: {
         id,
-        value: subField ? { [subField]: value } : value
+        value: subField ? { [subField]: finalValue } : finalValue
       }
     }).then(() => {
       onUpdate && onUpdate();
@@ -103,6 +105,10 @@ const Editable = ({
     setValue(value);
   };
 
+  const handleClear = () => {
+    handleSubmit(null, '');
+  };
+
   const handleToggle = event => {
     event.stopPropagation();
     setOpen(!open);
@@ -115,7 +121,7 @@ const Editable = ({
   }, [queryResult, path, open]);
 
   if (!administrador) {
-    return !adminOnly && <span>{children}</span>;
+    return !adminOnly && !!value && <span>{children}</span>;
   }
 
   return (
@@ -124,7 +130,7 @@ const Editable = ({
       className={administrador ? classes.adminWrapper : ''}
       onClick={event => event.stopPropagation()}
     >
-      {!open && (children || value)}
+      {!open && !!value && (children || value)}
       <div className={classes.root}>
         <IconButton
           fontSize="small"
@@ -164,8 +170,8 @@ const Editable = ({
               />
             ) : upload ? (
               <div>
-                <UploadButton value={value} handleSubmit={handleSubmit} />
-                {value && <img src={value} height={100} />}
+                <UploadButton value={value} handleChange={handleChange} />
+                {value && <img src={value} height={100} alt="imagen" />}
               </div>
             ) : (
               <TextareaAutosize
@@ -179,8 +185,11 @@ const Editable = ({
               />
             )}
             <IconButton onClick={handleSubmit} className={classes.iconButton}>
-              <SaveIcon />
+              <SaveIcon color="success" />
             </IconButton>
+            {/*<IconButton onClick={handleClear} className={classes.iconButton}>
+              <ClearIcon />
+            </IconButton>*/}
           </Fragment>
         )}
       </div>

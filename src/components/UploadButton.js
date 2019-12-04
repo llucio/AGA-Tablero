@@ -1,107 +1,96 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import _ from 'lodash';
 import Uppy from '@uppy/core';
 import AwsS3 from '@uppy/aws-s3';
-import locale from '@uppy/locales/lib/es_ES';
+import Webcam from '@uppy/webcam';
+import Url from '@uppy/url';
+import Spanish from '@uppy/locales/lib/es_ES';
 import DashboardModal from '@uppy/react/lib/DashboardModal';
+import uuidv4 from 'uuid/v4';
 
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
+import '@uppy/webcam/dist/style.css';
+import '@uppy/url/dist/style.css';
 
-// .use(, {
-//   trigger: '.UppyModalOpenerBtn',
-//   inline: true,
-//   target: '.DashboardContainer',
-//   replaceTargetContent: true,
-//   showProgressDetails: true,
-//   note: 'Images and video only, 2–3 files, up to 1 MB',
-//   height: 470,
-//   metaFields: [
-//     { id: 'name', name: 'Name', placeholder: 'file name' },
-//     {
-//       id: 'caption',
-//       name: 'Caption',
-//       placeholder: 'describe what the image is about'
-//     }
-//   ],
-//   browserBackButtonClose: true
-// });
-// // .use(GoogleDrive, {
-// //   target: Dashboard,
-// //   companionUrl: 'https://companion.uppy.io'
-// // })
-// // .use(Dropbox, { target: Dashboard, companionUrl: 'https://companion.uppy.io' })
-// // .use(Instagram, {
-// //   target: Dashboard,
-// //   companionUrl: 'https://companion.uppy.io'
-// // })
-// // .use(Facebook, {
-// //   target: Dashboard,
-// //   companionUrl: 'https://companion.uppy.io'
-// // })
-// // .use(Webcam, { target: Dashboard })
-// // .use(Tus, { endpoint: 'https://master.tus.io/files/' });
+const companionUrl =
+  process.env.REACT_APP_COMPANION_URL ||
+  'https://aga-companion.apps.funcionpublica.gob.mx';
 
-class UploadButton extends React.Component {
-  constructor(props) {
-    super(props);
+const locale = {
+  ...Spanish,
+  strings: {
+    ...Spanish.strings,
+    dropPasteImport: 'Arrastra o pega archivo aquí, %{browse} o importa desde:',
+    browse: 'selecciona archivo',
+    myDevice: 'Subir archivo',
+    done: 'Hecho',
+    failedToFetch:
+      'No se ha podido descargar archivo. Verifica que la URL sea correcta'
+  }
+};
 
-    this.state = {
-      modalOpen: true,
-      newValue: null
+const uppy = Uppy({
+  debug: false,
+  autoProceed: true,
+  restrictions: {
+    maxFileSize: null,
+    maxNumberOfFiles: 1,
+    minNumberOfFiles: 1,
+    allowedFileTypes: null
+  },
+  locale,
+  onBeforeFileAdded: file => ({
+    ...file,
+    name: uuidv4()
+  })
+})
+  .use(AwsS3, { companionUrl })
+  .use(Url, { companionUrl })
+  .use(Webcam, { title: 'Cámara' });
+
+const UploadButton = ({ value, handleChange }) => {
+  const [open, setOpen] = useState(!value);
+  const [newValue, setNewValue] = useState(null);
+
+  const displayValue = value;
+  console.log('saa', displayValue);
+
+  useEffect(() => {
+    const onComplete = result => {
+      const [file] = result.successful;
+      if (file) {
+        setNewValue(file.uploadURL);
+        handleChange(file.uploadURL);
+      }
+      setOpen(false);
+      uppy.reset();
     };
 
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    uppy.on('complete', onComplete);
 
-    this.uppy = Uppy({
-      debug: true,
-      locale,
-      autoProceed: false,
-      restrictions: {
-        maxNumberOfFiles: 1
-        // minNumberOfFiles: 1
-        // allowedFileTypes: ['image/*', 'video/*']
-      }
-    }).use(AwsS3, {
-      limit: 1,
-      companionUrl: 'https://aga-companion.apps.funcionpublica.gob.mx'
-    });
+    return () => {
+      uppy.off('complete', onComplete);
+    };
+  }, [value]);
 
-    this.uppy.on('complete', result => {
-      console.log('successful files:', result.successful);
-      console.log('failed files:', result.failed);
-    });
-  }
-
-  handleOpen() {
-    this.setState({
-      modalOpen: true
-    });
-  }
-
-  handleClose() {
-    this.setState({
-      modalOpen: false
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        {this.props.value && <img src={this.props.value} height={100} />}
-        {this.state.newValue && <img src={this.state.newValue} />}
-        <button onClick={this.handleOpen}>Cargar nuevo archivo</button>
-        <DashboardModal
-          uppy={this.uppy}
-          closeModalOnClickOutside
-          open={this.state.modalOpen}
-          closeAfterFinish
-          proudlyDisplayPoweredByUppy={false}
-          onRequestClose={this.handleClose}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {!!value && (
+        <div>
+          <button onClick={() => setOpen(true)}>Cambiar archivo</button>
+        </div>
+      )}
+      <DashboardModal
+        uppy={uppy}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        plugins={['Url']}
+        closeModalOnClickOutside
+        proudlyDisplayPoweredByUppy={false}
+      />
+    </div>
+  );
+};
 
 export default UploadButton;
