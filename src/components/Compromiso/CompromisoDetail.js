@@ -16,7 +16,19 @@ import VerticalSplitIcon from '@material-ui/icons/VerticalSplit';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import { StickyContainer, Sticky } from 'react-sticky';
+
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import Editable from '../Editable';
+import Sortable from '../Sortable';
 import DataDisplay from '../DataDisplay';
 import TabPanel from '../TabPanel';
 import LoadingIndicator from '../LoadingIndicator';
@@ -38,11 +50,16 @@ const useStyles = makeStyles(theme => ({
   root_grid: {
     flexGrow: 1
   },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary
+  },
   margin: {
     margin: theme.spacing(2)
   },
   descripcion: {
-    padding: theme.spacing(0, 0, 6, 0)
+    // padding: theme.spacing(0, 0, 6, 0)
   },
   institucion: {
     padding: theme.spacing(0, 0, 6, 0)
@@ -57,14 +74,18 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
   panel_heading: {
-    fontSize: theme.typography.pxToRem(18),
-    fontWeight: theme.typography.fontWeightRegular
+    fontSize: theme.typography.pxToRem(24),
+    fontWeight: theme.typography.fontWeightBold,
+    width: '100%'
   },
   button: {
     margin: theme.spacing(1)
   },
   input: {
     display: 'none'
+  },
+  sticky: {
+    marginTop: '100px'
   }
 }));
 
@@ -88,207 +109,190 @@ const CompromisoDetail = ({ match }) => {
   const handleChangeIndex = index => setTabIndex(index);
 
   return (
-    <Box>
-      {/* {usuario.administrador && (
-        <Fab
-          href={`/compromiso/${item.id}/editar`}
-          variant="extended"
-          color="primary"
-          aria-label="add"
-          className={classes.margin}
-        >
-          <EditIcon className={classes.extendedIcon} />
-          Editar
-        </Fab>
-      )} */}
-      <Editable item={item} path="titulo" onUpdate={refetch}>
-        <h1>{item.titulo}</h1>
-      </Editable>
+    <div className={classes.root_grid}>
+      <StickyContainer>
+        <Grid container spacing={3}>
+          <Grid className="menuSidebar" item xs={12} sm={3}>
+            <Sticky bottomOffset={200}>
+              {({
+                style,
+                isSticky,
+                wasSticky,
+                distanceFromTop,
+                distanceFromBottom,
+                calculatedHeight
+              }) => (
+                <Box
+                  fontSize={18}
+                  style={style}
+                  className={isSticky ? classes.sticky : ''}
+                >
+                  {isSticky && (
+                    <h5>
+                      <strong>{item.titulo}</strong>
+                    </h5>
+                  )}
+                  <Sortable
+                    items={item.hitos}
+                    refetch={refetch}
+                    itemComponent={({ item: { titulo, id } }) => (
+                      <p key={`sidebar-${id}`}>
+                        <Link href={`#hito-${id}`}>
+                          {titulo || 'Sin título'}
+                        </Link>
+                      </p>
+                    )}
+                    axis="y"
+                  />
+                </Box>
+              )}
+            </Sticky>
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            <Editable
+              item={item}
+              path="titulo"
+              label="Título"
+              onUpdate={refetch}
+            >
+              <h1 className="extra-bold">{item.titulo}</h1>
+            </Editable>
 
-      <hr className="line" />
+            <Editable
+              item={item}
+              adminOnly
+              upload
+              uploadType="image"
+              label="Imagen"
+              path="metadatos.imagen"
+              onUpdate={refetch}
+            >
+              <img src={metadatos.imagen} alt="compromiso" height={100} />
+            </Editable>
 
-      <h3>¿Cuál es el compromiso?</h3>
+            <Editable
+              item={item}
+              upload
+              uploadType="file"
+              path="metadatos.descarga"
+              label="Descarga de compromiso"
+              onUpdate={refetch}
+            >
+              <a href={metadatos.descarga}>Descarga compromiso</a>
+            </Editable>
 
-      <Box
-        className={classes.descripcion}
-        p={3}
-        fontWeight="fontWeightLight"
-        fontSize={20}
-      >
-        <Editable
-          html
-          item={item}
-          path="metadatos.descripcion"
-          onUpdate={refetch}
-        >
-          <DataDisplay data={metadatos.descripcion} />
-        </Editable>
-      </Box>
+            <hr className="line" />
 
-      <Editable adminOnly item={item} path="metadatos.imagen" onUpdate={refetch}>
-        {metadatos.imagen}
-      </Editable>
-      <Editable
-        admiOnly
-        item={item}
-        path="metadatos.descarga"
-        onUpdate={refetch}
-      >
-        {metadatos.descarga}
-      </Editable>
-      <Editable item={item} path="metadatos.responsables" onUpdate={refetch}>
-        <DataDisplay data={metadatos.responsables} />
-      </Editable>
-      <Editable
-        item={item}
-        html
-        path="metadatos.responsables"
-        onUpdate={refetch}
-      >
-        {metadatos.responsbles}
-      </Editable>
-      <Editable item={item} path="metadatos.dependencia" onUpdate={refetch}>
-        {metadatos.dependencia}
-      </Editable>
-      <Editable item={item} path="metadatos.dependencia" onUpdate={refetch}>
-        {metadatos.dependencia}
-      </Editable>
-      <Editable item={item} path="metadatos.dependencia2" onUpdate={refetch}>
-        {metadatos.dependencia2}
-      </Editable>
-      <Editable item={item} path="metadatos.dependencia3" onUpdate={refetch}>
-        {metadatos.dependencia3}
-      </Editable>
-      <Editable
-        adminOnly
-        item={item}
-        path="metadatos.observaciones"
-        onUpdate={refetch}
-      >
-        <DataDisplay data={metadatos.observaciones} />
-      </Editable>
-
-      <Box className={classes.root}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={tabIndex}
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons="on"
-            indicatorColor="primary"
-            textColor="primary"
-            aria-label="Compromiso"
-          >
-            {compromisoTabs.map(({ label, icon }, i) => (
-              <Tab key={i} label={label} icon={icon} {...a11yProps(i)} />
-            ))}
-          </Tabs>
-        </AppBar>
-
-        <SwipeableViews index={tabIndex} onChangeIndex={handleChangeIndex}>
-          {compromisoTabs.map(({ key }, i) => (
-            <TabPanel key={i} index={i} value={tabIndex} dir={theme.direction}>
+            <Box className={classes.descripcion}>
+              <h4>¿Cuál es el compromiso?</h4>
               <Editable
                 html
                 item={item}
-                path={`metadatos.${key}`}
+                label="Descripción"
+                path="metadatos.descripcion"
                 onUpdate={refetch}
               >
-                <DataDisplay data={_.get(item, ['metadatos', key], '')} />
+                <DataDisplay data={metadatos.descripcion || ''} />
               </Editable>
-            </TabPanel>
-          ))}
-        </SwipeableViews>
-      </Box>
+            </Box>
+            <Editable
+              item={item}
+              path="metadatos.dependencia"
+              label="Dependencia"
+              onUpdate={refetch}
+            >
+              {metadatos.dependencia}
+            </Editable>
+            <Editable
+              item={item}
+              path="metadatos.dependencia2"
+              onUpdate={refetch}
+            >
+              {metadatos.dependencia2}
+            </Editable>
+            <Editable
+              item={item}
+              path="metadatos.dependencia3"
+              onUpdate={refetch}
+            >
+              {metadatos.dependencia3}
+            </Editable>
+            <Editable
+              item={item}
+              path="metadatos.responsables"
+              label="Responsables"
+              onUpdate={refetch}
+            >
+              <DataDisplay data={metadatos.responsables || ''} />
+            </Editable>
+            <Editable
+              adminOnly
+              item={item}
+              path="metadatos.observaciones"
+              onUpdate={refetch}
+            >
+              <DataDisplay data={metadatos.observaciones || ''} />
+            </Editable>
 
-      <h1>Hitos</h1>
-      <HitoList where={{ compromiso_id: { _eq: item.id } }} />
-    </Box>
+            <div className={classes.panel}>
+              {compromisoTabs.map(({ key, label }, i) => (
+                <ExpansionPanel className="elevation-0" key={i}>
+                  <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls={`panel-content.${key}`}
+                    id={`panel-content-${key}`}
+                  >
+                    <Typography className="panel_heading extra-bold ">
+                      {label}
+                    </Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <Typography className="light">
+                      <Editable
+                        item={item}
+                        html
+                        path={`metadatos.${key}`}
+                        onUpdate={refetch}
+                      >
+                        <DataDisplay
+                          data={_.get(item, ['metadatos', key], '')}
+                        />
+                      </Editable>
+                    </Typography>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              ))}
+            </div>
+            <HitoList where={{ compromiso_id: { _eq: item.id } }} />
+          </Grid>
+        </Grid>
+      </StickyContainer>
+    </div>
   );
 };
 
 const compromisoTabs = [
-  { key: 'valores', label: 'Valores', icon: <VerifiedUserIcon /> },
-  { key: 'adicional', label: 'Información', icon: <MenuBookIcon /> },
+  {
+    key: 'valores',
+    label: 'Valores de Gobierno Abierto',
+    icon: <VerifiedUserIcon />
+  },
+  { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> },
   { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
   { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
   { key: 'alineacion2030', label: 'Agenda 2030', icon: <VerticalSplitIcon /> },
   { key: 'solucionPlanteada', label: 'Solución', icon: <WbIncandescentIcon /> },
-  { key: 'analisisRiesgo', label: 'Analisís de Riesgo', icon: <ListAltIcon /> },
-  { key: 'otrosActores', label: 'Otros actores', icon: <PeopleAltIcon /> }
+  { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
+  {
+    key: 'desarrolloSostenible',
+    label: 'Objetivos de Desarrollo Sostenible',
+    icon: <ListAltIcon />
+  },
+  {
+    key: 'otrosActores',
+    label: 'Otros actores involucrados',
+    icon: <PeopleAltIcon />
+  }
 ];
-
-// const dateOptions = {
-//   header: { month: 'long' },
-//   footer: { year: 'numeric' },
-//   value: { day: '2-digit' },
-//   locale: 'es-MX'
-// };
-
-// const dateTheme = {
-//   calendarIcon: {
-//     textColor: 'blue', // text color of the header and footer
-//     primaryColor: '#ccc', // background of the header and footer
-//     backgroundColor: '#fafafa'
-//   }
-// };
-
-// const Hito = ({ hito, refetch }) => {
-//   const { descripcion } = hito.metadatos;
-//   const classes = useStyles();
-
-//   return (
-//     <Box className={classes.panel}>
-//       <ExpansionPanel className="vertical-margin-bottom-middle">
-//         <ExpansionPanelSummary
-//           className="grey lighten-4 text-uppercase"
-//           expandIcon={<ExpandMoreIcon />}
-//           aria-controls="panel1a-content"
-//           id="panel1a-header"
-//         >
-//           <Typography className={classes.panel_heading}>
-//             <Editable
-//               item={hito}
-//               path="metadatos.descripcion"
-//               onUpdate={refetch}
-//             >
-//               <span className="semi-bold">{descripcion}</span>
-//             </Editable>
-//             <Editable
-//               adminOnly
-//               item={hito}
-//               path="metadatos.ponderacion"
-//               valueType="Int"
-//               onUpdate={refetch}
-//             >
-//               <strong>{hito.metadatos.ponderacion}</strong>
-//             </Editable>
-//             <Editable
-//               adminOnly
-//               item={hito}
-//               path="fecha_inicial"
-//               type="date"
-//               valueType="timestamptz"
-//               onUpdate={refetch}
-//             >
-//               <strong>{!!hito.fecha_inicial && moment(hito.fecha_inicial).utc().format('D [de] MMMM [de] YYYY')}</strong>
-//             </Editable>
-//             <Editable
-//               adminOnly
-//               item={hito}
-//               path="fecha_final"
-//               type="date"
-//               valueType="timestamptz"
-//               onUpdate={refetch}
-//             >
-//               <strong>{!!hito.fecha_final && moment(hito.fecha_final).utc().format('D [de] MMMM [de] YYYY')}</strong>
-//             </Editable>
-//           </Typography>
-//         </ExpansionPanelSummary>
-
-//       </ExpansionPanel>
-//     </Box>
-//   );
-// };
 
 export default CompromisoDetail;

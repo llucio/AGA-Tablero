@@ -11,7 +11,7 @@ import { apolloClient } from './apollo';
 import MenuPrincipal from './components/Layout/MenuPrincipal';
 import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
-import CompromisoDetail from './components/Compromiso/CompromisoDetailNew';
+import CompromisoDetail from './components/Compromiso/CompromisoDetail';
 import HitoDetail from './components/Hito/HitoDetail';
 import ScrollToTop from './components/ScrollToTop';
 import BreadcrumbBar from './components/BreadcrumbBar';
