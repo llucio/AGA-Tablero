@@ -30,49 +30,45 @@ const locale = {
   }
 };
 
-const uppy = Uppy({
-  debug: false,
-  autoProceed: true,
-  restrictions: {
-    maxFileSize: null,
-    maxNumberOfFiles: 1,
-    minNumberOfFiles: 1,
-    allowedFileTypes: null
-  },
-  locale,
-  onBeforeFileAdded: file => ({
-    ...file,
-    name: uuidv4()
-  })
-})
-  .use(AwsS3, { companionUrl })
-  .use(Url, { companionUrl })
-  .use(Webcam, { title: 'Cámara' });
-
 const UploadButton = ({ value, handleChange }) => {
   const [open, setOpen] = useState(!value);
-  const [newValue, setNewValue] = useState(null);
 
-  const displayValue = value;
-  console.log('saa', displayValue);
+  const uppy = Uppy({
+    debug: false,
+    autoProceed: true,
+    restrictions: {
+      maxFileSize: null,
+      maxNumberOfFiles: 1,
+      minNumberOfFiles: 1,
+      allowedFileTypes: null
+    },
+    locale,
+    onBeforeFileAdded: file => ({
+      ...file,
+      name: uuidv4()
+    })
+  })
+    .use(AwsS3, { companionUrl })
+    .use(Url, { companionUrl })
+    .use(Webcam, { title: 'Cámara' });
 
   useEffect(() => {
     const onComplete = result => {
       const [file] = result.successful;
       if (file) {
-        setNewValue(file.uploadURL);
         handleChange(file.uploadURL);
       }
       setOpen(false);
-      uppy.reset();
     };
+
+    uppy.reset();
 
     uppy.on('complete', onComplete);
 
     return () => {
       uppy.off('complete', onComplete);
     };
-  }, [value]);
+  }, [value, open]);
 
   return (
     <div>
@@ -84,7 +80,10 @@ const UploadButton = ({ value, handleChange }) => {
       <DashboardModal
         uppy={uppy}
         open={open}
-        onRequestClose={() => setOpen(false)}
+        onRequestClose={() => {
+          handleChange(value || '');
+          setOpen(false);
+        }}
         plugins={['Url']}
         closeModalOnClickOutside
         proudlyDisplayPoweredByUppy={false}

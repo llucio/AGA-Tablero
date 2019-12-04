@@ -69,9 +69,19 @@ const HitoDetail = ({ match, id }) => {
           html
           item={hito}
           path="metadatos.descripcion"
+          label="Descripción"
           onUpdate={refetch}
         >
           <DataDisplay data={metadatos.descripcion} />
+        </Editable>
+        <Editable
+          html
+          item={hito}
+          path="metadatos.institucionesResponsables"
+          label="Instituciones responsables"
+          onUpdate={refetch}
+        >
+          <DataDisplay data={metadatos.institucionesResponsables} />
         </Editable>
       </Grid>
       <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
@@ -105,6 +115,7 @@ const HitoHeader = ({ hito, refetch }) => {
         <Editable
           item={hito}
           path="fecha_inicial"
+          label="Fecha inicial"
           type="date"
           valueType="timestamptz"
           onUpdate={refetch}
@@ -132,7 +143,7 @@ const HitoHeader = ({ hito, refetch }) => {
             </Link>
           </em>
         </strong>
-        <Editable item={hito} path="titulo" onUpdate={refetch}>
+        <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
           <h3 className="extra-bold">{hito.titulo}</h3>
         </Editable>
       </Grid>

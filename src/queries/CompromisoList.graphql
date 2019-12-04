@@ -1,13 +1,18 @@
 #import "./fragments.graphql"
 
-query CompromisosQuery($where: compromiso_bool_exp) {
-  items: compromiso(
-    where: $where
-    order_by: [{ orden: asc }, { fecha_creacion: asc }]
-  ) {
+query PlanQuery($compromisosWhere: compromiso_bool_exp) {
+  # plan: plan_by_pk(id: $planId) {
+  plan {
     id
-    titulo
-    fecha_creacion
     metadatos
+    compromisos(
+      where: $compromisosWhere
+      order_by: [{ orden: asc }, { fecha_creacion: asc }]
+    ) {
+      id
+      titulo
+      fecha_creacion
+      metadatos
+    }
   }
 }
