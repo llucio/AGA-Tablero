@@ -275,19 +275,20 @@ const CompromisoDetail = ({ match }) => {
 };
 
 const compromisoTabs = [
+  { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
+  { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
+  { key: 'solucionPlanteada', label: 'Solución', icon: <WbIncandescentIcon /> },
+  { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
   {
     key: 'valores',
     label: 'Valores de Gobierno Abierto',
     icon: <VerifiedUserIcon />
   },
-  { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> },
-  { key: 'antecedentes', label: 'Antecedentes', icon: <BookmarksIcon /> },
-  { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
   {
     key: 'alineacion2030',
     label: (
       <span>
-        Agenda 2030{' '}
+        Objetivos de Desarrollo Sostenible
         <IconButton
           target="_blank"
           href="https://www.undp.org/content/undp/es/home/sustainable-development-goals.html"
@@ -302,13 +303,17 @@ const compromisoTabs = [
     ),
     icon: <VerticalSplitIcon />
   },
-  { key: 'solucionPlanteada', label: 'Solución', icon: <WbIncandescentIcon /> },
-  { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
   {
-    key: 'desarrolloSostenible',
-    label: 'Objetivos de Desarrollo Sostenible',
-    icon: <ListAltIcon />
+    key: 'igualdadGenero',
+    label: 'Alineación con perspectiva de igualdad de género',
+    icon: <VerticalSplitIcon />
   },
+  {
+    key: 'ejePND',
+    label: 'Eje del Plan Nacional de Desarrollo',
+    icon: <PeopleAltIcon />
+  },
+  { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> },
   {
     key: 'otrosActores',
     label: 'Otros actores involucrados',
