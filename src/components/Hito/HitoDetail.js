@@ -133,6 +133,27 @@ const HitoHeader = ({ hito, refetch }) => {
             </ThemeProvider>
           )}
         </Editable>
+        <Editable
+          item={hito}
+          path="fecha_final"
+          label="Fecha final"
+          type="date"
+          valueType="timestamptz"
+          onUpdate={refetch}
+        >
+          {!!hito.fecha_final && (
+            <ThemeProvider theme={dateTheme}>
+              <CalendarIcon
+                date={moment(hito.fecha_final)
+                  .utc()
+                  .toDate()}
+                options={dateOptions}
+                theme={dateTheme}
+                className="elevation-1"
+              />
+            </ThemeProvider>
+          )}
+        </Editable>
       </Grid>
       <Grid item xs={6} md={7}>
         <strong>

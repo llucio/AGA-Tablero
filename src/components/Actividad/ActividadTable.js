@@ -72,10 +72,13 @@ const ActividadTable = ({ where }) => {
   return (
     <div className="vertical-margin">
       <Box className={classes.rootTable}>
-        <Table className={classes.table} aria-label="table">
+        <Table className={classes.table} aria-label="Lista de actividades">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Actividades</StyledTableCell>
+              <StyledTableCell align="center">Actividades</StyledTableCell>
+              <StyledTableCell align="center">
+                Instituciones responsables
+              </StyledTableCell>
               <StyledTableCell align="center">Estatus</StyledTableCell>
               <StyledTableCell align="center">
                 Medio de verificación
@@ -93,7 +96,7 @@ const ActividadTable = ({ where }) => {
                     label="Tíulo"
                     onUpdate={refetch}
                   >
-                    {actividad.titulo || 'Sin título'}
+                    <h4>{actividad.titulo || 'Sin título'}</h4>
                   </Editable>
                   <Editable
                     html
@@ -104,14 +107,16 @@ const ActividadTable = ({ where }) => {
                   >
                     <DataDisplay data={actividad.metadatos.descripcion || ''} />
                   </Editable>
+                </StyledTableCell>
+                <StyledTableCell align="center">
                   <Editable
                     html
                     item={actividad}
-                    label="Medio de verificación"
-                    path="medio_verificacion"
+                    label="Instituciones responsables"
+                    path="metadatos.instituciones"
                     onUpdate={refetch}
                   >
-                    <span>{actividad.medio_verificacion}</span>
+                    <span>{actividad.metadatos.instituciones}</span>
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">
@@ -121,12 +126,12 @@ const ActividadTable = ({ where }) => {
                   <EntregableList
                     where={{ hito_id: { _eq: actividad.hito_id } }}
                   />
-
                   <Editable
                     adminOnly
+                    html
                     item={actividad}
                     path="metadatos.medio_verificacion"
-                    valueType="String"
+                    label="Medio de verificación"
                     onUpdate={refetch}
                   >
                     <strong>{actividad.metadatos.medio_verificacion}</strong>
