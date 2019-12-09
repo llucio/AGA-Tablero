@@ -76,14 +76,15 @@ const SortableList = ({
     return null;
   }
 
-  const SortableItem = SortableElement(({ value }) => (
-    <span>
-      {usuario?.administrador && deletable && (
-        <Deletable item={value} typename={typename} refetch={refetch} />
-      )}
-      <ItemComponent item={value} refetch={refetch} {...itemProps} />
-    </span>
-  ));
+  const SortableItem = SortableElement(
+    ({ value }) =>
+      (usuario?.administrador && deletable && (
+        <span>
+          <Deletable item={value} typename={typename} refetch={refetch} />
+          <ItemComponent item={value} refetch={refetch} {...itemProps} />
+        </span>
+      )) || <ItemComponent item={value} refetch={refetch} {...itemProps} />
+  );
 
   const Container = SortableContainer(({ items }) => {
     return (
