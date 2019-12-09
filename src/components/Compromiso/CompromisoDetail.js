@@ -191,22 +191,6 @@ const CompromisoDetail = ({ match }) => {
               >
                 <DataDisplay data={metadatos.dependencia || ''} />
               </Editable>
-              <Editable
-                html
-                item={item}
-                path="metadatos.dependencia2"
-                onUpdate={refetch}
-              >
-                <DataDisplay data={metadatos.dependencia2 || ''} />
-              </Editable>
-              <Editable
-                html
-                item={item}
-                path="metadatos.dependencia3"
-                onUpdate={refetch}
-              >
-                <DataDisplay data={metadatos.dependencia3 || ''} />
-              </Editable>
               <h4 className="mt-3">Organizaciones Corresponsables</h4>
               <Editable
                 item={item}
