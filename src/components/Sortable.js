@@ -11,6 +11,7 @@ import Deletable from './Deletable';
 const SortableList = ({
   items,
   refetch,
+  deletable = false,
   containerComponent: ContainerComponent = Box,
   containerProps = {},
   itemComponent: ItemComponent,
@@ -73,12 +74,12 @@ const SortableList = ({
   }
 
   const SortableItem = SortableElement(({ value }) =>
-    <React.Fragment>
-      {usuario?.administrador && (
-        <Deletable item={value} typename={typename} refetch={refetch} />
-      )}
+    <div>
+      {deletable &&
+        usuario.administrador &&
+        <Deletable item={value} typename={typename} refetch={refetch} />}
       <ItemComponent item={value} refetch={refetch} {...itemProps} />
-    </React.Fragment>
+    </div>
   );
 
   const Container = SortableContainer(({ items }) => {

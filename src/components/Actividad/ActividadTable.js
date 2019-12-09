@@ -90,9 +90,9 @@ const ActividadTable = ({ where }) => {
                     label="Tíulo"
                     onUpdate={refetch}
                   >
-                    <h4>
+                    <h5>
                       {actividad.titulo || 'Sin título'}
-                    </h4>
+                    </h5>
                   </Editable>
                   <Editable
                     html

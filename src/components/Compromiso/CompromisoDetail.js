@@ -114,6 +114,7 @@ const CompromisoDetail = ({ match }) => {
                   <Sortable
                     items={item.hitos}
                     refetch={refetch}
+                    deletable
                     itemComponent={({ item: { titulo, id } }) =>
                       <p key={`sidebar-${id}`}>
                         <Link href={`#hito-${id}`}>

@@ -8,15 +8,17 @@ import ActividadCard from './ActividadCard';
 const LIST_QUERY = loader('../../queries/ActividadList.graphql');
 
 const ActividadList = ({ where }) => {
-  const { data: { items: actividades = [] } = {}, loading, error, refetch } = useQuery(
-    LIST_QUERY,
-    {
-      variables: {
-        where
-      },
-      fetchPolicy: 'cache-and-network'
-    }
-  );
+  const {
+    data: { items: actividades = [] } = {},
+    loading,
+    error,
+    refetch
+  } = useQuery(LIST_QUERY, {
+    variables: {
+      where
+    },
+    fetchPolicy: 'cache-and-network'
+  });
 
   if (error) return <div>Error</div>;
   if (loading && !actividades) return <LoadingIndicator />;
@@ -25,6 +27,7 @@ const ActividadList = ({ where }) => {
   return (
     <ol className="vertical-margin-bottom">
       <Sortable
+        deletable
         items={actividades}
         itemComponent={ActividadCard}
         refetch={refetch}
@@ -35,5 +38,3 @@ const ActividadList = ({ where }) => {
 };
 
 export default ActividadList;
-
-
