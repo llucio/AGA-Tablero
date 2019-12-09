@@ -28,6 +28,7 @@ const HitoList = ({ where }) => {
       <h2>Acciones clave</h2>
       <hr className="line" />
       <Sortable
+        typeName="hito"
         items={hitos}
         itemComponent={HitoCard}
         itemProps={{}}

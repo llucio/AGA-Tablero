@@ -55,6 +55,7 @@ const CompromisoList = ({ where }) => {
       </Editable>
       <Sortable
         items={compromisos}
+        typename="compromiso"
         itemComponent={CompromisoCard}
         itemProps={{}}
         containerComponent={Grid}

@@ -7,18 +7,21 @@ import arrayMove from 'array-move';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useRoles } from '../hooks';
 import Deletable from './Deletable';
+import Creatable from './Creatable';
 
 const SortableList = ({
   items,
   refetch,
   deletable = false,
+  creatable,
+  parentId,
+  typename,
   containerComponent: ContainerComponent = Box,
   containerProps = {},
   itemComponent: ItemComponent,
   itemProps = {},
   ...options
 }) => {
-  const typename = _.get(items, '0.__typename', '');
   const [loading, setLoading] = useState(false);
   const { usuario } = useRoles();
   const [mutateOrden] = useMutation(
@@ -73,37 +76,48 @@ const SortableList = ({
     return null;
   }
 
-  const SortableItem = SortableElement(({ value }) =>
-    <>
-      {deletable && usuario?.administrador &&
-        <Deletable item={value} typename={typename} refetch={refetch} />}
+  const SortableItem = SortableElement(({ value }) => (
+    <span>
+      {usuario?.administrador && deletable && (
+        <Deletable item={value} typename={typename} refetch={refetch} />
+      )}
       <ItemComponent item={value} refetch={refetch} {...itemProps} />
-    </>
-  );
+    </span>
+  ));
 
   const Container = SortableContainer(({ items }) => {
     return (
       <ContainerComponent {...containerProps}>
-        {items.map((value, index) =>
+        {items.map((value, index) => (
           <SortableItem
             key={`${typename}-${value.id}`}
             index={index}
             value={value}
           />
-        )}
+        ))}
       </ContainerComponent>
     );
   });
 
   return (
-    <Container
-      axis="x"
-      pressDelay={200}
-      shouldCancelStart={() => !usuario.administrador}
-      items={items}
-      onSortEnd={onSort}
-      {...options}
-    />
+    <>
+      {usuario?.administrador && creatable && (
+        <Creatable
+          parentKey={creatable}
+          parentId={parentId}
+          typename={typename}
+          refetch={refetch}
+        />
+      )}
+      <Container
+        axis="x"
+        pressDelay={200}
+        shouldCancelStart={() => !usuario.administrador}
+        items={items}
+        onSortEnd={onSort}
+        {...options}
+      />
+    </>
   );
 };
 

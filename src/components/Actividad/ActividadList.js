@@ -7,7 +7,7 @@ import ActividadCard from './ActividadCard';
 
 const LIST_QUERY = loader('../../queries/ActividadList.graphql');
 
-const ActividadList = ({ where }) => {
+const ActividadList = ({ where, hitoId }) => {
   const {
     data: { items: actividades = [] } = {},
     loading,
@@ -27,7 +27,10 @@ const ActividadList = ({ where }) => {
   return (
     <ol className="vertical-margin-bottom">
       <Sortable
+        typename="actividad"
         deletable
+        creatable="hito_id"
+        parentId={hitoId}
         items={actividades}
         itemComponent={ActividadCard}
         refetch={refetch}

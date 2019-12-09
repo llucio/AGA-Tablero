@@ -99,38 +99,45 @@ const CompromisoDetail = ({ match }) => {
                 distanceFromTop,
                 distanceFromBottom,
                 calculatedHeight
-              }) =>
+              }) => (
                 <Box
                   fontSize={18}
                   style={style}
                   className={isSticky ? classes.sticky : ''}
                 >
-                  {isSticky &&
+                  {isSticky && (
                     <h5>
-                      <strong>
-                        {item.titulo}
-                      </strong>
-                    </h5>}
+                      <strong>{item.titulo}</strong>
+                    </h5>
+                  )}
                   <Sortable
+                    typename="hito"
                     items={item.hitos}
+                    creatable="compromiso_id"
+                    parentId={item.id}
                     refetch={refetch}
                     deletable
-                    itemComponent={({ item: { titulo, id } }) =>
+                    itemComponent={({ item: { titulo, id } }) => (
                       <p key={`sidebar-${id}`}>
                         <Link href={`#hito-${id}`}>
                           {titulo || 'Sin título'}
                         </Link>
-                      </p>}
+                      </p>
+                    )}
                     axis="y"
                   />
-                </Box>}
+                </Box>
+              )}
             </Sticky>
           </Grid>
           <Grid item xs={12} sm={9}>
-            <Editable item={item} path="titulo" label="Título" onUpdate={refetch}>
-              <h1 className="extra-bold">
-                {item.titulo}
-              </h1>
+            <Editable
+              item={item}
+              path="titulo"
+              label="Título"
+              onUpdate={refetch}
+            >
+              <h1 className="extra-bold">{item.titulo}</h1>
             </Editable>
 
             <Editable
@@ -219,7 +226,7 @@ const CompromisoDetail = ({ match }) => {
                     )
                   );
                 })
-                .map(({ key, label }, i) =>
+                .map(({ key, label }, i) => (
                   <ExpansionPanel className="elevation-0" key={i}>
                     <ExpansionPanelSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -239,12 +246,14 @@ const CompromisoDetail = ({ match }) => {
                           onUpdate={refetch}
                           html
                         >
-                          <DataDisplay data={_.get(item, ['metadatos', key], '')} />
+                          <DataDisplay
+                            data={_.get(item, ['metadatos', key], '')}
+                          />
                         </Editable>
                       </Typography>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
-                )}
+                ))}
             </div>
             <HitoList where={{ compromiso_id: { _eq: item.id } }} />
           </Grid>
