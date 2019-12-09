@@ -112,23 +112,14 @@ const Editable = ({
     setOpen(!open);
   };
 
-  useEffect(
-    () => {
-      if (queryResult) {
-        setValue(_.get(queryResult, path, ''));
-      }
-    },
-    [queryResult, path, open]
-  );
+  useEffect(() => {
+    if (queryResult) {
+      setValue(_.get(queryResult, path, ''));
+    }
+  }, [queryResult, path, open]);
 
   if (!administrador) {
-    return (
-      !adminOnly &&
-      !!value &&
-      <span>
-        {children}
-      </span>
-    );
+    return !adminOnly && !!value && <span>{children}</span>;
   }
 
   return (
@@ -147,73 +138,80 @@ const Editable = ({
         >
           {open ? <CloseIcon /> : <EditIcon />}
         </IconButton>
-        {!open &&
+        {!open && (
           <span className={classes.editLabel}>
-            <small>
-              {label || subField || field}
-            </small>
-          </span>}
-        {open &&
+            <small>{label || subField || field}</small>
+          </span>
+        )}
+        {open && (
           <Fragment>
-            {!!type
-              ? <Input
-                  type={type}
-                  value={
-                    type === 'date'
-                      ? value && moment(value).utc().format(moment.HTML5_FMT.DATE)
-                      : value
-                  }
-                  autoFocus
-                  label={label || subField || field}
-                  placeholder={label || subField || field}
-                  onChange={({ target: { value } = {} }) => handleChange(value)}
+            {!!type ? (
+              <Input
+                type={type}
+                value={
+                  type === 'date'
+                    ? value &&
+                      moment(value)
+                        .utc()
+                        .format(moment.HTML5_FMT.DATE)
+                    : value
+                }
+                autoFocus
+                label={label || subField || field}
+                placeholder={label || subField || field}
+                onChange={({ target: { value } = {} }) => handleChange(value)}
+              />
+            ) : html ? (
+              <HtmlEditor
+                value={value}
+                onChange={({ target: { value } = {} }) => handleChange(value)}
+              />
+            ) : upload ? (
+              <div>
+                {value &&
+                  (uploadType === 'image' ? (
+                    <img src={value} height={100} alt="imagen" />
+                  ) : (
+                    <p>
+                      Archivo actual:
+                      <br />
+                      <a
+                        href={value}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                      >
+                        {value}
+                      </a>
+                    </p>
+                  ))}
+                <UploadButton
+                  value={value}
+                  handleChange={value => {
+                    setValue(value);
+                    handleSubmit(null, value);
+                  }}
                 />
-              : html
-                ? <HtmlEditor
-                    value={value}
-                    onChange={({ target: { value } = {} }) => handleChange(value)}
-                  />
-                : upload
-                  ? <div>
-                      {value &&
-                        (uploadType === 'image'
-                          ? <img src={value} height={100} alt="imagen" />
-                          : <p>
-                              Archivo actual:
-                              <br />
-                              <a
-                                href={value}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                download
-                              >
-                                {value}
-                              </a>
-                            </p>)}
-                      <UploadButton
-                        value={value}
-                        handleChange={value => {
-                          setValue(value);
-                          handleSubmit(null, value);
-                        }}
-                      />
-                    </div>
-                  : <TextareaAutosize
-                      value={value}
-                      autoFocus
-                      aria-label="minimum height"
-                      rows={1}
-                      label={label || subField || field}
-                      placeholder={label || subField || field}
-                      onChange={({ target: { value } = {} }) => handleChange(value)}
-                    />}
+              </div>
+            ) : (
+              <TextareaAutosize
+                value={value}
+                autoFocus
+                aria-label="minimum height"
+                rows={1}
+                label={label || subField || field}
+                placeholder={label || subField || field}
+                onChange={({ target: { value } = {} }) => handleChange(value)}
+              />
+            )}
             <IconButton onClick={handleSubmit} className={classes.iconButton}>
               <SaveIcon color="success" />
             </IconButton>
             {/*<IconButton onClick={handleClear} className={classes.iconButton}>
               <ClearIcon />
             </IconButton>*/}
-          </Fragment>}
+          </Fragment>
+        )}
       </div>
     </div>
   );
@@ -249,7 +247,10 @@ const getMutation = ({ typename, field, subField, valueType = 'String' }) => {
 };
 
 Editable.propTypes = {
-  field: PropTypes.oneOf([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  field: PropTypes.oneOf([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]),
   metadatos: PropTypes.object,
   valueType: PropTypes.string,
   onUpdate: PropTypes.func,

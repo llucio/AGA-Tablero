@@ -14,6 +14,8 @@ import HitoDetail from './components/Hito/HitoDetail';
 import ScrollToTop from './components/ScrollToTop';
 import BreadcrumbBar from './components/BreadcrumbBar';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 const routes = [
   {
     path: '/',
@@ -47,16 +49,17 @@ const theme = {
   }
 };
 
-const App = () =>
+const App = () => (
   <AuthProvider>
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
         <AppRouter />
       </ThemeProvider>
     </ApolloProvider>
-  </AuthProvider>;
+  </AuthProvider>
+);
 
-const AppRouter = () =>
+const AppRouter = () => (
   <Router>
     <ScrollToTop />
     {routes.map(
@@ -69,23 +72,24 @@ const AppRouter = () =>
         image = '/assets/images/decorativa2.jpg',
         headerArrow = false,
         exact = true
-      }) =>
+      }) => (
         <Route
           key={path}
           path={path}
           exact={exact}
-          component={props =>
+          component={props => (
             <React.Fragment>
               <MenuPrincipal />
 
-              {!!heading &&
+              {!!heading && (
                 <Heading
                   heading={heading}
                   subheading={subheading}
                   headerArrow={headerArrow}
                   image={image}
                   className={headerClass}
-                />}
+                />
+              )}
 
               <section id="one" className="vertical-margin-top-middle">
                 <Container>
@@ -95,12 +99,15 @@ const AppRouter = () =>
               </section>
 
               <Footer />
-            </React.Fragment>}
+            </React.Fragment>
+          )}
         />
+      )
     )}
-  </Router>;
+  </Router>
+);
 
-const Heading = ({ className, image, heading, subheading, headerArrow }) =>
+const Heading = ({ className, image, heading, subheading, headerArrow }) => (
   <section
     id="banner"
     className={className}
@@ -108,19 +115,16 @@ const Heading = ({ className, image, heading, subheading, headerArrow }) =>
   >
     <Box className="content">
       <header>
-        <h2 className="big shadow-text">
-          {heading}
-        </h2>
-        {subheading &&
-          <h4 className="mt-4 lead shadow-text">
-            {subheading}
-          </h4>}
+        <h2 className="big shadow-text">{heading}</h2>
+        {subheading && <h4 className="mt-4 lead shadow-text">{subheading}</h4>}
       </header>
     </Box>
-    {headerArrow &&
+    {headerArrow && (
       <a href="#one" className="goto-next scrolly">
         Siguiente
-      </a>}
-  </section>;
+      </a>
+    )}
+  </section>
+);
 
 export default App;
