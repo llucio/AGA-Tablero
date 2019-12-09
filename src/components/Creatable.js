@@ -43,14 +43,14 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
 
   return (
     <div>
-      <IconButton
+      <Button
         onClick={handleClickOpen}
-        size="small"
-        variant="danger"
-        className="mt-4"
+        variant="light"
+        size="sm"
+        color="secondary"
       >
-        <AddIcon />
-      </IconButton>
+        <AddIcon /> Añadir {typename}
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
