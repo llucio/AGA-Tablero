@@ -18,7 +18,7 @@ const HtmlEditor = ({ value, onChange }) => {
         )
       );
     },
-    [value, editorState]
+    [value]
   );
 
   return (
