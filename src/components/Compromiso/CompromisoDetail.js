@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
   panel_heading: {
-    fontSize: theme.typography.pxToRem(24),
+    fontSize: theme.typography.pxToRem(18),
     fontWeight: theme.typography.fontWeightBold,
     width: '100%'
   },
