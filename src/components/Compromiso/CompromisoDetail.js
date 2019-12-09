@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import SwipeableViews from 'react-swipeable-views';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
@@ -18,7 +14,6 @@ import IconButton from '@material-ui/core/IconButton';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { StickyContainer, Sticky } from 'react-sticky';
@@ -27,21 +22,14 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 import Editable from '../Editable';
 import Sortable from '../Sortable';
 import DataDisplay from '../DataDisplay';
-import TabPanel from '../TabPanel';
 import LoadingIndicator from '../LoadingIndicator';
 import HitoList from '../Hito/HitoList.js';
 import { useRoles } from '../../hooks';
 
 const GET_QUERY = loader('../../queries/CompromisoGet.graphql');
-
-const a11yProps = index => ({
-  id: `full-width-tab-${index}`,
-  'aria-controls': `full-width-tabpanel-${index}`
-});
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -82,9 +70,7 @@ const useStyles = makeStyles(theme => ({
 
 const CompromisoDetail = ({ match }) => {
   const classes = useStyles();
-  const theme = useTheme();
   const { usuario: { administrador } = {} } = useRoles();
-  const [tabIndex, setTabIndex] = useState(0);
   const { data: { item } = {}, loading, error, refetch } = useQuery(GET_QUERY, {
     variables: {
       id: match.params.id
@@ -97,8 +83,8 @@ const CompromisoDetail = ({ match }) => {
 
   const { metadatos = {} } = item;
 
-  const handleChange = (_, newIndex) => setTabIndex(newIndex);
-  const handleChangeIndex = index => setTabIndex(index);
+  // const handleChange = (_, newIndex) => setTabIndex(newIndex);
+  // const handleChangeIndex = index => setTabIndex(index);
 
   return (
     <div className={classes.root_grid}>
@@ -113,41 +99,37 @@ const CompromisoDetail = ({ match }) => {
                 distanceFromTop,
                 distanceFromBottom,
                 calculatedHeight
-              }) => (
+              }) =>
                 <Box
                   fontSize={18}
                   style={style}
                   className={isSticky ? classes.sticky : ''}
                 >
-                  {isSticky && (
+                  {isSticky &&
                     <h5>
-                      <strong>{item.titulo}</strong>
-                    </h5>
-                  )}
+                      <strong>
+                        {item.titulo}
+                      </strong>
+                    </h5>}
                   <Sortable
                     items={item.hitos}
                     refetch={refetch}
-                    itemComponent={({ item: { titulo, id } }) => (
+                    itemComponent={({ item: { titulo, id } }) =>
                       <p key={`sidebar-${id}`}>
                         <Link href={`#hito-${id}`}>
                           {titulo || 'Sin título'}
                         </Link>
-                      </p>
-                    )}
+                      </p>}
                     axis="y"
                   />
-                </Box>
-              )}
+                </Box>}
             </Sticky>
           </Grid>
           <Grid item xs={12} sm={9}>
-            <Editable
-              item={item}
-              path="titulo"
-              label="Título"
-              onUpdate={refetch}
-            >
-              <h1 className="extra-bold">{item.titulo}</h1>
+            <Editable item={item} path="titulo" label="Título" onUpdate={refetch}>
+              <h1 className="extra-bold">
+                {item.titulo}
+              </h1>
             </Editable>
 
             <Editable
@@ -188,7 +170,7 @@ const CompromisoDetail = ({ match }) => {
               </Editable>
             </Box>
             <Box className={classes.descripcion}>
-              <h4>Dependencias resposables</h4>
+              <h4>Dependencias responsables</h4>
               <Editable
                 item={item}
                 html
@@ -214,7 +196,7 @@ const CompromisoDetail = ({ match }) => {
               >
                 <DataDisplay data={metadatos.dependencia3 || ''} />
               </Editable>
-              <h4>Organización Corresposable</h4>
+              <h4 d>Organizaciones Corresponsables</h4>
               <Editable
                 item={item}
                 html
@@ -236,7 +218,7 @@ const CompromisoDetail = ({ match }) => {
                     )
                   );
                 })
-                .map(({ key, label }, i) => (
+                .map(({ key, label }, i) =>
                   <ExpansionPanel className="elevation-0" key={i}>
                     <ExpansionPanelSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -256,14 +238,12 @@ const CompromisoDetail = ({ match }) => {
                           onUpdate={refetch}
                           html
                         >
-                          <DataDisplay
-                            data={_.get(item, ['metadatos', key], '')}
-                          />
+                          <DataDisplay data={_.get(item, ['metadatos', key], '')} />
                         </Editable>
                       </Typography>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
-                ))}
+                )}
             </div>
             <HitoList where={{ compromiso_id: { _eq: item.id } }} />
           </Grid>

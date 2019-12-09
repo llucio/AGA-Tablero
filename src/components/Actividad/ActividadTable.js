@@ -2,10 +2,7 @@ import React from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
-import Sortable from '../Sortable';
-// import ActividadHitoTable from './ActividadHitoTable';
 import EntregableList from '../Entregable/EntregableList';
-
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,7 +11,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 
@@ -35,9 +31,9 @@ const StyledTableRow = withStyles(theme => ({
   }
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
 
 const useStyles = makeStyles(theme => ({
   rootTable: {
@@ -80,14 +76,12 @@ const ActividadTable = ({ where }) => {
                 Instituciones responsables
               </StyledTableCell>
               <StyledTableCell align="center">Estatus</StyledTableCell>
-              <StyledTableCell align="center">
-                Medio de verificación
-              </StyledTableCell>
+              <StyledTableCell align="center">Medio de verificación</StyledTableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {actividades.map(actividad => (
+            {actividades.map(actividad =>
               <StyledTableRow key={actividad.id}>
                 <StyledTableCell component="th" scope="actividad">
                   <Editable
@@ -96,7 +90,9 @@ const ActividadTable = ({ where }) => {
                     label="Tíulo"
                     onUpdate={refetch}
                   >
-                    <h4>{actividad.titulo || 'Sin título'}</h4>
+                    <h4>
+                      {actividad.titulo || 'Sin título'}
+                    </h4>
                   </Editable>
                   <Editable
                     html
@@ -116,16 +112,16 @@ const ActividadTable = ({ where }) => {
                     path="metadatos.instituciones"
                     onUpdate={refetch}
                   >
-                    <span>{actividad.metadatos.instituciones}</span>
+                    <span>
+                      {actividad.metadatos.instituciones}
+                    </span>
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <CheckCircleIcon className="light-green-text" />
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <EntregableList
-                    where={{ hito_id: { _eq: actividad.hito_id } }}
-                  />
+                  <EntregableList where={{ hito_id: { _eq: actividad.hito_id } }} />
                   <Editable
                     adminOnly
                     html
@@ -134,11 +130,13 @@ const ActividadTable = ({ where }) => {
                     label="Medio de verificación"
                     onUpdate={refetch}
                   >
-                    <strong>{actividad.metadatos.medio_verificacion}</strong>
+                    <strong>
+                      {actividad.metadatos.medio_verificacion}
+                    </strong>
                   </Editable>
                 </StyledTableCell>
               </StyledTableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </Box>

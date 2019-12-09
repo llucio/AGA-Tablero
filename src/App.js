@@ -1,11 +1,9 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Box from '@material-ui/core/Box';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import AuthProvider from './keycloak';
 import { apolloClient } from './apollo';
 import MenuPrincipal from './components/Layout/MenuPrincipal';
@@ -49,17 +47,16 @@ const theme = {
   }
 };
 
-const App = () => (
+const App = () =>
   <AuthProvider>
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
         <AppRouter />
       </ThemeProvider>
     </ApolloProvider>
-  </AuthProvider>
-);
+  </AuthProvider>;
 
-const AppRouter = () => (
+const AppRouter = () =>
   <Router>
     <ScrollToTop />
     {routes.map(
@@ -72,24 +69,23 @@ const AppRouter = () => (
         image = '/assets/images/decorativa2.jpg',
         headerArrow = false,
         exact = true
-      }) => (
+      }) =>
         <Route
           key={path}
           path={path}
           exact={exact}
-          component={props => (
+          component={props =>
             <React.Fragment>
               <MenuPrincipal />
 
-              {!!heading && (
+              {!!heading &&
                 <Heading
                   heading={heading}
                   subheading={subheading}
                   headerArrow={headerArrow}
                   image={image}
                   className={headerClass}
-                />
-              )}
+                />}
 
               <section id="one" className="vertical-margin-top-middle">
                 <Container>
@@ -99,15 +95,12 @@ const AppRouter = () => (
               </section>
 
               <Footer />
-            </React.Fragment>
-          )}
+            </React.Fragment>}
         />
-      )
     )}
-  </Router>
-);
+  </Router>;
 
-const Heading = ({ className, image, heading, subheading, headerArrow }) => (
+const Heading = ({ className, image, heading, subheading, headerArrow }) =>
   <section
     id="banner"
     className={className}
@@ -115,16 +108,19 @@ const Heading = ({ className, image, heading, subheading, headerArrow }) => (
   >
     <Box className="content">
       <header>
-        <h2 className="big shadow-text">{heading}</h2>
-        {subheading && <h4 className="mt-4 lead shadow-text">{subheading}</h4>}
+        <h2 className="big shadow-text">
+          {heading}
+        </h2>
+        {subheading &&
+          <h4 className="mt-4 lead shadow-text">
+            {subheading}
+          </h4>}
       </header>
     </Box>
-    {headerArrow && (
+    {headerArrow &&
       <a href="#one" className="goto-next scrolly">
         Siguiente
-      </a>
-    )}
-  </section>
-);
+      </a>}
+  </section>;
 
 export default App;

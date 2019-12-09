@@ -3,17 +3,10 @@ import { Link } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
-import { DateTime } from 'luxon';
 import { CalendarIcon } from 'react-calendar-icon';
-import { ThemeProvider } from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-
-import Table from 'react-bootstrap/Table';
-
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 import moment from '../../utils/moment';
@@ -43,14 +36,16 @@ const useStyles = makeStyles(theme => ({
 const HitoDetail = ({ match, id }) => {
   const classes = useStyles();
 
-  const { data: { item: hito } = {}, loading, error, refetch } = useQuery(
-    GET_QUERY,
-    {
-      variables: {
-        id: id || match.params.id
-      }
+  const {
+    data: { item: hito } = {},
+    loading,
+    error,
+    refetch
+  } = useQuery(GET_QUERY, {
+    variables: {
+      id: id || match.params.id
     }
-  );
+  });
 
   if (error) return <div>Error</div>;
   if (loading && !hito) return <LoadingIndicator />;
@@ -96,21 +91,16 @@ const dateOptions = {
   locale: 'es-MX'
 };
 
-const dateTheme = {
-  calendarIcon: {
-    className: 'green'
-  }
-};
-
 const HitoHeader = ({ hito, refetch }) => {
   const { metadatos } = hito;
   return (
     <Grid container spacing={2}>
       <Grid
         item
-        xs={3}
-        md={2}
-        className="widget-calendar light-blue-text text-uppercase bold"
+        xs={4}
+        md={4}
+        align
+        className="widget-calendar light-blue-text text-uppercase bold text-center"
       >
         <Editable
           item={hito}
@@ -120,18 +110,16 @@ const HitoHeader = ({ hito, refetch }) => {
           valueType="timestamptz"
           onUpdate={refetch}
         >
-          {!!hito.fecha_inicial && (
-            <ThemeProvider theme={dateTheme}>
+          {!!hito.fecha_inicial &&
+            <div style={{ display: 'inline-block' }}>
+              <p>Inicio</p>
               <CalendarIcon
-                date={moment(hito.fecha_inicial)
-                  .utc()
-                  .toDate()}
+                style={{ margin: '0 auto' }}
+                date={moment(hito.fecha_inicial).utc().toDate()}
                 options={dateOptions}
-                theme={dateTheme}
                 className="elevation-1"
               />
-            </ThemeProvider>
-          )}
+            </div>}
         </Editable>
         <Editable
           item={hito}
@@ -140,22 +128,20 @@ const HitoHeader = ({ hito, refetch }) => {
           type="date"
           valueType="timestamptz"
           onUpdate={refetch}
+          style={{ display: 'inline-block' }}
         >
-          {!!hito.fecha_final && (
-            <ThemeProvider theme={dateTheme}>
+          {!!hito.fecha_final &&
+            <div>
+              <p>Fin</p>
               <CalendarIcon
-                date={moment(hito.fecha_final)
-                  .utc()
-                  .toDate()}
+                date={moment(hito.fecha_final).utc().toDate()}
                 options={dateOptions}
-                theme={dateTheme}
                 className="elevation-1"
               />
-            </ThemeProvider>
-          )}
+            </div>}
         </Editable>
       </Grid>
-      <Grid item xs={6} md={7}>
+      <Grid item xs={6} md={6}>
         <strong>
           <em>
             Compromiso:{' '}
@@ -165,7 +151,9 @@ const HitoHeader = ({ hito, refetch }) => {
           </em>
         </strong>
         <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-          <h3 className="extra-bold">{hito.titulo}</h3>
+          <h3 className="extra-bold">
+            {hito.titulo}
+          </h3>
         </Editable>
       </Grid>
       <Grid item xs={3} md={3}>

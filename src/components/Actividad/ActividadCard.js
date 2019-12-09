@@ -1,10 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import LinkIcon from '@material-ui/icons/Link';
 import Typography from '@material-ui/core/Typography';
-import Editable from '../Editable';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,13 +47,14 @@ const useStyles = makeStyles(theme => ({
 
 const ActividadCard = ({ item: actividad, refetch }) => {
   const classes = useStyles();
-  const { metadatos = {} } = actividad;
 
   return (
     <Grid item xs={12} className={classes.root}>
       <li className={classes.item}>
         <Typography className="light" display="block">
-          <span>{actividad.titulo}</span>
+          <span>
+            {actividad.titulo}
+          </span>
         </Typography>
       </li>
     </Grid>

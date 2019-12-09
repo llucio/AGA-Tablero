@@ -1,9 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import { Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import Container from 'react-bootstrap/Container';
-import Box from '@material-ui/core/Box';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 const BreadcrumbBar = ({ match, ...props }) => {
@@ -16,9 +13,7 @@ const BreadcrumbBar = ({ match, ...props }) => {
       </LinkContainer>
       <Route
         path="/compromiso"
-        component={() => (
-          <Breadcrumb.Item active>Compromisofcons</Breadcrumb.Item>
-        )}
+        component={() => <Breadcrumb.Item active>Compromiso</Breadcrumb.Item>}
       />
       <Route
         path="/accion-clave/"

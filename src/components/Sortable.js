@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import arrayMove from 'array-move';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useRoles } from '../hooks';
+import Deletable from './Deletable';
 
 const SortableList = ({
   items,
@@ -71,20 +72,25 @@ const SortableList = ({
     return null;
   }
 
-  const SortableItem = SortableElement(({ value }) => (
-    <ItemComponent item={value} refetch={refetch} {...itemProps} />
-  ));
+  const SortableItem = SortableElement(({ value }) =>
+    <React.Fragment>
+      {usuario?.administrador && (
+        <Deletable item={value} typename={typename} refetch={refetch} />
+      )}
+      <ItemComponent item={value} refetch={refetch} {...itemProps} />
+    </React.Fragment>
+  );
 
   const Container = SortableContainer(({ items }) => {
     return (
       <ContainerComponent {...containerProps}>
-        {items.map((value, index) => (
+        {items.map((value, index) =>
           <SortableItem
             key={`${typename}-${value.id}`}
             index={index}
             value={value}
           />
-        ))}
+        )}
       </ContainerComponent>
     );
   });

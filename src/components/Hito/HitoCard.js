@@ -1,11 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Box from '@material-ui/core/Box';
 import { Link } from 'react-router-dom';
-import moment from '../../utils/moment';
 import ActividadList from '../Actividad/ActividadList';
 import Editable from '../Editable';
 
@@ -23,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HitoCard = ({ item: hito, refetch }) => {
-  const { metadatos = {} } = hito;
+  // const { metadatos = {} } = hito;
   const classes = useStyles();
 
   return (
@@ -32,7 +28,9 @@ const HitoCard = ({ item: hito, refetch }) => {
         <a name={`hito-${hito.id}`} />
         <h4 className="extra-bold">
           <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-            <span>{hito.titulo || 'Sin título'}</span>
+            <span>
+              {hito.titulo || 'Sin título'}
+            </span>
           </Editable>
         </h4>
         <Box>
