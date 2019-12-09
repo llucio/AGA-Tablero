@@ -163,7 +163,7 @@ const CompromisoDetail = ({ match }) => {
               label="Descarga de compromiso"
               onUpdate={refetch}
             >
-              <a href={metadatos.descarga}>Descarga compromiso</a>
+              <a href={metadatos.descarga}>Descarga la hoja de ruta</a>
             </Editable>
 
             <hr className="line" />
