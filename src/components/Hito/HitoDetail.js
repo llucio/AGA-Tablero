@@ -177,9 +177,7 @@ const HitoHeader = ({ hito, refetch }) => {
               aria-valuenow="10"
               aria-valuemin="0"
               aria-valuemax="100"
-            >
-              1 de 24 atividades completadas
-            </div>
+            />
           </div>
         </Grid>
       </Grid>

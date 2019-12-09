@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 
@@ -68,7 +69,11 @@ const ActividadTable = ({ where }) => {
   return (
     <div className="vertical-margin">
       <Box className={classes.rootTable}>
-        <Table className={classes.table} aria-label="Lista de actividades">
+        <Table
+          responsive
+          className={classes.table}
+          aria-label="Lista de actividades"
+        >
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">Actividades</StyledTableCell>
@@ -105,7 +110,8 @@ const ActividadTable = ({ where }) => {
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <CheckCircleIcon className="light-green-text" />
+                  {/* <CheckCircleIcon className="light-green-text" /> */}
+                  <CheckCircleOutlineIcon /> Ninguno
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <EntregableList
