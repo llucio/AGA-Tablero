@@ -90,7 +90,7 @@ const CompromisoDetail = ({ match }) => {
     <div className={classes.root_grid}>
       <StickyContainer>
         <Grid container spacing={3}>
-          <Grid className="menuSidebar" item xs={12} sm={3}>
+          <Grid className="menuSidebar d-none d-md-block" item xs={12} md={3}>
             <Sticky bottomOffset={200}>
               {({
                 style,
@@ -133,7 +133,7 @@ const CompromisoDetail = ({ match }) => {
               )}
             </Sticky>
           </Grid>
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={12} md={9}>
             <Editable
               item={item}
               path="titulo"
