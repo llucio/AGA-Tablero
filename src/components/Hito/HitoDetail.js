@@ -16,14 +16,14 @@ const GET_QUERY = loader('../../queries/HitoGet.graphql');
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    // flexGrow: 1,
     margin: theme.spacing(3, 0)
   },
   header: {
     marginBottom: '2em'
   },
   containerHito: {
-    flexGrow: 1
+    // flexGrow: 1
   },
   paper: {
     padding: theme.spacing(1),
@@ -36,16 +36,14 @@ const useStyles = makeStyles(theme => ({
 const HitoDetail = ({ match, id }) => {
   const classes = useStyles();
 
-  const {
-    data: { item: hito } = {},
-    loading,
-    error,
-    refetch
-  } = useQuery(GET_QUERY, {
-    variables: {
-      id: id || match.params.id
+  const { data: { item: hito } = {}, loading, error, refetch } = useQuery(
+    GET_QUERY,
+    {
+      variables: {
+        id: id || match.params.id
+      }
     }
-  });
+  );
 
   if (error) return <div>Error</div>;
   if (loading && !hito) return <LoadingIndicator />;
@@ -55,11 +53,16 @@ const HitoDetail = ({ match, id }) => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2} className={classes.header}>
+      <Grid spacing={2} className={classes.header}>
         <HitoHeader hito={hito} refetch={refetch} />
       </Grid>
 
-      <Grid container spacing={2}>
+      <Grid spacing={2}>
+        <div>
+          <h6>
+            <strong>Descripción/objetivo de la acción clave</strong>
+          </h6>
+        </div>
         <Editable
           html
           item={hito}
@@ -69,6 +72,11 @@ const HitoDetail = ({ match, id }) => {
         >
           <DataDisplay data={metadatos.descripcion} />
         </Editable>
+        <div>
+          <h6>
+            <strong>Responsables</strong>
+          </h6>
+        </div>
         <Editable
           html
           item={hito}
@@ -76,7 +84,10 @@ const HitoDetail = ({ match, id }) => {
           label="Instituciones responsables"
           onUpdate={refetch}
         >
-          <DataDisplay data={metadatos.institucionesResponsables} />
+          <DataDisplay
+            className="d-block"
+            data={metadatos.institucionesResponsables}
+          />
         </Editable>
       </Grid>
       <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
@@ -110,16 +121,19 @@ const HitoHeader = ({ hito, refetch }) => {
           valueType="timestamptz"
           onUpdate={refetch}
         >
-          {!!hito.fecha_inicial &&
+          {!!hito.fecha_inicial && (
             <div style={{ display: 'inline-block' }}>
               <p>Inicio</p>
               <CalendarIcon
                 style={{ margin: '0 auto' }}
-                date={moment(hito.fecha_inicial).utc().toDate()}
+                date={moment(hito.fecha_inicial)
+                  .utc()
+                  .toDate()}
                 options={dateOptions}
                 className="elevation-1"
               />
-            </div>}
+            </div>
+          )}
         </Editable>
         <Editable
           item={hito}
@@ -130,15 +144,18 @@ const HitoHeader = ({ hito, refetch }) => {
           onUpdate={refetch}
           style={{ display: 'inline-block' }}
         >
-          {!!hito.fecha_final &&
+          {!!hito.fecha_final && (
             <div>
               <p>Fin</p>
               <CalendarIcon
-                date={moment(hito.fecha_final).utc().toDate()}
+                date={moment(hito.fecha_final)
+                  .utc()
+                  .toDate()}
                 options={dateOptions}
                 className="elevation-1"
               />
-            </div>}
+            </div>
+          )}
         </Editable>
       </Grid>
       <Grid item xs={6} md={6}>
@@ -151,9 +168,7 @@ const HitoHeader = ({ hito, refetch }) => {
           </em>
         </strong>
         <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-          <h3 className="extra-bold">
-            {hito.titulo}
-          </h3>
+          <h3 className="extra-bold">{hito.titulo}</h3>
         </Editable>
       </Grid>
       <Grid item xs={3} md={3}>

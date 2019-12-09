@@ -72,16 +72,15 @@ const ActividadTable = ({ where }) => {
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">Actividades</StyledTableCell>
-              <StyledTableCell align="center">
-                Instituciones responsables
-              </StyledTableCell>
               <StyledTableCell align="center">Estatus</StyledTableCell>
-              <StyledTableCell align="center">Medio de verificación</StyledTableCell>
+              <StyledTableCell align="center">
+                Medio de verificación
+              </StyledTableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {actividades.map(actividad =>
+            {actividades.map(actividad => (
               <StyledTableRow key={actividad.id}>
                 <StyledTableCell component="th" scope="actividad">
                   <Editable
@@ -90,10 +89,11 @@ const ActividadTable = ({ where }) => {
                     label="Tíulo"
                     onUpdate={refetch}
                   >
-                    <h5>
-                      {actividad.titulo || 'Sin título'}
-                    </h5>
+                    <h5>{actividad.titulo || 'Sin título'}</h5>
                   </Editable>
+                  <h6>
+                    <strong>Descripción/objetivo de la actividad</strong>
+                  </h6>
                   <Editable
                     html
                     item={actividad}
@@ -105,23 +105,12 @@ const ActividadTable = ({ where }) => {
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <Editable
-                    html
-                    item={actividad}
-                    label="Instituciones responsables"
-                    path="metadatos.instituciones"
-                    onUpdate={refetch}
-                  >
-                    <span>
-                      {actividad.metadatos.instituciones}
-                    </span>
-                  </Editable>
-                </StyledTableCell>
-                <StyledTableCell align="center">
                   <CheckCircleIcon className="light-green-text" />
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <EntregableList where={{ hito_id: { _eq: actividad.hito_id } }} />
+                  <EntregableList
+                    where={{ hito_id: { _eq: actividad.hito_id } }}
+                  />
                   <Editable
                     adminOnly
                     html
@@ -130,13 +119,11 @@ const ActividadTable = ({ where }) => {
                     label="Medio de verificación"
                     onUpdate={refetch}
                   >
-                    <strong>
-                      {actividad.metadatos.medio_verificacion}
-                    </strong>
+                    <strong>{actividad.metadatos.medio_verificacion}</strong>
                   </Editable>
                 </StyledTableCell>
               </StyledTableRow>
-            )}
+            ))}
           </TableBody>
         </Table>
       </Box>
