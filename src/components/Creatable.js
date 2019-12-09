@@ -57,14 +57,13 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {`Crear nuevo ${typename}`}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{`Crear ${typename}`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Input
-              label="Título"
               placeholder="Título"
+              style={{ width: '400px' }}
+              autoFocus
               onChange={event => setTitulo(event.target.value)}
             />
           </DialogContentText>
@@ -73,7 +72,7 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleConfirm} color="danger" autoFocus>
+          <Button onClick={handleConfirm} color="danger">
             Crear
           </Button>
         </DialogActions>
