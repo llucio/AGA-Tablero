@@ -91,7 +91,7 @@ const ActividadTable = ({ where }) => {
                   >
                     <h5>{actividad.titulo || 'Sin título'}</h5>
                   </Editable>
-                  <h6>
+                  <h6 className="mt-4">
                     <strong>Descripción/objetivo de la actividad</strong>
                   </h6>
                   <Editable

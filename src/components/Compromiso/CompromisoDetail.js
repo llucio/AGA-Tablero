@@ -110,6 +110,9 @@ const CompromisoDetail = ({ match }) => {
                       <strong>{item.titulo}</strong>
                     </h5>
                   )}
+                  <h6 className="mt-3">
+                    <strong>Acciones clave:</strong>
+                  </h6>
                   <Sortable
                     typename="hito"
                     items={item.hitos}
@@ -178,7 +181,7 @@ const CompromisoDetail = ({ match }) => {
               </Editable>
             </Box>
             <Box className={classes.descripcion}>
-              <h4>Dependencias responsables</h4>
+              <h4 className="mt-3">Dependencias responsables</h4>
               <Editable
                 item={item}
                 html
@@ -204,7 +207,7 @@ const CompromisoDetail = ({ match }) => {
               >
                 <DataDisplay data={metadatos.dependencia3 || ''} />
               </Editable>
-              <h4 d>Organizaciones Corresponsables</h4>
+              <h4 className="mt-3">Organizaciones Corresponsables</h4>
               <Editable
                 item={item}
                 html
