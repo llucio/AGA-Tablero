@@ -51,33 +51,31 @@ const UploadButton = ({ value, handleChange }) => {
     .use(Url, { companionUrl })
     .use(Webcam, { title: 'Cámara' });
 
-  useEffect(
-    () => {
-      const onComplete = result => {
-        const [file] = result.successful;
-        if (file) {
-          handleChange(file.uploadURL);
-        }
-        setOpen(false);
-      };
+  useEffect(() => {
+    const onComplete = result => {
+      const [file] = result.successful;
+      if (file) {
+        handleChange(file.uploadURL);
+      }
+      setOpen(false);
+    };
 
-      uppy.reset();
+    uppy.reset();
 
-      uppy.on('complete', onComplete);
+    uppy.on('complete', onComplete);
 
-      return () => {
-        uppy.off('complete', onComplete);
-      };
-    },
-    [value, open]
-  );
+    return () => {
+      uppy.off('complete', onComplete);
+    };
+  }, [value, open]);
 
   return (
     <div>
-      {!!value &&
+      {!!value && (
         <div>
           <button onClick={() => setOpen(true)}>Cambiar archivo</button>
-        </div>}
+        </div>
+      )}
       <DashboardModal
         uppy={uppy}
         open={open}

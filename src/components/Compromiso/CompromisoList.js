@@ -1,8 +1,9 @@
 import React from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import LoadingIndicator from '../LoadingIndicator';
-import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
 import DownloadIcon from '@material-ui/icons/GetApp';
 import Grid from '@material-ui/core/Grid';
@@ -11,18 +12,43 @@ import Editable from '../Editable';
 
 import CompromisoCard from './CompromisoCard';
 
+const useStyles = makeStyles(theme => ({
+  margin: {
+    marginRight: theme.spacing(1)
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1)
+  }
+}));
+
+const AgaTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.black,
+    color: 'rgba(250, 250, 250, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 13
+  },
+  arrow: {
+    color: theme.palette.common.black
+  }
+}))(Tooltip);
+
 const LIST_QUERY = loader('../../queries/CompromisoList.graphql');
 
 const CompromisoList = ({ where }) => {
-  const { data: { plan: [plan] = [] } = {}, loading, error, refetch } = useQuery(
-    LIST_QUERY,
-    {
-      variables: {
-        compromisosWhere: where
-      },
-      fetchPolicy: 'cache-and-network'
-    }
-  );
+  const classes = useStyles();
+
+  const {
+    data: { plan: [plan] = [] } = {},
+    loading,
+    error,
+    refetch
+  } = useQuery(LIST_QUERY, {
+    variables: {
+      compromisosWhere: where
+    },
+    fetchPolicy: 'cache-and-network'
+  });
 
   if (error) return <div>Error</div>;
   if (loading && !plan) return <LoadingIndicator />;
@@ -32,27 +58,41 @@ const CompromisoList = ({ where }) => {
 
   return (
     <div className="vertical-margin-bottom">
-      <h2>Compromisos</h2>
-      <hr className="line" />
-      <Editable
-        upload
-        item={plan}
-        label="Descarga de plan de acción"
-        path="metadatos.descarga"
-        uploadType="file"
-        onUpdate={refetch}
-      >
-        <Fab
-          href={metadatos.descarga}
-          download
-          target="_blank"
-          variant="extended"
-          color="light"
-        >
-          <DownloadIcon title="Descarga el plan de acción" />
-          Descarga plan de acción
-        </Fab>
-      </Editable>
+      <Grid container spacing={3}>
+        <Grid item xs={9} sm={10}>
+          <h2>Compromisos</h2>
+          <hr className="line" />
+        </Grid>
+        <Grid item xs={2} sm={2} align="right">
+          <Editable
+            upload
+            item={plan}
+            label="Descarga de plan de acción"
+            path="metadatos.descarga"
+            uploadType="file"
+            onUpdate={refetch}
+          >
+            <AgaTooltip
+              title="Descarga el plan de acción"
+              aria-label="descarga"
+              placement="left"
+            >
+              <Fab
+                href={metadatos.descarga}
+                download
+                target="_blank"
+                color="primary"
+                aria-label="add"
+                className={classes.margin}
+              >
+                <DownloadIcon />
+                {/* Descarga el plan de acción  */}
+              </Fab>
+            </AgaTooltip>
+          </Editable>
+        </Grid>
+      </Grid>
+
       <Sortable
         items={compromisos}
         typename="compromiso"

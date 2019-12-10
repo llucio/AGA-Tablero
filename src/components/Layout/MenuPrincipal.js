@@ -12,7 +12,7 @@ import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 
-const base = 'https://gobabierto-staging.k8s.funcionpublica.gob.mx';
+const base = process.env.WEBSITE_BASE_URL || 'https://stenciljs.com';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,6 +64,9 @@ const MenuPrincipal = props => {
           <Container>
             <Hidden mdUp>
               <Toolbar>
+                <Button color="inherit" className="blue" size="large">
+                  <MenuIcon />
+                </Button>
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -80,9 +83,6 @@ const MenuPrincipal = props => {
                     Abierto MX
                   </strong>
                 </Typography>
-                <Fab color="inherit" className="black">
-                  <MenuIcon />
-                </Fab>
               </Toolbar>
             </Hidden>
 
@@ -95,7 +95,7 @@ const MenuPrincipal = props => {
                   image="/assets/images/logo.png"
                   title="Gobierno Abierto"
                 />
-                <Typography variant="subtitle1" className={classes.title}>
+                <Typography variant="h6" className={classes.title}>
                   <strong>Alianza</strong> para el{' '}
                   <strong>
                     {' '}

@@ -6,7 +6,7 @@ import LoadingIndicator from '../LoadingIndicator';
 import { CalendarIcon } from 'react-calendar-icon';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+//import Box from '@material-ui/core/Box';
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 import moment from '../../utils/moment';

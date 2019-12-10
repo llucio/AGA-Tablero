@@ -30,7 +30,7 @@ const routes = [
     path: '/compromiso/:id',
     content: CompromisoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
-    subheading: 'NEW',
+    subheading: 'new',
     headerClass: 'medium'
   },
   {

@@ -40,7 +40,7 @@ const CompromisoCard = ({ item: compromiso, index }) => {
           height: '320px'
         }}
       >
-        <Box className="pattern3 box-4">
+        <Box className="pattern5 box-4">
           <Link
             to={`/compromiso/${compromiso.id}`}
             className="white-text shadow-text"
