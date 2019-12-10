@@ -3,7 +3,7 @@
 html,
 body {
   margin: 0;
-  font-family: Source Sans Pro, sans-serif !important;
+  font-family: 'Source Sans Pro', sans-serif !important;
   font-size: 16px !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -264,7 +264,7 @@ hr.line {
 }
 
 .panel_heading {
-  font-family: Source Sans Pro, sans-serif !important;
+  font-family: 'Source Sans Pro', sans-serif !important;
   font-size: 24px !important;
   width: 100%;
 }
@@ -279,7 +279,7 @@ hr.line {
 }
 
 .MuiExpansionPanelDetails-root {
-  font-family: Source Sans Pro, sans-serif !important;
+  font-family: 'Source Sans Pro', sans-serif !important;
   padding: 8px 0px 24px !important;
 }
 
@@ -295,7 +295,7 @@ thead.MuiTableHead-root {
 }
 
 th.MuiTableCell-root {
-  font-family: Source Sans Pro, sans-serif !important;
+  font-family: 'Source Sans Pro', sans-serif !important;
   font-size: 16px !important;
 }
 
@@ -353,7 +353,7 @@ th.MuiTableCell-root {
 
 .MuiTypography-h4 {
   font-size: 1.5rem !important;
-  font-family: Source Sans Pro, sans-serif !important;
+  font-family: 'Source Sans Pro', sans-serif !important;
   font-weight: 400;
   line-height: 1.05 !important;
   letter-spacing: 0em !important;
@@ -419,7 +419,7 @@ th.MuiTableCell-root {
 }
 
 .compromiso-content .MuiBox-root h6:hover {
-  background-color:#eceff1 ; 
+  background-color:#eceff1!important; 
 }
 
 
@@ -458,6 +458,10 @@ a:hover > * {
     margin-top: 0 !important;
   }
 
+  .menu-transparente h6 {
+    margin: inherit;
+  }
+  
   .image-over {
     height: 240px;
     padding: 25px;
@@ -478,6 +482,10 @@ a:hover > * {
 
   .menu-transparente {
     margin-top: 0 !important;
+  }
+
+  .menu-transparente h6 {
+    margin: inherit;
   }
 
   .image-over {
