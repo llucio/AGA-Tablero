@@ -61,7 +61,7 @@
 
 
 .bm-menu-wrap{
-  right: 60px!important;
+  right: inherit!important;
   top:0;
 }
 

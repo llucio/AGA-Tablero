@@ -126,6 +126,7 @@ hr.line {
   letter-spacing: -0.04em;
 }
 
+
 .image-over {
   background: -moz-linear-gradient(
     top,
@@ -461,7 +462,11 @@ a:hover > * {
   .menu-transparente h6 {
     margin: inherit;
   }
-  
+
+  .menu-transparente .MuiToolbar-gutters {
+      padding-left: 0px;
+  }
+
   .image-over {
     height: 240px;
     padding: 25px;
@@ -488,6 +493,9 @@ a:hover > * {
     margin: inherit;
   }
 
+  .menu-transparente .MuiToolbar-gutters {
+      padding-left: 0px;
+  }
   .image-over {
     height: 280px;
     padding: 25px;
