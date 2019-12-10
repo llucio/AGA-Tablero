@@ -1,4 +1,4 @@
-@import url("colores.css");
+@import url('colores.css');
 
 html,
 body {
@@ -264,7 +264,7 @@ hr.line {
 }
 
 .panel_heading {
-  font-family: "Montserrat", sans-serif !important;
+  font-family: 'Montserrat', sans-serif !important;
   font-size: 24px !important;
   width: 100%;
 }
@@ -279,7 +279,7 @@ hr.line {
 }
 
 .MuiExpansionPanelDetails-root {
-  font-family: "Montserrat", sans-serif !important;
+  font-family: 'Montserrat', sans-serif !important;
   padding: 8px 0px 24px !important;
 }
 
@@ -295,7 +295,7 @@ thead.MuiTableHead-root {
 }
 
 th.MuiTableCell-root {
-  font-family: "Montserrat", sans-serif !important;
+  font-family: 'Montserrat', sans-serif !important;
   font-size: 16px !important;
 }
 
@@ -353,7 +353,7 @@ th.MuiTableCell-root {
 
 .MuiTypography-h4 {
   font-size: 1.5rem !important;
-  font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
+  font-family: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
   font-weight: 400;
   line-height: 1.05 !important;
   letter-spacing: 0em !important;

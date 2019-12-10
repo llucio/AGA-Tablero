@@ -1,13 +1,13 @@
-import React from "react";
-import _ from "lodash";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import _ from 'lodash';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 // Para imágenes aleatorias (provisional)
-const defaultImage = "https://picsum.photos/300/300";
+const defaultImage = 'https://picsum.photos/300/300';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +25,7 @@ const CompromisoCard = ({ item: compromiso, index }) => {
   // Imagen con caracteres aleatorios para evitar cache de navegador
   const imageUrl = _.get(
     compromiso,
-    "metadatos.imagen",
+    'metadatos.imagen',
     `${defaultImage}?${compromiso.id}`
   );
 
@@ -36,8 +36,8 @@ const CompromisoCard = ({ item: compromiso, index }) => {
         className="box-4 item-compromisos"
         style={{
           backgroundImage: `url(${imageUrl})`,
-          backgroundSize: "cover",
-          height: "320px"
+          backgroundSize: 'cover',
+          height: '320px'
         }}
       >
         <Box className="pattern5 box-4">

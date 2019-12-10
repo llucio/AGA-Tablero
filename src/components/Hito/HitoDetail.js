@@ -1,18 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { loader } from "graphql.macro";
-import { useQuery } from "@apollo/react-hooks";
-import LoadingIndicator from "../LoadingIndicator";
-import { CalendarIcon } from "react-calendar-icon";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { loader } from 'graphql.macro';
+import { useQuery } from '@apollo/react-hooks';
+import LoadingIndicator from '../LoadingIndicator';
+import { CalendarIcon } from 'react-calendar-icon';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 //import Box from '@material-ui/core/Box';
-import DataDisplay from "../DataDisplay";
-import Editable from "../Editable";
-import moment from "../../utils/moment";
-import ActividadTable from "../Actividad/ActividadTable";
+import DataDisplay from '../DataDisplay';
+import Editable from '../Editable';
+import moment from '../../utils/moment';
+import ActividadTable from '../Actividad/ActividadTable';
 
-const GET_QUERY = loader("../../queries/HitoGet.graphql");
+const GET_QUERY = loader('../../queries/HitoGet.graphql');
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0)
   },
   header: {
-    marginBottom: "2em"
+    marginBottom: '2em'
   },
   containerHito: {
     // flexGrow: 1
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1),
     margin: theme.spacing(1, 0),
-    textAlign: "center",
+    textAlign: 'center',
     color: theme.palette.text.secondary
   }
 }));
@@ -96,10 +96,10 @@ const HitoDetail = ({ match, id }) => {
 };
 
 const dateOptions = {
-  header: { month: "short" },
-  footer: { year: "numeric" },
-  value: { day: "2-digit" },
-  locale: "es-MX"
+  header: { month: 'short' },
+  footer: { year: 'numeric' },
+  value: { day: '2-digit' },
+  locale: 'es-MX'
 };
 
 const HitoHeader = ({ hito, refetch }) => {
@@ -108,7 +108,7 @@ const HitoHeader = ({ hito, refetch }) => {
     <Grid container spacing={2}>
       <Grid item xs={12} md={9}>
         <strong>
-          Compromiso:{" "}
+          Compromiso:{' '}
           <Link to={`/compromiso/${hito.compromiso.id}`}>
             {hito.compromiso.titulo}
           </Link>
@@ -132,10 +132,10 @@ const HitoHeader = ({ hito, refetch }) => {
           onUpdate={refetch}
         >
           {!!hito.fecha_inicial && (
-            <div style={{ display: "inline-block" }}>
+            <div style={{ display: 'inline-block' }}>
               <p>Inicio</p>
               <CalendarIcon
-                style={{ margin: "0 auto" }}
+                style={{ margin: '0 auto' }}
                 date={moment(hito.fecha_inicial)
                   .utc()
                   .toDate()}
@@ -152,7 +152,7 @@ const HitoHeader = ({ hito, refetch }) => {
           type="date"
           valueType="timestamptz"
           onUpdate={refetch}
-          style={{ display: "inline-block" }}
+          style={{ display: 'inline-block' }}
         >
           {!!hito.fecha_final && (
             <div>

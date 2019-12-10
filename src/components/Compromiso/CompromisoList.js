@@ -1,16 +1,16 @@
-import React from "react";
-import { loader } from "graphql.macro";
-import { useQuery } from "@apollo/react-hooks";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import LoadingIndicator from "../LoadingIndicator";
-import Tooltip from "@material-ui/core/Tooltip";
-import Fab from "@material-ui/core/Fab";
-import DownloadIcon from "@material-ui/icons/GetApp";
-import Grid from "@material-ui/core/Grid";
-import Sortable from "../Sortable";
-import Editable from "../Editable";
+import React from 'react';
+import { loader } from 'graphql.macro';
+import { useQuery } from '@apollo/react-hooks';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import LoadingIndicator from '../LoadingIndicator';
+import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
+import DownloadIcon from '@material-ui/icons/GetApp';
+import Grid from '@material-ui/core/Grid';
+import Sortable from '../Sortable';
+import Editable from '../Editable';
 
-import CompromisoCard from "./CompromisoCard";
+import CompromisoCard from './CompromisoCard';
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 const AgaTooltip = withStyles(theme => ({
   tooltip: {
     backgroundColor: theme.palette.common.black,
-    color: "rgba(250, 250, 250, 0.87)",
+    color: 'rgba(250, 250, 250, 0.87)',
     boxShadow: theme.shadows[1],
     fontSize: 13
   },
@@ -33,7 +33,7 @@ const AgaTooltip = withStyles(theme => ({
   }
 }))(Tooltip);
 
-const LIST_QUERY = loader("../../queries/CompromisoList.graphql");
+const LIST_QUERY = loader('../../queries/CompromisoList.graphql');
 
 const CompromisoList = ({ where }) => {
   const classes = useStyles();
@@ -47,7 +47,7 @@ const CompromisoList = ({ where }) => {
     variables: {
       compromisosWhere: where
     },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: 'cache-and-network'
   });
 
   if (error) return <div>Error</div>;
@@ -100,9 +100,9 @@ const CompromisoList = ({ where }) => {
         itemProps={{}}
         containerComponent={Grid}
         containerProps={{
-          direction: "row",
-          justify: "space-between",
-          alignItems: "flex-start",
+          direction: 'row',
+          justify: 'space-between',
+          alignItems: 'flex-start',
           container: true
         }}
         refetch={refetch}
