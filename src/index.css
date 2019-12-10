@@ -1,9 +1,9 @@
-@import url('colores.css');
+@import url("colores.css");
 
 html,
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: Source Sans Pro, sans-serif !important;
   font-size: 16px !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -96,20 +96,52 @@ hr.line {
 
 .menu-transparente {
   /*background-color: inherit !important;*/
-  background-color: rgba(0, 0, 0, 0.7) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
   z-index: 9999 !important;
+  font-size: 0.9em;
+}
+/*
+.menu-transparente .MuiBox-root {
+  float: right !important;
+}*/
+
+.menu-transparente .MuiButton-text {
+  text-transform: inherit;
+  margin-left: 1em;
+}
+.menu-transparente .MuiButton-textSizeLarge {
+  padding: 20px 11px;
+  font-size: 0.9375rem;
+  margin-left: 0;
+  margin-right: 20px;
+  border-radius: inherit;
+}
+
+.menu-transparente h6 {
+  float: left;
+  line-height: 1.3;
+  width: 200px;
+  margin: 0.6em 0 0 1em;
+  font-size: 1.2em;
+  letter-spacing: -0.04em;
 }
 
 .image-over {
-  background: -moz-linear-gradient(top,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.8) 100%);
-  background: -webkit-linear-gradient(top,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.8) 100%);
-  background: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.8) 100%);
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
   -webkit-border-radius: 6px 6px 6px 6px;
   border-radius: 6px 6px 6px 6px;
@@ -121,15 +153,28 @@ hr.line {
 }
 
 .pattern1 {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAFUlEQVQImWNgQAO/fv0yproAAwMDADvBD6bchomlAAAAAElFTkSuQmCC) repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAFUlEQVQImWNgQAO/fv0yproAAwMDADvBD6bchomlAAAAAElFTkSuQmCC)
+    repeat;
 }
 
 .pattern2 {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgYGAwZiAWYFcJABFmAGeceo4VAAAAAElFTkSuQmCC) repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgYGAwZiAWYFcJABFmAGeceo4VAAAAAElFTkSuQmCC)
+    repeat;
 }
 
 .pattern3 {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAD0lEQVQImWNgwARStBAAABpPAIPQzAGMAAAAAElFTkSuQmCC) repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAD0lEQVQImWNgwARStBAAABpPAIPQzAGMAAAAAElFTkSuQmCC)
+    repeat;
+}
+
+.pattern4 {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgYGDYzEAswK4SADxmAWfSMHuPAAAAAElFTkSuQmCC)
+    repeat;
+}
+
+.pattern5 {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQImWNgQAW+ZHAAJ14BNVd0PgAAAAAASUVORK5CYII=)
+    repeat;
 }
 
 .curson-default {
@@ -176,7 +221,8 @@ hr.line {
   cursor: wait !important;
 }
 
-.widget-calendar {}
+.widget-calendar {
+}
 
 .sc-bdVaJa {
   border: solid 1px #e2e8ee;
@@ -187,7 +233,8 @@ hr.line {
   background-color: #fafafa;
 }
 
-.sc-bdVaJa .sc-bxivhb {}
+.sc-bdVaJa .sc-bxivhb {
+}
 
 .sc-bdVaJa .sc-htpNat {
   background-color: #fafafa;
@@ -216,9 +263,8 @@ hr.line {
   border-left: #0099ff 6px solid;
 }
 
-
 .panel_heading {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 24px !important;
   width: 100%;
 }
@@ -233,13 +279,15 @@ hr.line {
 }
 
 .MuiExpansionPanelDetails-root {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   padding: 8px 0px 24px !important;
 }
 
-table.MuiTable-root {}
+table.MuiTable-root {
+}
 
-thead {}
+thead {
+}
 
 thead.MuiTableHead-root {
   text-transform: uppercase;
@@ -247,7 +295,7 @@ thead.MuiTableHead-root {
 }
 
 th.MuiTableCell-root {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 16px !important;
 }
 
@@ -260,8 +308,8 @@ th.MuiTableCell-root {
 .coWVFC {
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .z-depth-1-half {
@@ -305,16 +353,17 @@ th.MuiTableCell-root {
 
 .MuiTypography-h4 {
   font-size: 1.5rem !important;
-  font-family: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
+  font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
   line-height: 1.05 !important;
   letter-spacing: 0em !important;
 }
 
-.item-compromisos {}
+.item-compromisos {
+}
 
 .item-compromisos a:hover,
-.item-compromisos a:hover>* {
+.item-compromisos a:hover > * {
   color: #f4ff81;
   -webkit-transition: none;
   transition: none;
@@ -328,12 +377,12 @@ th.MuiTableCell-root {
  * Reset estilos gobabierto
  */
 
-.row__>* {
+.row__ > * {
   padding: 0 0 0 0;
 }
 
 a:hover,
-a:hover>* {
+a:hover > * {
   color: #03a9f4;
   -webkit-transition: none;
   transition: none;

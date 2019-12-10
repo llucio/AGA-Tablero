@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CardMedia from '@material-ui/core/CardMedia';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Container from '@material-ui/core/Container';
-import Hidden from '@material-ui/core/Hidden';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Fab from '@material-ui/core/Fab';
-import Button from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
+import React from "react";
+import PropTypes from "prop-types";
+import CardMedia from "@material-ui/core/CardMedia";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import Container from "@material-ui/core/Container";
+import Hidden from "@material-ui/core/Hidden";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Fab from "@material-ui/core/Fab";
+import Button from "@material-ui/core/Button";
+import MenuIcon from "@material-ui/icons/Menu";
 
-const base = 'https://gobabierto-staging.k8s.funcionpublica.gob.mx';
+const base = "https://gobabierto-staging.k8s.funcionpublica.gob.mx";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    className: 'shadow-text'
+    className: "shadow-text"
   },
   media: {
     height: 55,
@@ -64,6 +64,9 @@ const MenuPrincipal = props => {
           <Container>
             <Hidden mdUp>
               <Toolbar>
+                <Button color="inherit" className="blue" size="large">
+                  <MenuIcon />
+                </Button>
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -72,17 +75,14 @@ const MenuPrincipal = props => {
                   title="Gobierno Abierto"
                 />
                 <Typography variant="subtitle1" className={classes.title}>
-                  <strong>Alianza</strong> para el{' '}
+                  <strong>Alianza</strong> para el{" "}
                   <strong>
-                    {' '}
+                    {" "}
                     Gobierno
                     <br />
                     Abierto MX
                   </strong>
                 </Typography>
-                <Fab color="inherit" className="black">
-                  <MenuIcon />
-                </Fab>
               </Toolbar>
             </Hidden>
 
@@ -95,10 +95,10 @@ const MenuPrincipal = props => {
                   image="/assets/images/logo.png"
                   title="Gobierno Abierto"
                 />
-                <Typography variant="subtitle1" className={classes.title}>
-                  <strong>Alianza</strong> para el{' '}
+                <Typography variant="h6" className={classes.title}>
+                  <strong>Alianza</strong> para el{" "}
                   <strong>
-                    {' '}
+                    {" "}
                     Gobierno
                     <br />
                     Abierto MX
