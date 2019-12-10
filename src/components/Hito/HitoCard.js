@@ -40,9 +40,10 @@ const HitoCard = ({ item: hito, refetch }) => {
         <Box>
           <Button
             color="primary"
-            to={`/accion-clave/${hito.id}`}
+            href={`/accion-clave/${hito.id}`}
           >
-            <LinkIcon className={classes.extendedIcon} />
+            <LinkIcon 
+            className={classes.extendedIcon} />
             Detalles
           </Button>
         </Box>

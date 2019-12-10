@@ -353,7 +353,7 @@ th.MuiTableCell-root {
 
 .MuiTypography-h4 {
   font-size: 1.5rem !important;
-  font-family: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
+  font-family: Source Sans Pro, sans-serif !important;
   font-weight: 400;
   line-height: 1.05 !important;
   letter-spacing: 0em !important;
@@ -380,7 +380,9 @@ th.MuiTableCell-root {
   list-style-type: disc;
   margin: 0;
   padding: 0 30px;
-
+}
+.compromiso-content ol {
+  list-style-type: decimal;
 }
  
 .compromiso-content li {
@@ -407,6 +409,17 @@ th.MuiTableCell-root {
 .compromiso-content li a:hover {
   font-size: 30px;
   background: #f6f6f6;
+}
+
+.compromiso-content .MuiBox-root h6 {
+  border-left: 5px solid #8bc34a;
+  padding: 5px 15px;
+  margin: 25px 0;
+  transition: background-color 0.5s ease;
+}
+
+.compromiso-content .MuiBox-root h6:hover {
+  background-color:#eceff1 ; 
 }
 
 
