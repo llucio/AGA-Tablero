@@ -264,7 +264,7 @@ hr.line {
 }
 
 .panel_heading {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: Source Sans Pro, sans-serif !important;
   font-size: 24px !important;
   width: 100%;
 }
@@ -279,7 +279,7 @@ hr.line {
 }
 
 .MuiExpansionPanelDetails-root {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: Source Sans Pro, sans-serif !important;
   padding: 8px 0px 24px !important;
 }
 
@@ -295,7 +295,7 @@ thead.MuiTableHead-root {
 }
 
 th.MuiTableCell-root {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: Source Sans Pro, sans-serif !important;
   font-size: 16px !important;
 }
 
@@ -372,6 +372,43 @@ th.MuiTableCell-root {
   -webkit-transform: none;
   transform: none;
 }
+
+.compromiso-content{}
+
+
+.compromiso-content ul {
+  list-style-type: disc;
+  margin: 0;
+  padding: 0 30px;
+
+}
+ 
+.compromiso-content li {
+  border-bottom: 1px solid #eceff1;
+  min-width: 200px;
+  max-width: auto;
+  padding: 10px 0;
+}
+ 
+ 
+.compromiso-content li a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  width: 200px;
+ 
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+ 
+.compromiso-content li a:hover {
+  font-size: 30px;
+  background: #f6f6f6;
+}
+
 
 /*
  * Reset estilos gobabierto

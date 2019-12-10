@@ -2,8 +2,12 @@ import React from 'react';
 import _ from 'lodash';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
@@ -14,6 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { StickyContainer, Sticky } from 'react-sticky';
@@ -67,6 +72,19 @@ const useStyles = makeStyles(theme => ({
     marginTop: '100px'
   }
 }));
+
+const AgaTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.black,
+    color: 'rgba(250, 250, 250, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 13
+  },
+  arrow: {
+    color: theme.palette.common.black
+  }
+}))(Tooltip);
+
 
 const CompromisoDetail = ({ match }) => {
   const classes = useStyles();
@@ -129,11 +147,38 @@ const CompromisoDetail = ({ match }) => {
                     )}
                     axis="y"
                   />
+                  <Divider variant="middle" />
+                  <Editable
+                    item={item}
+                    upload
+                    uploadType="file"
+                    path="metadatos.descarga"
+                    label="Descarga de compromiso"
+                    onUpdate={refetch}
+                  >
+                    <AgaTooltip
+                      title="Descarga la hoja de ruta"
+                      aria-label="descarga"
+                      placement="right"
+                    >
+                      <Fab
+                        variant="extended"
+                        size="large"
+                        color="primary"
+                        className={classes.button}
+                        href={metadatos.descarga}
+                        target="_blank"
+                      >
+                        <GetAppIcon className={classes.extendedIcon} />
+                        Hoja de ruta
+                      </Fab>
+                    </AgaTooltip>
+                  </Editable>
                 </Box>
               )}
             </Sticky>
           </Grid>
-          <Grid item xs={12} md={9}>
+          <Grid item xs={12} md={9} className="compromiso-content">
             <Editable
               item={item}
               path="titulo"
@@ -153,17 +198,6 @@ const CompromisoDetail = ({ match }) => {
               onUpdate={refetch}
             >
               <img src={metadatos.imagen} alt="compromiso" height={100} />
-            </Editable>
-
-            <Editable
-              item={item}
-              upload
-              uploadType="file"
-              path="metadatos.descarga"
-              label="Descarga de compromiso"
-              onUpdate={refetch}
-            >
-              <a href={metadatos.descarga}>Descarga la hoja de ruta</a>
             </Editable>
 
             <hr className="line" />
@@ -281,6 +315,7 @@ const compromisoTabs = [
           size="small"
           title="Consulta la lista de Objetivos de desarrollo Sostenible"
           aria-label="Consulta la lista de Objetivos de desarrollo Sostenible"
+          style={{marginLeft: '10px'}}
         >
           <HelpIcon />
         </IconButton>
