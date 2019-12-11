@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from "react-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -30,7 +31,7 @@ const routes = [
     path: '/compromiso/:id',
     content: CompromisoDetail,
     heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
-    subheading: 'new',
+    //subheading: 'new',
     headerClass: 'medium'
   },
   {
@@ -80,7 +81,6 @@ const AppRouter = () => (
           component={props => (
             <React.Fragment>
               <MenuPrincipal />
-
               {!!heading && (
                 <Heading
                   heading={heading}

@@ -106,7 +106,7 @@ const HitoHeader = ({ hito, refetch }) => {
   const { metadatos } = hito;
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={9}>
+      <Grid item xs={12} md={8}>
         <strong>
           Compromiso:{' '}
           <Link to={`/compromiso/${hito.compromiso.id}`}>
@@ -120,7 +120,7 @@ const HitoHeader = ({ hito, refetch }) => {
       <Grid
         item
         xs={12}
-        md={3}
+        md={4}
         className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase bold text-center"
       >
         <Editable
