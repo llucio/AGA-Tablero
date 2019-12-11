@@ -9,6 +9,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+  #banner .content {
+    padding: 6em 4.563em 4.5em;
+  }
+
+  #banner .content header {
+    margin: 25px 0 0;
+  }
+
+
 .light {
   font-weight: 300 !important;
 }
@@ -47,7 +56,7 @@ strong,
 
 hr.line {
   margin: 10px 0 4%;
-  width: 5rem;
+  width: 10rem;
   border: 3px solid #8bc34a;
 }
 
@@ -256,6 +265,7 @@ hr.line {
   line-height: 1.1;
   padding: 4px 4px 4px 10px;
   border-left: #eceff1 6px solid;
+  margin-bottom: .6rem;
 }
 
 .menuSidebar p:hover,
@@ -376,7 +386,6 @@ th.MuiTableCell-root {
 
 .compromiso-content{}
 
-
 .compromiso-content ul {
   list-style-type: disc;
   margin: 0;
@@ -419,8 +428,23 @@ th.MuiTableCell-root {
   transition: background-color 0.5s ease;
 }
 
+.compromiso-content .MuiBox-root h4{
+  font-weight: 600;
+}
+
+.table-actividad .MuiBox-root h6{
+  border-left: inherit;
+  padding: inherit;
+  margin: inherit;
+  transition: inherit;
+}
+
 .compromiso-content .MuiBox-root h6:hover {
   background-color:#eceff1!important; 
+}
+
+.table-actividad .MuiBox-root h6:hover{
+  background-color: transparent!important;
 }
 
 
@@ -449,6 +473,14 @@ a:hover > * {
 
 @media screen and (max-width: 640px) {
   /* Resoluciones menores de 640 píxeles de ancho. */
+
+  #banner .content {
+    padding: 3em 1.5625em 2.25em;
+  }
+
+  #banner .content header {
+    margin: 25px 0 0;
+  }
 
   #page-wrapper {
     padding-bottom: 0px;
@@ -479,6 +511,14 @@ a:hover > * {
 
 @media screen and (max-width: 1024px) and (min-width: 640px) {
   /* Resoluciones menores de 1024 píxeles de ancho pero mayores que 640 píxeles */
+  
+  #banner .content {
+    padding: 5em 1.5625em 4.25em;
+  }
+
+  #banner .content header {
+    margin: 25px 0 0;
+  }
 
   #page-wrapper {
     padding-bottom: 0px;

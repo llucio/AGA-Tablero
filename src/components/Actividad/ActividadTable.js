@@ -67,7 +67,7 @@ const ActividadTable = ({ where }) => {
   if (!actividades) return null;
 
   return (
-    <div className="vertical-margin">
+    <div className="vertical-margin table-actividad">
       <Box className={classes.rootTable}>
         <Table
           responsive
