@@ -60,7 +60,7 @@ const MenuPrincipal = props => {
   return (
     <>
       <Hidden mdUp>
-        <MenuMovil pageWrapId={"page-wrap"} outerContainerId={"App"} />
+        <MenuMovil pageWrapId={'page-wrap'} outerContainerId={'App'} />
         <AppBar
           color="inherit"
           position="fixed"
@@ -70,7 +70,7 @@ const MenuPrincipal = props => {
             {/*<Button color="inherit" className="blue" size="large">
               .
             </Button>*/}
-            <MenuMovil pageWrapId={"page-wrap"} outerContainerId={"App"} />
+            <MenuMovil pageWrapId={'page-wrap'} outerContainerId={'App'} />
             <CardMedia
               component="img"
               alt="Gobierno Abierto"
@@ -90,9 +90,6 @@ const MenuPrincipal = props => {
             </Typography>
           </Toolbar>
         </AppBar>
-
-
-
       </Hidden>
 
       <Hidden smDown>

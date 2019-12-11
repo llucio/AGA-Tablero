@@ -85,7 +85,6 @@ const AgaTooltip = withStyles(theme => ({
   }
 }))(Tooltip);
 
-
 const CompromisoDetail = ({ match }) => {
   const classes = useStyles();
   const { usuario: { administrador } = {} } = useRoles();
@@ -297,7 +296,11 @@ const compromisoTabs = [
     icon: <WbIncandescentIcon />
   },
   { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
-  { key: 'indicadorGlobal', label: 'Indicador global', icon: <BookmarksIcon /> },
+  {
+    key: 'indicadorGlobal',
+    label: 'Indicador global',
+    icon: <BookmarksIcon />
+  },
   {
     key: 'valores',
     label: 'Valores de Gobierno Abierto',
@@ -315,7 +318,7 @@ const compromisoTabs = [
           size="small"
           title="Consulta la lista de Objetivos de desarrollo Sostenible"
           aria-label="Consulta la lista de Objetivos de desarrollo Sostenible"
-          style={{marginLeft: '10px'}}
+          style={{ marginLeft: '10px' }}
         >
           <HelpIcon />
         </IconButton>

@@ -9,56 +9,61 @@ import UserMenu from './UserMenu';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   box_one: {
     padding: theme.spacing(0, 4),
     textAlign: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   box_two: {
     padding: theme.spacing(0, 7),
     textAlign: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   link: {
-    margin: theme.spacing(1),
-  },
+    margin: theme.spacing(1)
+  }
 }));
 
 const Footer = props => {
+  const classes = useStyles();
 
-	const classes = useStyles();
-
-	return (
-
-    <div className='black'>
-			<Container >
-				
-				<Grid
-				  container
-				  direction="row"
-				  justify="center"
-				  alignItems="stretch"
-				  spacing={4}
+  return (
+    <div className="black">
+      <Container>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="stretch"
+          spacing={4}
           className={classes.root}
-				>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-	          	<Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
-	              <CardMedia
-	                component="img"
-	                alt="Gobierno Abierto"
-	                className={classes.media}
-	                image="/assets/images/logo_sfp_vertical_blanco.svg"
-	                title="Gobierno Abierto"
-	              />
+        >
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
+                <CardMedia
+                  component="img"
+                  alt="Gobierno Abierto"
+                  className={classes.media}
+                  image="/assets/images/logo_sfp_vertical_blanco.svg"
+                  title="Gobierno Abierto"
+                />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -67,11 +72,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -80,21 +89,24 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	      </Grid>
+            </Box>
+          </Grid>
+        </Grid>
 
-	      <Grid
-				  container
-				  direction="row"
-				  justify="center"
-				  alignItems="flex-start"
-				  spacing={4}
-
-				>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+          spacing={4}
+        >
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -103,11 +115,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -116,11 +132,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -129,11 +149,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_two}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_two}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -142,11 +166,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -155,11 +183,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -168,21 +200,24 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	      </Grid>
+            </Box>
+          </Grid>
+        </Grid>
 
-	      <Grid
-				  container
-				  direction="row"
-				  justify="center"
-				  alignItems="flex-start"
-				  spacing={4}
-
-				>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+          spacing={4}
+        >
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -191,11 +226,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -204,11 +243,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_two}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_two}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -217,11 +260,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -230,11 +277,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -243,11 +294,15 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	        <Grid item xs={4}  sm={2}>
-	          <Box className={classes.box_one}>
-              <Link href="https://www.gob.mx/sfp" target="_blank" className={classes.link}>
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box className={classes.box_one}>
+              <Link
+                href="https://www.gob.mx/sfp"
+                target="_blank"
+                className={classes.link}
+              >
                 <CardMedia
                   component="img"
                   alt="Gobierno Abierto"
@@ -256,9 +311,9 @@ const Footer = props => {
                   title="Gobierno Abierto"
                 />
               </Link>
-	          </Box>
-	        </Grid>
-	      </Grid>
+            </Box>
+          </Grid>
+        </Grid>
 
         <Grid
           container
@@ -268,14 +323,12 @@ const Footer = props => {
         >
           <Grid item xs={6} sm={4}>
             <Box className={classes.box_one}>
-            <UserMenu />
+              <UserMenu />
             </Box>
           </Grid>
         </Grid>
-
       </Container>
-     </div>
-
+    </div>
   );
 };
 

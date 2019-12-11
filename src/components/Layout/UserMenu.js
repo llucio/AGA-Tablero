@@ -13,7 +13,7 @@ import { useRoles } from '../../hooks';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing(4, 1),
+    padding: theme.spacing(4, 1)
   },
   paper: {
     padding: theme.spacing(1),
@@ -25,8 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   extendedIcon: {
     marginRight: theme.spacing(1)
-  },
-
+  }
 }));
 
 const UserMenu = () => {
@@ -65,7 +64,7 @@ const UserMenu = () => {
             ) : (
               <FaceIcon className={classes.extendedIcon} />
             )}
-             Mi sesión
+            Mi sesión
           </Fab>
           <Menu
             id="simple-menu"
@@ -82,7 +81,6 @@ const UserMenu = () => {
           </Menu>
         </Grid>
       ) : (
-
         <Fab
           variant="extended"
           className="grey darken-4 grey-text text-darken-1"
@@ -92,7 +90,6 @@ const UserMenu = () => {
         >
           <PersonIcon className={classes.extendedIcon} /> Identifícate
         </Fab>
-
       )}
     </Box>
   );

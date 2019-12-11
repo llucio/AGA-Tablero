@@ -52,9 +52,7 @@ const ActividadCard = ({ item: actividad, refetch }) => {
     <Grid item xs={12} className={classes.root}>
       <li className={classes.item}>
         <Typography className="light" display="block">
-          <span>
-            {actividad.titulo}
-          </span>
+          <span>{actividad.titulo}</span>
         </Typography>
       </li>
     </Grid>
