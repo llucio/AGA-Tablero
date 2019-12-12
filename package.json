@@ -38,7 +38,7 @@
     "react-calendar-icon": "^0.9.2",
     "react-dom": "^16.9.0",
     "react-draft-wysiwyg": "^1.13.2",
-    "react-keycloak": "8.0.1-191207",
+    "react-keycloak": "^8.0.1-191207",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.3.0",
