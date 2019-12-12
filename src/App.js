@@ -1,51 +1,51 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-import Container from "react-bootstrap/Container";
-import Box from "@material-ui/core/Box";
-import AuthProvider from "./keycloak";
-import { apolloClient } from "./apollo";
-import MenuPrincipal from "./components/Layout/MenuPrincipal";
-import Footer from "./components/Layout/Footer";
-import CompromisoList from "./components/Compromiso/CompromisoList";
-import CompromisoDetail from "./components/Compromiso/CompromisoDetail";
-import HitoDetail from "./components/Hito/HitoDetail";
-import ScrollToTop from "./components/ScrollToTop";
-import BreadcrumbBar from "./components/BreadcrumbBar";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import Container from 'react-bootstrap/Container';
+import Box from '@material-ui/core/Box';
+import AuthProvider from './keycloak';
+import { apolloClient } from './apollo';
+import MenuPrincipal from './components/Layout/MenuPrincipal';
+import Footer from './components/Layout/Footer';
+import CompromisoList from './components/Compromiso/CompromisoList';
+import CompromisoDetail from './components/Compromiso/CompromisoDetail';
+import HitoDetail from './components/Hito/HitoDetail';
+import ScrollToTop from './components/ScrollToTop';
+import BreadcrumbBar from './components/Layout/BreadcrumbBar';
 
-import "bootstrap/dist/css/bootstrap.css";
+import 'bootstrap/dist/css/bootstrap.css';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     content: CompromisoList,
-    heading: "¡Conoce los avances de los compromisos de Gobierno Abierto",
+    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto',
     subheading:
-      "En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.",
-    image: "/assets/images/planes_de_accion.jpg",
-    headerClass: "medium"
+      'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
+    image: '/assets/images/planes_de_accion.jpg',
+    headerClass: 'medium'
   },
   {
-    path: "/compromiso/:id",
+    path: '/compromiso/:id',
     content: CompromisoDetail,
-    heading: "¡Conoce los avances de los compromisos de Gobierno Abierto!",
-    headerClass: "medium"
+    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
+    headerClass: 'medium'
   },
   {
-    path: ["/accion-clave/:id"],
+    path: ['/accion-clave/:id'],
     content: HitoDetail,
-    heading: "¡Conoce los avances de los compromisos de Gobierno Abierto!",
-    headerClass: "medium"
+    heading: '¡Conoce los avances de los compromisos de Gobierno Abierto!',
+    headerClass: 'medium'
   }
 ];
 
 const theme = {
   calendarIcon: {
-    textColor: "white",
-    primaryColor: "#0da472",
-    backgroundColor: "#fafafa"
+    textColor: 'white',
+    primaryColor: '#0da472',
+    backgroundColor: '#fafafa'
   }
 };
 
@@ -69,7 +69,7 @@ const AppRouter = () => (
         heading,
         subheading,
         headerClass,
-        image = "/assets/images/decorativa2.jpg",
+        image = '/assets/images/decorativa2.jpg',
         headerArrow = false,
         exact = true
       }) => (

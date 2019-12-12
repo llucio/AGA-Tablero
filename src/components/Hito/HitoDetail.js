@@ -109,12 +109,12 @@ const HitoHeader = ({ hito, refetch }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={8}>
-        <strong>
+        {/*<strong>
           Compromiso:{' '}
           <Link to={`/compromiso/${hito.compromiso.id}`}>
             {hito.compromiso.titulo}
           </Link>
-        </strong>
+        </strong>*/}
         <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
           <h3 className="bold">{hito.titulo}</h3>
         </Editable>

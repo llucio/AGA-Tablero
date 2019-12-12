@@ -60,7 +60,7 @@ const MenuPrincipal = props => {
   return (
     <>
       <Hidden mdUp>
-        <MenuMovil pageWrapId={'page-wrap'} outerContainerId={'App'} />
+        {/*<MenuMovil pageWrapId={'page-wrap'} outerContainerId={'App'} />*/}
         <AppBar
           color="inherit"
           position="fixed"
