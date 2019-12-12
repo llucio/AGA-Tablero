@@ -6,7 +6,6 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import MenuBookIcon from '@material-ui/icons/MenuBook';

@@ -9,12 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
-
-//import CheeseburgerMenu from 'cheeseburger-menu'
-//import HamburgerMenu from 'react-hamburger-menu'
 
 const base = process.env.WEBSITE_BASE_URL || 'https://gobabiertomx.org';
 

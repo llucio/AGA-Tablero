@@ -2,12 +2,12 @@ import React from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
-import BreadcrumbItem from './BreadcrumbItem';
+import Hidden from '@material-ui/core/Hidden';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 const GET_QUERY = loader('../../queries/HitoGet.graphql');
-//const LIST_QUERY = loader('../../queries/HitoList.graphql');
 
-const BreadcrumbCompromiso = props => {
+const BreadcrumbHito = props => {
   const idItem = props.hitoId;
 
   const { data: { item } = {}, loading, error } = useQuery(GET_QUERY, {
@@ -22,7 +22,14 @@ const BreadcrumbCompromiso = props => {
 
   //const { metadatos = {} } = item;
 
-  return <BreadcrumbItem compromisoId={item.compromiso_id} />; //{item.titulo}
+  return (
+    <Breadcrumb.Item active>
+      <span>
+        <Hidden smDown>{item.titulo}</Hidden>
+        <Hidden mdUp>Acción clave</Hidden>
+      </span>
+    </Breadcrumb.Item>
+  ); //{item.titulo}
 };
 
-export default BreadcrumbCompromiso;
+export default BreadcrumbHito;
