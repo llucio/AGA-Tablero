@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme => ({
     fontWeight: theme.typography.fontWeightRegular
   },
   extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
+    marginRight: theme.spacing(1)
+  }
 }));
 
 const HitoCard = ({ item: hito, refetch }) => {
@@ -38,12 +38,8 @@ const HitoCard = ({ item: hito, refetch }) => {
           </Editable>
         </h4>
         <Box>
-          <Button
-            color="primary"
-            href={`/accion-clave/${hito.id}`}
-          >
-            <LinkIcon 
-            className={classes.extendedIcon} />
+          <Button color="primary" href={`/accion-clave/${hito.id}`}>
+            <LinkIcon className={classes.extendedIcon} />
             Detalles
           </Button>
         </Box>

@@ -3,9 +3,7 @@ import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 //import Sortable from '../Sortable';
@@ -29,22 +27,18 @@ const EntregableList = ({ where }) => {
 
   return (
     <div>
-
       {entregables.map(entregable => (
         <Box key={entregable.id}>
-		      <Link href={entregable.archivos[0]} color="inherit">
-		        <PictureAsPdfIcon />
-		      </Link>
+          <Link href={entregable.archivos[0]} color="inherit">
+            <PictureAsPdfIcon />
+          </Link>
           <Link href={entregable.archivos[1]} color="inherit">
-		        <PictureAsPdfIcon />
-		      </Link>
+            <PictureAsPdfIcon />
+          </Link>
         </Box>
       ))}
-
     </div>
   );
 };
 
 export default EntregableList;
-
-

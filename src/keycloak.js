@@ -15,11 +15,7 @@ const Provider = ({ children }) => {
   };
 
   return (
-    <KeycloakProvider
-      initConfig={initConfig}
-      keycloak={keycloak}
-      onTokens={setToken}
-    >
+    <KeycloakProvider initConfig={initConfig} keycloak={keycloak} onTokens={setToken}>
       {children}
     </KeycloakProvider>
   );

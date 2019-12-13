@@ -10,7 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+//import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
@@ -67,7 +67,7 @@ const ActividadTable = ({ where }) => {
   if (!actividades) return null;
 
   return (
-    <div className="vertical-margin">
+    <div className="vertical-margin table-actividad">
       <Box className={classes.rootTable}>
         <Table
           responsive

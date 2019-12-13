@@ -6,7 +6,6 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
@@ -84,7 +83,6 @@ const AgaTooltip = withStyles(theme => ({
     color: theme.palette.common.black
   }
 }))(Tooltip);
-
 
 const CompromisoDetail = ({ match }) => {
   const classes = useStyles();
@@ -297,7 +295,11 @@ const compromisoTabs = [
     icon: <WbIncandescentIcon />
   },
   { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
-  { key: 'indicadorGlobal', label: 'Indicador global', icon: <BookmarksIcon /> },
+  {
+    key: 'indicadorGlobal',
+    label: 'Indicador global',
+    icon: <BookmarksIcon />
+  },
   {
     key: 'valores',
     label: 'Valores de Gobierno Abierto',
@@ -315,7 +317,7 @@ const compromisoTabs = [
           size="small"
           title="Consulta la lista de Objetivos de desarrollo Sostenible"
           aria-label="Consulta la lista de Objetivos de desarrollo Sostenible"
-          style={{marginLeft: '10px'}}
+          style={{ marginLeft: '10px' }}
         >
           <HelpIcon />
         </IconButton>

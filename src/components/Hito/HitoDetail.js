@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
 import { CalendarIcon } from 'react-calendar-icon';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-//import Box from '@material-ui/core/Box';
+import Box from '@material-ui/core/Box';
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 import moment from '../../utils/moment';
@@ -36,14 +35,11 @@ const useStyles = makeStyles(theme => ({
 const HitoDetail = ({ match, id }) => {
   const classes = useStyles();
 
-  const { data: { item: hito } = {}, loading, error, refetch } = useQuery(
-    GET_QUERY,
-    {
-      variables: {
-        id: id || match.params.id
-      }
+  const { data: { item: hito } = {}, loading, error, refetch } = useQuery(GET_QUERY, {
+    variables: {
+      id: id || match.params.id
     }
-  );
+  });
 
   if (error) return <div>Error</div>;
   if (loading && !hito) return <LoadingIndicator />;
@@ -53,44 +49,37 @@ const HitoDetail = ({ match, id }) => {
 
   return (
     <div className={classes.root}>
-      <Grid spacing={2} className={classes.header}>
-        <HitoHeader hito={hito} refetch={refetch} />
-      </Grid>
+      <Box className="compromiso-content">
+        <Grid spacing={2} className={classes.header}>
+          <HitoHeader hito={hito} refetch={refetch} />
+        </Grid>
 
-      <Grid spacing={2}>
-        <div>
-          <h6>
-            <strong>Descripción/objetivo de la acción clave</strong>
-          </h6>
-        </div>
-        <Editable
-          html
-          item={hito}
-          path="metadatos.descripcion"
-          label="Descripción"
-          onUpdate={refetch}
-        >
-          <DataDisplay data={metadatos.descripcion} />
-        </Editable>
-        <div>
-          <h6>
-            <strong>Responsables</strong>
-          </h6>
-        </div>
-        <Editable
-          html
-          item={hito}
-          path="metadatos.institucionesResponsables"
-          label="Instituciones responsables"
-          onUpdate={refetch}
-        >
-          <DataDisplay
-            className="d-block"
-            data={metadatos.institucionesResponsables}
-          />
-        </Editable>
-      </Grid>
-      <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
+        <Grid spacing={2}>
+          <div>
+            <h6>
+              <strong>Descripción/objetivo de la acción clave</strong>
+            </h6>
+          </div>
+          <Editable html item={hito} path="metadatos.descripcion" label="Descripción" onUpdate={refetch}>
+            <DataDisplay data={metadatos.descripcion} />
+          </Editable>
+          <div>
+            <h6>
+              <strong>Responsables</strong>
+            </h6>
+          </div>
+          <Editable
+            html
+            item={hito}
+            path="metadatos.institucionesResponsables"
+            label="Instituciones responsables"
+            onUpdate={refetch}
+          >
+            <DataDisplay className="d-block" data={metadatos.institucionesResponsables} />
+          </Editable>
+        </Grid>
+        <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
+      </Box>
     </div>
   );
 };
@@ -107,14 +96,14 @@ const HitoHeader = ({ hito, refetch }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={8}>
-        <strong>
+        {/*<strong>
           Compromiso:{' '}
           <Link to={`/compromiso/${hito.compromiso.id}`}>
             {hito.compromiso.titulo}
           </Link>
-        </strong>
+        </strong>*/}
         <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-          <h3 className="bold">{hito.titulo}</h3>
+          <h2 className="bold">{hito.titulo}</h2>
         </Editable>
       </Grid>
       <Grid
