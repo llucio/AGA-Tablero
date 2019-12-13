@@ -14,6 +14,7 @@ const CustomHeader = props => {
   const heading = props.heading;
   const subheading = props.subheading;
   const headerArrow = props.headerArrow;
+  const imageDefault = '/assets/images/planes_de_accion.jpg';
 
   const { data: { item } = {}, loading, error } = useQuery(GET_QUERY, {
     variables: {
@@ -25,15 +26,12 @@ const CustomHeader = props => {
   if (loading && !item) return <LoadingIndicator />;
   if (!item) return <HeadingDefault />;
 
-  {
-    /*return <>backgroundImage: `url(${item.metadatos.imagen})`</>;*/
-  }
-
-  const imageUrl = item.metadatos.imagen ? item.metadatos.imagen : props.image;
+  const { metadatos = {} } = item;
+  const imageUrl = metadatos.imagen ? metadatos.imagen : imageDefault;
 
   return (
     <section id="banner" className="medium" style={{ backgroundImage: `url(${imageUrl})` }}>
-      <Box className="content image-content-- pattern5">
+      <Box className="content image-content-- pattern4">
         <header>
           <h2 className="big shadow-text">{heading}</h2>
           {subheading && <h4 className="mt-4 lead shadow-text">{subheading}</h4>}
@@ -55,7 +53,7 @@ const HeadingDefault = props => {
 
   return (
     <section id="banner" className="medium" style={{ backgroundImage: `url(${image})` }}>
-      <Box className="content image-content-- pattern5">
+      <Box className="content image-content-- pattern4">
         <header>
           <h2 className="big shadow-text">{heading}</h2>
           {subheading && <h4 className="mt-4 lead shadow-text">{subheading}</h4>}

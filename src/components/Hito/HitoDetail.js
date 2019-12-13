@@ -35,14 +35,11 @@ const useStyles = makeStyles(theme => ({
 const HitoDetail = ({ match, id }) => {
   const classes = useStyles();
 
-  const { data: { item: hito } = {}, loading, error, refetch } = useQuery(
-    GET_QUERY,
-    {
-      variables: {
-        id: id || match.params.id
-      }
+  const { data: { item: hito } = {}, loading, error, refetch } = useQuery(GET_QUERY, {
+    variables: {
+      id: id || match.params.id
     }
-  );
+  });
 
   if (error) return <div>Error</div>;
   if (loading && !hito) return <LoadingIndicator />;
@@ -63,13 +60,7 @@ const HitoDetail = ({ match, id }) => {
               <strong>Descripción/objetivo de la acción clave</strong>
             </h6>
           </div>
-          <Editable
-            html
-            item={hito}
-            path="metadatos.descripcion"
-            label="Descripción"
-            onUpdate={refetch}
-          >
+          <Editable html item={hito} path="metadatos.descripcion" label="Descripción" onUpdate={refetch}>
             <DataDisplay data={metadatos.descripcion} />
           </Editable>
           <div>
@@ -84,10 +75,7 @@ const HitoDetail = ({ match, id }) => {
             label="Instituciones responsables"
             onUpdate={refetch}
           >
-            <DataDisplay
-              className="d-block"
-              data={metadatos.institucionesResponsables}
-            />
+            <DataDisplay className="d-block" data={metadatos.institucionesResponsables} />
           </Editable>
         </Grid>
         <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
@@ -115,7 +103,7 @@ const HitoHeader = ({ hito, refetch }) => {
           </Link>
         </strong>*/}
         <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-          <h3 className="bold">{hito.titulo}</h3>
+          <h2 className="bold">{hito.titulo}</h2>
         </Editable>
       </Grid>
       <Grid
