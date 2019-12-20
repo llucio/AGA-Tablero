@@ -1,5 +1,5 @@
 # Fase I: Construcción
-FROM node:12-alpine as build
+FROM node:10-alpine as build
 
 # URL de API de datos
 ARG API_URL=http://localhost:4000/v1/graphql
@@ -11,7 +11,7 @@ WORKDIR /app
 
 # Instalar dependencias
 COPY package.json yarn.lock ./
-RUN yarn install --production
+RUN yarn install
 
 # Copiar el resto del código y construir proyecto
 COPY src src
