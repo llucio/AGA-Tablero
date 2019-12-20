@@ -4,7 +4,6 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter as Router, Route, useParams } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Container from 'react-bootstrap/Container';
-import Box from '@material-ui/core/Box';
 import AuthProvider from './keycloak';
 import { apolloClient } from './apollo';
 import MenuPrincipal from './components/Layout/MenuPrincipal';
@@ -16,6 +15,7 @@ import ScrollToTop from './components/ScrollToTop';
 import BreadcrumbBar from './components/Layout/BreadcrumbBar';
 import CustomHeader from './components/Layout/CustomHeader';
 
+// import '@atlaskit/css-reset';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const routes = [
@@ -53,15 +53,14 @@ const theme = {
   }
 };
 
-const App = () => (
+const App = () =>
   <AuthProvider>
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
         <AppRouter />
       </ThemeProvider>
     </ApolloProvider>
-  </AuthProvider>
-);
+  </AuthProvider>;
 
 const AppRouter = () => {
   //let { id } = useParams();
@@ -80,23 +79,22 @@ const AppRouter = () => {
           //image = '/assets/images/decorativa2.jpg',
           headerArrow = false,
           exact = true
-        }) => (
+        }) =>
           <Route
             key={path}
             path={path}
             exact={exact}
-            component={props => (
+            component={props =>
               <React.Fragment>
                 <MenuPrincipal />
-                {!!heading && (
+                {!!heading &&
                   <Heading
                     heading={heading}
                     subheading={subheading}
                     headerArrow={headerArrow}
                     image={image}
                     className={headerClass}
-                  />
-                )}
+                  />}
 
                 <section id="one" className="vertical-margin-top-middle">
                   <Container>
@@ -106,20 +104,32 @@ const AppRouter = () => {
                 </section>
 
                 <Footer />
-              </React.Fragment>
-            )}
+              </React.Fragment>}
           />
-        )
       )}
     </Router>
   );
 };
 
-const Heading = ({ className, image, heading, subheading, headerArrow, headerClass }) => {
+const Heading = ({
+  className,
+  image,
+  heading,
+  subheading,
+  headerArrow,
+  headerClass
+}) => {
   //const compromisoId = match.params.id;
   let { id } = useParams();
 
-  return <CustomHeader compromisoId={id} heading={heading} subheading={subheading} headerArrow={headerArrow} />;
+  return (
+    <CustomHeader
+      compromisoId={id}
+      heading={heading}
+      subheading={subheading}
+      headerArrow={headerArrow}
+    />
+  );
 };
 
 export default App;

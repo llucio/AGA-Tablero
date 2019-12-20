@@ -7,6 +7,9 @@ query CompromisoGet($id: uuid!) {
       id
       titulo
       orden
+      conversaciones {
+        ...Conversacion
+      }
     }
   }
 }

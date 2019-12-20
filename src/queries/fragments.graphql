@@ -5,6 +5,9 @@ fragment Compromiso on compromiso {
   plan_id
   fecha_creacion
   metadatos
+  conversaciones {
+    ...Conversacion
+  }
   hitos_aggregate {
     aggregate {
       count
@@ -92,4 +95,15 @@ fragment Hito on hito {
       }
     }
   }
+}
+
+fragment Conversacion on conversacion {
+  id
+  hito_id
+  compromiso_id
+  actividad_id
+  usuario
+  fecha_creacion
+  contenido
+  padre
 }

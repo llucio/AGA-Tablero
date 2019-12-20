@@ -1,10 +1,10 @@
 #import "./fragments.graphql"
 
 query HitoList($where: hito_bool_exp) {
-  items: hito(
-    where: $where
-    order_by: [{ orden: asc }, { fecha_creacion: asc }]
-  ) {
+  items: hito(where: $where, order_by: [{ orden: asc }, { fecha_creacion: asc }]) {
     ...Hito
+    conversaciones {
+      ...Conversacion
+    }
   }
 }

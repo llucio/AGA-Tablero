@@ -3,10 +3,11 @@ import _ from 'lodash';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
+// import { Editor } from '@atlaskit/editor-core'; // eslint-disable-line import/extensions
 import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
@@ -28,11 +29,12 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Editable from '../Editable';
 import Sortable from '../Sortable';
+// import LocaleSelect, { Locale } from '@atlaskit/locale/LocaleSelect';
 import DataDisplay from '../DataDisplay';
 import LoadingIndicator from '../LoadingIndicator';
 import HitoList from '../Hito/HitoList.js';
 import { useRoles } from '../../hooks';
-
+import Conversation from '../Conversation';
 const GET_QUERY = loader('../../queries/CompromisoGet.graphql');
 
 const useStyles = makeStyles(theme => ({
@@ -115,17 +117,18 @@ const CompromisoDetail = ({ match }) => {
                 distanceFromTop,
                 distanceFromBottom,
                 calculatedHeight
-              }) => (
+              }) =>
                 <Box
                   fontSize={18}
                   style={style}
                   className={isSticky ? classes.sticky : ''}
                 >
-                  {isSticky && (
+                  {isSticky &&
                     <h5>
-                      <strong>{item.titulo}</strong>
-                    </h5>
-                  )}
+                      <strong>
+                        {item.titulo}
+                      </strong>
+                    </h5>}
                   <h6 className="mt-3">
                     <strong>Acciones clave:</strong>
                   </h6>
@@ -136,13 +139,12 @@ const CompromisoDetail = ({ match }) => {
                     parentId={item.id}
                     refetch={refetch}
                     deletable
-                    itemComponent={({ item: { titulo, id } }) => (
+                    itemComponent={({ item: { titulo, id } }) =>
                       <p key={`sidebar-${id}`}>
                         <Link href={`#hito-${id}`}>
                           {titulo || 'Sin título'}
                         </Link>
-                      </p>
-                    )}
+                      </p>}
                     axis="y"
                   />
                   <Divider variant="middle" />
@@ -172,18 +174,14 @@ const CompromisoDetail = ({ match }) => {
                       </Fab>
                     </AgaTooltip>
                   </Editable>
-                </Box>
-              )}
+                </Box>}
             </Sticky>
           </Grid>
           <Grid item xs={12} md={9} className="compromiso-content">
-            <Editable
-              item={item}
-              path="titulo"
-              label="Título"
-              onUpdate={refetch}
-            >
-              <h1 className="extra-bold">{item.titulo}</h1>
+            <Editable item={item} path="titulo" label="Título" onUpdate={refetch}>
+              <h1 className="extra-bold">
+                {item.titulo}
+              </h1>
             </Editable>
 
             <Editable
@@ -211,6 +209,33 @@ const CompromisoDetail = ({ match }) => {
               >
                 <DataDisplay data={metadatos.descripcion || ''} />
               </Editable>
+            </Box>
+            <Box>
+              <Conversation item={item} refetch={refetch} />
+              {/* <Comment // avatar={
+                //   <Avatar src={avatarImg} label="Atlaskit avatar" size="medium" />
+                // }
+                author={<CommentAuthor>John Smith</CommentAuthor>}
+                type="author"
+                edited={<CommentEdited>Edited</CommentEdited>}
+                restrictedTo="Restricted to Admins Only"
+                time={<CommentTime>30 August, 2016</CommentTime>}
+                content={
+                  <p>
+                    Content goes here. This can include <a href="/link">links</a> and
+                    other content.
+                  </p>
+                }
+                actions={[
+                  <CommentAction>Reply</CommentAction>,
+                  <CommentAction>Edit</CommentAction>,
+                  <CommentAction>Like</CommentAction>
+                ]}
+              />
+              <CommentLayout
+                // avatar={<Avatar src={avatarImg} label="User avatar" size="medium" />}
+                content={<Editor appearance="comment" />}
+              /> */}
             </Box>
             <Box className={classes.descripcion}>
               <h4 className="mt-3">Dependencias responsables</h4>
@@ -245,7 +270,7 @@ const CompromisoDetail = ({ match }) => {
                     )
                   );
                 })
-                .map(({ key, label }, i) => (
+                .map(({ key, label }, i) =>
                   <ExpansionPanel className="elevation-0" key={i}>
                     <ExpansionPanelSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -265,14 +290,12 @@ const CompromisoDetail = ({ match }) => {
                           onUpdate={refetch}
                           html
                         >
-                          <DataDisplay
-                            data={_.get(item, ['metadatos', key], '')}
-                          />
+                          <DataDisplay data={_.get(item, ['metadatos', key], '')} />
                         </Editable>
                       </Typography>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
-                ))}
+                )}
             </div>
             <HitoList where={{ compromiso_id: { _eq: item.id } }} />
           </Grid>

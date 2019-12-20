@@ -5,7 +5,7 @@ import {
   USER_ROLE_STORAGE_KEY,
   USER_ROLE_DEFAULT
 } from './constants';
-import { useKeycloak } from 'react-keycloak';
+import { useKeycloak } from '@react-keycloak/web';
 
 const useRoles = () => {
   const [keycloak, initialized] = useKeycloak();
@@ -24,12 +24,15 @@ const useRoles = () => {
     administrador: _.get(claims, 'allowed_roles', []).includes('administrador')
   };
 
-  useEffect(() => {
-    if (authenticated) {
-      const role = usuario.administrador ? 'administrador' : USER_ROLE_DEFAULT;
-      window.localStorage.setItem(USER_ROLE_STORAGE_KEY, role);
-    }
-  }, [authenticated, usuario]);
+  useEffect(
+    () => {
+      if (authenticated) {
+        const role = usuario.administrador ? 'administrador' : USER_ROLE_DEFAULT;
+        window.localStorage.setItem(USER_ROLE_STORAGE_KEY, role);
+      }
+    },
+    [authenticated, usuario]
+  );
 
   return {
     login,

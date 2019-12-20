@@ -9,15 +9,17 @@ import HitoCard from './HitoCard';
 const LIST_QUERY = loader('../../queries/HitoList.graphql');
 
 const HitoList = ({ where }) => {
-  const { data: { items: hitos } = {}, loading, error, refetch } = useQuery(
-    LIST_QUERY,
-    {
-      variables: {
-        where
-      },
-      fetchPolicy: 'cache-and-network'
-    }
-  );
+  const {
+    data: { items: hitos } = {},
+    loading,
+    error,
+    refetch
+  } = useQuery(LIST_QUERY, {
+    variables: {
+      where
+    },
+    fetchPolicy: 'cache-and-network'
+  });
 
   if (error) return <div>Error</div>;
   if (loading && !hitos) return <LoadingIndicator />;

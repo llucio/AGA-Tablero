@@ -1,6 +1,6 @@
 import React from 'react';
 import Keycloak from 'keycloak-js';
-import { KeycloakProvider } from 'react-keycloak';
+import { KeycloakProvider } from '@react-keycloak/web';
 import { AUTH_TOKEN_STORAGE_KEY } from './constants';
 
 const keycloak = new Keycloak('/keycloak.json');
@@ -15,7 +15,11 @@ const Provider = ({ children }) => {
   };
 
   return (
-    <KeycloakProvider initConfig={initConfig} keycloak={keycloak} onTokens={setToken}>
+    <KeycloakProvider
+      initConfig={initConfig}
+      keycloak={keycloak}
+      onTokens={setToken}
+    >
       {children}
     </KeycloakProvider>
   );
