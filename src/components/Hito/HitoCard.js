@@ -34,7 +34,9 @@ const HitoCard = ({ item: hito, refetch }) => {
         <a name={`hito-${hito.id}`} />
         <h4 className="extra-bold">
           <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-            <span>{hito.titulo || 'Sin título'}</span>
+            <span>
+              {hito.titulo || 'Sin título'}
+            </span>
           </Editable>
         </h4>
         <Box>
@@ -44,10 +46,7 @@ const HitoCard = ({ item: hito, refetch }) => {
           </Button>
         </Box>
         <div>
-          <ActividadList
-            hitoId={hito.id}
-            where={{ hito_id: { _eq: hito.id } }}
-          />
+          <ActividadList hitoId={hito.id} where={{ hito_id: { _eq: hito.id } }} />
         </div>
       </Box>
     </Box>

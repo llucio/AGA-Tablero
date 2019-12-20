@@ -8,16 +8,14 @@ import Comment, {
   CommentAuthor,
   CommentLayout
 } from '@atlaskit/comment';
-import { defaultSchema } from '@atlaskit/adf-schema';
 import { ReactRenderer } from '@atlaskit/renderer';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import LoadingIndicator from './LoadingIndicator';
-import { EditorContext } from '@atlaskit/editor-core';
 import Avatar from '@atlaskit/avatar';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import * as es from 'react-intl/locale-data/es';
+import moment from '../utils/moment';
 
 addLocaleData(es);
 
@@ -43,7 +41,7 @@ const ConversationContainer = ({ item, refetch }) => {
 
   return (
     <div>
-      {item.conversaciones.map(conversacion =>
+      {(item.conversaciones || []).map(conversacion =>
         <Comment
           key={conversacion.id}
           avatar={<Avatar label={conversacion.usuario} size="medium" />}
@@ -55,7 +53,11 @@ const ConversationContainer = ({ item, refetch }) => {
           type="autor"
           // edited={<CommentEdited>Edited</CommentEdited>}
           restrictedTo="Sólo para participantes"
-          time={<CommentTime>Diciembre 1, 2019</CommentTime>}
+          time={
+            <CommentTime>
+              {moment(conversacion.fecha_creacion).format('D [de] MMMM [de] YYYY')}}
+            </CommentTime>
+          }
           content={
             <p>
               <ReactRenderer document={JSON.parse(conversacion.contenido)} />
@@ -70,7 +72,6 @@ const ConversationContainer = ({ item, refetch }) => {
       )}
       <IntlProvider locale="es" messages={esMessages}>
         <Conversation
-          isExpanded={true}
           objectId={item.id}
           provider={provider}
           placeholder="Comentarios..."

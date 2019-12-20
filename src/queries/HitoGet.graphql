@@ -7,6 +7,9 @@ query HitoGet($id: uuid!) {
       id
       titulo
     }
+    conversaciones {
+      ...Conversacion
+    }
     actividades(order_by: { orden: asc }) {
       id
       orden

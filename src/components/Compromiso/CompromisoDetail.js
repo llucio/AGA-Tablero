@@ -212,30 +212,6 @@ const CompromisoDetail = ({ match }) => {
             </Box>
             <Box>
               <Conversation item={item} refetch={refetch} />
-              {/* <Comment // avatar={
-                //   <Avatar src={avatarImg} label="Atlaskit avatar" size="medium" />
-                // }
-                author={<CommentAuthor>John Smith</CommentAuthor>}
-                type="author"
-                edited={<CommentEdited>Edited</CommentEdited>}
-                restrictedTo="Restricted to Admins Only"
-                time={<CommentTime>30 August, 2016</CommentTime>}
-                content={
-                  <p>
-                    Content goes here. This can include <a href="/link">links</a> and
-                    other content.
-                  </p>
-                }
-                actions={[
-                  <CommentAction>Reply</CommentAction>,
-                  <CommentAction>Edit</CommentAction>,
-                  <CommentAction>Like</CommentAction>
-                ]}
-              />
-              <CommentLayout
-                // avatar={<Avatar src={avatarImg} label="User avatar" size="medium" />}
-                content={<Editor appearance="comment" />}
-              /> */}
             </Box>
             <Box className={classes.descripcion}>
               <h4 className="mt-3">Dependencias responsables</h4>

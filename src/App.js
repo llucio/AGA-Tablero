@@ -15,7 +15,6 @@ import ScrollToTop from './components/ScrollToTop';
 import BreadcrumbBar from './components/Layout/BreadcrumbBar';
 import CustomHeader from './components/Layout/CustomHeader';
 
-// import '@atlaskit/css-reset';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const routes = [
