@@ -16,7 +16,7 @@ RUN yarn install
 # Copiar el resto del código y construir proyecto
 COPY src src
 COPY public public
-RUN yarn run build --production
+RUN GENERATE_SOURCEMAP=false yarn run build --production
 
 RUN echo $KEYCLOAK_CLIENT_CONFIG > build/keycloak.json
 
