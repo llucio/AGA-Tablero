@@ -5,14 +5,14 @@ import { ThemeProvider } from 'styled-components';
 import Container from 'react-bootstrap/Container';
 import AuthProvider from './keycloak';
 import { apolloClient } from './apollo';
+import Header from './components/Layout/Header';
 import MenuPrincipal from './components/Layout/MenuPrincipal';
+import BreadcrumbBar from './components/Layout/BreadcrumbBar';
 import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetail';
 import HitoDetail from './components/Hito/HitoDetail';
 import ScrollToTop from './components/ScrollToTop';
-import BreadcrumbBar from './components/Layout/BreadcrumbBar';
-import Header from './components/Layout/Header';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -55,11 +55,10 @@ const App = () => (
                 key={path}
                 path={path}
                 exact={exact}
-                component={props => (
+                component={() => (
                   <React.Fragment>
                     <MenuPrincipal />
                     <Header headerProps={headerProps} />
-
                     <section id='one' className='vertical-margin-top-middle'>
                       <Container>
                         <BreadcrumbBar />
