@@ -33,7 +33,7 @@ import Sortable from '../Sortable';
 import DataDisplay from '../DataDisplay';
 import LoadingIndicator from '../LoadingIndicator';
 import HitoList from '../Hito/HitoList.js';
-import { useRoles } from '../../hooks';
+import { useAuth } from '../../hooks';
 import Conversation from '../Conversation';
 const GET_QUERY = loader('../../queries/CompromisoGet.graphql');
 
@@ -88,7 +88,7 @@ const AgaTooltip = withStyles(theme => ({
 
 const CompromisoDetail = ({ match }) => {
   const classes = useStyles();
-  const { usuario: { administrador } = {} } = useRoles();
+  const { usuario: { administrador } = {} } = useAuth();
   const { data: { item } = {}, loading, error, refetch } = useQuery(GET_QUERY, {
     variables: {
       id: match.params.id

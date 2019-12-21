@@ -12,7 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 // import ClearIcon from '@material-ui/icons/Delete';
 import ColorHash from 'color-hash';
-import { useRoles } from '../hooks';
+import { useAuth } from '../hooks';
 import HtmlEditor from './HtmlEditor';
 import UploadButton from './UploadButton';
 import moment from '../utils/moment';
@@ -66,7 +66,7 @@ const Editable = ({
   type
 }) => {
   const [open, setOpen] = useState(false);
-  const { usuario: { administrador } = {} } = useRoles();
+  const { usuario: { administrador } = {} } = useAuth();
   const [value, setValue] = useState();
   const [field, subField] = path.split('.');
   const { data: { queryResult } = {}, refetch } = useQuery(

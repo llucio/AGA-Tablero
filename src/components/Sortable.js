@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 import Box from '@material-ui/core/Box';
 import arrayMove from 'array-move';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { useRoles } from '../hooks';
+import { useAuth } from '../hooks';
 import Deletable from './Deletable';
 import Creatable from './Creatable';
 
@@ -23,7 +23,7 @@ const SortableList = ({
   ...options
 }) => {
   const [loading, setLoading] = useState(false);
-  const { usuario } = useRoles();
+  const { usuario } = useAuth();
   const [mutateOrden] = useMutation(
     gql`
     mutation setOrden($id: uuid!, $orden: Int!) {

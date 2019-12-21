@@ -7,7 +7,7 @@ import {
 } from './constants';
 import { useKeycloak } from '@react-keycloak/web';
 
-const useRoles = () => {
+const useAuth = () => {
   const [keycloak, initialized] = useKeycloak();
   const { login, logout, authenticated, tokenParsed } = keycloak;
 
@@ -46,4 +46,4 @@ const useRoles = () => {
   };
 };
 
-export { useRoles };
+export { useAuth };
