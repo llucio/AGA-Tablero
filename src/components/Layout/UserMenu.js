@@ -44,53 +44,49 @@ const UserMenu = () => {
 
   return (
     <Box className={classes.root}>
-      {authenticated ? (
-        <Grid
-          container
-          direction="row"
-          justify="flex-end"
-          alignItems="center"
-          spacing={1}
-        >
-          <Fab
+      {authenticated
+        ? <Grid
+            container
+            direction="row"
+            justify="flex-end"
+            alignItems="center"
+            spacing={1}
+          >
+            <Fab
+              variant="extended"
+              className="grey darken-4 grey-text text-darken-1"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              {usuario.administrador
+                ? <PolicyIcon className={classes.extendedIcon} />
+                : <FaceIcon className={classes.extendedIcon} />}
+              Mi sesión
+            </Fab>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                {usuario.name} ({usuario.email})
+              </MenuItem>
+              <MenuItem onClick={handleClose}>Administrador</MenuItem>
+              <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
+            </Menu>
+          </Grid>
+        : <Fab
             variant="extended"
             className="grey darken-4 grey-text text-darken-1"
-            aria-controls="simple-menu"
             aria-haspopup="true"
-            onClick={handleClick}
+            aria-label="login"
+            onClick={() => login()}
           >
-            {usuario.administrador ? (
-              <PolicyIcon className={classes.extendedIcon} />
-            ) : (
-              <FaceIcon className={classes.extendedIcon} />
-            )}
-            Mi sesión
-          </Fab>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>
-              {usuario.name} ({usuario.email})
-            </MenuItem>
-            <MenuItem onClick={handleClose}>Administrador</MenuItem>
-            <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
-          </Menu>
-        </Grid>
-      ) : (
-        <Fab
-          variant="extended"
-          className="grey darken-4 grey-text text-darken-1"
-          aria-haspopup="true"
-          aria-label="login"
-          onClick={() => login()}
-        >
-          <PersonIcon className={classes.extendedIcon} /> Identifícate
-        </Fab>
-      )}
+            <PersonIcon className={classes.extendedIcon} /> Identifícate
+          </Fab>}
     </Box>
   );
 };
