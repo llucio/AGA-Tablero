@@ -3,8 +3,5 @@
 query EntregableList($where: entregable_bool_exp) {
   items: entregable(where: $where, order_by: [{ fecha_creacion: asc }]) {
     ...Entregable
-    conversaciones {
-      ...Conversacion
-    }
   }
 }

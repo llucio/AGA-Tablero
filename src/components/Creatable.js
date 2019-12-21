@@ -46,7 +46,7 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
       <Button
         onClick={handleClickOpen}
         variant="light"
-        size="sm"
+        size="small"
         color="secondary"
       >
         <AddIcon /> Añadir {typename}

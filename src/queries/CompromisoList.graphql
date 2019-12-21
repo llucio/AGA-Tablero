@@ -9,10 +9,7 @@ query PlanQuery($compromisosWhere: compromiso_bool_exp) {
       where: $compromisosWhere
       order_by: [{ orden: asc }, { fecha_creacion: asc }]
     ) {
-      id
-      titulo
-      fecha_creacion
-      metadatos
+      ...Compromiso
     }
   }
 }

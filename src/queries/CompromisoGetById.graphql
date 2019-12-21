@@ -1,15 +1,12 @@
 #import "./fragments.graphql"
 
-query CompromisoGet($id: uuid!) {
+query CompromisoGetByPk($id: String!) {
   item: compromiso_by_pk(id: $id) {
     ...Compromiso
     hitos(order_by: { orden: asc }) {
       id
       titulo
       orden
-      conversaciones {
-        ...Conversacion
-      }
     }
   }
 }

@@ -10,7 +10,7 @@ import Deletable from './Deletable';
 import Creatable from './Creatable';
 
 const SortableList = ({
-  items,
+  items = [],
   refetch,
   deletable = false,
   creatable,

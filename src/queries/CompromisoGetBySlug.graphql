@@ -1,0 +1,12 @@
+#import "./fragments.graphql"
+
+query CompromisoGetBySlug($id: String!) {
+  item: compromiso(where: { slug: { _eq: $id } }, limit: 1) {
+    ...Compromiso
+    hitos(order_by: { orden: asc }) {
+      id
+      titulo
+      orden
+    }
+  }
+}

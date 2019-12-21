@@ -54,39 +54,36 @@ const CompromisoList = ({ where }) => {
   if (loading && !plan) return <LoadingIndicator />;
   if (!plan) return null;
 
-  const { compromisos = [], metadatos = {} } = plan;
-
   return (
-    <div className="vertical-margin-bottom">
+    <div className='vertical-margin-bottom'>
       <Grid container spacing={3}>
         <Grid item xs={9} sm={10}>
           <h2>Compromisos</h2>
-          <hr className="line" />
+          <hr className='line' />
         </Grid>
-        <Grid item xs={2} sm={2} align="right">
+        <Grid item xs={2} sm={2} align='right'>
           <Editable
             upload
             item={plan}
-            label="Descarga de plan de acción"
-            path="metadatos.descarga"
-            uploadType="file"
+            label='Descarga de plan de acción'
+            path='metadatos.descarga'
+            uploadType='file'
             onUpdate={refetch}
           >
             <AgaTooltip
-              title="Descarga el plan de acción"
-              aria-label="descarga"
-              placement="left"
+              title='Descarga el plan de acción'
+              aria-label='descarga'
+              placement='left'
             >
               <Fab
-                href={metadatos.descarga}
+                href={plan.metadatos?.descarga}
                 download
-                target="_blank"
-                color="primary"
-                aria-label="add"
+                target='_blank'
+                color='primary'
+                aria-label='add'
                 className={classes.margin}
               >
                 <DownloadIcon />
-                {/* Descarga el plan de acción  */}
               </Fab>
             </AgaTooltip>
           </Editable>
@@ -94,10 +91,10 @@ const CompromisoList = ({ where }) => {
       </Grid>
 
       <Sortable
-        items={compromisos}
-        typename="compromiso"
+        items={plan.compromisos}
         itemComponent={CompromisoCard}
-        itemProps={{}}
+        refetch={refetch}
+        typename='compromiso'
         containerComponent={Grid}
         containerProps={{
           direction: 'row',
@@ -105,8 +102,7 @@ const CompromisoList = ({ where }) => {
           alignItems: 'flex-start',
           container: true
         }}
-        refetch={refetch}
-        axis="xy"
+        axis='xy'
       />
     </div>
   );

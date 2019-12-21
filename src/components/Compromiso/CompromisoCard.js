@@ -22,12 +22,8 @@ const useStyles = makeStyles(theme => ({
 const CompromisoCard = ({ item: compromiso, index }) => {
   const classes = useStyles();
 
-  // Imagen con caracteres aleatorios para evitar cache de navegador
-  const imageUrl = _.get(
-    compromiso,
-    'metadatos.imagen',
-    `${defaultImage}?${compromiso.id}`
-  );
+  const imageUrl =
+    compromiso.metadatos?.imagen || `${defaultImage}?${compromiso.id}`;
 
   return (
     <Grid item xs={12} md={4} lg={4} className={classes.root}>
@@ -42,7 +38,7 @@ const CompromisoCard = ({ item: compromiso, index }) => {
       >
         <Box className="pattern5 box-4">
           <Link
-            to={`/compromiso/${compromiso.id}`}
+            to={`/compromiso/${compromiso.slug}`}
             className="white-text shadow-text"
           >
             <Typography

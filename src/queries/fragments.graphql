@@ -5,14 +5,7 @@ fragment Compromiso on compromiso {
   plan_id
   fecha_creacion
   metadatos
-  conversaciones {
-    ...Conversacion
-  }
-  hitos_aggregate {
-    aggregate {
-      count
-    }
-  }
+  slug
 }
 
 fragment Actividad on actividad {
@@ -64,9 +57,6 @@ fragment Hito on hito {
   metadatos
   fecha_inicial
   fecha_final
-  entregables {
-    ...Entregable
-  }
   entregables_aggregate {
     aggregate {
       min {
@@ -76,9 +66,6 @@ fragment Hito on hito {
         fecha_creacion
       }
     }
-  }
-  actividades(order_by: { orden: asc }) {
-    ...Actividad
   }
   actividades_aggregate {
     aggregate {
@@ -94,6 +81,9 @@ fragment Hito on hito {
         fecha_final
       }
     }
+  }
+  actividades(order_by: { orden: asc }) {
+    ...Actividad
   }
 }
 
