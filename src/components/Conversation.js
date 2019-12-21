@@ -1,6 +1,8 @@
 import React from 'react';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
 import { Conversation, ConversationResource } from '@atlaskit/conversation';
-import esMessages from '@atlaskit/editor-core/dist/esm/i18n/es';
+import Avatar from '@atlaskit/avatar';
 import Comment, {
   CommentTime,
   CommentAction,
@@ -9,15 +11,9 @@ import Comment, {
   CommentLayout
 } from '@atlaskit/comment';
 import { ReactRenderer } from '@atlaskit/renderer';
-import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import Avatar from '@atlaskit/avatar';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import * as es from 'react-intl/locale-data/es';
 import moment from '../utils/moment';
-
-addLocaleData(es);
+import IntlProvider from './IntlProvider';
 
 const getMutation = ({ __typename: typename, id }) => gql`
   mutation ConversationMutation($value: String!) {
@@ -25,6 +21,7 @@ const getMutation = ({ __typename: typename, id }) => gql`
       objects: { ${typename}_id: "${id}", contenido: $value }
     ) {
       affected_rows
+
     }
   }
 `;
@@ -41,21 +38,20 @@ const ConversationContainer = ({ item, refetch }) => {
 
   return (
     <div>
-      {(item.conversaciones || []).map(conversacion =>
+      {(item.conversaciones || []).map(conversacion => (
         <Comment
           key={conversacion.id}
           avatar={<Avatar label={conversacion.usuario} size="medium" />}
-          author={
-            <CommentAuthor>
-              {conversacion.usuario}
-            </CommentAuthor>
-          }
+          author={<CommentAuthor>{conversacion.usuario}</CommentAuthor>}
           type="autor"
           // edited={<CommentEdited>Edited</CommentEdited>}
           restrictedTo="Sólo para participantes"
           time={
             <CommentTime>
-              {moment(conversacion.fecha_creacion).format('D [de] MMMM [de] YYYY')}}
+              {moment(conversacion.fecha_creacion).format(
+                'D [de] MMMM [de] YYYY'
+              )}
+              }
             </CommentTime>
           }
           content={
@@ -69,8 +65,8 @@ const ConversationContainer = ({ item, refetch }) => {
           //   <CommentAction>Like</CommentAction>
           // ]}
         />
-      )}
-      <IntlProvider locale="es" messages={esMessages}>
+      ))}
+      <IntlProvider>
         <Conversation
           objectId={item.id}
           provider={provider}
