@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';

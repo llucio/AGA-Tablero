@@ -1,20 +1,15 @@
-import { useEffect } from 'react';
 import _ from 'lodash';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { useKeycloak } from '@react-keycloak/web';
-import {
-  AUTH_TOKEN_STORAGE_KEY,
-  USER_ROLE_STORAGE_KEY,
-  USER_ROLE_DEFAULT
-} from './constants';
+import { AUTH_TOKEN_STORAGE_KEY } from './constants';
 
 const USUARIO_QUERY = loader('./queries/UsuarioGet.graphql');
 
 const useAuth = () => {
   const [keycloak, initialized] = useKeycloak();
   const { login, logout, authenticated, tokenParsed } = keycloak;
-  const { data: { usuario } = {}, loading: userLoading, error } = useQuery(
+  const { data: { usuario } = {}, loading: userLoading } = useQuery(
     USUARIO_QUERY,
     {
       skip: !authenticated,

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import _ from 'lodash';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import Box from '@material-ui/core/Box';

@@ -408,9 +408,6 @@ th.MuiTableCell-root {
   transform: none;
 }
 
-.compromiso-content {
-}
-
 .compromiso-content ul {
   list-style-type: disc;
   margin: 0;
@@ -445,15 +442,19 @@ th.MuiTableCell-root {
   background: #f6f6f6;
 }
 
-.compromiso-content .MuiBox-root h6 {
+.compromiso-content h6 {
   border-left: 5px solid #8bc34a;
   padding: 5px 15px;
   margin: 25px 0;
   transition: background-color 0.5s ease;
 }
 
-.compromiso-content .MuiBox-root h4 {
+.compromiso-content h4 {
   font-weight: 600;
+}
+
+.compromiso-content h6:hover {
+  background-color: #eceff1 !important;
 }
 
 .table-actividad .MuiBox-root h6 {
@@ -461,10 +462,6 @@ th.MuiTableCell-root {
   padding: inherit;
   margin: inherit;
   transition: inherit;
-}
-
-.compromiso-content .MuiBox-root h6:hover {
-  background-color: #eceff1 !important;
 }
 
 .table-actividad .MuiBox-root h6:hover {

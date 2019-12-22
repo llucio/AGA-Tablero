@@ -49,6 +49,13 @@ const ConversationContainer = ({ item, refetch }) => {
               onFocus={() => setIsExpanded(true)}
             >
               <Editor
+                primaryToolbarComponents={<div>Aaa</div>}
+                secondaryToolbarComponents={<div>Aaa</div>}
+                allowTextAlignment={false}
+                textFormatting={{
+                  disableCode: true,
+                  disableSuperscriptAndSubscript: true
+                }}
                 appearance="comment"
                 shouldFocus
                 onSave={onSave}

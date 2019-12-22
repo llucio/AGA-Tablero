@@ -103,87 +103,78 @@ const dateOptions = {
   locale: 'es-MX'
 };
 
-const HitoHeader = ({ hito, refetch }) => {
-  const { metadatos } = hito;
-  return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} md={8}>
-        {/*<strong>
-          Compromiso:{' '}
-          <Link to={`/compromiso/${hito.compromiso.id}`}>
-            {hito.compromiso.titulo}
-          </Link>
-        </strong>*/}
-        <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-          <h2 className="bold">{hito.titulo}</h2>
-        </Editable>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        md={4}
-        className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase bold text-center"
+const HitoHeader = ({ hito, refetch }) => (
+  <Grid container spacing={2}>
+    <Grid item xs={12} md={8}>
+      <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
+        <h2 className="bold">{hito.titulo}</h2>
+      </Editable>
+    </Grid>
+    <Grid
+      item
+      xs={12}
+      md={4}
+      className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase bold text-center"
+    >
+      <Editable
+        item={hito}
+        path="fecha_inicial"
+        label="Fecha inicial"
+        type="date"
+        valueType="timestamptz"
+        onUpdate={refetch}
       >
-        <Editable
-          item={hito}
-          path="fecha_inicial"
-          label="Fecha inicial"
-          type="date"
-          valueType="timestamptz"
-          onUpdate={refetch}
-        >
-          {!!hito.fecha_inicial && (
-            <div style={{ display: 'inline-block' }}>
-              <p>Inicio</p>
-              <CalendarIcon
-                style={{ margin: '0 auto' }}
-                date={moment(hito.fecha_inicial)
-                  .utc()
-                  .toDate()}
-                options={dateOptions}
-                className="elevation-1"
-              />
-            </div>
-          )}
-        </Editable>
-        <Editable
-          item={hito}
-          path="fecha_final"
-          label="Fecha final"
-          type="date"
-          valueType="timestamptz"
-          onUpdate={refetch}
-          style={{ display: 'inline-block' }}
-        >
-          {!!hito.fecha_final && (
-            <div>
-              <p>Fin</p>
-              <CalendarIcon
-                date={moment(hito.fecha_final)
-                  .utc()
-                  .toDate()}
-                options={dateOptions}
-                className="elevation-1"
-              />
-            </div>
-          )}
-        </Editable>
-      </Grid>
-      <Grid container>
-        <Grid item xs={12}>
-          <div className="progress mt-2">
-            <div
-              className="progress-bar-dark light-green w-0"
-              role="progressbar"
-              aria-valuenow="10"
-              aria-valuemin="0"
-              aria-valuemax="100"
+        {!!hito.fecha_inicial && (
+          <div style={{ display: 'inline-block' }}>
+            <p>Inicio</p>
+            <CalendarIcon
+              style={{ margin: '0 auto' }}
+              date={moment(hito.fecha_inicial)
+                .utc()
+                .toDate()}
+              options={dateOptions}
+              className="elevation-1"
             />
           </div>
-        </Grid>
+        )}
+      </Editable>
+      <Editable
+        item={hito}
+        path="fecha_final"
+        label="Fecha final"
+        type="date"
+        valueType="timestamptz"
+        onUpdate={refetch}
+        style={{ display: 'inline-block' }}
+      >
+        {!!hito.fecha_final && (
+          <div>
+            <p>Fin</p>
+            <CalendarIcon
+              date={moment(hito.fecha_final)
+                .utc()
+                .toDate()}
+              options={dateOptions}
+              className="elevation-1"
+            />
+          </div>
+        )}
+      </Editable>
+    </Grid>
+    <Grid container>
+      <Grid item xs={12}>
+        <div className="progress mt-2">
+          <div
+            className="progress-bar-dark light-green w-0"
+            role="progressbar"
+            aria-valuenow="10"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          />
+        </div>
       </Grid>
     </Grid>
-  );
-};
+  </Grid>
+);
 
 export default HitoDetail;

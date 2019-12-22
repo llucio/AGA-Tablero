@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useParams, useLocation } from 'react-router-dom';
+import { Route, useLocation } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import Hidden from '@material-ui/core/Hidden';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';

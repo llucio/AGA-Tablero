@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HitoCard = ({ item: hito, refetch }) => {
-  // const { metadatos = {} } = hito;
   const classes = useStyles();
 
   return (
@@ -38,17 +37,21 @@ const HitoCard = ({ item: hito, refetch }) => {
           </Editable>
         </h4>
         <Box>
-          <Button color="primary" href={`/accion-clave/${hito.id}`}>
+          <Button
+            to={`/accion-clave/${hito.id}`}
+            component={Link}
+            color="primary"
+          >
             <LinkIcon className={classes.extendedIcon} />
             Detalles
           </Button>
         </Box>
-        <div>
+        <Box>
           <ActividadList
             hitoId={hito.id}
             where={{ hito_id: { _eq: hito.id } }}
           />
-        </div>
+        </Box>
       </Box>
     </Box>
   );
