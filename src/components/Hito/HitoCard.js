@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: theme.typography.fontWeightRegular
   },
   extendedIcon: {
-    marginRight: teme.spacing(1)
+    marginRight: theme.spacing(1)
   }
 }));
 
