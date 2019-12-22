@@ -32,22 +32,22 @@ const Header = ({ headerProps }) => {
 
   return (
     <section
-      id='banner'
+      id="banner"
       className={finalHeaderProps.className}
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
-      <Box className='content image-content-- pattern4'>
+      <Box className="content image-content-- pattern4">
         <header>
-          <h2 className='big shadow-text'>{finalHeaderProps.heading}</h2>
+          <h2 className="big shadow-text">{finalHeaderProps.heading}</h2>
           {finalHeaderProps.subheading && (
-            <h4 className='mt-4 lead shadow-text'>
+            <h4 className="mt-4 lead shadow-text">
               {finalHeaderProps.subheading}
             </h4>
           )}
         </header>
       </Box>
       {finalHeaderProps.headerArrow && (
-        <a href='#one' className='goto-next scrolly'>
+        <a href="#one" className="goto-next scrolly">
           Siguiente
         </a>
       )}

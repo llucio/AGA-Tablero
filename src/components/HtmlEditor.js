@@ -8,18 +8,15 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 const HtmlEditor = ({ value, onChange }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-  useEffect(
-    () => {
-      if (toHtml(editorState) === value) return;
-      setEditorState(
-        EditorState.push(
-          editorState,
-          ContentState.createFromBlockArray(htmlToDraft(value || ''))
-        )
-      );
-    },
-    [value]
-  );
+  useEffect(() => {
+    if (toHtml(editorState) === value) return;
+    setEditorState(
+      EditorState.push(
+        editorState,
+        ContentState.createFromBlockArray(htmlToDraft(value || ''))
+      )
+    );
+  }, [value]);
 
   return (
     <div className="rich-editor">

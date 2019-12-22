@@ -49,7 +49,7 @@ const HitoDetail = props => {
 
   return (
     <div className={classes.root}>
-      <Box className='compromiso-content'>
+      <Box className="compromiso-content">
         <Grid spacing={2} className={classes.header}>
           <HitoHeader hito={hito} refetch={refetch} />
         </Grid>
@@ -63,8 +63,8 @@ const HitoDetail = props => {
           <Editable
             html
             item={hito}
-            path='metadatos.descripcion'
-            label='Descripción'
+            path="metadatos.descripcion"
+            label="Descripción"
             onUpdate={refetch}
           >
             <DataDisplay data={hito.metadatos?.descripcion} />
@@ -77,12 +77,12 @@ const HitoDetail = props => {
           <Editable
             html
             item={hito}
-            path='metadatos.institucionesResponsables'
-            label='Instituciones responsables'
+            path="metadatos.institucionesResponsables"
+            label="Instituciones responsables"
             onUpdate={refetch}
           >
             <DataDisplay
-              className='d-block'
+              className="d-block"
               data={hito.metadatos?.institucionesResponsables}
             />
           </Editable>
@@ -114,22 +114,22 @@ const HitoHeader = ({ hito, refetch }) => {
             {hito.compromiso.titulo}
           </Link>
         </strong>*/}
-        <Editable item={hito} path='titulo' label='Título' onUpdate={refetch}>
-          <h2 className='bold'>{hito.titulo}</h2>
+        <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
+          <h2 className="bold">{hito.titulo}</h2>
         </Editable>
       </Grid>
       <Grid
         item
         xs={12}
         md={4}
-        className='d-flex justify-content-around widget-calendar light-blue-text text-uppercase bold text-center'
+        className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase bold text-center"
       >
         <Editable
           item={hito}
-          path='fecha_inicial'
-          label='Fecha inicial'
-          type='date'
-          valueType='timestamptz'
+          path="fecha_inicial"
+          label="Fecha inicial"
+          type="date"
+          valueType="timestamptz"
           onUpdate={refetch}
         >
           {!!hito.fecha_inicial && (
@@ -141,17 +141,17 @@ const HitoHeader = ({ hito, refetch }) => {
                   .utc()
                   .toDate()}
                 options={dateOptions}
-                className='elevation-1'
+                className="elevation-1"
               />
             </div>
           )}
         </Editable>
         <Editable
           item={hito}
-          path='fecha_final'
-          label='Fecha final'
-          type='date'
-          valueType='timestamptz'
+          path="fecha_final"
+          label="Fecha final"
+          type="date"
+          valueType="timestamptz"
           onUpdate={refetch}
           style={{ display: 'inline-block' }}
         >
@@ -163,7 +163,7 @@ const HitoHeader = ({ hito, refetch }) => {
                   .utc()
                   .toDate()}
                 options={dateOptions}
-                className='elevation-1'
+                className="elevation-1"
               />
             </div>
           )}
@@ -171,13 +171,13 @@ const HitoHeader = ({ hito, refetch }) => {
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <div className='progress mt-2'>
+          <div className="progress mt-2">
             <div
-              className='progress-bar-dark light-green w-0'
-              role='progressbar'
-              aria-valuenow='10'
-              aria-valuemin='0'
-              aria-valuemax='100'
+              className="progress-bar-dark light-green w-0"
+              role="progressbar"
+              aria-valuenow="10"
+              aria-valuemin="0"
+              aria-valuemax="100"
             />
           </div>
         </Grid>

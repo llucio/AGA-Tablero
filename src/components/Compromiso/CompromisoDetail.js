@@ -222,7 +222,7 @@ const CompromisoDetail = () => {
               </Editable>
             </Box>
             <Box>
-              <Conversacion item={compromiso} refetch={refetch} />
+              <Conversacion item={compromiso} />
             </Box>
             <Box className={classes.descripcion}>
               <h4 className="mt-3">Dependencias responsables</h4>

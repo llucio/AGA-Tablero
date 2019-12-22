@@ -59,7 +59,7 @@ const App = () => (
                   <React.Fragment>
                     <MenuPrincipal />
                     <Header headerProps={headerProps} />
-                    <section id='one' className='vertical-margin-top-middle'>
+                    <section id="one" className="vertical-margin-top-middle">
                       <Container>
                         <BreadcrumbBar />
                         <Component />

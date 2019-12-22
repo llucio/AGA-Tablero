@@ -25,8 +25,6 @@ const BreadcrumbItem = () => {
   if (loading && !item) return <LoadingIndicator />;
   if (!item) return <h1>No encontrado</h1>;
 
-  //const { metadatos = {} } = item;
-
   return (
     <LinkContainer to={`/compromiso/${item.id}`}>
       <Breadcrumb.Item>

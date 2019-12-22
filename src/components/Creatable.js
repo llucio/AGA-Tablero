@@ -43,20 +43,20 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
 
   return (
     <div>
-      <Button onClick={handleClickOpen} size='small' color='secondary'>
+      <Button onClick={handleClickOpen} size="small" color="secondary">
         <AddIcon /> Añadir {typename}
       </Button>
       <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id='alert-dialog-title'>{`Crear ${typename}`}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{`Crear ${typename}`}</DialogTitle>
         <DialogContent>
-          <DialogContentText id='alert-dialog-description'>
+          <DialogContentText id="alert-dialog-description">
             <Input
-              placeholder='Título'
+              placeholder="Título"
               style={{ width: '400px' }}
               autoFocus
               onChange={event => setTitulo(event.target.value)}
@@ -64,10 +64,10 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color='primary'>
+          <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleConfirm} color='danger'>
+          <Button onClick={handleConfirm} color="danger">
             Crear
           </Button>
         </DialogActions>

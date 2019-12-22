@@ -20,8 +20,6 @@ const BreadcrumbHito = props => {
   if (loading && !item) return <LoadingIndicator />;
   if (!item) return <h1>No encontrado</h1>;
 
-  //const { metadatos = {} } = item;
-
   return (
     <Breadcrumb.Item active>
       <span>
@@ -29,7 +27,7 @@ const BreadcrumbHito = props => {
         <Hidden mdUp>Acción clave</Hidden>
       </span>
     </Breadcrumb.Item>
-  ); //{item.titulo}
+  );
 };
 
 export default BreadcrumbHito;

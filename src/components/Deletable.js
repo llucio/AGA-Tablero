@@ -59,9 +59,7 @@ const Deletable = ({ item, typename, refetch }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <strong>
-              {item.titulo}
-            </strong>
+            <strong>{item.titulo}</strong>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -20,7 +20,7 @@ const MenuMovil = props => {
   return (
     <Menu {...props}>
       <Typography
-        variant='subtitle1'
+        variant="subtitle1"
         gutterBottoms
         className={classes.title}
         style={{ widht: '100%' }}
@@ -35,48 +35,48 @@ const MenuMovil = props => {
       </Typography>
 
       <Typography
-        variant='subtitle1'
+        variant="subtitle1"
         gutterBottoms
         style={{ marginTop: '20px' }}
       >
-        <Link href={`${base}/`} color='inherit' className='light menu-item'>
+        <Link href={`${base}/`} color="inherit" className="light menu-item">
           Inicio
         </Link>
         <Link
           href={`${base}/quienes-somos`}
-          color='inherit'
-          className='light menu-item'
+          color="inherit"
+          className="light menu-item"
         >
           Quienes somos
         </Link>
         <Link
           href={`${base}/antecedentes`}
-          color='inherit'
-          className='light menu-item'
+          color="inherit"
+          className="light menu-item"
         >
           Antecedentes
         </Link>
         <Link
           href={`${base}/blog/`}
-          color='inherit'
-          className='light menu-item'
+          color="inherit"
+          className="light menu-item"
         >
           Blog
         </Link>
         <Link
           href={`${base}/plan1/`}
-          color='inherit'
-          className='light menu-item'
+          color="inherit"
+          className="light menu-item"
         >
           Planes de acción
         </Link>
-        <Link href={`/`} color='inherit' className='light menu-item'>
+        <Link href={`/`} color="inherit" className="light menu-item">
           Tablero
         </Link>
         <Link
           href={`${base}/contacto/`}
-          color='inherit'
-          className='light menu-item'
+          color="inherit"
+          className="light menu-item"
         >
           Contacto
         </Link>

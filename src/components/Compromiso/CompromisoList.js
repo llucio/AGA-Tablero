@@ -55,32 +55,32 @@ const CompromisoList = ({ where }) => {
   if (!plan) return null;
 
   return (
-    <div className='vertical-margin-bottom'>
+    <div className="vertical-margin-bottom">
       <Grid container spacing={3}>
         <Grid item xs={9} sm={10}>
           <h2>Compromisos</h2>
-          <hr className='line' />
+          <hr className="line" />
         </Grid>
-        <Grid item xs={2} sm={2} align='right'>
+        <Grid item xs={2} sm={2} align="right">
           <Editable
             upload
             item={plan}
-            label='Descarga de plan de acción'
-            path='metadatos.descarga'
-            uploadType='file'
+            label="Descarga de plan de acción"
+            path="metadatos.descarga"
+            uploadType="file"
             onUpdate={refetch}
           >
             <AgaTooltip
-              title='Descarga el plan de acción'
-              aria-label='descarga'
-              placement='left'
+              title="Descarga el plan de acción"
+              aria-label="descarga"
+              placement="left"
             >
               <Fab
                 href={plan.metadatos?.descarga}
                 download
-                target='_blank'
-                color='primary'
-                aria-label='add'
+                target="_blank"
+                color="primary"
+                aria-label="add"
                 className={classes.margin}
               >
                 <DownloadIcon />
@@ -94,7 +94,7 @@ const CompromisoList = ({ where }) => {
         items={plan.compromisos}
         itemComponent={CompromisoCard}
         refetch={refetch}
-        typename='compromiso'
+        typename="compromiso"
         containerComponent={Grid}
         containerProps={{
           direction: 'row',
@@ -102,7 +102,7 @@ const CompromisoList = ({ where }) => {
           alignItems: 'flex-start',
           container: true
         }}
-        axis='xy'
+        axis="xy"
       />
     </div>
   );

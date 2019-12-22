@@ -24,15 +24,12 @@ const useAuth = () => {
     administrador: _.get(claims, 'allowed_roles', []).includes('administrador')
   };
 
-  useEffect(
-    () => {
-      if (authenticated) {
-        const role = usuario.administrador ? 'administrador' : USER_ROLE_DEFAULT;
-        window.localStorage.setItem(USER_ROLE_STORAGE_KEY, role);
-      }
-    },
-    [authenticated, usuario]
-  );
+  useEffect(() => {
+    if (authenticated) {
+      const role = usuario.administrador ? 'administrador' : USER_ROLE_DEFAULT;
+      window.localStorage.setItem(USER_ROLE_STORAGE_KEY, role);
+    }
+  }, [authenticated, usuario]);
 
   return {
     login,

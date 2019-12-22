@@ -11,18 +11,18 @@ const BreadcrumbBar = props => {
 
   return (
     <Breadcrumb>
-      <LinkContainer to='/'>
+      <LinkContainer to="/">
         <Breadcrumb.Item active={path === '/'}>
           <Hidden smDown>4&ordm; Plan de Acción</Hidden>
           <Hidden mdUp>4&ordm; Plan</Hidden>
         </Breadcrumb.Item>
       </LinkContainer>
       <Route
-        path='/compromiso'
+        path="/compromiso"
         component={() => <Breadcrumb.Item active>Compromiso</Breadcrumb.Item>}
       />
-      <Route path='/accion-clave/' component={BreadcrumbCompromiso} />
-      <Route path='/accion-clave/' component={BreadcrumbHito} />
+      <Route path="/accion-clave/" component={BreadcrumbCompromiso} />
+      <Route path="/accion-clave/" component={BreadcrumbHito} />
     </Breadcrumb>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { Conversation, ConversationResource } from '@atlaskit/conversation';
+
 import Avatar from '@atlaskit/avatar';
 import Box from '@material-ui/core/Box';
 import Comment, {
@@ -34,8 +34,8 @@ const getQuery = type => gql`
   }
 `;
 
-const Conversacion = ({ item, refetch }) => {
-  const { data: { conversaciones } = {}, error } = useQuery(
+const Conversacion = ({ item }) => {
+  const { data: { conversaciones } = {}, error, refetch } = useQuery(
     getQuery(item.__typename),
     { variables: { id: item.id } }
   );
@@ -44,20 +44,20 @@ const Conversacion = ({ item, refetch }) => {
 
   return (
     <Box>
+      <ConversacionEditor item={item} refetch={refetch} />
       {conversaciones?.map(conversacion => (
         <Comment
           key={conversacion.id}
-          avatar={<Avatar label={conversacion.usuario} size='medium' />}
+          avatar={<Avatar label={conversacion.usuario} size="medium" />}
           author={<CommentAuthor>{conversacion.usuario}</CommentAuthor>}
-          type='autor'
+          type="autor"
           // edited={<CommentEdited>Edited</CommentEdited>}
-          restrictedTo='Sólo para participantes'
+          restrictedTo="Sólo para participantes"
           time={
             <CommentTime>
               {moment(conversacion.fecha_creacion).format(
                 'D [de] MMMM [de] YYYY'
               )}
-              }
             </CommentTime>
           }
           content={
@@ -72,7 +72,6 @@ const Conversacion = ({ item, refetch }) => {
           // ]}
         />
       ))}
-      <ConversacionEditor item={item} refetch={refetch} />
     </Box>
   );
 };
