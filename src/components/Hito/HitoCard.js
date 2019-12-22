@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ActividadList from '../Actividad/ActividadList';
 import LinkIcon from '@material-ui/icons/Link';
 
@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 const HitoCard = ({ item: hito, refetch }) => {
   const classes = useStyles();
+  const { compromisoSlug } = useParams();
 
   return (
     <Box className={classes.panel}>
@@ -38,7 +39,7 @@ const HitoCard = ({ item: hito, refetch }) => {
         </h4>
         <Box>
           <Button
-            to={`/accion-clave/${hito.id}`}
+            to={`/compromiso/${compromisoSlug}/${hito.id}`}
             component={Link}
             color="primary"
           >

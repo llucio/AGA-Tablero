@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import Box from '@material-ui/core/Box';
 import arrayMove from 'array-move';
+import Box from '@material-ui/core/Box';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useAuth } from '../hooks';
 import Deletable from './Deletable';
 import Creatable from './Creatable';
 
 const SortableList = ({
-  items = [],
+  items,
   refetch,
-  deletable = false,
   creatable,
   parentId,
   typename,
+  deletable = false,
   containerComponent: ContainerComponent = Box,
   containerProps = {},
   itemComponent: ItemComponent,
   itemProps = {},
-  ...options
+  ...sortableProps
 }) => {
   const [loading, setLoading] = useState(false);
-  const { administrador, usuario } = useAuth();
+  const { administrador } = useAuth();
   const [mutateOrden] = useMutation(
     gql`
     mutation setOrden($id: uuid!, $orden: Int!) {
@@ -32,24 +32,7 @@ const SortableList = ({
     }
   `
   );
-  // const [mutateEliminar] = useMutation(
-  //   gql`
-  //   mutation setOrden($id: uuid!, $orden: Int!) {
-  //     update_${typename}(where: { id: { _eq: $id } }, _set: { orden: $orden }) {
-  //       affected_rows
-  //     }
-  //   }
-  // `
-  // );
-  // const [mutateInsertar] = useMutation(
-  //   gql`
-  //   mutation Insertar() {
-  //     insert_${typename}(where: { id: { _eq: $id } }, _set: { orden: $orden }) {
-  //       affected_rows
-  //     }
-  //   }
-  // `
-  // );
+
   const onSort = ({ oldIndex, newIndex }) => {
     setLoading(true);
     Promise.all(
@@ -71,7 +54,7 @@ const SortableList = ({
       });
   };
 
-  if (loading) {
+  if (loading || !items) {
     return null;
   }
 
@@ -115,7 +98,7 @@ const SortableList = ({
         shouldCancelStart={() => !administrador}
         items={items}
         onSortEnd={onSort}
-        {...options}
+        {...sortableProps}
       />
     </>
   );

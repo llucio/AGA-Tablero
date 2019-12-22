@@ -23,14 +23,23 @@ const getQuery = type => gql`
     ) {
       id
       fecha_creacion
-      usuario
       contenido
+      usuario {
+        email
+        nombre
+        metadatos
+        organizacion {
+          id
+          nombre
+          metadatos
+        }
+      }
     }
   }
 `;
 
 const Conversacion = ({ item }) => {
-  const { authenticated } = useAuth();
+  const { authenticated, usuario } = useAuth();
   const { data: { conversaciones } = {}, error, refetch } = useQuery(
     getQuery(item.__typename),
     { variables: { id: item.id } }
@@ -38,9 +47,28 @@ const Conversacion = ({ item }) => {
 
   if (error) return <div>Error</div>;
 
+  let compromisoId;
+  switch (item.__typename) {
+    case 'compromiso':
+      compromisoId = item.id;
+      break;
+    case 'hito':
+      console.log('si,esss');
+      compromisoId = item.compromiso_id;
+      break;
+    case 'actividad':
+      compromisoId = item.compromiso_id;
+      break;
+    default:
+  }
+
+  const compromisoAllowed = usuario?.responsable_compromisos
+    .map(rc => rc.compromiso_id)
+    .includes(compromisoId);
+
   return (
     <Box>
-      {authenticated && (
+      {compromisoAllowed && (
         <Box>
           <ConversacionEditor item={item} refetch={refetch} />
         </Box>
@@ -48,9 +76,9 @@ const Conversacion = ({ item }) => {
       {conversaciones?.map(conversacion => (
         <Comment
           key={conversacion.id}
-          avatar={<Avatar label={conversacion.usuario} size="medium" />}
-          author={<CommentAuthor>{conversacion.usuario}</CommentAuthor>}
-          type="autor"
+          avatar={<Avatar label={conversacion.usuario_email} size="medium" />}
+          author={<CommentAuthor>{conversacion.usuario.nombre}</CommentAuthor>}
+          type="Institución"
           // edited={<CommentEdited>Edited</CommentEdited>}
           restrictedTo="Sólo para participantes"
           time={

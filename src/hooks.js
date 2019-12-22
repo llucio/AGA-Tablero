@@ -12,7 +12,7 @@ const useAuth = () => {
   const { data: { usuario } = {}, loading: userLoading } = useQuery(
     USUARIO_QUERY,
     {
-      skip: !authenticated,
+      skip: !tokenParsed?.email,
       variables: {
         id: tokenParsed?.email
       }
@@ -33,12 +33,12 @@ const useAuth = () => {
       window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
       logout();
     },
-    administrador: _.get(profile.claims, 'allowed_roles', []).includes(
-      'administrador'
-    ),
     authenticated,
     profile,
     usuario,
+    administrador: _.get(profile.claims, 'allowed_roles', []).includes(
+      'administrador'
+    ),
     loading: !initialized || userLoading
   };
 };

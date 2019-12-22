@@ -30,7 +30,7 @@ const routes = [
     component: CompromisoDetail
   },
   {
-    path: '/accion-clave/:hitoId',
+    path: '/compromiso/:compromisoSlug/:hitoId',
     component: HitoDetail
   }
 ];
