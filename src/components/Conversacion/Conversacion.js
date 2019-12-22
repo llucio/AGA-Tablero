@@ -7,8 +7,7 @@ import Comment, {
   CommentTime,
   CommentAction,
   CommentEdited,
-  CommentAuthor,
-  CommentLayout
+  CommentAuthor
 } from '@atlaskit/comment';
 import { ReactRenderer } from '@atlaskit/renderer';
 import { useAuth } from '../../hooks';
@@ -62,15 +61,15 @@ const Conversacion = ({ item }) => {
             </CommentTime>
           }
           content={
-            <p>
-              <ReactRenderer document={JSON.parse(conversacion.contenido)} />
-            </p>
+            <ReactRenderer document={JSON.parse(conversacion.contenido)} />
           }
-          // actions={[
-          //   <CommentAction>Reply</CommentAction>,
-          //   <CommentAction>Edit</CommentAction>,
-          //   <CommentAction>Like</CommentAction>
-          // ]}
+          actions={
+            authenticated && [
+              <CommentAction>Responder</CommentAction>,
+              <CommentAction>Eliminar</CommentAction>,
+              <CommentAction>Marcar</CommentAction>
+            ]
+          }
         />
       ))}
     </Box>

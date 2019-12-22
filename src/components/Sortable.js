@@ -23,7 +23,7 @@ const SortableList = ({
   ...options
 }) => {
   const [loading, setLoading] = useState(false);
-  const { usuario } = useAuth();
+  const { administrador, usuario } = useAuth();
   const [mutateOrden] = useMutation(
     gql`
     mutation setOrden($id: uuid!, $orden: Int!) {
@@ -78,7 +78,7 @@ const SortableList = ({
 
   const SortableItem = SortableElement(
     ({ value }) =>
-      (usuario?.administrador && deletable && (
+      (administrador && deletable && (
         <span>
           <Deletable item={value} typename={typename} refetch={refetch} />
           <ItemComponent item={value} refetch={refetch} {...itemProps} />
@@ -102,7 +102,7 @@ const SortableList = ({
 
   return (
     <>
-      {usuario?.administrador && creatable && (
+      {administrador && creatable && (
         <Creatable
           parentKey={creatable}
           parentId={parentId}
@@ -113,7 +113,7 @@ const SortableList = ({
       <Container
         axis="x"
         pressDelay={200}
-        shouldCancelStart={() => !usuario.administrador}
+        shouldCancelStart={() => !administrador}
         items={items}
         onSortEnd={onSort}
         {...options}

@@ -1,35 +1,36 @@
 import { useEffect } from 'react';
 import _ from 'lodash';
+import { loader } from 'graphql.macro';
+import { useQuery } from '@apollo/react-hooks';
+import { useKeycloak } from '@react-keycloak/web';
 import {
   AUTH_TOKEN_STORAGE_KEY,
   USER_ROLE_STORAGE_KEY,
   USER_ROLE_DEFAULT
 } from './constants';
-import { useKeycloak } from '@react-keycloak/web';
+
+const USUARIO_QUERY = loader('./queries/UsuarioGet.graphql');
 
 const useAuth = () => {
   const [keycloak, initialized] = useKeycloak();
   const { login, logout, authenticated, tokenParsed } = keycloak;
-
-  const claims = _.mapKeys(
-    _.get(tokenParsed, ['https://hasura.io/jwt/claims'], {}),
-    (_, key) => key.replace('x-hasura-', '').replace('-', '_')
+  const { data: { usuario } = {}, loading: userLoading, error } = useQuery(
+    USUARIO_QUERY,
+    {
+      skip: !authenticated,
+      variables: {
+        id: tokenParsed?.email
+      }
+    }
   );
 
-  const usuario = {
+  const profile = {
     ...tokenParsed,
-    claims,
-    institucion: claims.institucion_id,
-    organizacion: claims.organizacion_id,
-    administrador: _.get(claims, 'allowed_roles', []).includes('administrador')
+    claims: _.mapKeys(
+      _.get(tokenParsed, ['https://hasura.io/jwt/claims'], {}),
+      (_, key) => key.replace('x-hasura-', '').replace('-', '_')
+    )
   };
-
-  useEffect(() => {
-    if (authenticated) {
-      const role = usuario.administrador ? 'administrador' : USER_ROLE_DEFAULT;
-      window.localStorage.setItem(USER_ROLE_STORAGE_KEY, role);
-    }
-  }, [authenticated, usuario]);
 
   return {
     login,
@@ -37,9 +38,13 @@ const useAuth = () => {
       window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
       logout();
     },
+    administrador: _.get(profile.claims, 'allowed_roles', []).includes(
+      'administrador'
+    ),
     authenticated,
+    profile,
     usuario,
-    loading: !initialized
+    loading: !initialized || userLoading
   };
 };
 

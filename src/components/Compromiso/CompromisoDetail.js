@@ -89,7 +89,7 @@ const AgaTooltip = withStyles(theme => ({
 const CompromisoDetail = () => {
   const { compromisoSlug } = useParams();
   const classes = useStyles();
-  const { usuario: { administrador } = {} } = useAuth();
+  const { administrador } = useAuth();
   const {
     data: { item: [compromiso] = [] } = {},
     loading,

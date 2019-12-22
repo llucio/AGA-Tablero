@@ -97,3 +97,29 @@ fragment Conversacion on conversacion {
   contenido
   padre
 }
+
+fragment ResponsableCompromiso on responsable_compromiso {
+  id
+  compromiso_id
+  metadatos
+}
+
+fragment ResponsableHito on responsable_compromiso {
+  id
+  hito_id
+  metadatos
+}
+
+fragment Organizacion on organizacion {
+  id
+  nombre
+  metadatos
+  gobierno
+}
+
+fragment Usuario on usuario {
+  email
+  nombre
+  metadatos
+  organizacion_id
+}

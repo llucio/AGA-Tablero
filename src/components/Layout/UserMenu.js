@@ -30,7 +30,14 @@ const useStyles = makeStyles(theme => ({
 
 const UserMenu = () => {
   const classes = useStyles();
-  const { loading, authenticated, usuario, login, logout } = useAuth();
+  const {
+    authenticated,
+    administrador,
+    profile,
+    login,
+    logout,
+    loading
+  } = useAuth();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = event => {
@@ -59,7 +66,7 @@ const UserMenu = () => {
             aria-haspopup="true"
             onClick={handleClick}
           >
-            {usuario.administrador ? (
+            {administrador ? (
               <PolicyIcon className={classes.extendedIcon} />
             ) : (
               <FaceIcon className={classes.extendedIcon} />
@@ -74,7 +81,7 @@ const UserMenu = () => {
             onClose={handleClose}
           >
             <MenuItem onClick={handleClose}>
-              {usuario.name} ({usuario.email})
+              {profile.nombre} ({profile.email})
             </MenuItem>
             <MenuItem onClick={handleClose}>Administrador</MenuItem>
             <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
