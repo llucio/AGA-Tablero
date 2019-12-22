@@ -1,7 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-
 import Avatar from '@atlaskit/avatar';
 import Box from '@material-ui/core/Box';
 import Comment, {
@@ -12,12 +11,9 @@ import Comment, {
   CommentLayout
 } from '@atlaskit/comment';
 import { ReactRenderer } from '@atlaskit/renderer';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { useAuth } from '../../hooks';
 import moment from '../../utils/moment';
-import IntlProvider from '../IntlProvider';
 import ConversacionEditor from './ConversacionEditor';
-
-const transformer = new JSONTransformer();
 
 const getQuery = type => gql`
   query ConversacionQuery($id: uuid!, $limit: Int = 100) {
@@ -35,6 +31,7 @@ const getQuery = type => gql`
 `;
 
 const Conversacion = ({ item }) => {
+  const { authenticated } = useAuth();
   const { data: { conversaciones } = {}, error, refetch } = useQuery(
     getQuery(item.__typename),
     { variables: { id: item.id } }
@@ -44,7 +41,11 @@ const Conversacion = ({ item }) => {
 
   return (
     <Box>
-      <ConversacionEditor item={item} refetch={refetch} />
+      {authenticated && (
+        <Box>
+          <ConversacionEditor item={item} refetch={refetch} />
+        </Box>
+      )}
       {conversaciones?.map(conversacion => (
         <Comment
           key={conversacion.id}
