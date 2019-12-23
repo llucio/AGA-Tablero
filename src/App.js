@@ -12,6 +12,7 @@ import BreadcrumbBar from './components/Layout/BreadcrumbBar';
 import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetail';
+import UserEditor from './components/administracion/UserEditor';
 import HitoDetail from './components/Hito/HitoDetail';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -33,6 +34,10 @@ const routes = [
   {
     path: '/compromiso/:compromisoSlug/:hitoId',
     component: HitoDetail
+  },
+  {
+    path: '/administracion/usuarios',
+    component: UserEditor
   }
 ];
 

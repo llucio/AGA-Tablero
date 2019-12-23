@@ -79,7 +79,7 @@ const Conversacion = ({ item }) => {
           key={conversacion.id}
           avatar={<Avatar label={conversacion.usuario_email} size="medium" />}
           author={<CommentAuthor>{conversacion.usuario.nombre}</CommentAuthor>}
-          type="Institución"
+          type={conversacion.usuario.organizacion.nombre}
           // edited={<CommentEdited>Edited</CommentEdited>}
           restrictedTo="Sólo para participantes"
           time={
