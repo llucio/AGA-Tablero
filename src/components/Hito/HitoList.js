@@ -25,8 +25,6 @@ const HitoList = ({ where }) => {
 
   return (
     <div className="vertical-margin">
-      <h2>Acciones clave</h2>
-      <hr className="line" />
       <Sortable
         typeName="hito"
         items={hitos}

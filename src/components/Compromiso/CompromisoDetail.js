@@ -220,9 +220,6 @@ const CompromisoDetail = () => {
                 <DataDisplay data={compromiso.metadatos?.descripcion || ''} />
               </Editable>
             </Box>
-            <Box>
-              <Conversacion item={compromiso} />
-            </Box>
             <Box className={classes.descripcion}>
               <h4 className="mt-3">Dependencias responsables</h4>
               <Editable
@@ -247,7 +244,7 @@ const CompromisoDetail = () => {
                 />
               </Editable>
             </Box>
-            <div className={classes.panel}>
+            <Box className="pt-3">
               {compromisoTabs
                 .filter(
                   ({ key }) =>
@@ -285,8 +282,17 @@ const CompromisoDetail = () => {
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
                 ))}
-            </div>
-            <HitoList where={{ compromiso_id: { _eq: compromiso.id } }} />
+            </Box>
+            <Box className="pt-3">
+              <h2>Discución y comentarios</h2>
+              <hr className="line" />
+              <Conversacion item={compromiso} />
+            </Box>
+            <Box className="pt-4">
+              <h2>Acciones clave</h2>
+              <hr className="line" />
+              <HitoList where={{ compromiso_id: { _eq: compromiso.id } }} />
+            </Box>
           </Grid>
         </Grid>
       </StickyContainer>
