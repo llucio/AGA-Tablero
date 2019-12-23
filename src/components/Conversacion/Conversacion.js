@@ -39,7 +39,7 @@ const getQuery = type => gql`
 `;
 
 const Conversacion = ({ item }) => {
-  const { authenticated, usuario } = useAuth();
+  const { authenticated, usuario, anonymousMode } = useAuth();
   const { data: { conversaciones } = {}, error, refetch } = useQuery(
     getQuery(item.__typename),
     { variables: { id: item.id } }
@@ -53,7 +53,6 @@ const Conversacion = ({ item }) => {
       compromisoId = item.id;
       break;
     case 'hito':
-      console.log('si,esss');
       compromisoId = item.compromiso_id;
       break;
     case 'actividad':
@@ -62,9 +61,11 @@ const Conversacion = ({ item }) => {
     default:
   }
 
-  const compromisoAllowed = usuario?.responsable_compromisos
-    .map(rc => rc.compromiso_id)
-    .includes(compromisoId);
+  const compromisoAllowed =
+    authenticated &&
+    usuario?.responsable_compromisos
+      .map(rc => rc.compromiso_id)
+      .includes(compromisoId);
 
   return (
     <Box>

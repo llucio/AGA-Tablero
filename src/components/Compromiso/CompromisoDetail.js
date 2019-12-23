@@ -257,7 +257,6 @@ const CompromisoDetail = () => {
                       ''
                     )
                 )
-
                 .map(({ key, label }, i) => (
                   <ExpansionPanel className="elevation-0" key={i}>
                     <ExpansionPanelSummary
