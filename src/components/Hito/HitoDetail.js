@@ -162,7 +162,7 @@ const HitoHeader = ({ hito, refetch }) => (
       </Editable>
     </Grid>
     <Grid container>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={9}>
         <div className="progress mt-2">
           <div
             className="progress-bar-dark light-green w-0"
@@ -172,6 +172,16 @@ const HitoHeader = ({ hito, refetch }) => (
             aria-valuemax="100"
           />
         </div>
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Editable
+          item={hito}
+          path="metadatos.ponderacion"
+          label="Ponderación"
+          onUpdate={refetch}
+        >
+          <div>Ponderación: {hito.metadatos?.ponderacion || 100} % </div>
+        </Editable>
       </Grid>
     </Grid>
   </Grid>

@@ -109,7 +109,7 @@ const UserEditor = () => {
   return (
     <div style={styles.container}>
       <CRUDTable
-        caption="Tasks"
+        caption="Usuarios"
         fetchItems={payload => service.fetchItems(payload)}
       >
         <Fields>
@@ -126,7 +126,7 @@ const UserEditor = () => {
           message="Crear un nuevo usuario"
           trigger="Crear usuario"
           onSubmit={task => service.create(task)}
-          submitText="Create"
+          submitText="Crear"
           validate={values => {
             const errors = {};
             if (!values.email) {
@@ -142,17 +142,13 @@ const UserEditor = () => {
         />
 
         <UpdateForm
-          title="Task Update Process"
-          message="Update task"
-          trigger="Update"
+          title="Actualizar"
+          message="Actulizar usuario"
+          trigger="Actualizar"
           onSubmit={task => service.update(task)}
-          submitText="Update"
+          submitText="Acualizar"
           validate={values => {
             const errors = {};
-
-            if (!values.id) {
-              errors.id = 'Please, provide id';
-            }
 
             if (!values.title) {
               errors.title = "Please, provide task's title";
@@ -167,11 +163,11 @@ const UserEditor = () => {
         />
 
         <DeleteForm
-          title="Task Delete Process"
-          message="Are you sure you want to delete the task?"
-          trigger="Delete"
+          title="Eliinar usuario"
+          message="Confirma que deseas eliminar usuario"
+          trigger="Eliminar"
           onSubmit={task => service.delete(task)}
-          submitText="Delete"
+          submitText="Eliminar"
           validate={values => {
             const errors = {};
             if (!values.id) {
