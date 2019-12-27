@@ -57,11 +57,11 @@ const CompromisoList = ({ where }) => {
   return (
     <div className="vertical-margin-bottom">
       <Grid container spacing={3}>
-        <Grid item xs={9} sm={10}>
+        <Grid item xs={12} sm={7}>
           <h2>Compromisos</h2>
           <hr className="line" />
         </Grid>
-        <Grid item xs={2} sm={2} align="right">
+        <Grid item xs={12} sm={5} align="right">
           <Editable
             upload
             item={plan}
@@ -81,9 +81,12 @@ const CompromisoList = ({ where }) => {
                 target="_blank"
                 color="primary"
                 aria-label="add"
+                variant="extend"
+                style={{ width: '300px' }}
                 className={classes.margin}
               >
                 <DownloadIcon />
+                Descarga plan de acción
               </Fab>
             </AgaTooltip>
           </Editable>
