@@ -1,0 +1,56 @@
+.parallax {
+  height: 420px;
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.parallax .content {
+  width: 100%;
+  height: 420px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.parallax .gradiente {
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
+}
+
+@media screen and (max-width: 640px) {
+  header {
+    margin-top: 0em !important;
+  }
+  .parallax {
+    background-attachment: scroll;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 640px) {
+  header {
+    margin-top: 0em !important;
+  }
+  .parallax {
+    background-attachment: scroll;
+    background-position: bottom;
+    background-size: cover;
+  }
+}
+

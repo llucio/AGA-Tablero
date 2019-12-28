@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import '../../assets/css/efectos.css';
 
 // Para imágenes aleatorias (provisional)
 const defaultImage = 'https://picsum.photos/300/300';
@@ -28,14 +29,14 @@ const CompromisoCard = ({ item: compromiso, index }) => {
     <Grid item xs={12} md={4} lg={4} className={classes.root}>
       <Box
         boxShadow={3}
-        className="box-4 item-compromisos"
+        className="box-6 item-compromisos efecto saturacion"
         style={{
           backgroundImage: `url(${imageUrl})`,
           backgroundSize: 'cover',
           height: '320px'
         }}
       >
-        <Box className="pattern5 box-4">
+        <Box className="pattern4 box-6">
           <Link
             to={`/compromiso/${compromiso.slug}`}
             className="white-text shadow-text"

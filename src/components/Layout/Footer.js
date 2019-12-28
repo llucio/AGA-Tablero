@@ -12,12 +12,12 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   box_one: {
-    padding: theme.spacing(0, 4),
+    padding: theme.spacing(0),
     textAlign: 'center',
     backgroundColor: 'black'
   },
   box_two: {
-    padding: theme.spacing(0, 7),
+    padding: theme.spacing(0, 2),
     textAlign: 'center',
     backgroundColor: 'black'
   },
@@ -40,7 +40,7 @@ const Footer = props => {
           spacing={4}
           className={classes.root}
         >
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -57,7 +57,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -74,7 +74,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -98,9 +98,9 @@ const Footer = props => {
           direction="row"
           justify="center"
           alignItems="flex-start"
-          spacing={4}
+          spacing={1}
         >
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -117,7 +117,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -134,7 +134,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -151,7 +151,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_two}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -168,7 +168,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -185,7 +185,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -209,9 +209,9 @@ const Footer = props => {
           direction="row"
           justify="center"
           alignItems="flex-start"
-          spacing={4}
+          spacing={1}
         >
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -228,7 +228,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -245,7 +245,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_two}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -262,7 +262,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -279,7 +279,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"
@@ -296,7 +296,7 @@ const Footer = props => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={2} sm={1}>
             <Box className={classes.box_one}>
               <Link
                 href="https://www.gob.mx/sfp"

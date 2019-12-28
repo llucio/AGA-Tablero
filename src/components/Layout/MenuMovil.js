@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { slide as Menu } from 'react-burger-menu';
-import '../../burguer-menu.css';
+import '../../assets/css/burguer-menu.css';
 
 const base = process.env.WEBSITE_BASE_URL || 'https://gobabiertomx.org';
 
