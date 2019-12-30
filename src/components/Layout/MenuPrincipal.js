@@ -115,10 +115,18 @@ const MenuPrincipal = props => {
                     href={`${base}/quienes-somos/`}
                     text="Quiénes somos"
                   />
+                  <MenuButton
+                    href={`${base}/antecedentes/`}
+                    text="Antecedentes"
+                  />
                   <MenuButton href={`${base}/blog/`} text="Blog" />
                   <MenuButton href={`${base}/plan1/`} text="Planes de acción" />
                   <MenuButton href="/" text="Tablero" />
-                  <MenuButton href={`${base}/contacto/`} text="Contacto" />
+                  <MenuButton
+                    href={`${base}/contacto/`}
+                    text="Contacto"
+                    class_alt="menu-spacing "
+                  />
                 </Toolbar>
               </Container>
             </AppBar>
@@ -129,8 +137,8 @@ const MenuPrincipal = props => {
   );
 };
 
-const MenuButton = ({ href, text }) => (
-  <Button href={href} color="inherit" className="normal">
+const MenuButton = ({ href, text, class_alt }) => (
+  <Button href={href} color="inherit" className={`${class_alt} normal`}>
     {text}
   </Button>
 );

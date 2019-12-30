@@ -180,7 +180,7 @@ const CompromisoDetail = () => {
               )}
             </Sticky>
           </Grid>
-          <Grid item xs={12} md={9} className="compromiso-conten">
+          <Grid item xs={12} md={9} className="compromiso-content">
             <Editable
               item={compromiso}
               path="titulo"
