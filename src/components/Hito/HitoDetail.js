@@ -125,7 +125,7 @@ const HitoHeader = ({ hito, refetch }) => (
         onUpdate={refetch}
       >
         {!!hito.fecha_inicial && (
-          <div style={{ display: 'inline-block' }}>
+          <Box className="" style={{ display: 'inline-block' }}>
             <p>Inicio</p>
             <CalendarIcon
               style={{ margin: '0 auto' }}
@@ -133,9 +133,8 @@ const HitoHeader = ({ hito, refetch }) => (
                 .utc()
                 .toDate()}
               options={dateOptions}
-              className="elevation-1"
             />
-          </div>
+          </Box>
         )}
       </Editable>
       <Editable
@@ -148,7 +147,7 @@ const HitoHeader = ({ hito, refetch }) => (
         style={{ display: 'inline-block' }}
       >
         {!!hito.fecha_final && (
-          <div>
+          <Box>
             <p>Fin</p>
             <CalendarIcon
               date={moment(hito.fecha_final)
@@ -157,30 +156,33 @@ const HitoHeader = ({ hito, refetch }) => (
               options={dateOptions}
               className="elevation-1"
             />
-          </div>
+          </Box>
         )}
       </Editable>
     </Grid>
     <Grid container>
-      <Grid item xs={12} sm={9}>
-        <div className="progress mt-2">
-          <div
+      <Grid item xs={12} sm={8}>
+        <Box className="progress mt-2">
+          <Box
             className="progress-bar-dark light-green w-0"
             role="progressbar"
             aria-valuenow="10"
             aria-valuemin="0"
             aria-valuemax="100"
           />
-        </div>
+        </Box>
       </Grid>
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={12} sm={4} className="">
         <Editable
           item={hito}
           path="metadatos.ponderacion"
           label="Ponderación"
           onUpdate={refetch}
         >
-          <div>Ponderación: {hito.metadatos?.ponderacion || 100} % </div>
+          <Box className="blue">
+            Ponderación: {hito.metadatos?.ponderacion || 100} %{' '}
+          </Box>
+          <br className="clearfix" />
         </Editable>
       </Grid>
     </Grid>

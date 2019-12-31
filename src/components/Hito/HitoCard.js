@@ -30,8 +30,8 @@ const HitoCard = ({ item: hito, refetch }) => {
 
   return (
     <Box className={classes.panel}>
-      <Box className="vertical-margin-bottom-middle">
-        <a name={`hito-${hito.id}`} />
+      <Box className="">
+        <a name={`hito-${hito.id}`} className="nameTopSpacing" />
         <h4 className="extra-bold">
           <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
             <span>{hito.titulo || 'Sin título'}</span>
@@ -42,6 +42,7 @@ const HitoCard = ({ item: hito, refetch }) => {
             to={`/compromiso/${compromisoSlug}/${hito.id}`}
             component={Link}
             color="primary"
+            className="blue-grey lighten-5"
           >
             <LinkIcon className={classes.extendedIcon} />
             Detalles

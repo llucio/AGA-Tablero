@@ -119,7 +119,7 @@ const CompromisoDetail = () => {
                 calculatedHeight
               }) => (
                 <Box
-                  fontSize={18}
+                  fontSize={17}
                   style={style}
                   className={isSticky ? classes.sticky : ''}
                 >

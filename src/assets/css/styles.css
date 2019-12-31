@@ -46,7 +46,7 @@ strong,
 }
 
 hr.line {
-  margin: 10px 0 4%;
+  margin: 0 0 4%;
   width: 10rem;
   border: 3px solid #8bc34a;
 }
@@ -229,20 +229,26 @@ hr.line {
 .widget-calendar {
 }
 
-.sc-bdVaJa {
-  border: solid 1px #e2e8ee;
+.sc-AnqlK {
+  background-color: #fafafa !important;
+  height: inherit !important;
 }
 
-.sc-bdVaJa .sc-bwzfXH {
+.sc-AnqlK .sc-keFjpB {
   color: #03a9f4 !important;
-  background-color: #fafafa;
+  background-color: #ef5350;
+  color: #fff !important;
 }
 
-.sc-bdVaJa .sc-bxivhb {
+.sc-AnqlK .sc-kVrTmx {
+  color: #37474f !important;
+  margin-right: 0 !important;
+  margin-top: 0 !important;
 }
 
-.sc-bdVaJa .sc-htpNat {
-  background-color: #fafafa;
+.sc-AnqlK .sc-jWojfa {
+  background-color: #546e7a;
+  color: #fff !important;
 }
 
 .menuSidebar a {
@@ -356,11 +362,14 @@ th.MuiTableCell-root {
 /*
  * Personalizando MuI
  */
+.MuiTypography-h3,
+.MuiTypography-h4 {
+  font-family: 'Source Sans Pro', sans-serif !important;
+  font-weight: 400;
+}
 
 .MuiTypography-h4 {
   font-size: 1.5rem !important;
-  font-family: 'Source Sans Pro', sans-serif !important;
-  font-weight: 400;
   line-height: 1.05 !important;
   letter-spacing: 0em !important;
 }
@@ -379,13 +388,21 @@ th.MuiTableCell-root {
   transform: none;
 }
 
+.compromiso-content .nameTopSpacing {
+  width: 100%;
+  height: 50px;
+  display: block;
+  border-bottom: none;
+}
+
 .compromiso-content ul {
   list-style-type: disc;
   margin: 0;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 .compromiso-content ol {
   list-style-type: decimal;
+  padding-left: 0.25em;
 }
 
 .compromiso-content li {
@@ -417,7 +434,11 @@ th.MuiTableCell-root {
   border-left: 5px solid #8bc34a;
   padding: 5px 15px;
   margin: 25px 0;
-  transition: background-color 0.5s ease;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .compromiso-content h4 {
@@ -437,6 +458,12 @@ th.MuiTableCell-root {
 
 .table-actividad .MuiBox-root h6:hover {
   background-color: transparent !important;
+
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 /*
