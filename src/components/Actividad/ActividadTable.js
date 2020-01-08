@@ -10,7 +10,18 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+
+import DoneIcon from '@material-ui/icons/Done';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+
+import BatteryChargingFullIcon from '@material-ui/icons/BatteryChargingFull';
+import BatteryCharging60Icon from '@material-ui/icons/BatteryCharging60';
+import BatteryCharging20Icon from '@material-ui/icons/BatteryCharging20';
+
+import AvTimerIcon from '@material-ui/icons/AvTimer';
+
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 
@@ -43,6 +54,9 @@ const useStyles = makeStyles(theme => ({
   },
   table: {
     minWidth: 700
+  },
+  marginButton: {
+    margin: theme.spacing(1)
   }
 }));
 
@@ -70,13 +84,14 @@ const ActividadTable = ({ where }) => {
       <Box className={classes.rootTable}>
         <Table
           responsive
+          stickyHeader
           className={classes.table}
           aria-label="Lista de actividades"
         >
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">Actividades</StyledTableCell>
-              <StyledTableCell align="center">Estatus</StyledTableCell>
+              <StyledTableCell align="center">Estatus </StyledTableCell>
               <StyledTableCell align="center">
                 Medio de verificación
               </StyledTableCell>
@@ -111,8 +126,38 @@ const ActividadTable = ({ where }) => {
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {/* <CheckCircleIcon className="light-green-text" /> */}
-                  <CheckCircleOutlineIcon /> Ninguno
+                  <div>
+                    <Tooltip title="¡Completo!" placement="right">
+                      <Fab
+                        size="small"
+                        aria-label="status"
+                        className="indigo darken-2 white-text"
+                        style={{ margin: '5px' }}
+                      >
+                        <AvTimerIcon />
+                      </Fab>
+                    </Tooltip>
+                    <Tooltip title="En proceso" placement="right">
+                      <Fab
+                        size="small"
+                        aria-label="status"
+                        className="indigo white-text"
+                        style={{ margin: '5px' }}
+                      >
+                        <BatteryCharging60Icon />
+                      </Fab>
+                    </Tooltip>
+                    <Tooltip title="Por iniciar" placement="right">
+                      <Fab
+                        size="small"
+                        aria-label="status"
+                        className="indigo lighten-2 indigo-text text-lighten-4"
+                        style={{ margin: '5px' }}
+                      >
+                        <BatteryCharging20Icon />
+                      </Fab>
+                    </Tooltip>
+                  </div>
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <EntregableList

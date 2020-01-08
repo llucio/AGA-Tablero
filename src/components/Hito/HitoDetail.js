@@ -12,6 +12,7 @@ import Editable from '../Editable';
 import moment from '../../utils/moment';
 import ActividadTable from '../Actividad/ActividadTable';
 import Conversacion from '../Conversacion/Conversacion';
+import '../../assets/css/calendario.css';
 
 const GET_QUERY = loader('../../queries/HitoGet.graphql');
 
@@ -114,7 +115,7 @@ const HitoHeader = ({ hito, refetch }) => (
       item
       xs={12}
       md={4}
-      className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase bold text-center"
+      className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase extra-bold text-center"
     >
       <Editable
         item={hito}
@@ -154,7 +155,7 @@ const HitoHeader = ({ hito, refetch }) => (
                 .utc()
                 .toDate()}
               options={dateOptions}
-              className="elevation-1"
+              className=""
             />
           </Box>
         )}

@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import '../../assets/css/efectos.css';
+import '../../assets/css/image-effects.css';
 
 // Para imágenes aleatorias (provisional)
 const defaultImage = 'https://picsum.photos/300/300';
@@ -36,7 +37,7 @@ const CompromisoCard = ({ item: compromiso, index }) => {
           height: '320px'
         }}
       >
-        <Box className="pattern4 box-6">
+        <Box className="img-gradiente box-4">
           <Link
             to={`/compromiso/${compromiso.slug}`}
             className="white-text shadow-text"
