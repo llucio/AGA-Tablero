@@ -12,6 +12,12 @@ import Editable from '../Editable';
 import moment from '../../utils/moment';
 import ActividadTable from '../Actividad/ActividadTable';
 import Conversacion from '../Conversacion/Conversacion';
+
+import { Ribbon } from '@potion/element';
+import { Svg } from '@potion/element';
+import { Chord } from '@potion/layout';
+import { LinearGradient } from '@potion/extra';
+
 import '../../assets/css/calendario.css';
 
 const GET_QUERY = loader('../../queries/HitoGet.graphql');
@@ -92,6 +98,37 @@ const HitoDetail = props => {
           <Conversacion item={hito} refetch={refetch} />
         </Box>
         <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
+        <Box className="grey lighten-4" style={{ height: '500px' }}>
+          <Svg width={400} height={400}>
+            <Chord
+              data={[
+                [11975, 5871, 8916, 2868],
+                [1951, 10048, 2060, 6171],
+                [8010, 16145, 8090, 8045],
+                [1013, 990, 940, 6907]
+              ]}
+              animate
+              nodeEnter={d => ({
+                ...d,
+                sourceStartAngle: d.sourceEndAngle,
+                targetStartAngle: d.targetEndAngle
+              })}
+            >
+              {nodes =>
+                nodes.map((node, i) => (
+                  <Ribbon
+                    {...node}
+                    fill="black"
+                    stroke="black"
+                    fillOpacity={0.9}
+                    radius={500 * 0.4}
+                    transform={{ translate: [200, 200] }}
+                  />
+                ))
+              }
+            </Chord>
+          </Svg>
+        </Box>
       </Box>
     </div>
   );

@@ -14,6 +14,8 @@ import { useAuth } from '../../hooks';
 import moment from '../../utils/moment';
 import ConversacionEditor from './ConversacionEditor';
 
+import '../../assets/css/comentarios.css';
+
 const getQuery = type => gql`
   query ConversacionQuery($id: uuid!, $limit: Int = 100) {
     conversaciones: conversacion(
@@ -68,38 +70,54 @@ const Conversacion = ({ item }) => {
       .includes(compromisoId);
 
   return (
-    <Box>
+    <Box className="comment-content horizontal-padding vertical-padding ">
       {compromisoAllowed && (
         <Box>
           <ConversacionEditor item={item} refetch={refetch} />
         </Box>
       )}
       {conversaciones?.map(conversacion => (
-        <Comment
-          key={conversacion.id}
-          avatar={<Avatar label={conversacion.usuario_email} size="medium" />}
-          author={<CommentAuthor>{conversacion.usuario.nombre}</CommentAuthor>}
-          type={conversacion.usuario.organizacion.nombre}
-          // edited={<CommentEdited>Edited</CommentEdited>}
-          restrictedTo="Sólo para participantes"
-          time={
-            <CommentTime>
-              {moment(conversacion.fecha_creacion).format(
-                'D [de] MMMM [de] YYYY'
-              )}
-            </CommentTime>
-          }
-          content={
-            <ReactRenderer document={JSON.parse(conversacion.contenido)} />
-          }
-          actions={
-            authenticated && [
-              <CommentAction>Responder</CommentAction>,
-              <CommentAction>Eliminar</CommentAction>,
-              <CommentAction>Marcar</CommentAction>
-            ]
-          }
-        />
+        <Box className="grey lighten-5 comment-padding comment-margin box-6">
+          <Comment
+            key={conversacion.id}
+            avatar={
+              <Avatar
+                label={conversacion.usuario_email}
+                size="medium"
+                className="elevation-2"
+              />
+            }
+            author={
+              <CommentAuthor>{conversacion.usuario.nombre}</CommentAuthor>
+            }
+            type={conversacion.usuario.organizacion.nombre}
+            // edited={<CommentEdited>Edited</CommentEdited>}
+            restrictedTo="Sólo para participantes"
+            time={
+              <CommentTime>
+                {moment(conversacion.fecha_creacion).format(
+                  'D [de] MMMM [de] YYYY'
+                )}
+              </CommentTime>
+            }
+            content={
+              <ReactRenderer document={JSON.parse(conversacion.contenido)} />
+            }
+            actions={
+              authenticated && [
+                <CommentAction>
+                  <small>Responder</small>
+                </CommentAction>,
+                <CommentAction>
+                  <small>Eliminar</small>
+                </CommentAction>,
+                <CommentAction>
+                  <small>Marcar</small>
+                </CommentAction>
+              ]
+            }
+          />
+        </Box>
       ))}
     </Box>
   );
