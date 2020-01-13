@@ -57,7 +57,7 @@ const HitoDetail = props => {
   return (
     <div className={classes.root}>
       <Box className="compromiso-content">
-        <Grid spacing={2} className={classes.header}>
+        <Grid className={classes.header}>
           <HitoHeader hito={hito} refetch={refetch} />
         </Grid>
 

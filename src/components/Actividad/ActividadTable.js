@@ -2,7 +2,7 @@ import React from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
-import EntregableList from '../Entregable/EntregableList';
+import MedioVerificacionList from '../Verificacion/MedioVerificacionList';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -57,6 +57,9 @@ const useStyles = makeStyles(theme => ({
   },
   marginButton: {
     margin: theme.spacing(1)
+  },
+  mediosCell: {
+    minWidth: 400
   }
 }));
 
@@ -91,8 +94,8 @@ const ActividadTable = ({ where }) => {
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">Actividades</StyledTableCell>
-              <StyledTableCell align="center">Estatus </StyledTableCell>
-              <StyledTableCell align="center">
+              <StyledTableCell align="center">Estatus</StyledTableCell>
+              <StyledTableCell className={classes.mediosCell} align="center">
                 Medio de verificación
               </StyledTableCell>
             </TableRow>
@@ -160,11 +163,8 @@ const ActividadTable = ({ where }) => {
                   </div>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <EntregableList
-                    where={{ hito_id: { _eq: actividad.hito_id } }}
-                  />
-                  <Editable
-                    adminOnly
+                  <MedioVerificacionList actividadId={actividad.id} />
+                  {/* <Editable
                     html
                     item={actividad}
                     path="metadatos.medio_verificacion"
@@ -172,7 +172,7 @@ const ActividadTable = ({ where }) => {
                     onUpdate={refetch}
                   >
                     <strong>{actividad.metadatos.medio_verificacion}</strong>
-                  </Editable>
+                  </Editable> */}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

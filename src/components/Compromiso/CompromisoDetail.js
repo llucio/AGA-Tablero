@@ -88,7 +88,7 @@ const AgaTooltip = withStyles(theme => ({
 const CompromisoDetail = () => {
   const { compromisoSlug } = useParams();
   const classes = useStyles();
-  const { administrador } = useAuth();
+  const { administrador, loading: authLoading } = useAuth();
   const {
     data: { item: [compromiso] = [] } = {},
     loading,
@@ -101,7 +101,7 @@ const CompromisoDetail = () => {
   });
 
   if (error) return <div>Error</div>;
-  if (loading && !compromiso) return <LoadingIndicator />;
+  if (authLoading || (loading && !compromiso)) return <LoadingIndicator />;
   if (!compromiso) return <h1>No encontrado</h1>;
 
   return (

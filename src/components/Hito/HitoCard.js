@@ -37,6 +37,18 @@ const HitoCard = ({ item: hito, refetch }) => {
             <span>{hito.titulo || 'Sin título'}</span>
           </Editable>
         </h4>
+        <p>
+          <Editable
+            adminOnly
+            item={hito}
+            path="ponderacion"
+            label="Ponderación"
+            valueType="Int"
+            onUpdate={refetch}
+          >
+            Ponderación <span>{hito.ponderacion}%</span>
+          </Editable>
+        </p>
         <Box>
           <Button
             to={`/compromiso/${compromisoSlug}/${hito.id}`}

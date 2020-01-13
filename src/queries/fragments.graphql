@@ -17,6 +17,34 @@ fragment Actividad on actividad {
   metadatos
   fecha_inicial
   fecha_final
+  medios_verificacion_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+
+fragment Verificacion on verificacion {
+  id
+  medio_verificacion_id
+  usuario_email
+  valor
+}
+
+fragment MedioVerificacion on medio_verificacion {
+  id
+  fecha_creacion
+  usuario_email
+  actividad_id
+  archivos
+  metadatos
+  titulo
+  verificaciones {
+    id
+    fecha_creacion
+    metadatos
+    valor
+  }
 }
 
 fragment Entregable on entregable {

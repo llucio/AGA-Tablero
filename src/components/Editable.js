@@ -25,10 +25,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     margin: '6px 0',
     padding: '3px'
-    // margin: '3px'
   },
   root: {
-    // margin: '0 0 2em 0',
     display: 'flex',
     fontFamily: '"Montserrat", sans-serif !important',
     alignItems: 'center',

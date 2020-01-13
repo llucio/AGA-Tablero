@@ -1,0 +1,14 @@
+#import "./fragments.graphql"
+
+query MedioVerificacionList($where: medio_verificacion_bool_exp) {
+  items: medio_verificacion(
+    where: $where
+    order_by: [{ fecha_creacion: asc }]
+  ) {
+    ...MedioVerificacion
+    verificaciones {
+      id
+      valor
+    }
+  }
+}
