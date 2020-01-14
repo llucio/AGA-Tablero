@@ -39,7 +39,6 @@ const HitoCard = ({ item: hito, refetch }) => {
         </h4>
         <p>
           <Editable
-            adminOnly
             item={hito}
             path="ponderacion"
             label="Ponderación"

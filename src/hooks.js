@@ -3,7 +3,7 @@ import { createGlobalState } from 'react-hooks-global-state';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { useKeycloak } from '@react-keycloak/web';
-import { AUTH_TOKEN_STORAGE_KEY } from './constants';
+import { AUTH_TOKEN_STORAGE_KEY, USER_ROLE_STORAGE_KEY } from './constants';
 const USUARIO_QUERY = loader('./queries/UsuarioGet.graphql');
 
 const initialState = { anonymousMode: false };

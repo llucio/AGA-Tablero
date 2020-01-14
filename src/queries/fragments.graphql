@@ -85,6 +85,7 @@ fragment Hito on hito {
   metadatos
   fecha_inicial
   fecha_final
+  ponderacion
   entregables_aggregate {
     aggregate {
       min {
