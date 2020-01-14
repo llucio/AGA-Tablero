@@ -1,11 +1,11 @@
 import React from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
-import LoadingIndicator from '../LoadingIndicator';
-
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import LoadingIndicator from '../LoadingIndicator';
+import { useAuth } from '../../hooks';
 import Creatable from '../MedioCreatable';
 
 const LIST_QUERY = loader('../../queries/MedioVerificacionList.graphql');
@@ -24,12 +24,14 @@ const MedioVerificacionList = ({ actividadId }) => {
     },
     fetchPolicy: 'cache-and-network'
   });
+  const { usuario, loading: authLoading } = useAuth();
 
   if (error) {
     console.error(error);
     return <div>Error</div>;
   }
-  if (loading && !mediosVerificacion) return <LoadingIndicator />;
+  if (authLoading || (loading && !mediosVerificacion))
+    return <LoadingIndicator />;
   if (!mediosVerificacion) return null;
 
   console.log(mediosVerificacion);
