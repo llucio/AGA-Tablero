@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import Link from '@material-ui/core/Link';
@@ -6,11 +7,11 @@ import Box from '@material-ui/core/Box';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import LoadingIndicator from '../LoadingIndicator';
 import { useAuth } from '../../hooks';
-import Creatable from '../MedioCreatable';
+import MedioCreatable from '../MedioCreatable';
 
 const LIST_QUERY = loader('../../queries/MedioVerificacionList.graphql');
 
-const MedioVerificacionList = ({ actividadId }) => {
+const MedioVerificacionList = ({ actividad }) => {
   const {
     data: { items: mediosVerificacion = [] } = {},
     loading,
@@ -19,7 +20,7 @@ const MedioVerificacionList = ({ actividadId }) => {
   } = useQuery(LIST_QUERY, {
     variables: {
       where: {
-        actividad_id: { _eq: actividadId }
+        actividad_id: { _eq: actividad.id }
       }
     },
     fetchPolicy: 'cache-and-network'
@@ -34,16 +35,25 @@ const MedioVerificacionList = ({ actividadId }) => {
     return <LoadingIndicator />;
   if (!mediosVerificacion) return null;
 
-  console.log(mediosVerificacion);
+  const responsableHito =
+    usuario &&
+    _.find(usuario.responsable_hitos, { hito_id: actividad.hito.id });
+  const responsableCompromiso =
+    usuario &&
+    _.find(usuario.responsable_compromisos, {
+      compromiso_id: actividad.hito.compromiso_id
+    });
 
   return (
     <div>
-      <Creatable
-        typename="medio_verificacion"
-        parentKey="actividad_id"
-        parentId={actividadId}
-        refetch={refetch}
-      />
+      {(responsableHito || responsableCompromiso) && (
+        <MedioCreatable
+          typename="medio_verificacion"
+          parentKey="actividad_id"
+          parentId={actividad.id}
+          refetch={refetch}
+        />
+      )}
       <div>
         {mediosVerificacion.map(
           medioVerificacion =>

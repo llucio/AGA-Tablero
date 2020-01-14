@@ -6,5 +6,9 @@ query ActividadList($where: actividad_bool_exp) {
     order_by: [{ orden: asc }, { fecha_creacion: asc }]
   ) {
     ...Actividad
+    hito {
+      id
+      compromiso_id
+    }
   }
 }

@@ -163,7 +163,7 @@ const ActividadTable = ({ where }) => {
                   </div>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <MedioVerificacionList actividadId={actividad.id} />
+                  <MedioVerificacionList actividad={actividad} />
                   {/* <Editable
                     html
                     item={actividad}
