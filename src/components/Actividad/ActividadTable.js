@@ -15,6 +15,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import AvTimerIcon from '@material-ui/icons/AvTimer';
 import BatteryCharging60Icon from '@material-ui/icons/BatteryCharging60';
 import BatteryCharging20Icon from '@material-ui/icons/BatteryCharging20';
+
+import DoneIcon from '@material-ui/icons/Done';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 
@@ -120,30 +125,30 @@ const ActividadTable = ({ where }) => {
                       <Fab
                         size="small"
                         aria-label="status"
-                        className="indigo darken-2 white-text"
+                        className="lime darken-2 white-text"
                         style={{ margin: '5px' }}
                       >
-                        <AvTimerIcon />
+                        <DoneAllIcon />
                       </Fab>
                     </Tooltip>
                     <Tooltip title="En proceso" placement="right">
                       <Fab
                         size="small"
                         aria-label="status"
-                        className="indigo white-text"
+                        className="amber white-text"
                         style={{ margin: '5px' }}
                       >
-                        <BatteryCharging60Icon />
+                        <DoneIcon />
                       </Fab>
                     </Tooltip>
                     <Tooltip title="Por iniciar" placement="right">
                       <Fab
                         size="small"
                         aria-label="status"
-                        className="indigo lighten-2 indigo-text text-lighten-4"
+                        className="grey lighten-2 white-text"
                         style={{ margin: '5px' }}
                       >
-                        <BatteryCharging20Icon />
+                        <DoneIcon />
                       </Fab>
                     </Tooltip>
                   </div>
