@@ -94,7 +94,7 @@ const HitoDetail = props => {
           </Editable>
         </Grid>
         <Box className="pt-3">
-          <h2>Discución y comentarios</h2>
+          <h2>Discusión y comentarios</h2>
           <hr className="line" />
           <Conversacion item={hito} refetch={refetch} />
         </Box>
