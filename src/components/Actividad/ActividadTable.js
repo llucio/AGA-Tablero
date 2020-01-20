@@ -115,9 +115,6 @@ const ActividadTable = ({ where }) => {
                       <strong>{actividad.titulo || 'Sin título'}</strong>
                     </h5>
                   </Editable>
-                  <h6 className="extra-bold mt-3">
-                    Descripción/objetivo de la actividad
-                  </h6>
                   <Editable
                     html
                     item={actividad}

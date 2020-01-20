@@ -1,15 +1,15 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import Avatar from '@atlaskit/avatar';
-import Box from '@material-ui/core/Box';
+import { ReactRenderer } from '@atlaskit/renderer';
 import Comment, {
   CommentTime,
   CommentAction,
-  CommentEdited,
+  // CommentEdited,
   CommentAuthor
 } from '@atlaskit/comment';
-import { ReactRenderer } from '@atlaskit/renderer';
+import Avatar from '@atlaskit/avatar';
+import Box from '@material-ui/core/Box';
 import { useAuth } from '../../hooks';
 import moment from '../../utils/moment';
 import ConversacionEditor from './ConversacionEditor';
