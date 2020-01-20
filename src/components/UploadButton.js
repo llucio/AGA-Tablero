@@ -1,10 +1,8 @@
-import React, { memo, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Uppy from '@uppy/core';
 import AwsS3 from '@uppy/aws-s3';
-import Webcam from '@uppy/webcam';
-import Url from '@uppy/url';
 import Spanish from '@uppy/locales/lib/es_ES';
 import DashboardModal from '@uppy/react/lib/DashboardModal';
 import Dashboard from '@uppy/react/lib/Dashboard';

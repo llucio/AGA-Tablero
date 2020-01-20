@@ -42,33 +42,33 @@ let tasks = [
   }
 ];
 
-const SORTERS = {
-  NUMBER_ASCENDING: mapper => (a, b) => mapper(a) - mapper(b),
-  NUMBER_DESCENDING: mapper => (a, b) => mapper(b) - mapper(a),
-  STRING_ASCENDING: mapper => (a, b) => mapper(a).localeCompare(mapper(b)),
-  STRING_DESCENDING: mapper => (a, b) => mapper(b).localeCompare(mapper(a))
-};
+// const SORTERS = {
+//   NUMBER_ASCENDING: mapper => (a, b) => mapper(a) - mapper(b),
+//   NUMBER_DESCENDING: mapper => (a, b) => mapper(b) - mapper(a),
+//   STRING_ASCENDING: mapper => (a, b) => mapper(a).localeCompare(mapper(b)),
+//   STRING_DESCENDING: mapper => (a, b) => mapper(b).localeCompare(mapper(a))
+// };
 
-const getSorter = data => {
-  const mapper = x => x[data.field];
-  let sorter = SORTERS.STRING_ASCENDING(mapper);
+// const getSorter = data => {
+//   const mapper = x => x[data.field];
+//   let sorter = SORTERS.STRING_ASCENDING(mapper);
 
-  if (data.field === 'id') {
-    sorter =
-      data.direction === 'ascending'
-        ? SORTERS.NUMBER_ASCENDING(mapper)
-        : SORTERS.NUMBER_DESCENDING(mapper);
-  } else {
-    sorter =
-      data.direction === 'ascending'
-        ? SORTERS.STRING_ASCENDING(mapper)
-        : SORTERS.STRING_DESCENDING(mapper);
-  }
+//   if (data.field === 'id') {
+//     sorter =
+//       data.direction === 'ascending'
+//         ? SORTERS.NUMBER_ASCENDING(mapper)
+//         : SORTERS.NUMBER_DESCENDING(mapper);
+//   } else {
+//     sorter =
+//       data.direction === 'ascending'
+//         ? SORTERS.STRING_ASCENDING(mapper)
+//         : SORTERS.STRING_DESCENDING(mapper);
+//   }
 
-  return sorter;
-};
+//   return sorter;
+// };
 
-let count = tasks.length;
+// let count = tasks.length;
 const service = {
   fetchItems: payload => {
     return apolloClient
@@ -79,9 +79,6 @@ const service = {
         console.log(data);
         return data.usuarios;
       });
-    // let result = Array.from(tasks);
-    // result = result.sort(getSorter(payload.sort));
-    // return Promise.resolve(result);
   },
   create: task => {
     return apolloClient.mutate({

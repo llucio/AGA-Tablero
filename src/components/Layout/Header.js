@@ -39,7 +39,7 @@ const Header = ({ headerProps }) => {
     <header
       //id="banner"
       className={finalHeaderProps.className}
-      style={{ backgroundImage: `url(${imageUrl})` }}
+      style={{ backgroundSize: 'cover', backgroundImage: `url(${imageUrl})` }}
     >
       <Box className="content gradiente">
         <Box className="container white-text">
