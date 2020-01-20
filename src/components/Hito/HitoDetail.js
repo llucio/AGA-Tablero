@@ -16,7 +16,6 @@ import Conversacion from '../Conversacion/Conversacion';
 import { Ribbon } from '@potion/element';
 import { Svg } from '@potion/element';
 import { Chord } from '@potion/layout';
-import { LinearGradient } from '@potion/extra';
 
 import '../../assets/css/calendario.css';
 
@@ -94,10 +93,14 @@ const HitoDetail = props => {
             />
           </Editable>
         </Grid>
-        <Box>
+        <Box className="pt-3">
+          <h2>Discución y comentarios</h2>
+          <hr className="line" />
           <Conversacion item={hito} refetch={refetch} />
         </Box>
+
         <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
+
         <Box className="grey lighten-4" style={{ height: '500px' }}>
           <Svg width={400} height={400}>
             <Chord

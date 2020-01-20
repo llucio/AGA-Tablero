@@ -58,15 +58,13 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
           <DialogContentText id="alert-dialog-description">
             <Input
               placeholder="Título"
-              style={{ width: '100%', marginBottom: '2em' }}
+              style={{ width: '100%', marginBottom: 0, paddingBottom: 0 }}
               autoFocus
               label="Título"
-              variant="outlined"
               color="secondary"
               onChange={event => setTitulo(event.target.value)}
             />
             <UploadButton
-              // value={archivos}
               label="Seleccionar archivo(s)"
               restrictions={{
                 maxNumberOfFiles: null

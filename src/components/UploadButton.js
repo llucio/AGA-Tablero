@@ -46,10 +46,7 @@ const uppy = Uppy({
     ...file,
     name: uuidv4()
   })
-})
-  .use(AwsS3, { companionUrl })
-  .use(Url, { companionUrl })
-  .use(Webcam, { title: 'Cámara' });
+}).use(AwsS3, { companionUrl });
 
 const UploadButton = ({
   value,
@@ -76,7 +73,7 @@ const UploadButton = ({
     return () => {
       uppy.off('complete', onComplete);
     };
-  }, [value, open, handleChange]);
+  }, [handleChange]);
 
   return (
     <div>
@@ -106,9 +103,8 @@ const UploadButton = ({
           //   handleChange(value || '');
           //   setOpen(false);
           // }}
-          height="300"
+          height="200"
           inline={true}
-          plugins={['Url']}
           proudlyDisplayPoweredByUppy={false}
         />
       )}

@@ -12,15 +12,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
-
-// import DoneIcon from '@material-ui/icons/Done';
-// import DoneAllIcon from '@material-ui/icons/DoneAll';
-// import BatteryChargingFullIcon from '@material-ui/icons/BatteryChargingFull';
+import AvTimerIcon from '@material-ui/icons/AvTimer';
 import BatteryCharging60Icon from '@material-ui/icons/BatteryCharging60';
 import BatteryCharging20Icon from '@material-ui/icons/BatteryCharging20';
-
-import AvTimerIcon from '@material-ui/icons/AvTimer';
-
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 
@@ -40,10 +34,6 @@ const StyledTableRow = withStyles(theme => ({
     }
   }
 }))(TableRow);
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
 
 const useStyles = makeStyles(theme => ({
   rootTable: {
@@ -160,15 +150,6 @@ const ActividadTable = ({ where }) => {
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <MedioVerificacionList actividad={actividad} />
-                  {/* <Editable
-                    html
-                    item={actividad}
-                    path="metadatos.medio_verificacion"
-                    label="Medio de verificación"
-                    onUpdate={refetch}
-                  >
-                    <strong>{actividad.metadatos.medio_verificacion}</strong>
-                  </Editable> */}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

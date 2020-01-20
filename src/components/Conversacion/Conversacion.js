@@ -42,10 +42,12 @@ const getQuery = type => gql`
 
 const Conversacion = ({ item }) => {
   const { authenticated, usuario, anonymousMode } = useAuth();
-  const { data: { conversaciones } = {}, error, refetch } = useQuery(
-    getQuery(item.__typename),
-    { variables: { id: item.id } }
-  );
+  const {
+    data: { conversaciones } = {},
+    loading,
+    error,
+    refetch
+  } = useQuery(getQuery(item.__typename), { variables: { id: item.id } });
 
   if (error) return <div>Error</div>;
 
@@ -72,10 +74,11 @@ const Conversacion = ({ item }) => {
   return (
     <Box className="comment-content horizontal-padding vertical-padding ">
       {compromisoAllowed && (
-        <Box>
+        <Box className="mb-4">
           <ConversacionEditor item={item} refetch={refetch} />
         </Box>
       )}
+      {!loading && !conversaciones?.length && <h4>Aún no hay comentarios</h4>}
       {conversaciones?.map(conversacion => (
         <Box className="grey lighten-5 comment-padding comment-margin box-6">
           <Comment

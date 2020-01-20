@@ -56,7 +56,7 @@ const HitoCard = ({ item: hito, refetch }) => {
             className="blue-grey lighten-5"
           >
             <LinkIcon className={classes.extendedIcon} />
-            Detalles
+            Detalles y avance
           </Button>
         </Box>
         <Box>
