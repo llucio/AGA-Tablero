@@ -10,6 +10,8 @@ import Comment, {
 } from '@atlaskit/comment';
 import Avatar from '@atlaskit/avatar';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import { useAuth } from '../../hooks';
 import moment from '../../utils/moment';
 import ConversacionEditor from './ConversacionEditor';
@@ -80,14 +82,14 @@ const Conversacion = ({ item }) => {
       )}
       {!loading && !conversaciones?.length && <h4>Aún no hay comentarios</h4>}
       {conversaciones?.map(conversacion => (
-        <Box className="grey lighten-5 comment-padding comment-margin box-6">
+        <Box className="comment-border grey lighten-5 comment-padding comment-margin box-6">
           <Comment
             key={conversacion.id}
             avatar={
               <Avatar
                 label={conversacion.usuario_email}
-                size="medium"
-                className="elevation-2"
+                size="large"
+                className=""
               />
             }
             author={
@@ -109,13 +111,13 @@ const Conversacion = ({ item }) => {
             actions={
               authenticated && [
                 <CommentAction>
-                  <small>Responder</small>
+                  <Chip size="small" label="Clickable" label="Responder" />
                 </CommentAction>,
                 <CommentAction>
-                  <small>Eliminar</small>
+                  <Chip size="small" label="Clickable" label="Eliminar" />
                 </CommentAction>,
                 <CommentAction>
-                  <small>Marcar</small>
+                  <Chip size="small" label="Clickable" label="Marcar" />
                 </CommentAction>
               ]
             }
