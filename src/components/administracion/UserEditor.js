@@ -27,7 +27,7 @@ const INSERT_USUARIO = gql`
   }
 `;
 
-const DescriptionRenderer = ({ field }) => <textarea {...field} />;
+// const DescriptionRenderer = ({ field }) => <textarea {...field} />;
 
 let tasks = [
   {

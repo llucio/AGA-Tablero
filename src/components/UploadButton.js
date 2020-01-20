@@ -40,7 +40,6 @@ const uppy = Uppy({
     maxNumberOfFiles: 1,
     minNumberOfFiles: 1,
     allowedFileTypes: null
-    // ...restrictions
   },
   locale,
   onBeforeFileAdded: file => ({
@@ -97,7 +96,6 @@ const UploadButton = ({
             handleChange(value || '');
             setOpen(false);
           }}
-          plugins={['Url']}
           closeModalOnClickOutside
           proudlyDisplayPoweredByUppy={false}
         />

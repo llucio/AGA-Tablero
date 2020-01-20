@@ -13,10 +13,9 @@ import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import DoneIcon from '@material-ui/icons/Done';
-import DoneAllIcon from '@material-ui/icons/DoneAll';
-
-import BatteryChargingFullIcon from '@material-ui/icons/BatteryChargingFull';
+// import DoneIcon from '@material-ui/icons/Done';
+// import DoneAllIcon from '@material-ui/icons/DoneAll';
+// import BatteryChargingFullIcon from '@material-ui/icons/BatteryChargingFull';
 import BatteryCharging60Icon from '@material-ui/icons/BatteryCharging60';
 import BatteryCharging20Icon from '@material-ui/icons/BatteryCharging20';
 
