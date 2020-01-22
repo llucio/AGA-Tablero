@@ -1,0 +1,16 @@
+#import "./fragments.graphql"
+
+query UsuarioGet($id: String!) {
+  usuario: usuario_by_pk(email: $id) {
+    ...Usuario
+    organizacion {
+      ...Organizacion
+    }
+    responsable_compromisos {
+      compromiso_id
+    }
+    responsable_hitos {
+      hito_id
+    }
+  }
+}

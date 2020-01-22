@@ -2,7 +2,7 @@ import React from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
-import EntregableList from '../Entregable/EntregableList';
+import MedioVerificacionList from '../Verificacion/MedioVerificacionList';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,8 +10,16 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
-//import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+import AvTimerIcon from '@material-ui/icons/AvTimer';
+import BatteryCharging60Icon from '@material-ui/icons/BatteryCharging60';
+import BatteryCharging20Icon from '@material-ui/icons/BatteryCharging20';
+
+import DoneIcon from '@material-ui/icons/Done';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 
@@ -32,10 +40,6 @@ const StyledTableRow = withStyles(theme => ({
   }
 }))(TableRow);
 
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
 const useStyles = makeStyles(theme => ({
   rootTable: {
     width: '100%',
@@ -44,6 +48,12 @@ const useStyles = makeStyles(theme => ({
   },
   table: {
     minWidth: 700
+  },
+  marginButton: {
+    margin: theme.spacing(1)
+  },
+  mediosCell: {
+    minWidth: 400
   }
 }));
 
@@ -71,6 +81,7 @@ const ActividadTable = ({ where }) => {
       <Box className={classes.rootTable}>
         <Table
           responsive
+          stickyHeader
           className={classes.table}
           aria-label="Lista de actividades"
         >
@@ -78,7 +89,7 @@ const ActividadTable = ({ where }) => {
             <TableRow>
               <StyledTableCell align="center">Actividades</StyledTableCell>
               <StyledTableCell align="center">Estatus</StyledTableCell>
-              <StyledTableCell align="center">
+              <StyledTableCell className={classes.mediosCell} align="center">
                 Medio de verificación
               </StyledTableCell>
             </TableRow>
@@ -98,9 +109,6 @@ const ActividadTable = ({ where }) => {
                       <strong>{actividad.titulo || 'Sin título'}</strong>
                     </h5>
                   </Editable>
-                  <h6 className="extra-bold mt-3">
-                    Descripción/objetivo de la actividad
-                  </h6>
                   <Editable
                     html
                     item={actividad}
@@ -112,23 +120,41 @@ const ActividadTable = ({ where }) => {
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {/* <CheckCircleIcon className="light-green-text" /> */}
-                  <CheckCircleOutlineIcon /> Ninguno
+                  <div>
+                    <Tooltip title="¡Completo!" placement="right">
+                      <Fab
+                        size="small"
+                        aria-label="status"
+                        className="lime darken-2 white-text"
+                        style={{ margin: '5px' }}
+                      >
+                        <DoneAllIcon />
+                      </Fab>
+                    </Tooltip>
+                    <Tooltip title="En proceso" placement="right">
+                      <Fab
+                        size="small"
+                        aria-label="status"
+                        className="amber white-text"
+                        style={{ margin: '5px' }}
+                      >
+                        <DoneIcon />
+                      </Fab>
+                    </Tooltip>
+                    <Tooltip title="Por iniciar" placement="right">
+                      <Fab
+                        size="small"
+                        aria-label="status"
+                        className="grey lighten-2 white-text"
+                        style={{ margin: '5px' }}
+                      >
+                        <DoneIcon />
+                      </Fab>
+                    </Tooltip>
+                  </div>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <EntregableList
-                    where={{ hito_id: { _eq: actividad.hito_id } }}
-                  />
-                  <Editable
-                    adminOnly
-                    html
-                    item={actividad}
-                    path="metadatos.medio_verificacion"
-                    label="Medio de verificación"
-                    onUpdate={refetch}
-                  >
-                    <strong>{actividad.metadatos.medio_verificacion}</strong>
-                  </Editable>
+                  <MedioVerificacionList actividad={actividad} />
                 </StyledTableCell>
               </StyledTableRow>
             ))}

@@ -1,8 +1,6 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import _ from 'lodash';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -43,12 +41,7 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
 
   return (
     <div>
-      <Button
-        onClick={handleClickOpen}
-        variant="light"
-        size="sm"
-        color="secondary"
-      >
+      <Button onClick={handleClickOpen} size="small" color="secondary">
         <AddIcon /> Añadir {typename}
       </Button>
       <Dialog

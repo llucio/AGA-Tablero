@@ -20,8 +20,6 @@ const BreadcrumbCompromiso = props => {
   if (loading && !item) return <LoadingIndicator />;
   if (!item) return <h1>No encontrado</h1>;
 
-  //const { metadatos = {} } = item;
-
   return <BreadcrumbItem compromisoId={item.compromiso_id} />; //{item.titulo}
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -8,7 +9,7 @@ import Fab from '@material-ui/core/Fab';
 import PersonIcon from '@material-ui/icons/Person';
 import PolicyIcon from '@material-ui/icons/Policy';
 import FaceIcon from '@material-ui/icons/Face';
-import { useRoles } from '../../hooks';
+import { useAuth } from '../../hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,8 +30,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UserMenu = () => {
+  const history = useHistory();
   const classes = useStyles();
-  const { loading, authenticated, usuario, login, logout } = useRoles();
+  const {
+    anonymousMode,
+    setAnonymousMode,
+    isAdministrador,
+    profile,
+    usuario,
+    login,
+    logout,
+    loading
+  } = useAuth();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = event => {
@@ -44,7 +55,7 @@ const UserMenu = () => {
 
   return (
     <Box className={classes.root}>
-      {authenticated ? (
+      {profile?.email ? (
         <Grid
           container
           direction="row"
@@ -59,12 +70,12 @@ const UserMenu = () => {
             aria-haspopup="true"
             onClick={handleClick}
           >
-            {usuario.administrador ? (
+            {isAdministrador ? (
               <PolicyIcon className={classes.extendedIcon} />
             ) : (
               <FaceIcon className={classes.extendedIcon} />
             )}
-            Mi sesión
+            {usuario?.nombre || profile?.name} ({profile?.email})
           </Fab>
           <Menu
             id="simple-menu"
@@ -73,10 +84,24 @@ const UserMenu = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>
-              {usuario.name} ({usuario.email})
+            <MenuItem
+              selected={anonymousMode}
+              onClick={() => setAnonymousMode(!anonymousMode)}
+            >
+              {anonymousMode
+                ? `Ver como ${isAdministrador ? 'administrador' : 'usuario'}`
+                : 'Ver como anónimo'}
             </MenuItem>
-            <MenuItem onClick={handleClose}>Administrador</MenuItem>
+            {usuario?.organizacion && (
+              <MenuItem>{usuario.organizacion.nombre}</MenuItem>
+            )}
+            {isAdministrador && (
+              <MenuItem
+                onClick={() => history.push('/administracion/usuarios')}
+              >
+                Administrar usuarios
+              </MenuItem>
+            )}
             <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
           </Menu>
         </Grid>

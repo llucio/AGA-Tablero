@@ -50,7 +50,11 @@ const DataDisplay = ({ data, ...rest }) => {
 
   // Un String renderea un párrafo
   else if (_.isString(data)) {
-    return <RawHtml as="span">{data}</RawHtml>
+    return (
+      <RawHtml as="span" className="compromiso-content">
+        {data}
+      </RawHtml>
+    );
   }
 
   // Valor de tipo desconocido

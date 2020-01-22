@@ -1,35 +1,42 @@
-import { useEffect } from 'react';
 import _ from 'lodash';
-import {
-  AUTH_TOKEN_STORAGE_KEY,
-  USER_ROLE_STORAGE_KEY,
-  USER_ROLE_DEFAULT
-} from './constants';
-import { useKeycloak } from 'react-keycloak';
+import { createGlobalState } from 'react-hooks-global-state';
+import { loader } from 'graphql.macro';
+import { useQuery } from '@apollo/react-hooks';
+import { useKeycloak } from '@react-keycloak/web';
+import { AUTH_TOKEN_STORAGE_KEY } from './constants';
+const USUARIO_QUERY = loader('./queries/UsuarioGet.graphql');
 
-const useRoles = () => {
+const initialState = { anonymousMode: false };
+const {
+  GlobalStateProvider: AuthStateProvider,
+  useGlobalState
+} = createGlobalState(initialState);
+
+const useAuth = () => {
   const [keycloak, initialized] = useKeycloak();
   const { login, logout, authenticated, tokenParsed } = keycloak;
-
-  const claims = _.mapKeys(
-    _.get(tokenParsed, ['https://hasura.io/jwt/claims'], {}),
-    (_, key) => key.replace('x-hasura-', '').replace('-', '_')
+  const [anonymousMode, setAnonymousMode] = useGlobalState('anonymousMode');
+  const { data: { usuario } = {}, loading: userLoading } = useQuery(
+    USUARIO_QUERY,
+    {
+      skip: !tokenParsed?.email,
+      variables: {
+        id: tokenParsed?.email
+      }
+    }
   );
 
-  const usuario = {
+  const profile = {
     ...tokenParsed,
-    claims,
-    institucion: claims.institucion_id,
-    organizacion: claims.organizacion_id,
-    administrador: _.get(claims, 'allowed_roles', []).includes('administrador')
+    claims: _.mapKeys(
+      _.get(tokenParsed, ['https://hasura.io/jwt/claims'], {}),
+      (_, key) => key.replace('x-hasura-', '').replace('-', '_')
+    )
   };
 
-  useEffect(() => {
-    if (authenticated) {
-      const role = usuario.administrador ? 'administrador' : USER_ROLE_DEFAULT;
-      window.localStorage.setItem(USER_ROLE_STORAGE_KEY, role);
-    }
-  }, [authenticated, usuario]);
+  const administrador = _.get(profile.claims, 'allowed_roles', []).includes(
+    'administrador'
+  );
 
   return {
     login,
@@ -37,10 +44,16 @@ const useRoles = () => {
       window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
       logout();
     },
-    authenticated,
+    authenticated: !anonymousMode && authenticated,
+    profile,
     usuario,
-    loading: !initialized
+    setAnonymousMode,
+    anonymousMode,
+    organizacion: usuario?.organizacion,
+    administrador: !anonymousMode && administrador,
+    isAdministrador: administrador,
+    loading: !initialized || userLoading
   };
 };
 
-export { useRoles };
+export { useAuth, AuthStateProvider };

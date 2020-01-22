@@ -9,28 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#banner::before {
-  width: 0;
-}
-
-#banner .content {
-  padding: 7.5em 4.563em 7.5em;
-  margin-right: 0;
-  width: 99.99%;
-  max-width: 99.99%;
-}
-
-#banner .content header {
-  margin: 25px 0 0;
-}
-
-.image-content {
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
-}
-
 .light {
   font-weight: 300 !important;
 }
@@ -68,7 +46,7 @@ strong,
 }
 
 hr.line {
-  margin: 10px 0 4%;
+  margin: 0 0 4%;
   width: 10rem;
   border: 3px solid #8bc34a;
 }
@@ -130,6 +108,8 @@ hr.line {
 .menu-transparente .MuiButton-text {
   text-transform: inherit;
   margin-left: 1em;
+  letter-spacing: -0.015em;
+  font-weight: 500 !important;
 }
 .menu-transparente .MuiButton-textSizeLarge {
   padding: 20px 11px;
@@ -137,6 +117,9 @@ hr.line {
   margin-left: 0;
   margin-right: 20px;
   border-radius: inherit;
+}
+.menu-spacing {
+  margin-right: 105px !important;
 }
 
 .menu-transparente h6 {
@@ -146,108 +129,6 @@ hr.line {
   margin: 0.6em 0 0 1em;
   font-size: 1.2em;
   letter-spacing: -0.04em;
-}
-
-.image-over {
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
-  -webkit-border-radius: 6px 6px 6px 6px;
-  border-radius: 6px 6px 6px 6px;
-  height: 320px;
-  padding: 30px;
-  display: flex;
-  justify-content: left;
-  align-items: flex-end;
-}
-
-.pattern1 {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAFUlEQVQImWNgQAO/fv0yproAAwMDADvBD6bchomlAAAAAElFTkSuQmCC)
-    repeat;
-}
-
-.pattern2 {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgYGAwZiAWYFcJABFmAGeceo4VAAAAAElFTkSuQmCC)
-    repeat;
-}
-
-.pattern3 {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAD0lEQVQImWNgwARStBAAABpPAIPQzAGMAAAAAElFTkSuQmCC)
-    repeat;
-}
-
-.pattern4 {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgYGDYzEAswK4SADxmAWfSMHuPAAAAAElFTkSuQmCC)
-    repeat;
-}
-
-.pattern5 {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQImWNgQAW+ZHAAJ14BNVd0PgAAAAAASUVORK5CYII=)
-    repeat;
-}
-
-.curson-default {
-  cursor: default !important;
-}
-
-.curson-crosshair {
-  cursor: crosshair !important;
-}
-
-.curson-pointer {
-  cursor: pointer !important;
-}
-
-.curson-move {
-  cursor: move !important;
-}
-
-.curson-nw-resize {
-  cursor: nw-resize !important;
-}
-
-.curson-ne-resize {
-  cursor: ne-resize !important;
-}
-
-.curson-n-resize {
-  cursor: n-resize !important;
-}
-
-.curson-e-resize {
-  cursor: e-resize !important;
-}
-
-.curson-help {
-  cursor: help !important;
-}
-
-.curson-text {
-  cursor: text !important;
-}
-
-.curson-wait {
-  cursor: wait !important;
-}
-
-.widget-calendar {
-}
-
-.sc-bdVaJa {
-  border: solid 1px #e2e8ee;
-}
-
-.sc-bdVaJa .sc-bwzfXH {
-  color: #03a9f4 !important;
-  background-color: #fafafa;
-}
-
-.sc-bdVaJa .sc-bxivhb {
-}
-
-.sc-bdVaJa .sc-htpNat {
-  background-color: #fafafa;
 }
 
 .menuSidebar a {
@@ -317,51 +198,58 @@ th.MuiTableCell-root {
 
 .elevation-1,
 .coWVFC {
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .z-depth-1-half {
-  -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+  -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14),
+    0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }
 
 .elevation-2 {
-  -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
 }
 
 .elevation-3 {
-  -webkit-box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12),
-    0 5px 5px -3px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
 }
 
 .elevation-4 {
-  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12),
-    0 8px 10px -7px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12),
-    0 8px 10px -7px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
 }
 
 .elevation-5 {
-  -webkit-box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12),
-    0 11px 15px -7px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12),
-    0 11px 15px -7px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
 }
 
 /*
  * Personalizando MuI
  */
+.MuiTypography-h3,
+.MuiTypography-h4 {
+  font-family: 'Source Sans Pro', sans-serif !important;
+  font-weight: 400;
+}
 
 .MuiTypography-h4 {
   font-size: 1.5rem !important;
-  font-family: 'Source Sans Pro', sans-serif !important;
-  font-weight: 400;
   line-height: 1.05 !important;
   letter-spacing: 0em !important;
 }
@@ -380,16 +268,21 @@ th.MuiTableCell-root {
   transform: none;
 }
 
-.compromiso-content {
+.compromiso-content .nameTopSpacing {
+  width: 100%;
+  height: 50px;
+  display: block;
+  border-bottom: none;
 }
 
 .compromiso-content ul {
   list-style-type: disc;
   margin: 0;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 .compromiso-content ol {
   list-style-type: decimal;
+  padding-left: 0.25em;
 }
 
 .compromiso-content li {
@@ -417,15 +310,23 @@ th.MuiTableCell-root {
   background: #f6f6f6;
 }
 
-.compromiso-content .MuiBox-root h6 {
+.compromiso-content h6 {
   border-left: 5px solid #8bc34a;
   padding: 5px 15px;
   margin: 25px 0;
-  transition: background-color 0.5s ease;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.compromiso-content .MuiBox-root h4 {
+.compromiso-content h4 {
   font-weight: 600;
+}
+
+.compromiso-content h6:hover {
+  background-color: #eceff1 !important;
 }
 
 .table-actividad .MuiBox-root h6 {
@@ -435,12 +336,14 @@ th.MuiTableCell-root {
   transition: inherit;
 }
 
-.compromiso-content .MuiBox-root h6:hover {
-  background-color: #eceff1 !important;
-}
-
 .table-actividad .MuiBox-root h6:hover {
   background-color: transparent !important;
+
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 /*
@@ -469,14 +372,6 @@ a:hover > * {
 @media screen and (max-width: 640px) {
   /* Resoluciones menores de 640 píxeles de ancho. */
 
-  #banner .content {
-    padding: 3em 1.5625em 2.25em;
-  }
-
-  #banner .content header {
-    margin: 25px 0 0;
-  }
-
   #page-wrapper {
     padding-bottom: 0px;
     padding-top: 0px !important;
@@ -492,11 +387,6 @@ a:hover > * {
 
   .menu-transparente .MuiToolbar-gutters {
     padding-left: 0px;
-  }
-
-  .image-over {
-    height: 240px;
-    padding: 25px;
   }
 
   .item-compromisos {
@@ -507,14 +397,6 @@ a:hover > * {
 @media screen and (max-width: 1024px) and (min-width: 640px) {
   /* Resoluciones menores de 1024 píxeles de ancho pero mayores que 640 píxeles */
 
-  #banner .content {
-    padding: 5em 1.5625em 4.25em;
-  }
-
-  #banner .content header {
-    margin: 25px 0 0;
-  }
-
   #page-wrapper {
     padding-bottom: 0px;
     padding-top: 0px !important;
@@ -531,10 +413,6 @@ a:hover > * {
   .menu-transparente .MuiToolbar-gutters {
     padding-left: 0px;
   }
-  .image-over {
-    height: 280px;
-    padding: 25px;
-  }
 
   .item-compromisos {
     height: 280px !important;
@@ -543,11 +421,6 @@ a:hover > * {
 
 @media screen and (min-width: 1024px) and (max-width: 1109px) {
   /* Resoluciones mayores de 1024 píxeles. */
-
-  .image-over {
-    height: 280px;
-    padding: 25px;
-  }
 
   .item-compromisos {
     height: 280px !important;

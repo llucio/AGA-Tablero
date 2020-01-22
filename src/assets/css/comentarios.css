@@ -1,0 +1,22 @@
+.comment-content {
+  border-left: 4px solid #cfd8dc;
+}
+
+.comment-border {
+  border: 2px solid #eeeeee;
+  /*background-image: url(/assets/images/comment-bullet.png);*/
+}
+.comment-padding {
+  padding: 10px;
+}
+
+.comment-margin {
+  margin: 10px 0;
+}
+
+.comment-content .sc-bAeIUo.hnxmMv {
+  font-weight: 900;
+}
+.comment-content .css-1ordfia {
+  font-size: 13px;
+}

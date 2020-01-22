@@ -1,10 +1,11 @@
 import React from 'react';
-import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import '../../assets/css/efectos.css';
+import '../../assets/css/image-effects.css';
 
 // Para imágenes aleatorias (provisional)
 const defaultImage = 'https://picsum.photos/300/300';
@@ -22,27 +23,23 @@ const useStyles = makeStyles(theme => ({
 const CompromisoCard = ({ item: compromiso, index }) => {
   const classes = useStyles();
 
-  // Imagen con caracteres aleatorios para evitar cache de navegador
-  const imageUrl = _.get(
-    compromiso,
-    'metadatos.imagen',
-    `${defaultImage}?${compromiso.id}`
-  );
+  const imageUrl =
+    compromiso.metadatos?.imagen || `${defaultImage}?${compromiso.id}`;
 
   return (
     <Grid item xs={12} md={4} lg={4} className={classes.root}>
       <Box
         boxShadow={3}
-        className="box-4 item-compromisos"
+        className="box-6 item-compromisos efecto saturacion"
         style={{
           backgroundImage: `url(${imageUrl})`,
           backgroundSize: 'cover',
           height: '320px'
         }}
       >
-        <Box className="pattern5 box-4">
+        <Box className="img-gradiente box-4">
           <Link
-            to={`/compromiso/${compromiso.id}`}
+            to={`/compromiso/${compromiso.slug}`}
             className="white-text shadow-text"
           >
             <Typography

@@ -5,11 +5,7 @@ fragment Compromiso on compromiso {
   plan_id
   fecha_creacion
   metadatos
-  hitos_aggregate {
-    aggregate {
-      count
-    }
-  }
+  slug
 }
 
 fragment Actividad on actividad {
@@ -21,6 +17,34 @@ fragment Actividad on actividad {
   metadatos
   fecha_inicial
   fecha_final
+  medios_verificacion_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+
+fragment Verificacion on verificacion {
+  id
+  medio_verificacion_id
+  usuario_email
+  valor
+}
+
+fragment MedioVerificacion on medio_verificacion {
+  id
+  fecha_creacion
+  usuario_email
+  actividad_id
+  archivos
+  metadatos
+  titulo
+  verificaciones {
+    id
+    fecha_creacion
+    metadatos
+    valor
+  }
 }
 
 fragment Entregable on entregable {
@@ -61,9 +85,7 @@ fragment Hito on hito {
   metadatos
   fecha_inicial
   fecha_final
-  entregables {
-    ...Entregable
-  }
+  ponderacion
   entregables_aggregate {
     aggregate {
       min {
@@ -73,9 +95,6 @@ fragment Hito on hito {
         fecha_creacion
       }
     }
-  }
-  actividades(order_by: { orden: asc }) {
-    ...Actividad
   }
   actividades_aggregate {
     aggregate {
@@ -92,4 +111,44 @@ fragment Hito on hito {
       }
     }
   }
+  actividades(order_by: { orden: asc }) {
+    ...Actividad
+  }
+}
+
+fragment Conversacion on conversacion {
+  id
+  hito_id
+  compromiso_id
+  actividad_id
+  usuario
+  fecha_creacion
+  contenido
+  padre
+}
+
+fragment ResponsableCompromiso on responsable_compromiso {
+  id
+  compromiso_id
+  metadatos
+}
+
+fragment ResponsableHito on responsable_compromiso {
+  id
+  hito_id
+  metadatos
+}
+
+fragment Organizacion on organizacion {
+  id
+  nombre
+  metadatos
+  gobierno
+}
+
+fragment Usuario on usuario {
+  email
+  nombre
+  metadatos
+  organizacion_id
 }

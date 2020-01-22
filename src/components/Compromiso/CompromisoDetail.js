@@ -1,12 +1,12 @@
 import React from 'react';
-import _ from 'lodash';
+import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
 import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
@@ -26,14 +26,15 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useAuth } from '../../hooks';
 import Editable from '../Editable';
 import Sortable from '../Sortable';
 import DataDisplay from '../DataDisplay';
 import LoadingIndicator from '../LoadingIndicator';
 import HitoList from '../Hito/HitoList.js';
-import { useRoles } from '../../hooks';
+import Conversacion from '../Conversacion/Conversacion';
 
-const GET_QUERY = loader('../../queries/CompromisoGet.graphql');
+const GET_QUERY = loader('../../queries/CompromisoGetBySlug.graphql');
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,23 +85,24 @@ const AgaTooltip = withStyles(theme => ({
   }
 }))(Tooltip);
 
-const CompromisoDetail = ({ match }) => {
+const CompromisoDetail = () => {
+  const { compromisoSlug } = useParams();
   const classes = useStyles();
-  const { usuario: { administrador } = {} } = useRoles();
-  const { data: { item } = {}, loading, error, refetch } = useQuery(GET_QUERY, {
+  const { administrador, loading: authLoading } = useAuth();
+  const {
+    data: { item: [compromiso] = [] } = {},
+    loading,
+    error,
+    refetch
+  } = useQuery(GET_QUERY, {
     variables: {
-      id: match.params.id
+      id: compromisoSlug
     }
   });
 
   if (error) return <div>Error</div>;
-  if (loading && !item) return <LoadingIndicator />;
-  if (!item) return <h1>No encontrado</h1>;
-
-  const { metadatos = {} } = item;
-
-  // const handleChange = (_, newIndex) => setTabIndex(newIndex);
-  // const handleChangeIndex = index => setTabIndex(index);
+  if (authLoading || (loading && !compromiso)) return <LoadingIndicator />;
+  if (!compromiso) return <h1>No encontrado</h1>;
 
   return (
     <div className={classes.root_grid}>
@@ -117,25 +119,26 @@ const CompromisoDetail = ({ match }) => {
                 calculatedHeight
               }) => (
                 <Box
-                  fontSize={18}
+                  fontSize={17}
                   style={style}
                   className={isSticky ? classes.sticky : ''}
                 >
                   {isSticky && (
                     <h5>
-                      <strong>{item.titulo}</strong>
+                      <strong>{compromiso.titulo}</strong>
                     </h5>
                   )}
                   <h6 className="mt-3">
-                    <strong>Acciones clave:</strong>
+                    <strong>Acciones clave</strong>
                   </h6>
                   <Sortable
                     typename="hito"
-                    items={item.hitos}
+                    items={compromiso.hitos}
                     creatable="compromiso_id"
-                    parentId={item.id}
+                    parentId={compromiso.id}
                     refetch={refetch}
                     deletable
+                    axis="y"
                     itemComponent={({ item: { titulo, id } }) => (
                       <p key={`sidebar-${id}`}>
                         <Link href={`#hito-${id}`}>
@@ -143,11 +146,10 @@ const CompromisoDetail = ({ match }) => {
                         </Link>
                       </p>
                     )}
-                    axis="y"
                   />
                   <Divider variant="middle" />
                   <Editable
-                    item={item}
+                    item={compromiso}
                     upload
                     uploadType="file"
                     path="metadatos.descarga"
@@ -159,17 +161,19 @@ const CompromisoDetail = ({ match }) => {
                       aria-label="descarga"
                       placement="right"
                     >
-                      <Fab
-                        variant="extended"
-                        size="large"
-                        color="primary"
-                        className={classes.button}
-                        href={metadatos.descarga}
-                        target="_blank"
-                      >
-                        <GetAppIcon className={classes.extendedIcon} />
-                        Hoja de ruta
-                      </Fab>
+                      {compromiso.metadatos?.descarga && (
+                        <Fab
+                          variant="extended"
+                          size="large"
+                          color="primary"
+                          className={classes.button}
+                          href={compromiso.metadatos?.descarga}
+                          target="_blank"
+                        >
+                          <GetAppIcon className={classes.extendedIcon} />
+                          Hoja de ruta
+                        </Fab>
+                      )}
                     </AgaTooltip>
                   </Editable>
                 </Box>
@@ -178,16 +182,16 @@ const CompromisoDetail = ({ match }) => {
           </Grid>
           <Grid item xs={12} md={9} className="compromiso-content">
             <Editable
-              item={item}
+              item={compromiso}
               path="titulo"
               label="Título"
               onUpdate={refetch}
             >
-              <h1 className="extra-bold">{item.titulo}</h1>
+              <h1 className="extra-bold">{compromiso.titulo}</h1>
             </Editable>
 
             <Editable
-              item={item}
+              item={compromiso}
               adminOnly
               upload
               uploadType="image"
@@ -195,7 +199,11 @@ const CompromisoDetail = ({ match }) => {
               path="metadatos.imagen"
               onUpdate={refetch}
             >
-              <img src={metadatos.imagen} alt="compromiso" height={100} />
+              <img
+                src={compromiso.metadatos?.imagen}
+                alt="compromiso"
+                height={100}
+              />
             </Editable>
 
             <hr className="line" />
@@ -204,47 +212,48 @@ const CompromisoDetail = ({ match }) => {
               <h4>¿Cuál es el compromiso?</h4>
               <Editable
                 html
-                item={item}
+                item={compromiso}
                 label="Descripción"
                 path="metadatos.descripcion"
                 onUpdate={refetch}
               >
-                <DataDisplay data={metadatos.descripcion || ''} />
+                <DataDisplay data={compromiso.metadatos?.descripcion || ''} />
               </Editable>
             </Box>
             <Box className={classes.descripcion}>
               <h4 className="mt-3">Dependencias responsables</h4>
               <Editable
-                item={item}
+                item={compromiso}
                 html
                 path="metadatos.dependencia"
                 label="Dependencia"
                 onUpdate={refetch}
               >
-                <DataDisplay data={metadatos.dependencia || ''} />
+                <DataDisplay data={compromiso.metadatos?.dependencia || ''} />
               </Editable>
               <h4 className="mt-3">Organizaciones Corresponsables</h4>
               <Editable
-                item={item}
+                item={compromiso}
                 html
                 path="metadatos.corresponsable"
                 label="Organización corresponsable"
                 onUpdate={refetch}
               >
-                <DataDisplay data={metadatos.corresponsable || ''} />
+                <DataDisplay
+                  data={compromiso.metadatos?.corresponsable || ''}
+                />
               </Editable>
             </Box>
-            <div className={classes.panel}>
+            <Box className="pt-3">
               {compromisoTabs
-                .filter(({ key }) => {
-                  return (
+                .filter(
+                  ({ key }) =>
                     administrador ||
-                    `${_.get(item, ['metadatos', key], '') || ''}`.replace(
+                    `${compromiso.metadatos?.[key] || ''}`.replace(
                       /\s*<p>\s*<\/p>\s*/g,
                       ''
                     )
-                  );
-                })
+                )
                 .map(({ key, label }, i) => (
                   <ExpansionPanel className="elevation-0" key={i}>
                     <ExpansionPanelSummary
@@ -252,29 +261,38 @@ const CompromisoDetail = ({ match }) => {
                       aria-controls={`panel-content.${key}`}
                       id={`panel-content-${key}`}
                     >
-                      <Typography className="panel_heading extra-bold ">
+                      <Typography className="panel_heading extra-bold">
                         {label}
                       </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                       <Typography className="light">
                         <Editable
-                          item={item}
+                          item={compromiso}
                           label={label}
                           path={`metadatos.${key}`}
                           onUpdate={refetch}
                           html
                         >
                           <DataDisplay
-                            data={_.get(item, ['metadatos', key], '')}
+                            data={compromiso.metadatos?.[key] || ''}
                           />
                         </Editable>
                       </Typography>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
                 ))}
-            </div>
-            <HitoList where={{ compromiso_id: { _eq: item.id } }} />
+            </Box>
+            <Box className="pt-3">
+              <h2>Discusión y comentarios</h2>
+              <hr className="line" />
+              <Conversacion item={compromiso} />
+            </Box>
+            <Box className="pt-4">
+              <h2>Acciones clave</h2>
+              <hr className="line" />
+              <HitoList where={{ compromiso_id: { _eq: compromiso.id } }} />
+            </Box>
           </Grid>
         </Grid>
       </StickyContainer>

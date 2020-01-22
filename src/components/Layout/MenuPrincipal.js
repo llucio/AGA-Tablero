@@ -62,9 +62,6 @@ const MenuPrincipal = props => {
           className="menu-transparente text-white"
         >
           <Toolbar>
-            {/*<Button color="inherit" className="blue" size="large">
-              .
-            </Button>*/}
             <MenuMovil pageWrapId={'page-wrap'} outerContainerId={'App'} />
             <CardMedia
               component="img"
@@ -113,47 +110,23 @@ const MenuPrincipal = props => {
                       Abierto MX
                     </strong>
                   </Typography>
-                  <Button href={`${base}/`} color="inherit" className="normal">
-                    Inicio
-                  </Button>
-                  <Button
-                    href={`${base}/quienes-somos`}
-                    color="inherit"
-                    className="normal"
-                  >
-                    Quienes somos
-                  </Button>
-                  <Button
-                    href={`${base}/antecedentes`}
-                    color="inherit"
-                    className="normal"
-                  >
-                    Antecedentes
-                  </Button>
-                  <Button
-                    href={`${base}/blog/`}
-                    color="inherit"
-                    className="normal"
-                  >
-                    Blog
-                  </Button>
-                  <Button
-                    href={`${base}/plan1/`}
-                    color="inherit"
-                    className="normal"
-                  >
-                    Planes de acción
-                  </Button>
-                  <Button href={`/`} color="inherit" className="normal">
-                    Tablero
-                  </Button>
-                  <Button
+                  <MenuButton href={`${base}/`} text="Inicio" />
+                  <MenuButton
+                    href={`${base}/quienes-somos/`}
+                    text="Quiénes somos"
+                  />
+                  <MenuButton
+                    href={`${base}/antecedentes/`}
+                    text="Antecedentes"
+                  />
+                  <MenuButton href={`${base}/blog/`} text="Blog" />
+                  <MenuButton href={`${base}/plan1/`} text="Planes de acción" />
+                  <MenuButton href="/" text="Tablero" />
+                  <MenuButton
                     href={`${base}/contacto/`}
-                    color="inherit"
-                    className="normal"
-                  >
-                    Contacto
-                  </Button>
+                    text="Contacto"
+                    class_alt="menu-spacing "
+                  />
                 </Toolbar>
               </Container>
             </AppBar>
@@ -163,5 +136,11 @@ const MenuPrincipal = props => {
     </>
   );
 };
+
+const MenuButton = ({ href, text, class_alt }) => (
+  <Button href={href} color="inherit" className={`${class_alt} normal`}>
+    {text}
+  </Button>
+);
 
 export default MenuPrincipal;

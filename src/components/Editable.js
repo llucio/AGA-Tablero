@@ -12,7 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 // import ClearIcon from '@material-ui/icons/Delete';
 import ColorHash from 'color-hash';
-import { useRoles } from '../hooks';
+import { useAuth } from '../hooks';
 import HtmlEditor from './HtmlEditor';
 import UploadButton from './UploadButton';
 import moment from '../utils/moment';
@@ -25,10 +25,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     margin: '6px 0',
     padding: '3px'
-    // margin: '3px'
   },
   root: {
-    // margin: '0 0 2em 0',
     display: 'flex',
     fontFamily: '"Montserrat", sans-serif !important',
     alignItems: 'center',
@@ -66,7 +64,7 @@ const Editable = ({
   type
 }) => {
   const [open, setOpen] = useState(false);
-  const { usuario: { administrador } = {} } = useRoles();
+  const { administrador } = useAuth();
   const [value, setValue] = useState();
   const [field, subField] = path.split('.');
   const { data: { queryResult } = {}, refetch } = useQuery(
@@ -231,7 +229,9 @@ const getQuery = ({ typename, field, subField }) => {
 
 const getMutation = ({ typename, field, subField, valueType = 'String' }) => {
   return gql`
-    mutation MutateField($id: uuid!, $value: ${subField ? 'jsonb' : valueType}) {
+    mutation MutateField($id: uuid!, $value: ${
+      subField ? 'jsonb' : valueType
+    }) {
       mutationResult: update_${typename}(
         where: {
           id: { _eq: $id }

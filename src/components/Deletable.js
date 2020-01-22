@@ -1,5 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import _ from 'lodash';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import IconButton from '@material-ui/core/IconButton';
@@ -59,9 +58,7 @@ const Deletable = ({ item, typename, refetch }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <strong>
-              {item.titulo}
-            </strong>
+            <strong>{item.titulo}</strong>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
