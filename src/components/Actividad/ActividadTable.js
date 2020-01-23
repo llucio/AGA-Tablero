@@ -10,18 +10,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
-import AvTimerIcon from '@material-ui/icons/AvTimer';
-import BatteryCharging60Icon from '@material-ui/icons/BatteryCharging60';
-import BatteryCharging20Icon from '@material-ui/icons/BatteryCharging20';
-
-import DoneIcon from '@material-ui/icons/Done';
-import DoneAllIcon from '@material-ui/icons/DoneAll';
-import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
-
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
+import EstatusBadge from './EstatusBadge';
+
+// import AvTimerIcon from '@material-ui/icons/AvTimer';
+// import BatteryCharging60Icon from '@material-ui/icons/BatteryCharging60';
+// import BatteryCharging20Icon from '@material-ui/icons/BatteryCharging20';
+// import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 
 const LIST_QUERY = loader('../../queries/ActividadList.graphql');
 
@@ -120,38 +116,7 @@ const ActividadTable = ({ where }) => {
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <div>
-                    <Tooltip title="¡Completo!" placement="right">
-                      <Fab
-                        size="small"
-                        aria-label="status"
-                        className="lime darken-2 white-text"
-                        style={{ margin: '5px' }}
-                      >
-                        <DoneAllIcon />
-                      </Fab>
-                    </Tooltip>
-                    <Tooltip title="En proceso" placement="right">
-                      <Fab
-                        size="small"
-                        aria-label="status"
-                        className="amber white-text"
-                        style={{ margin: '5px' }}
-                      >
-                        <DoneIcon />
-                      </Fab>
-                    </Tooltip>
-                    <Tooltip title="Por iniciar" placement="right">
-                      <Fab
-                        size="small"
-                        aria-label="status"
-                        className="grey lighten-2 white-text"
-                        style={{ margin: '5px' }}
-                      >
-                        <DoneIcon />
-                      </Fab>
-                    </Tooltip>
-                  </div>
+                  <EstatusBadge estatus={actividad.metadatos?.estatus} />
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <MedioVerificacionList actividad={actividad} />
