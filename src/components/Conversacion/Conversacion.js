@@ -85,13 +85,7 @@ const Conversacion = ({ item }) => {
         <Box className="comment-border grey lighten-5 comment-padding comment-margin box-6">
           <Comment
             key={conversacion.id}
-            avatar={
-              <Avatar
-                label={conversacion.usuario_email}
-                size="large"
-                className=""
-              />
-            }
+            avatar={<Avatar label={conversacion.usuario_email} size="large" />}
             author={
               <CommentAuthor>{conversacion.usuario.nombre}</CommentAuthor>
             }
@@ -108,19 +102,19 @@ const Conversacion = ({ item }) => {
             content={
               <ReactRenderer document={JSON.parse(conversacion.contenido)} />
             }
-            actions={
-              authenticated && [
-                <CommentAction>
-                  <Chip size="small" label="Clickable" label="Responder" />
-                </CommentAction>,
-                <CommentAction>
-                  <Chip size="small" label="Clickable" label="Eliminar" />
-                </CommentAction>,
-                <CommentAction>
-                  <Chip size="small" label="Clickable" label="Marcar" />
-                </CommentAction>
-              ]
-            }
+            // actions={
+            //   authenticated && [
+            //     <CommentAction>
+            //       <Chip size="small" label="Responder" />
+            //     </CommentAction>,
+            //     <CommentAction>
+            //       <Chip size="small" label="Eliminar" />
+            //     </CommentAction>,
+            //     <CommentAction>
+            //       <Chip size="small" label="Clickable" label="Marcar" />
+            //     </CommentAction>
+            //   ]
+            // }
           />
         </Box>
       ))}
