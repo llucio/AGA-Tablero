@@ -101,7 +101,7 @@ const HitoDetail = props => {
 
         <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
 
-        <Box className="grey lighten-4" style={{ height: '500px' }}>
+        {/* <Box className="grey lighten-4" style={{ height: '500px' }}>
           <Svg width={400} height={400}>
             <Chord
               data={[
@@ -131,7 +131,7 @@ const HitoDetail = props => {
               }
             </Chord>
           </Svg>
-        </Box>
+        </Box> */}
       </Box>
     </div>
   );
