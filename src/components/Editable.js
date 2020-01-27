@@ -93,7 +93,11 @@ const Editable = ({
       onUpdate && onUpdate();
       autoClose && setOpen(false);
       setValue(finalValue);
-      _.isFunction(refetch) && refetch().catch(() => console.error('error'));
+      // return (
+      //   refetch &&
+      //   _.isFunction(refetch) &&
+      //   refetch().catch(() => console.error('error'))
+      // );
     });
   };
 

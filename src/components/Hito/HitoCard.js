@@ -42,8 +42,10 @@ const HitoCard = ({ item: hito, refetch }) => {
             item={hito}
             path="ponderacion"
             label="Ponderación"
-            valueType="Int"
-            onUpdate={refetch}
+            valueType="Float"
+            onUpdate={() => {
+              refetch();
+            }}
           >
             Ponderación <span>{hito.ponderacion}%</span>
           </Editable>

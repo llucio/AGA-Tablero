@@ -213,13 +213,15 @@ const HitoHeader = ({ hito, refetch }) => (
           />
         </Box>
       </Grid>
-      <Grid item xs={12} sm={4} className="">
+      <Grid item xs={12} sm={4}>
         <Editable
           item={hito}
           path="ponderacion"
-          valueType="Int"
+          valueType="Float"
           label="Ponderación"
-          onUpdate={refetch}
+          onUpdate={() => {
+            refetch();
+          }}
         >
           <Box>Ponderación: {hito.ponderacion}%</Box>
           <br className="clearfix" />
