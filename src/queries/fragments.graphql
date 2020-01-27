@@ -15,6 +15,7 @@ fragment Actividad on actividad {
   titulo
   fecha_creacion
   metadatos
+  archivos
   fecha_inicial
   fecha_final
   medios_verificacion_aggregate {

@@ -11,14 +11,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import UploadButton from './UploadButton';
 
-const Creatable = ({ typename, parentKey, parentId, refetch }) => {
+const AddActividadArchivos = ({ actividad, refetch }) => {
   const [open, setOpen] = useState(false);
   const [titulo, setTitulo] = useState('');
-  const [archivos, setArchivos] = useState([]);
-  const [execute] = useMutation(gql`
-    mutation CreateMutation($titulo: String, $archivos: jsonb) {
-      result: insert_${typename}(
-        objects: { titulo: $titulo, archivos: $archivos, ${parentKey}: "${parentId}" }
+  const [archivo, setArchivo] = useState();
+  const [executeAddArchivo] = useMutation(gql`
+    mutation AddArchivo($id: uuid!, $archivo: jsonb) {
+      update_actividad(
+        _append: { archivos: $archivo }
+        where: { id: { _eq: $id } }
       ) {
         affected_rows
       }
@@ -34,8 +35,8 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
   };
 
   const handleConfirm = () => {
-    execute({
-      variables: { titulo, archivos: [archivos] }
+    executeAddArchivo({
+      variables: { id: actividad.id, archivo }
     })
       .then(() => refetch())
       .then(handleClose);
@@ -44,7 +45,7 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
   return (
     <div>
       <Button onClick={handleClickOpen} size="small" color="secondary">
-        <AddIcon /> Añadir {typename}
+        <AddIcon /> Añadir Medio de verificación
       </Button>
       <Dialog
         open={open}
@@ -57,10 +58,10 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Input
-              placeholder="Título"
+              placeholder="Descripción del archivo"
               style={{ width: '100%', marginBottom: 0, paddingBottom: 0 }}
               autoFocus
-              label="Título"
+              label="Descripción"
               color="secondary"
               onChange={event => setTitulo(event.target.value)}
             />
@@ -70,7 +71,7 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
                 maxNumberOfFiles: null
               }}
               modal={false}
-              handleChange={setArchivos}
+              handleChange={setArchivo}
             />
           </DialogContentText>
         </DialogContent>
@@ -79,7 +80,7 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
             Cancelar
           </Button>
           <Button
-            disabled={!archivos.length || !titulo.trim()}
+            disabled={!archivo || !titulo.trim()}
             onClick={handleConfirm}
             color="danger"
           >
@@ -91,4 +92,4 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
   );
 };
 
-export default Creatable;
+export default AddActividadArchivos;
