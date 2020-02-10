@@ -2357,10 +2357,10 @@
     prop-types "^15.7.2"
     react-fast-compare "^2.0.4"
 
-"@react-keycloak/web@^1.0.0-alpha.5":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@react-keycloak/web/-/web-1.0.1.tgz#7cc7015c69798849d34b0a89d7a6b154e93df413"
-  integrity sha512-pOzfxAGhYwFSotzAc3eaIlmDLceHo6lQZJFcGmfhX4DJbYYRHTeFltuqYQYyq/P3FIzXEWOgL/rW+O0hGbIhPw==
+"@react-keycloak/web@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@react-keycloak/web/-/web-1.0.2.tgz#dfc103884ed340b84c05a79e21815babaf381cae"
+  integrity sha512-zQq5Pw505cVcTMJuBELU3B+16KQNIqdgM/Gxw8wpJy7/8kai1sB8etkd1JtDMfzrXgwbaLJ4DlYIouevs5O1gw==
   dependencies:
     "@react-keycloak/core" "^1.0.1"
     hoist-non-react-statics "^3.3.0"
@@ -8765,10 +8765,10 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-keycloak-js@^8.0.0:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-8.0.1.tgz#bf9884f0d5dc2365d7b99f330deea0949166dda2"
-  integrity sha512-1ABx6ZCk1jrmn9wAX8oMw175M75JHhpKq2bKSmplkhQXErkp0r8Lf+e+91Gr8DixVtT4/IyH9mc/JQuwbkvRbA==
+keycloak-js@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-8.0.2.tgz#2af5868aa4313c111601115e990ba317e5f14489"
+  integrity sha512-5Jy5rHx0oURTtj2T6LSMLiqyHzDzPr6ZnaY1fwCBlMsiMx7RVsIBeysYZ5yy29ojH9IMzNJzlZvuLKbEOCmgDQ==
   dependencies:
     base64-js "1.3.1"
     js-sha256 "0.9.0"
