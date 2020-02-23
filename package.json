@@ -15,11 +15,7 @@
     "@atlaskit/renderer": "^53.2.2",
     "@atlaskit/smart-card": "^12.6.2",
     "@material-ui/core": "^4.5.1",
-    "@material-ui/icons": "^4.5.1",
-    "@potion/color": "^1.0.0-next.21",
-    "@potion/element": "^1.0.0-next.0",
-    "@potion/extra": "^1.0.0-next.0",
-    "@potion/layout": "^1.0.0-next.0",
+    "@material-ui/icons": "^4.9.1",
     "@react-keycloak/web": "^1.0.4",
     "@uppy/aws-s3": "^1.5.2",
     "@uppy/core": "^1.8.2",
@@ -60,7 +56,6 @@
     "react-scripts": "^3.4.0",
     "react-sortable-hoc": "^1.10.1",
     "react-sticky": "^6.0.3",
-    "react-swipeable-views": "^0.13.3",
     "uuid": "^3.3.3"
   },
   "resolutions": {

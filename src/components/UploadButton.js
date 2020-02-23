@@ -10,7 +10,6 @@ import uuidv4 from 'uuid/v4';
 
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
-import '@uppy/webcam/dist/style.css';
 import '@uppy/url/dist/style.css';
 
 const companionUrl =

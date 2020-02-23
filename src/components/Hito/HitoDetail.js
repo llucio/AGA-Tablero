@@ -13,10 +13,6 @@ import moment from '../../utils/moment';
 import ActividadTable from '../Actividad/ActividadTable';
 import Conversacion from '../Conversacion/Conversacion';
 
-import { Ribbon } from '@potion/element';
-import { Svg } from '@potion/element';
-import { Chord } from '@potion/layout';
-
 import '../../assets/css/calendario.css';
 
 const GET_QUERY = loader('../../queries/HitoGet.graphql');

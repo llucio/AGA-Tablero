@@ -1,5 +1,4 @@
 import React from 'react';
-import { get } from 'lodash';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import DoneIcon from '@material-ui/icons/Done';
