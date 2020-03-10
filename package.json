@@ -44,7 +44,6 @@
     "react": "^16",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-burger-menu": "^2.6.13",
-    "react-calendar-icon": "^0.9.4",
     "react-crud-table": "^0.0.8",
     "react-dom": "^16.13.0",
     "react-draft-wysiwyg": "^1.13.2",
@@ -56,11 +55,6 @@
     "react-sortable-hoc": "^1.10.1",
     "react-sticky": "^6.0.3",
     "uuid": "^7.0.2"
-  },
-  "resolutions": {
-    "react-calendar-icon/**/styled-components": "^3.2.6",
-    "react-calendar-icon/styled-components": "^3.4.10",
-    "react-calendar-icon/react": "^16"
   },
   "scripts": {
     "start": "NODE_OPTIONS=--max-old-space-size=6144 react-scripts start",
