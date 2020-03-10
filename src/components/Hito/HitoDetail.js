@@ -3,17 +3,15 @@ import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
-import { CalendarIcon } from 'react-calendar-icon';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import moment from '../../utils/moment';
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
-import moment from '../../utils/moment';
+import CalendarIcon from '../CalendarIcon';
 import ActividadTable from '../Actividad/ActividadTable';
 import Conversacion from '../Conversacion/Conversacion';
-
-import '../../assets/css/calendario.css';
 
 const GET_QUERY = loader('../../queries/HitoGet.graphql');
 
@@ -162,14 +160,12 @@ const HitoHeader = ({ hito, refetch }) => (
         onUpdate={refetch}
       >
         {!!hito.fecha_inicial && (
-          <Box className="" style={{ display: 'inline-block' }}>
+          <Box style={{ display: 'inline-block' }}>
             <p>Inicio</p>
             <CalendarIcon
-              style={{ margin: '0 auto' }}
               date={moment(hito.fecha_inicial)
                 .utc()
                 .toDate()}
-              options={dateOptions}
             />
           </Box>
         )}
