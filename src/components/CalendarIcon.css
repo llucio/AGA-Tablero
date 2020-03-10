@@ -25,7 +25,7 @@ time.CalendarIcon strong {
   top: 0;
   padding: 0.4em 0;
   color: #fff;
-  background-color: #fd9f1b;
+  background-color: #ff5252;
   border-bottom: 1px dashed #f37302;
   box-shadow: 0 2px 0 #fd9f1b;
 }
@@ -33,7 +33,7 @@ time.CalendarIcon strong {
 time.CalendarIcon em {
   position: absolute;
   bottom: 0.3em;
-  color: #fd9f1b;
+  color: #37474f;
 }
 
 time.CalendarIcon span {

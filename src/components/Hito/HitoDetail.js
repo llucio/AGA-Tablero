@@ -54,7 +54,7 @@ const HitoDetail = props => {
           <HitoHeader hito={hito} refetch={refetch} />
         </Grid>
 
-        <Grid spacing={2}>
+        <Grid spacing={1}>
           <div>
             <h6>
               <strong>Descripción/objetivo de la acción clave</strong>
@@ -139,7 +139,7 @@ const dateOptions = {
 };
 
 const HitoHeader = ({ hito, refetch }) => (
-  <Grid container spacing={2}>
+  <Grid container spacing={1}>
     <Grid item xs={12} md={8}>
       <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
         <h2 className="bold">{hito.titulo}</h2>
@@ -161,12 +161,8 @@ const HitoHeader = ({ hito, refetch }) => (
       >
         {!!hito.fecha_inicial && (
           <Box style={{ display: 'inline-block' }}>
-            <p>Inicio</p>
-            <CalendarIcon
-              date={moment(hito.fecha_inicial)
-                .utc()
-                .toDate()}
-            />
+            <CalendarIcon date={hito.fecha_inicial} />
+            Inicio
           </Box>
         )}
       </Editable>
@@ -181,26 +177,21 @@ const HitoHeader = ({ hito, refetch }) => (
       >
         {!!hito.fecha_final && (
           <Box>
-            <p>Fin</p>
-            <CalendarIcon
-              date={moment(hito.fecha_final)
-                .utc()
-                .toDate()}
-              options={dateOptions}
-              className=""
-            />
+            <CalendarIcon date={hito.fecha_final} />
+            Fin
           </Box>
         )}
       </Editable>
     </Grid>
+
     <Grid container>
       <Grid item xs={12} sm={8}>
         <Box className="progress mt-2">
           <Box
             className="progress-bar-dark light-green w-0"
             role="progressbar"
-            aria-valuenow="10"
-            aria-valuemin="0"
+            aria-valuenow="40"
+            aria-valuemin="10"
             aria-valuemax="100"
           />
         </Box>

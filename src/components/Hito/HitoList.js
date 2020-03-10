@@ -29,7 +29,6 @@ const HitoList = ({ where }) => {
         typeName="hito"
         items={hitos}
         itemComponent={HitoCard}
-        itemProps={{}}
         containerComponent={Grid}
         containerProps={{
           direction: 'row',

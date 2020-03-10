@@ -25,6 +25,16 @@ const MedioVerificacionList = ({ actividad }) => {
 
   return (
     <div>
+      <div>
+        {(actividad.archivos || []).map(archivo => (
+          <Box key={`mv-${archivo}`}>
+            <Link target="_blank" href={archivo} color="inherit" title={'p'}>
+              <PictureAsPdfIcon /> {medioVerificacion.fecha_creacion}{' '}
+              {medioVerificacion.titulo}
+            </Link>
+          </Box>
+        ))}
+      </div>
       {(responsableHito || responsableCompromiso) && (
         <MedioCreatable
           typename="medio_verificacion"
