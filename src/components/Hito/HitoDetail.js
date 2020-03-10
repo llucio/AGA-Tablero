@@ -55,11 +55,9 @@ const HitoDetail = props => {
         </Grid>
 
         <Grid spacing={1}>
-          <div>
-            <h6>
-              <strong>Descripción/objetivo de la acción clave</strong>
-            </h6>
-          </div>
+          <h5>
+            <strong>Descripción/objetivo de la acción clave</strong>
+          </h5>
           <Editable
             html
             item={hito}
@@ -69,11 +67,11 @@ const HitoDetail = props => {
           >
             <DataDisplay data={hito.metadatos?.descripcion} />
           </Editable>
-          <div>
-            <h6>
-              <strong>Responsables</strong>
-            </h6>
-          </div>
+
+          <h5>
+            <strong>Responsables</strong>
+          </h5>
+
           <Editable
             html
             item={hito}
@@ -88,7 +86,7 @@ const HitoDetail = props => {
           </Editable>
         </Grid>
         <Box className="pt-3">
-          <h2>Discusión y comentarios</h2>
+          <h3>Discusión y comentarios</h3>
           <hr className="line" />
           <Conversacion item={hito} refetch={refetch} />
         </Box>
@@ -129,13 +127,6 @@ const HitoDetail = props => {
       </Box>
     </div>
   );
-};
-
-const dateOptions = {
-  header: { month: 'short' },
-  footer: { year: 'numeric' },
-  value: { day: '2-digit' },
-  locale: 'es-MX'
 };
 
 const HitoHeader = ({ hito, refetch }) => (
@@ -200,8 +191,8 @@ const HitoHeader = ({ hito, refetch }) => (
         <Editable
           item={hito}
           path="ponderacion"
-          valueType="Float"
           label="Ponderación"
+          valueType="Float"
           onUpdate={() => {
             refetch();
           }}
