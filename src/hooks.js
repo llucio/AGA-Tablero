@@ -7,10 +7,8 @@ import { AUTH_TOKEN_STORAGE_KEY } from './constants';
 const USUARIO_QUERY = loader('./queries/UsuarioGet.graphql');
 
 const initialState = { anonymousMode: false };
-const {
-  GlobalStateProvider: AuthStateProvider,
-  useGlobalState
-} = createGlobalState(initialState);
+// const { useGlobalState } = createGlobalState(initialState);
+const { useGlobalState } = createGlobalState(initialState);
 
 const useAuth = () => {
   const [keycloak, initialized] = useKeycloak();
@@ -56,4 +54,4 @@ const useAuth = () => {
   };
 };
 
-export { useAuth, AuthStateProvider };
+export { useAuth };

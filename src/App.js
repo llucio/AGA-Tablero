@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Container from 'react-bootstrap/Container';
 import AuthProvider from './keycloak';
-import { AuthStateProvider } from './hooks';
+import { useAuth } from './hooks';
 import { apolloClient } from './apollo';
 import Header from './components/Layout/Header';
 import MenuPrincipal from './components/Layout/MenuPrincipal';
@@ -57,38 +57,46 @@ const theme = {
 
 const App = () => (
   <AuthProvider>
-    <AuthStateProvider>
-      <ApolloProvider client={apolloClient}>
-        <ThemeProvider theme={theme}>
-          <Router>
-            <ScrollToTop />
-            {routes.map(
-              ({ path, exact = true, component: Component, headerProps }) => (
-                <Route
-                  key={path}
-                  path={path}
-                  exact={exact}
-                  component={() => (
-                    <React.Fragment>
-                      <MenuPrincipal />
-                      <Header headerProps={headerProps} />
-                      <section id="one" className="vertical-margin-top-middle">
-                        <Container>
-                          <BreadcrumbBar />
-                          <Component />
-                        </Container>
-                      </section>
-                      <Footer />
-                    </React.Fragment>
-                  )}
-                />
-              )
-            )}
-          </Router>
-        </ThemeProvider>
-      </ApolloProvider>
-    </AuthStateProvider>
+    {/* <AuthStateProvider> */}
+    <ApolloProvider client={apolloClient}>
+      <AuthApp />
+    </ApolloProvider>
+    {/* </AuthStateProvider> */}
   </AuthProvider>
 );
+
+const AuthApp = () => {
+  const { login } = useAuth();
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Router>
+        <ScrollToTop />
+        {routes.map(
+          ({ path, exact = true, component: Component, headerProps }) => (
+            <Route
+              key={path}
+              path={path}
+              exact={exact}
+              component={() => (
+                <React.Fragment>
+                  <MenuPrincipal />
+                  <Header headerProps={headerProps} />
+                  <section id="one" className="vertical-margin-top-middle">
+                    <Container>
+                      <BreadcrumbBar />
+                      <Component />
+                    </Container>
+                  </section>
+                  <Footer />
+                </React.Fragment>
+              )}
+            />
+          )
+        )}
+      </Router>
+    </ThemeProvider>
+  );
+};
 
 export default App;

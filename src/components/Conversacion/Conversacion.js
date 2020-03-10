@@ -4,14 +4,14 @@ import { useQuery } from '@apollo/react-hooks';
 import { ReactRenderer } from '@atlaskit/renderer';
 import Comment, {
   CommentTime,
-  CommentAction,
+  // CommentAction,
   // CommentEdited,
   CommentAuthor
 } from '@atlaskit/comment';
 import Avatar from '@atlaskit/avatar';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
+// import Button from '@material-ui/core/Button';
+// import Chip from '@material-ui/core/Chip';
 import { useAuth } from '../../hooks';
 import moment from '../../utils/moment';
 import ConversacionEditor from './ConversacionEditor';
@@ -43,7 +43,7 @@ const getQuery = type => gql`
 `;
 
 const Conversacion = ({ item }) => {
-  const { authenticated, usuario, anonymousMode } = useAuth();
+  const { authenticated, usuario } = useAuth();
   const {
     data: { conversaciones } = {},
     loading,

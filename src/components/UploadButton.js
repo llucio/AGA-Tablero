@@ -94,17 +94,17 @@ const UploadButton = ({
           proudlyDisplayPoweredByUppy={false}
         />
       ) : (
-        <Dashboard
-          uppy={uppy}
-          // onRequestClose={() => {
-          //   handleChange(value || '');
-          //   setOpen(false);
-          // }}
-          height="200"
-          inline={true}
-          proudlyDisplayPoweredByUppy={false}
-        />
-      )}
+          <Dashboard
+            uppy={uppy}
+            // onRequestClose={() => {
+            //   handleChange(value || '');
+            //   setOpen(false);
+            // }}
+            height="200"
+            inline={true}
+            proudlyDisplayPoweredByUppy={false}
+          />
+        )}
     </div>
   );
 };

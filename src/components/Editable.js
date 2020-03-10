@@ -67,7 +67,7 @@ const Editable = ({
   const { administrador } = useAuth();
   const [value, setValue] = useState();
   const [field, subField] = path.split('.');
-  const { data: { queryResult } = {}, refetch } = useQuery(
+  const { data: { queryResult } = {} /* refetch */ } = useQuery(
     getQuery({ typename, field, subField }),
     {
       variables: { id },
