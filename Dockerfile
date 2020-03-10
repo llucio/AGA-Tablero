@@ -5,6 +5,9 @@ FROM node:10-alpine as build
 ARG API_URL=http://localhost:4000/v1/graphql
 ENV REACT_APP_API_URL=$API_URL
 
+ARG SENTRY_DSN
+ENV REACT_APP_SENTRY_DSN=$SENTRY_DSN
+
 ARG KEYCLOAK_CLIENT_CONFIG='{"realm":"aga","auth-server-url":"http://localhost:8080/auth","ssl-required":"external","resource":"web-app","public-client":true,"verify-token-audience":true,"use-resource-role-mappings":true,"confidential-port":0}'
 
 WORKDIR /app
