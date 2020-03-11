@@ -1,5 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { ReactRenderer } from '@atlaskit/renderer';
 import Comment, {
