@@ -16,12 +16,22 @@ const AddActividadArchivos = ({ actividad, refetch }) => {
   const [titulo, setTitulo] = useState('');
   const [archivo, setArchivo] = useState();
   const [executeAddArchivo] = useMutation(gql`
-    mutation AddArchivo($id: uuid!, $archivo: jsonb) {
-      update_actividad(
-        _append: { archivos: $archivo }
-        where: { id: { _eq: $id } }
+    mutation AddArchivo(
+      $actividadId: uuid!
+      $titulo: String!
+      $archivos: jsonb
+    ) {
+      insert_medio_verificacion(
+        objects: {
+          actividad_id: $actividadId
+          archivos: $archivos
+          titulo: $titulo
+        }
       ) {
         affected_rows
+        returning {
+          id
+        }
       }
     }
   `);
@@ -36,7 +46,7 @@ const AddActividadArchivos = ({ actividad, refetch }) => {
 
   const handleConfirm = () => {
     executeAddArchivo({
-      variables: { id: actividad.id, archivo }
+      variables: { actividadId: actividad.id, archivos: [archivo], titulo }
     })
       .then(() => refetch())
       .then(handleClose);

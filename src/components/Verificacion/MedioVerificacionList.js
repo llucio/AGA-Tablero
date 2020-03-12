@@ -4,15 +4,29 @@ import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import moment from '../../utils/moment';
 import LoadingIndicator from '../LoadingIndicator';
 import { useAuth } from '../../hooks';
 import MedioCreatable from '../MedioCreatable';
 
-const MedioVerificacionList = ({ actividad }) => {
-  const { usuario, loading: authLoading } = useAuth();
+const LIST_QUERY = loader('../../queries/MedioVerificacionList.graphql');
 
-  if (authLoading) return <LoadingIndicator />;
+const MedioVerificacionList = ({ actividad }) => {
+  const { usuario, loading: authLoading, administrador } = useAuth();
+
+  const {
+    data: { items: mediosVerificacion } = {},
+    loading: dataLoading,
+    refetch
+  } = useQuery(LIST_QUERY, {
+    variables: {
+      where: {
+        actividad_id: { _eq: actividad.id }
+      }
+    }
+  });
+
+  if (authLoading || dataLoading) return <LoadingIndicator />;
 
   const responsableHito =
     usuario &&
@@ -26,20 +40,22 @@ const MedioVerificacionList = ({ actividad }) => {
   return (
     <div>
       <div>
-        {(actividad.archivos || []).map(archivo => (
-          <Box key={`mv-${archivo}`}>
-            <Link target="_blank" href={archivo} color="inherit" title={'p'}>
-              <PictureAsPdfIcon /> {medioVerificacion.fecha_creacion}{' '}
-              {medioVerificacion.titulo}
-            </Link>
-          </Box>
-        ))}
+        {(mediosVerificacion || []).map(
+          ({ id, archivos: [url] = [], titulo, fecha_creacion }) => (
+            <Box key={`mv-${id}`}>
+              <Link target="_blank" href={url} color="inherit" title={'p'}>
+                {titulo} - {moment(fecha_creacion).format('LL')}
+              </Link>
+            </Box>
+          )
+        )}
       </div>
-      {(responsableHito || responsableCompromiso) && (
+      {(responsableHito || responsableCompromiso || administrador) && (
         <MedioCreatable
           typename="medio_verificacion"
           parentKey="actividad_id"
           parentId={actividad.id}
+          actividad={actividad}
           refetch={refetch}
         />
       )}

@@ -2,7 +2,7 @@ import React from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from '../LoadingIndicator';
-// import MedioVerificacionList from '../Verificacion/MedioVerificacionList';
+import MedioVerificacionList from '../Verificacion/MedioVerificacionList';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -119,7 +119,10 @@ const ActividadTable = ({ where }) => {
                   <EstatusBadge estatus={actividad.metadatos?.estatus} />
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {/* <MedioVerificacionList actividad={actividad} /> */}
+                  <MedioVerificacionList
+                    actividad={actividad}
+                    refetch={refetch}
+                  />
                 </StyledTableCell>
               </StyledTableRow>
             ))}
