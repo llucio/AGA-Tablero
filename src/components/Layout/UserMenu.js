@@ -95,13 +95,6 @@ const UserMenu = () => {
             {usuario?.organizacion && (
               <MenuItem>{usuario.organizacion.nombre}</MenuItem>
             )}
-            {isAdministrador && (
-              <MenuItem
-                onClick={() => history.push('/administracion/usuarios')}
-              >
-                Administrar usuarios
-              </MenuItem>
-            )}
             <MenuItem onClick={() => logout()}>Cerrar sesión</MenuItem>
           </Menu>
         </Grid>
