@@ -49,8 +49,7 @@ const UploadButton = ({
   value,
   handleChange,
   label = 'Cambiar archivo',
-  modal = true,
-  restrictions = {}
+  modal = true
 }) => {
   const [open, setOpen] = useState(!value);
 
@@ -74,18 +73,23 @@ const UploadButton = ({
 
   return (
     <div>
-      {!!value &&
-        modal(
-          <Box>
-            <Button variant="contained" onClick={() => setOpen(true)}>
-              {label}
-            </Button>
-          </Box>
-        )}
+      {!!value && modal && (
+        <Box>
+          <Button
+            className="openmodal,"
+            variant="contained"
+            onClick={() => setOpen(true)}
+          >
+            {label}
+          </Button>
+        </Box>
+      )}
       {modal ? (
         <DashboardModal
           uppy={uppy}
           open={open}
+          trigger=".openmodal"
+          target="body"
           onRequestClose={() => {
             handleChange(value || '');
             setOpen(false);
@@ -94,17 +98,13 @@ const UploadButton = ({
           proudlyDisplayPoweredByUppy={false}
         />
       ) : (
-          <Dashboard
-            uppy={uppy}
-            // onRequestClose={() => {
-            //   handleChange(value || '');
-            //   setOpen(false);
-            // }}
-            height="200"
-            inline={true}
-            proudlyDisplayPoweredByUppy={false}
-          />
-        )}
+        <Dashboard
+          uppy={uppy}
+          height="200"
+          inline={true}
+          proudlyDisplayPoweredByUppy={false}
+        />
+      )}
     </div>
   );
 };
