@@ -1,6 +1,6 @@
 terminal:
   image: node:12-alpine
-  command:
+  script:
     - yarn install
     - yarn start
   variables:
