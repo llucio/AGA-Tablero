@@ -1,0 +1,7 @@
+terminal:
+  image: node:12-alpine
+  command:
+    - yarn install
+    - yarn start
+  variables:
+    NODE_ENV: test
