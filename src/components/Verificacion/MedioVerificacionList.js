@@ -4,7 +4,9 @@ import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { Image, Transformation } from 'cloudinary-react';
 import Link from '@material-ui/core/Link';
+import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
+import DeleteIcon from '@material-ui/icons/Delete';
 import moment from '../../utils/moment';
 import LoadingIndicator from '../LoadingIndicator';
 import { useAuth } from '../../hooks';
@@ -60,6 +62,11 @@ const MedioVerificacionList = ({ actividad }) => {
               <Link target="_blank" href={url} color="inherit">
                 {titulo}
               </Link>
+              {(responsableHito || responsableCompromiso || administrador) && (
+                <IconButton color="primary">
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              )}
               <blockquote>
                 <date>Cargado el {moment(fecha_creacion).format('LL')}</date>
               </blockquote>
