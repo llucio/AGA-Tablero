@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { loader, gql } from 'graphql.macro';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Image, Transformation } from 'cloudinary-react';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,6 +13,7 @@ import { useAuth } from '../../hooks';
 import MedioCreatable from '../MedioCreatable';
 
 const LIST_QUERY = loader('../../queries/MedioVerificacionList.graphql');
+
 const storagePrefix = 'https://descarga.storage.apps.funcionpublica.gob.mx/';
 
 const MedioVerificacionList = ({ actividad }) => {
@@ -29,6 +30,17 @@ const MedioVerificacionList = ({ actividad }) => {
       },
     },
   });
+
+  const [executeDelete] = useMutation(gql`
+    mutation DeleteMedio($id: uuid!) {
+      update_medio_verificacion(
+        where: { id: { _eq: $id } }
+        _set: { fecha_eliminacion: "NOW()" }
+      ) {
+        affected_rows
+      }
+    }
+  `);
 
   if (authLoading || dataLoading) return <LoadingIndicator />;
 
@@ -69,7 +81,14 @@ const MedioVerificacionList = ({ actividad }) => {
                   {(responsableHito ||
                     responsableCompromiso ||
                     administrador) && (
-                    <IconButton color="primary">
+                    <IconButton
+                      color="primary"
+                      onClick={() => {
+                        executeDelete({ variables: { id } }).then(() =>
+                          refetch()
+                        );
+                      }}
+                    >
                       <DeleteIcon fontSize="small" />
                     </IconButton>
                   )}
