@@ -50,6 +50,7 @@ const MedioVerificacionList = ({ actividad }) => {
               <Image
                 cloudName="gobmx"
                 publicId={url.replace(storagePrefix, 'storage/')}
+                style={{ padding: '0 0.5em' }}
               >
                 <Transformation
                   width="70"
@@ -59,17 +60,21 @@ const MedioVerificacionList = ({ actividad }) => {
                   crop="thumb"
                 />
               </Image>
-              <Link target="_blank" href={url} color="inherit">
-                {titulo}
-              </Link>
-              {(responsableHito || responsableCompromiso || administrador) && (
-                <IconButton color="primary">
-                  <DeleteIcon fontSize="small" />
-                </IconButton>
-              )}
-              <blockquote>
-                <date>Cargado el {moment(fecha_creacion).format('LL')}</date>
-              </blockquote>
+              <div>
+                <Link target="_blank" href={url} color="inherit">
+                  {titulo}
+                </Link>
+                <blockquote>
+                  <date>Cargado el {moment(fecha_creacion).format('LL')}</date>
+                  {(responsableHito ||
+                    responsableCompromiso ||
+                    administrador) && (
+                    <IconButton color="primary">
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  )}
+                </blockquote>
+              </div>
             </Box>
           )
         )}
