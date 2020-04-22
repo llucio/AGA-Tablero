@@ -46,7 +46,7 @@ const AddActividadArchivos = ({ actividad, refetch }) => {
 
   const handleConfirm = () => {
     executeAddArchivo({
-      variables: { actividadId: actividad.id, archivos: [archivo], titulo }
+      variables: { actividadId: actividad.id, archivos: [archivo], titulo },
     })
       .then(() => refetch())
       .then(handleClose);
@@ -64,21 +64,21 @@ const AddActividadArchivos = ({ actividad, refetch }) => {
         aria-describedby="alert-dialog-description"
         maxWidth="lg"
       >
-        <DialogTitle id="alert-dialog-title">{`Añadir nuevo medio de verificación`}</DialogTitle>
+        <DialogTitle>Añadir nuevo medio de verificación</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText>
             <Input
               placeholder="Descripción del archivo"
               style={{ width: '100%', marginBottom: 0, paddingBottom: 0 }}
               autoFocus
               label="Descripción"
               color="secondary"
-              onChange={event => setTitulo(event.target.value)}
+              onChange={(event) => setTitulo(event.target.value)}
             />
             <UploadButton
               label="Seleccionar archivo(s)"
               restrictions={{
-                maxNumberOfFiles: null
+                maxNumberOfFiles: null,
               }}
               modal={false}
               handleChange={setArchivo}
@@ -86,15 +86,14 @@ const AddActividadArchivos = ({ actividad, refetch }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
-          </Button>
+          <Button onClick={handleClose}>Cancelar</Button>
           <Button
+            variant="contained"
             disabled={!archivo || !titulo.trim()}
             onClick={handleConfirm}
-            color="danger"
+            color="primary"
           >
-            Crear
+            Añadir
           </Button>
         </DialogActions>
       </Dialog>

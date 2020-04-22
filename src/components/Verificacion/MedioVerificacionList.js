@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
+import { Image, Transformation } from 'cloudinary-react';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import moment from '../../utils/moment';
@@ -10,6 +11,7 @@ import { useAuth } from '../../hooks';
 import MedioCreatable from '../MedioCreatable';
 
 const LIST_QUERY = loader('../../queries/MedioVerificacionList.graphql');
+const storagePrefix = 'https://descarga.storage.apps.funcionpublica.gob.mx/';
 
 const MedioVerificacionList = ({ actividad }) => {
   const { usuario, loading: authLoading, administrador } = useAuth();
@@ -17,13 +19,13 @@ const MedioVerificacionList = ({ actividad }) => {
   const {
     data: { items: mediosVerificacion } = {},
     loading: dataLoading,
-    refetch
+    refetch,
   } = useQuery(LIST_QUERY, {
     variables: {
       where: {
-        actividad_id: { _eq: actividad.id }
-      }
-    }
+        actividad_id: { _eq: actividad.id },
+      },
+    },
   });
 
   if (authLoading || dataLoading) return <LoadingIndicator />;
@@ -34,7 +36,7 @@ const MedioVerificacionList = ({ actividad }) => {
   const responsableCompromiso =
     usuario &&
     _.find(usuario.responsable_compromisos, {
-      compromiso_id: actividad.hito.compromiso_id
+      compromiso_id: actividad.hito.compromiso_id,
     });
 
   return (
@@ -43,9 +45,24 @@ const MedioVerificacionList = ({ actividad }) => {
         {(mediosVerificacion || []).map(
           ({ id, archivos: [url] = [], titulo, fecha_creacion }) => (
             <Box key={`mv-${id}`}>
-              <Link target="_blank" href={url} color="inherit" title={'p'}>
-                {titulo} - {moment(fecha_creacion).format('LL')}
+              <Image
+                cloudName="gobmx"
+                publicId={url.replace(storagePrefix, 'storage/')}
+              >
+                <Transformation
+                  width="70"
+                  height="70"
+                  radius="max"
+                  effect="sharpen"
+                  crop="thumb"
+                />
+              </Image>
+              <Link target="_blank" href={url} color="inherit">
+                {titulo}
               </Link>
+              <blockquote>
+                <date>Cargado el {moment(fecha_creacion).format('LL')}</date>
+              </blockquote>
             </Box>
           )
         )}
