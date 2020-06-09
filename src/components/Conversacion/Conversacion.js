@@ -68,10 +68,12 @@ const Conversacion = ({ item }) => {
   }
 
   const compromisoAllowed =
-    authenticated &&
+    authenticated && (
+    usuario?.administrador ||
     usuario?.responsable_compromisos
       .map(rc => rc.compromiso_id)
-      .includes(compromisoId);
+      .includes(compromisoId)
+    )
 
   return (
     <Box className="comment-content horizontal-padding vertical-padding ">
