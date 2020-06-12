@@ -46,10 +46,10 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 700,
   },
   marginButton: {
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
   },
   mediosCell: {
-    minWidth: 400,
+    minWidth: 300,
   },
 }));
 

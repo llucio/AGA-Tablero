@@ -289,7 +289,7 @@ th.MuiTableCell-root {
   border-bottom: 1px solid #ececec;
   /* min-width: 200px; */
   max-width: auto;
-  padding: 3px 0;
+  padding: 1px 0;
 }
 
 .compromiso-content li a {
