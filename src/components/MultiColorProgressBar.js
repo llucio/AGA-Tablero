@@ -2,7 +2,7 @@ import React from 'react';
 
 import './MultiColorProgressBar.css';
 
-const MultiColorProgressBar = ({ readings }) => {
+const MultiColorProgressBar = ({ readings = [] }) => {
   const values = readings.map((item, i) => {
     if (item.value > 0) {
       return (

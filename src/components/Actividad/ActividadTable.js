@@ -116,7 +116,7 @@ const ActividadTable = ({ where }) => {
                   </Editable>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <EstatusBadge estatus={actividad.metadatos?.estatus} />
+                  <EstatusBadge actividad={actividad} refetch={refetch} />
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <MedioVerificacionList

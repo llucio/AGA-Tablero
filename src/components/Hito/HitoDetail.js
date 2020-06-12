@@ -37,7 +37,6 @@ const ACTIVIDAD_STATS = gql`
         count
       }
     }
-
     iniciado: actividad_aggregate(
       where: {
         hito_id: { _eq: $hitoId }
@@ -86,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HitoDetail = (props) => {
+const HitoDetail = () => {
   const { hitoId } = useParams();
   const classes = useStyles();
 
@@ -185,41 +184,46 @@ const HitoDetail = (props) => {
   );
 };
 
-const HitoHeader = ({ hito, refetch }) => {
-  const { data: stats = {} } = useQuery(ACTIVIDAD_STATS, {
+const HitoHeader = ({ hito, refetch: parentRefetch }) => {
+  const {
+    data: {
+      total: { aggregate: { count: total } = {} } = {},
+      ninguno: { aggregate: { count: ninguno } = {} } = {},
+      iniciado: { aggregate: { count: iniciado } = {} } = {},
+      completo: { aggregate: { count: completo } = {} } = {},
+      verificado: { aggregate: { count: verificado } = {} } = {},
+    } = {},
+    refetch: statsRefetch,
+  } = useQuery(ACTIVIDAD_STATS, {
     variables: {
       hitoId: hito.id,
     },
   });
 
-  const {
-    total: { aggregate: { count: total } = {} } = {},
-    ninguno: { aggregate: { count: ninguno } = {} } = {},
-    iniciado: { aggregate: { count: iniciado } = {} } = {},
-    completo: { aggregate: { count: completo } = {} } = {},
-    verificado: { aggregate: { count: verificado } = {} } = {},
-  } = stats;
+  const refetch = () => {
+    return Promise.all([parentRefetch(), statsRefetch()]);
+  };
 
-  const readings = stats && [
+  const readings = total && [
     {
-      name: 'Sin iniciar',
+      name: `${ninguno} Sin iniciar`,
       value: (ninguno / total) * 100,
-      color: '#ddd',
+      color: '#cccccc',
     },
     {
-      name: 'Iniciadas',
+      name: `${iniciado} Iniciadas`,
       value: (iniciado / total) * 100,
-      color: '#cacaca',
+      color: '#ffc107',
     },
     {
-      name: 'Completadas',
+      name: `${completo} Por verificar`,
       value: (completo / total) * 100,
-      color: '#cacaca',
+      color: '#afb42b',
     },
     {
-      name: 'Verificadas',
+      name: `${verificado} Verificadas`,
       value: (verificado / total) * 100,
-      color: '#cacaca',
+      color: '#388e3c',
     },
   ];
 
@@ -245,7 +249,11 @@ const HitoHeader = ({ hito, refetch }) => {
           onUpdate={refetch}
         >
           {!!hito.fecha_inicial && (
-            <Box style={{ display: 'inline-block' }}>
+            <Box
+              style={{
+                display: 'inline-block',
+              }}
+            >
               <CalendarIcon date={hito.fecha_inicial} />
               Inicio
             </Box>
@@ -258,7 +266,9 @@ const HitoHeader = ({ hito, refetch }) => {
           type="date"
           valueType="timestamptz"
           onUpdate={refetch}
-          style={{ display: 'inline-block' }}
+          style={{
+            display: 'inline-block',
+          }}
         >
           {!!hito.fecha_final && (
             <Box>

@@ -1,5 +1,6 @@
 .multicolor-bar {
-  margin: 20px 20%;
+  /* margin: 20px 20%; */
+  margin: 0 1em;
 }
 
 .multicolor-bar .values .value {
@@ -43,6 +44,6 @@
 }
 
 .multicolor-bar .legends .legend .label {
-  margin-left: 2px;
+  margin-left: 6px;
   vertical-align: middle;
 }
