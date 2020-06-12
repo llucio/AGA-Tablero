@@ -1,4 +1,5 @@
 import React from 'react';
+import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -28,6 +29,7 @@ const ESTATUSES = {
     icon: <DoneAllIcon />,
     title: 'verificado',
     fabClassName: 'lime darken-4 white-text',
+    siguiente: 'ninguno',
   },
 };
 
@@ -37,18 +39,26 @@ const EstatusTooltip = ({ actividad, refetch }) => {
   const { icon, title, fabClassName, siguiente } = ESTATUSES[estatus];
 
   const [executeChangeEstatus] = useMutation(gql`
-    mutation ChangeActiviadEstatus($id: uuid!, $estatus: String!) {
+    mutation ChangeActiviadEstatus($id: uuid!, $metadatos: jsonb!) {
       update_actividad(
         where: { id: { _eq: $id } }
-        _append: { metadatos: { estatus: $estatus } }
+        _append: { metadatos: $metadatos }
       ) {
         affected_rows
       }
     }
   `);
 
+  console.log(actividad.id);
   const handleChangeEstatus = (newEstatus) => {
-    executeChangeEstatus({ id: actividad.id, estatus: newEstatus })
+    executeChangeEstatus({
+      variables: {
+        id: actividad.id,
+        metadatos: {
+          estatus: newEstatus,
+        },
+      },
+    })
       .then(() => {
         // El estatus se actualizó correctamente, recargar datos
         refetch();
