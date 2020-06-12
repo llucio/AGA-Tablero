@@ -59,19 +59,6 @@ const MedioVerificacionList = ({ actividad }) => {
         {(mediosVerificacion || []).map(
           ({ id, archivos: [url] = [], titulo, fecha_creacion }) => (
             <Box key={`mv-${id}`}>
-              <Image
-                cloudName="gobmx"
-                publicId={url.replace(storagePrefix, 'storage/')}
-                style={{ padding: '0 0.5em' }}
-              >
-                <Transformation
-                  width="70"
-                  height="70"
-                  radius="max"
-                  effect="sharpen"
-                  crop="thumb"
-                />
-              </Image>
               <div>
                 <Link target="_blank" href={url} color="inherit">
                   {titulo}
