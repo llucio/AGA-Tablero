@@ -13,9 +13,9 @@ const HitoList = ({ where }) => {
     LIST_QUERY,
     {
       variables: {
-        where
+        where,
       },
-      fetchPolicy: 'cache-and-network'
+      fetchPolicy: 'cache-and-network',
     }
   );
 
@@ -34,7 +34,7 @@ const HitoList = ({ where }) => {
           direction: 'row',
           justify: 'space-between',
           alignItems: 'flex-start',
-          container: true
+          container: true,
         }}
         refetch={refetch}
         axis="y"

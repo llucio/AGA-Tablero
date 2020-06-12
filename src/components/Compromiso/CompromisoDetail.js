@@ -227,9 +227,12 @@ const CompromisoDetail = () => {
                 </Box>
               </Grid>
               <Grid item xs={12}>
-                {compromiso && (
-                  <CompromisosPieChart compromisoId={compromiso.id} />
-                )}
+                <Box>
+                  <h4>Progreso del compromiso</h4>
+                  {compromiso && (
+                    <CompromisosPieChart compromisoId={compromiso.id} />
+                  )}
+                </Box>
               </Grid>
             </Grid>
             <Box className={classes.descripcion}>
