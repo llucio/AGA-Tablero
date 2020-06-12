@@ -109,36 +109,38 @@ const HitoDetail = () => {
           <HitoHeader hito={hito} refetch={refetch} />
         </Grid>
 
-        <Grid spacing={1}>
-          <h5>
-            <strong>Descripción/objetivo de la acción clave</strong>
-          </h5>
-          <Editable
-            html
-            item={hito}
-            path="metadatos.descripcion"
-            label="Descripción"
-            onUpdate={refetch}
-          >
-            <DataDisplay data={hito.metadatos?.descripcion} />
-          </Editable>
-
-          <h5>
-            <strong>Responsables</strong>
-          </h5>
-
-          <Editable
-            html
-            item={hito}
-            path="metadatos.institucionesResponsables"
-            label="Instituciones responsables"
-            onUpdate={refetch}
-          >
-            <DataDisplay
-              className="d-block"
-              data={hito.metadatos?.institucionesResponsables}
-            />
-          </Editable>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={8}>
+            <h5>
+              <strong>Descripción/objetivo de la acción clave</strong>
+            </h5>
+            <Editable
+              html
+              item={hito}
+              path="metadatos.descripcion"
+              label="Descripción"
+              onUpdate={refetch}
+            >
+              <DataDisplay data={hito.metadatos?.descripcion} />
+            </Editable>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <h5>
+              <strong>Responsables</strong>
+            </h5>
+            <Editable
+              html
+              item={hito}
+              path="metadatos.institucionesResponsables"
+              label="Instituciones responsables"
+              onUpdate={refetch}
+            >
+              <DataDisplay
+                className="d-block"
+                data={hito.metadatos?.institucionesResponsables}
+              />
+            </Editable>
+          </Grid>
         </Grid>
         <Box className="pt-3">
           <h3>Discusión y comentarios</h3>
@@ -147,38 +149,6 @@ const HitoDetail = () => {
         </Box>
 
         <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
-
-        {/* <Box className="grey lighten-4" style={{ height: '500px' }}>
-          <Svg width={400} height={400}>
-            <Chord
-              data={[
-                [11975, 5871, 8916, 2868],
-                [1951, 10048, 2060, 6171],
-                [8010, 16145, 8090, 8045],
-                [1013, 990, 940, 6907]
-              ]}
-              animate
-              nodeEnter={d => ({
-                ...d,
-                sourceStartAngle: d.sourceEndAngle,
-                targetStartAngle: d.targetEndAngle
-              })}
-            >
-              {nodes =>
-                nodes.map((node, i) => (
-                  <Ribbon
-                    {...node}
-                    fill="black"
-                    stroke="black"
-                    fillOpacity={0.9}
-                    radius={500 * 0.4}
-                    transform={{ translate: [200, 200] }}
-                  />
-                ))
-              }
-            </Chord>
-          </Svg>
-        </Box> */}
       </Box>
     </div>
   );
@@ -206,24 +176,32 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
 
   const readings = total && [
     {
-      name: `${ninguno} Sin iniciar`,
-      value: (ninguno / total) * 100,
-      color: '#cccccc',
+      name: `${verificado} ${
+        verificado > 1 ? 'actividades verificadas' : 'actividad verificada'
+      }`,
+      value: (verificado / total) * 100,
+      color: '#388e3c',
     },
     {
-      name: `${iniciado} Iniciadas`,
-      value: (iniciado / total) * 100,
-      color: '#ffc107',
-    },
-    {
-      name: `${completo} Por verificar`,
+      name: `${completo} ${
+        completo > 1 ? 'actividades por ferificar' : 'actividad por verificar'
+      }`,
       value: (completo / total) * 100,
       color: '#afb42b',
     },
     {
-      name: `${verificado} Verificadas`,
-      value: (verificado / total) * 100,
-      color: '#388e3c',
+      name: `${iniciado} ${
+        iniciado > 1 ? 'actividades iniciadas' : 'actividad iniciada'
+      }`,
+      value: (iniciado / total) * 100,
+      color: '#ffc107',
+    },
+    {
+      name: `${ninguno} ${
+        ninguno > 1 ? 'actividades' : 'actividad'
+      } sin iniciar`,
+      value: (ninguno / total) * 100,
+      color: '#cccccc',
     },
   ];
 
@@ -280,9 +258,9 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
       </Grid>
 
       <Grid container>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={12}>
           <MultiColorProgressBar readings={readings} />
-          <Box className="progress mt-2">
+          {/* <Box className="progress mt-2">
             <Box
               className="progress-bar-dark light-green w-{"
               role="progressbar"
@@ -290,9 +268,9 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
               aria-valuemin="10"
               aria-valuemax="100"
             />
-          </Box>
+          </Box> */}
         </Grid>
-        <Grid item xs={12} sm={4}>
+        {/* <Grid item xs={12} sm={4}>
           <Editable
             item={hito}
             path="ponderacion"
@@ -305,7 +283,7 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
             <Box>Ponderación: {hito.ponderacion}%</Box>
             <br className="clearfix" />
           </Editable>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Grid>
   );
