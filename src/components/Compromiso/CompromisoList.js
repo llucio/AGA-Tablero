@@ -126,11 +126,11 @@ const CompromisoList = ({ where }) => {
           <hr className="line" />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <div>Total: {total}</div>
+          {/* <div>Total: {total}</div>
           <div>Iniciados: {ninguno}</div>
           <div>Iniciados: {iniciado}</div>
           <div>Iniciados: {completo}</div>
-          <div>Iniciados: {verificado}</div>
+          <div>Iniciados: {verificado}</div> */}
         </Grid>
         <Grid item xs={12} sm={4} align="right">
           <Editable
