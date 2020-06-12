@@ -1,4 +1,5 @@
 import React from 'react';
+import gql from 'graphql-tag';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
@@ -12,24 +13,80 @@ import CalendarIcon from '../CalendarIcon';
 import ActividadTable from '../Actividad/ActividadTable';
 import Conversacion from '../Conversacion/Conversacion';
 
+import MultiColorProgressBar from '../MultiColorProgressBar';
+
 const GET_QUERY = loader('../../queries/HitoGet.graphql');
 
-const useStyles = makeStyles(theme => ({
+const ACTIVIDAD_STATS = gql`
+  query HitoStats($hitoId: uuid!) {
+    total: actividad_aggregate(where: { hito_id: { _eq: $hitoId } }) {
+      aggregate {
+        count
+      }
+    }
+    ninguno: actividad_aggregate(
+      where: {
+        hito_id: { _eq: $hitoId }
+        _or: [
+          { metadatos: { _contains: { estatus: "ninguno" } } }
+          { _not: { metadatos: { _has_key: "estatus" } } }
+        ]
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+
+    iniciado: actividad_aggregate(
+      where: {
+        hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "iniciado" } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    completo: actividad_aggregate(
+      where: {
+        hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "completo" } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    verificado: actividad_aggregate(
+      where: {
+        hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "verificado" } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
+const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(3, 0)
+    margin: theme.spacing(3, 0),
   },
   header: {
-    marginBottom: '2em'
+    marginBottom: '2em',
   },
   paper: {
     padding: theme.spacing(1),
     margin: theme.spacing(1, 0),
     textAlign: 'center',
-    color: theme.palette.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 }));
 
-const HitoDetail = props => {
+const HitoDetail = (props) => {
   const { hitoId } = useParams();
   const classes = useStyles();
 
@@ -37,8 +94,8 @@ const HitoDetail = props => {
     GET_QUERY,
     {
       variables: {
-        id: hitoId
-      }
+        id: hitoId,
+      },
     }
   );
 
@@ -128,80 +185,120 @@ const HitoDetail = props => {
   );
 };
 
-const HitoHeader = ({ hito, refetch }) => (
-  <Grid container spacing={1}>
-    <Grid item xs={12} md={8}>
-      <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-        <h2 className="bold">{hito.titulo}</h2>
-      </Editable>
-    </Grid>
-    <Grid
-      item
-      xs={12}
-      md={4}
-      className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase extra-bold text-center"
-    >
-      <Editable
-        item={hito}
-        path="fecha_inicial"
-        label="Fecha inicial"
-        type="date"
-        valueType="timestamptz"
-        onUpdate={refetch}
-      >
-        {!!hito.fecha_inicial && (
-          <Box style={{ display: 'inline-block' }}>
-            <CalendarIcon date={hito.fecha_inicial} />
-            Inicio
-          </Box>
-        )}
-      </Editable>
-      <Editable
-        item={hito}
-        path="fecha_final"
-        label="Fecha final"
-        type="date"
-        valueType="timestamptz"
-        onUpdate={refetch}
-        style={{ display: 'inline-block' }}
-      >
-        {!!hito.fecha_final && (
-          <Box>
-            <CalendarIcon date={hito.fecha_final} />
-            Fin
-          </Box>
-        )}
-      </Editable>
-    </Grid>
+const HitoHeader = ({ hito, refetch }) => {
+  const { data: stats = {} } = useQuery(ACTIVIDAD_STATS, {
+    variables: {
+      hitoId: hito.id,
+    },
+  });
 
-    <Grid container>
-      <Grid item xs={12} sm={8}>
-        <Box className="progress mt-2">
-          <Box
-            className="progress-bar-dark light-green w-0"
-            role="progressbar"
-            aria-valuenow="40"
-            aria-valuemin="10"
-            aria-valuemax="100"
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <Editable
-          item={hito}
-          path="ponderacion"
-          label="Ponderación"
-          valueType="Float"
-          onUpdate={() => {
-            refetch();
-          }}
-        >
-          <Box>Ponderación: {hito.ponderacion}%</Box>
-          <br className="clearfix" />
+  const {
+    total: { aggregate: { count: total } = {} } = {},
+    ninguno: { aggregate: { count: ninguno } = {} } = {},
+    iniciado: { aggregate: { count: iniciado } = {} } = {},
+    completo: { aggregate: { count: completo } = {} } = {},
+    verificado: { aggregate: { count: verificado } = {} } = {},
+  } = stats;
+
+  const readings = stats && [
+    {
+      name: 'Sin iniciar',
+      value: (ninguno / total) * 100,
+      color: '#ddd',
+    },
+    {
+      name: 'Iniciadas',
+      value: (iniciado / total) * 100,
+      color: '#cacaca',
+    },
+    {
+      name: 'Completadas',
+      value: (completo / total) * 100,
+      color: '#cacaca',
+    },
+    {
+      name: 'Verificadas',
+      value: (verificado / total) * 100,
+      color: '#cacaca',
+    },
+  ];
+
+  return (
+    <Grid container spacing={1}>
+      <Grid item xs={12} md={8}>
+        <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
+          <h2 className="bold">{hito.titulo}</h2>
         </Editable>
       </Grid>
+      <Grid
+        item
+        xs={12}
+        md={4}
+        className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase extra-bold text-center"
+      >
+        <Editable
+          item={hito}
+          path="fecha_inicial"
+          label="Fecha inicial"
+          type="date"
+          valueType="timestamptz"
+          onUpdate={refetch}
+        >
+          {!!hito.fecha_inicial && (
+            <Box style={{ display: 'inline-block' }}>
+              <CalendarIcon date={hito.fecha_inicial} />
+              Inicio
+            </Box>
+          )}
+        </Editable>
+        <Editable
+          item={hito}
+          path="fecha_final"
+          label="Fecha final"
+          type="date"
+          valueType="timestamptz"
+          onUpdate={refetch}
+          style={{ display: 'inline-block' }}
+        >
+          {!!hito.fecha_final && (
+            <Box>
+              <CalendarIcon date={hito.fecha_final} />
+              Fin
+            </Box>
+          )}
+        </Editable>
+      </Grid>
+
+      <Grid container>
+        <Grid item xs={12} sm={8}>
+          <MultiColorProgressBar readings={readings} />
+          <Box className="progress mt-2">
+            <Box
+              className="progress-bar-dark light-green w-{"
+              role="progressbar"
+              aria-valuenow="40"
+              aria-valuemin="10"
+              aria-valuemax="100"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Editable
+            item={hito}
+            path="ponderacion"
+            label="Ponderación"
+            valueType="Float"
+            onUpdate={() => {
+              refetch();
+            }}
+          >
+            <Box>Ponderación: {hito.ponderacion}%</Box>
+            <br className="clearfix" />
+          </Editable>
+        </Grid>
+      </Grid>
     </Grid>
-  </Grid>
-);
+  );
+};
 
 export default HitoDetail;

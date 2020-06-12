@@ -8,18 +8,18 @@ const ESTATUSES = {
   ninguno: {
     icon: <DoneIcon />,
     title: 'Por iniciar',
-    fabClassName: 'grey lighten-2 white-text'
+    fabClassName: 'grey lighten-2 white-text',
   },
   iniciado: {
     icon: <DoneAllIcon />,
     title: 'En proceso',
-    fabClassName: 'amber white-text'
+    fabClassName: 'amber white-text',
   },
   completo: {
     icon: <DoneAllIcon />,
     title: 'Completo',
-    fabClassName: 'lime darken-2 white-text'
-  }
+    fabClassName: 'lime darken-2 white-text',
+  },
 };
 
 const EstatusTooltip = ({ estatus = 'ninguno' }) => {

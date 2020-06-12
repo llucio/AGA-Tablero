@@ -21,36 +21,36 @@ import EstatusBadge from './EstatusBadge';
 
 const LIST_QUERY = loader('../../queries/ActividadList.graphql');
 
-const StyledTableCell = withStyles(theme => ({
+const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
-  }
+    color: theme.palette.common.white,
+  },
 }))(TableCell);
 
-const StyledTableRow = withStyles(theme => ({
+const StyledTableRow = withStyles((theme) => ({
   root: {
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default
-    }
-  }
+      backgroundColor: theme.palette.background.default,
+    },
+  },
 }))(TableRow);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   rootTable: {
     width: '100%',
     marginTop: theme.spacing(3),
-    overflowX: 'auto'
+    overflowX: 'auto',
   },
   table: {
-    minWidth: 700
+    minWidth: 700,
   },
   marginButton: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   mediosCell: {
-    minWidth: 400
-  }
+    minWidth: 400,
+  },
 }));
 
 const ActividadTable = ({ where }) => {
@@ -60,12 +60,12 @@ const ActividadTable = ({ where }) => {
     data: { items: actividades = [] } = {},
     loading,
     refetch,
-    error
+    error,
   } = useQuery(LIST_QUERY, {
     variables: {
-      where
+      where,
     },
-    fetchPolicy: 'cache-and-network'
+    fetchPolicy: 'cache-and-network',
   });
 
   if (error) return <div>Error</div>;
@@ -92,7 +92,7 @@ const ActividadTable = ({ where }) => {
           </TableHead>
 
           <TableBody>
-            {actividades.map(actividad => (
+            {actividades.map((actividad) => (
               <StyledTableRow key={actividad.id}>
                 <StyledTableCell component="th" scope="actividad">
                   <Editable
