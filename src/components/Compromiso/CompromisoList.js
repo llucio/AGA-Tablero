@@ -14,28 +14,49 @@ import Editable from '../Editable';
 import CompromisoCard from './CompromisoCard';
 
 const ACTIVIDAD_STATS = gql`
-  {
-    totales: actividad_aggregate {
+  query CompromisosStats {
+    total: actividad_aggregate {
       aggregate {
         count
       }
     }
-    iniciadas: actividad_aggregate(
-      where: { metadatos: { _contains: { estatus: "iniciado" } } }
+    ninguno: actividad_aggregate(
+      where: {
+        _or: [
+          { metadatos: { _contains: { estatus: "ninguno" } } }
+          { _not: { metadatos: { _has_key: "estatus" } } }
+        ]
+      }
     ) {
       aggregate {
         count
       }
     }
-    completos: actividad_aggregate(
-      where: { metadatos: { _contains: { estatus: "completo" } } }
+    iniciado: actividad_aggregate(
+      where: {
+        # hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "iniciado" } }
+      }
     ) {
       aggregate {
         count
       }
     }
-    verificados: actividad_aggregate(
-      where: { metadatos: { _contains: { estatus: "verificado" } } }
+    completo: actividad_aggregate(
+      where: {
+        # hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "completo" } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    verificado: actividad_aggregate(
+      where: {
+        # hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "verificado" } }
+      }
     ) {
       aggregate {
         count
@@ -82,6 +103,17 @@ const CompromisoList = ({ where }) => {
     fetchPolicy: 'cache-and-network',
   });
 
+  const {
+    data: {
+      total: { aggregate: { count: total } = {} } = {},
+      ninguno: { aggregate: { count: ninguno } = {} } = {},
+      iniciado: { aggregate: { count: iniciado } = {} } = {},
+      completo: { aggregate: { count: completo } = {} } = {},
+      verificado: { aggregate: { count: verificado } = {} } = {},
+    } = {},
+    refetch: statsRefetch,
+  } = useQuery(ACTIVIDAD_STATS);
+
   if (error) return <div>Error</div>;
   if (loading && !plan) return <LoadingIndicator />;
   if (!plan) return null;
@@ -89,11 +121,18 @@ const CompromisoList = ({ where }) => {
   return (
     <div className="vertical-margin-bottom">
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={7}>
+        <Grid item xs={12} sm={5}>
           <h2>Compromisos</h2>
           <hr className="line" />
         </Grid>
-        <Grid item xs={12} sm={5} align="right">
+        <Grid item xs={12} sm={3}>
+          <div>Total: {total}</div>
+          <div>Iniciados: {ninguno}</div>
+          <div>Iniciados: {iniciado}</div>
+          <div>Iniciados: {completo}</div>
+          <div>Iniciados: {verificado}</div>
+        </Grid>
+        <Grid item xs={12} sm={4} align="right">
           <Editable
             upload
             item={plan}

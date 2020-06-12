@@ -45,9 +45,6 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 700,
   },
-  marginButton: {
-    // margin: theme.spacing(1),
-  },
   mediosCell: {
     minWidth: 300,
   },

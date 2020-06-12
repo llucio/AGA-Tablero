@@ -66,36 +66,12 @@ const MultiColorProgressBar = ({ readings = [] }) => {
 
   return (
     <div className="multicolor-bar">
-      {values && <div className="values">{values}</div>}
-
-      <div className="scale">{calibrations == '' ? '' : calibrations}</div>
-      <div className="bars">{bars == '' ? '' : bars}</div>
-      <div className="legends">{legends == '' ? '' : legends}</div>
+      <div className="values">{values}</div>
+      <div className="scale">{calibrations}</div>
+      <div className="bars">{bars}</div>
+      <div className="legends">{legends}</div>
     </div>
   );
 };
 
 export default MultiColorProgressBar;
-
-// let readings = [
-//   {
-//     name: 'Apples',
-//     value: 60,
-//     color: '#eb4d4b',
-//   },
-//   {
-//     name: 'Blueberries',
-//     value: 7,
-//     color: '#22a6b3',
-//   },
-//   {
-//     name: 'Guavas',
-//     value: 23,
-//     color: '#6ab04c',
-//   },
-//   {
-//     name: 'Grapes',
-//     value: 10,
-//     color: '#e056fd',
-//   },
-// ];

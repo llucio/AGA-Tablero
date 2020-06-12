@@ -1,5 +1,4 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
@@ -34,50 +33,9 @@ import DataDisplay from '../DataDisplay';
 import LoadingIndicator from '../LoadingIndicator';
 import HitoList from '../Hito/HitoList.js';
 import Conversacion from '../Conversacion/Conversacion';
+import CompromisosPieChart from './CompromisosPieChart';
 
 const GET_QUERY = loader('../../queries/CompromisoGetBySlug.graphql');
-
-const ACTIVIDAD_STATS = gql`
-  query CompromisoStats($compromisoId: uuid!) {
-    totales: actividad_aggregate(
-      where: { hito: { compromiso_id: $compromisoId } }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    iniciadas: actividad_aggregate(
-      where: {
-        hito: { compromiso_id: $compromisoId }
-        metadatos: { _contains: { estatus: "iniciado" } }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    completos: actividad_aggregate(
-      where: {
-        hito: { compromiso_id: $compromisoId }
-        metadatos: { _contains: { estatus: "completo" } }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    verificados: actividad_aggregate(
-      where: {
-        hito: { compromiso_id: $compromisoId }
-        metadatos: { _contains: { estatus: "verificado" } }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-  }
-`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -251,18 +209,29 @@ const CompromisoDetail = () => {
 
             <hr className="line" />
 
-            <Box className={classes.descripcion}>
-              <h4>¿Cuál es el compromiso?</h4>
-              <Editable
-                html
-                item={compromiso}
-                label="Descripción"
-                path="metadatos.descripcion"
-                onUpdate={refetch}
-              >
-                <DataDisplay data={compromiso.metadatos?.descripcion || ''} />
-              </Editable>
-            </Box>
+            <Grid container>
+              <Grid item xs={12}>
+                <Box className={classes.descripcion}>
+                  <h4>¿Cuál es el compromiso?</h4>
+                  <Editable
+                    html
+                    item={compromiso}
+                    label="Descripción"
+                    path="metadatos.descripcion"
+                    onUpdate={refetch}
+                  >
+                    <DataDisplay
+                      data={compromiso.metadatos?.descripcion || ''}
+                    />
+                  </Editable>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                {compromiso && (
+                  <CompromisosPieChart compromisoId={compromiso.id} />
+                )}
+              </Grid>
+            </Grid>
             <Box className={classes.descripcion}>
               <h4 className="mt-3">Dependencias responsables</h4>
               <Editable
