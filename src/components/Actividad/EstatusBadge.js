@@ -25,7 +25,7 @@ const ESTATUSES = {
     title: "Por iniciar",
     fabClassName: "grey lighten-2 white-text",
     siguiente: "iniciado",
-    anterior: " ",
+    anterior: "ninguno ",
   },
   iniciado: {
     icon: <DoneAllIcon />,
@@ -45,7 +45,7 @@ const ESTATUSES = {
     icon: <DoneAllIcon />,
     title: "verificado",
     fabClassName: "lime darken-4 white-text",
-    siguiente: " ",
+    siguiente: "verificado",
     anterior: "completo",
   },
 };
@@ -101,19 +101,22 @@ const EstatusTooltip = ({ actividad, refetch }) => {
         </Fab>
       </Tooltip>
 
-      <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+      <ButtonGroup 
+        variant="text" 
+        color="primary" 
+        aria-label="text primary button group"
+      >
         <Button
-              color="secondary"
-              size="small"
-              onClick={() => {
-                if (anterior) {
-                  handleChangeEstatus(anterior);
-                }
-              }}
-              disabled={title === "Por iniciar"}
+            color="secondary"
+            size="small"
+            onClick={() => {
+              if (anterior) {
+                handleChangeEstatus(anterior);
+              }
+            }}
+            disabled={title === "Por iniciar"}
         >{anterior}</Button>
         
-
         <Button
             color="primary"
             size="small"
