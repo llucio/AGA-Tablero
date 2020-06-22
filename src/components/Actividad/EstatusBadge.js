@@ -1,20 +1,28 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
+import PrevIcon from '@material-ui/icons/SkipPrevious';
+import NextIcon from '@material-ui/icons/SkipNext';
 import DoneIcon from '@material-ui/icons/Done';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import Chip from '@material-ui/core/Chip';
+import Fab from '@material-ui/core/Fab';
+import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-
 import { makeStyles } from '@material-ui/core/styles';
+import { useAuth } from '../../hooks';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: 150,
-    height: 50,
+    height: '100px',
+    padding: '10px',
+    margin: '10px',
+  },
+  margin: {
+    margin: '10px',
   },
 }));
 
@@ -24,7 +32,6 @@ const ESTATUSES = {
     title: 'Por iniciar',
     fabClassName: 'grey lighten-2 white-text',
     siguiente: 'iniciado',
-    anterior: 'ninguno',
   },
   iniciado: {
     icon: <DoneAllIcon />,
@@ -42,19 +49,19 @@ const ESTATUSES = {
   },
   verificado: {
     icon: <DoneAllIcon />,
-    title: 'verificado',
+    title: 'Verificado',
     fabClassName: 'lime darken-4 white-text',
-    siguiente: 'verificado',
     anterior: 'completo',
   },
 };
 
 const EstatusTooltip = ({ actividad, refetch }) => {
+  const { isAdministrador } = useAuth();
   const classes = useStyles();
-  const estatus = actividad.metadatos.estatus || 'ninguno';
+  const estatus = actividad.metadatos?.estatus || 'ninguno';
   const { icon, title, fabClassName, siguiente, anterior } = ESTATUSES[estatus];
 
-  const [executeChangeEstatus] = useMutation(gql`
+  const [executeChangeEstatus, { loading: mutationLoading }] = useMutation(gql`
     mutation ChangeActiviadEstatus($id: uuid!, $metadatos: jsonb!) {
       update_actividad(
         where: { id: { _eq: $id } }
@@ -65,9 +72,7 @@ const EstatusTooltip = ({ actividad, refetch }) => {
     }
   `);
 
-  //console.log(actividad.id);
   const handleChangeEstatus = (newEstatus) => {
-    console.log('newEstatus: ' + newEstatus);
     executeChangeEstatus({
       variables: {
         id: actividad.id,
@@ -77,59 +82,83 @@ const EstatusTooltip = ({ actividad, refetch }) => {
       },
     })
       .then(() => {
-        // El estatus se actualizó correctamente, recargar datos
-        refetch();
+        refetch(); // El estatus se actualizó correctamente, recargar datos
       })
       .catch((err) => {
-        console.error('Ocurrió error al cambiar estatus: ', err);
+        console.error('Error al cambiar estatus: ', err);
       });
   };
 
   return (
-    <div className={classes.root}>
-      <Tooltip title={title} placement="top">
-        <Fab
-          size="small"
-          aria-label="status"
-          style={{ margin: '10px' }}
-          className={fabClassName}
-        >
-          {icon}
-        </Fab>
-      </Tooltip>
+    <Box className={classes.root}>
+      <Box className={classes.margin}>
+        <Chip size="small" label={title} className={fabClassName} />
+      </Box>
 
-      <ButtonGroup
-        variant="text"
-        color="primary"
-        aria-label="text primary button group"
-      >
-        <Button
-          color="secondary"
-          size="small"
-          onClick={() => {
-            if (anterior) {
-              handleChangeEstatus(anterior);
-            }
-          }}
-          disabled={title === 'Por iniciar'}
-        >
-          {anterior}
-        </Button>
+      <Fab size="small" aria-label={title} className={fabClassName}>
+        {icon}
+      </Fab>
 
-        <Button
-          color="primary"
-          size="small"
-          onClick={() => {
-            if (siguiente) {
-              handleChangeEstatus(siguiente);
-            }
-          }}
-          disabled={title === 'verificado'}
-        >
-          {siguiente}
-        </Button>
-      </ButtonGroup>
-    </div>
+      <Box className={classes.margin}>
+        {isAdministrador && (
+          <ButtonGroup
+            variant="text"
+            color="primary"
+            aria-label="text primary button group"
+          >
+            <Tooltip
+              placement="top"
+              title={
+                mutationLoading
+                  ? 'Espere un momento...'
+                  : anterior
+                  ? `Retroceder a: ${ESTATUSES[anterior].title}`
+                  : ''
+              }
+            >
+              <Button
+                color="secondary"
+                size="small"
+                disabled={mutationLoading || !anterior}
+                startIcon={<PrevIcon />}
+                onClick={() => {
+                  if (anterior) {
+                    handleChangeEstatus(anterior);
+                  }
+                }}
+              >
+                Retroceder
+              </Button>
+            </Tooltip>
+
+            <Tooltip
+              placement="top"
+              title={
+                mutationLoading
+                  ? 'Espere un momento...'
+                  : siguiente
+                  ? `Avanzar a: ${ESTATUSES[siguiente].title}`
+                  : ''
+              }
+            >
+              <Button
+                color="secondary"
+                size="small"
+                disabled={mutationLoading || !siguiente}
+                endIcon={<NextIcon />}
+                onClick={() => {
+                  if (siguiente) {
+                    handleChangeEstatus(siguiente);
+                  }
+                }}
+              >
+                Avanzar
+              </Button>
+            </Tooltip>
+          </ButtonGroup>
+        )}
+      </Box>
+    </Box>
   );
 };
 
