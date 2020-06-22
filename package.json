@@ -37,7 +37,7 @@
     "html-to-draftjs": "^1.4.0",
     "immutable": "^4.0.0-rc.12",
     "jsonwebtoken": "^8.5.1",
-    "keycloak-js": "^9.0.0",
+    "keycloak-js": "^10.0.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",

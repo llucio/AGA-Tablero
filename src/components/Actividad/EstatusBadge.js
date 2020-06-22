@@ -1,10 +1,27 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
+import PrevIcon from '@material-ui/icons/SkipPrevious';
+import NextIcon from '@material-ui/icons/SkipNext';
 import DoneIcon from '@material-ui/icons/Done';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { makeStyles } from '@material-ui/core/styles';
+import { useAuth } from '../../hooks';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  margin: {
+    margin: '5px auto',
+  },
+}));
 
 const ESTATUSES = {
   ninguno: {
@@ -18,27 +35,32 @@ const ESTATUSES = {
     title: 'En proceso',
     fabClassName: 'amber white-text',
     siguiente: 'completo',
+    anterior: 'ninguno',
   },
   completo: {
     icon: <DoneAllIcon />,
     title: 'Completo',
     fabClassName: 'lime darken-2 white-text',
     siguiente: 'verificado',
+    anterior: 'iniciado',
   },
   verificado: {
     icon: <DoneAllIcon />,
-    title: 'verificado',
-    fabClassName: 'green darken-2 white-text',
-    siguiente: 'ninguno',
+    title: 'Verificado',
+    fabClassName: 'lime darken-4 white-text',
+    anterior: 'completo',
   },
 };
 
+const loadingClassName = 'grey lighten-2 white-text';
+
 const EstatusTooltip = ({ actividad, refetch }) => {
-  const estatus = actividad.metadatos.estatus || 'ninguno';
+  const { isAdministrador } = useAuth();
+  const classes = useStyles();
+  const estatus = actividad.metadatos?.estatus || 'ninguno';
+  const { icon, title, fabClassName, siguiente, anterior } = ESTATUSES[estatus];
 
-  const { icon, title, fabClassName, siguiente } = ESTATUSES[estatus];
-
-  const [executeChangeEstatus] = useMutation(gql`
+  const [executeChangeEstatus, { loading: mutationLoading }] = useMutation(gql`
     mutation ChangeActiviadEstatus($id: uuid!, $metadatos: jsonb!) {
       update_actividad(
         where: { id: { _eq: $id } }
@@ -49,7 +71,6 @@ const EstatusTooltip = ({ actividad, refetch }) => {
     }
   `);
 
-  console.log(actividad.id);
   const handleChangeEstatus = (newEstatus) => {
     executeChangeEstatus({
       variables: {
@@ -60,32 +81,93 @@ const EstatusTooltip = ({ actividad, refetch }) => {
       },
     })
       .then(() => {
-        // El estatus se actualizó correctamente, recargar datos
-        refetch();
+        refetch(); // El estatus se actualizó correctamente, recargar datos
       })
       .catch((err) => {
-        console.error('Ocurrió error al cambiar estatus: ', err);
+        console.error('Error al cambiar estatus: ', err);
       });
   };
 
   return (
-    <div>
-      <Tooltip title={title} placement="right">
-        <Fab
+    <Box className={classes.root}>
+      <Box className={classes.margin}>
+        <Chip
           size="small"
-          aria-label="status"
-          style={{ margin: '5px' }}
-          className={fabClassName}
-          onClick={() => {
-            if (siguiente) {
-              handleChangeEstatus(siguiente);
-            }
-          }}
+          label={title}
+          className={mutationLoading ? loadingClassName : fabClassName}
+        />
+      </Box>
+
+      <Box className={classes.margin}>
+        <Avatar
+          alt={title}
+          className={mutationLoading ? loadingClassName : fabClassName}
+          style={{ margin: '0 auto' }}
         >
           {icon}
-        </Fab>
-      </Tooltip>
-    </div>
+        </Avatar>
+      </Box>
+
+      {isAdministrador && (
+        <Box className={classes.margin}>
+          <ButtonGroup
+            variant="text"
+            color="primary"
+            aria-label="text primary button group"
+          >
+            <Tooltip
+              placement="top"
+              title={
+                mutationLoading
+                  ? 'Espere un momento...'
+                  : anterior
+                  ? `Retroceder a: ${ESTATUSES[anterior].title}`
+                  : ''
+              }
+            >
+              <Button
+                color="secondary"
+                size="small"
+                disabled={mutationLoading || !anterior}
+                startIcon={<PrevIcon />}
+                onClick={() => {
+                  if (anterior) {
+                    handleChangeEstatus(anterior);
+                  }
+                }}
+              >
+                Retroceder
+              </Button>
+            </Tooltip>
+
+            <Tooltip
+              placement="top"
+              title={
+                mutationLoading
+                  ? 'Espere un momento...'
+                  : siguiente
+                  ? `Avanzar a: ${ESTATUSES[siguiente].title}`
+                  : ''
+              }
+            >
+              <Button
+                color="secondary"
+                size="small"
+                disabled={mutationLoading || !siguiente}
+                endIcon={<NextIcon />}
+                onClick={() => {
+                  if (siguiente) {
+                    handleChangeEstatus(siguiente);
+                  }
+                }}
+              >
+                Avanzar
+              </Button>
+            </Tooltip>
+          </ButtonGroup>
+        </Box>
+      )}
+    </Box>
   );
 };
 
