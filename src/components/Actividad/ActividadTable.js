@@ -14,11 +14,6 @@ import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 import EstatusBadge from './EstatusBadge';
 
-// import AvTimerIcon from '@material-ui/icons/AvTimer';
-// import BatteryCharging60Icon from '@material-ui/icons/BatteryCharging60';
-// import BatteryCharging20Icon from '@material-ui/icons/BatteryCharging20';
-// import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
-
 const LIST_QUERY = loader('../../queries/ActividadList.graphql');
 
 const StyledTableCell = withStyles((theme) => ({
@@ -73,7 +68,6 @@ const ActividadTable = ({ where }) => {
     <div className="vertical-margin table-actividad">
       <Box className={classes.rootTable}>
         <Table
-          responsive
           stickyHeader
           className={classes.table}
           aria-label="Lista de actividades"
