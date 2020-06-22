@@ -6,7 +6,7 @@ import NextIcon from '@material-ui/icons/SkipNext';
 import DoneIcon from '@material-ui/icons/Done';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import Chip from '@material-ui/core/Chip';
-import Fab from '@material-ui/core/Fab';
+import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
@@ -17,12 +17,9 @@ import { useAuth } from '../../hooks';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    height: '100px',
-    padding: '10px',
-    margin: '10px',
   },
   margin: {
-    margin: '10px',
+    margin: '5px auto',
   },
 }));
 
@@ -54,6 +51,8 @@ const ESTATUSES = {
     anterior: 'completo',
   },
 };
+
+const loadingClassName = 'grey lighten-2 white-text';
 
 const EstatusTooltip = ({ actividad, refetch }) => {
   const { isAdministrador } = useAuth();
@@ -92,15 +91,25 @@ const EstatusTooltip = ({ actividad, refetch }) => {
   return (
     <Box className={classes.root}>
       <Box className={classes.margin}>
-        <Chip size="small" label={title} className={fabClassName} />
+        <Chip
+          size="small"
+          label={title}
+          className={mutationLoading ? loadingClassName : fabClassName}
+        />
       </Box>
 
-      <Fab size="small" aria-label={title} className={fabClassName}>
-        {icon}
-      </Fab>
-
       <Box className={classes.margin}>
-        {isAdministrador && (
+        <Avatar
+          alt={title}
+          className={mutationLoading ? loadingClassName : fabClassName}
+          style={{ margin: '0 auto' }}
+        >
+          {icon}
+        </Avatar>
+      </Box>
+
+      {isAdministrador && (
+        <Box className={classes.margin}>
           <ButtonGroup
             variant="text"
             color="primary"
@@ -156,8 +165,8 @@ const EstatusTooltip = ({ actividad, refetch }) => {
               </Button>
             </Tooltip>
           </ButtonGroup>
-        )}
-      </Box>
+        </Box>
+      )}
     </Box>
   );
 };
