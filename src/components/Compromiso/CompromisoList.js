@@ -1,4 +1,5 @@
 import React from 'react';
+import gql from 'graphql-tag';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -12,25 +13,77 @@ import Editable from '../Editable';
 
 import CompromisoCard from './CompromisoCard';
 
-const useStyles = makeStyles(theme => ({
+const ACTIVIDAD_STATS = gql`
+  query CompromisosStats {
+    total: actividad_aggregate {
+      aggregate {
+        count
+      }
+    }
+    ninguno: actividad_aggregate(
+      where: {
+        _or: [
+          { metadatos: { _contains: { estatus: "ninguno" } } }
+          { _not: { metadatos: { _has_key: "estatus" } } }
+        ]
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    iniciado: actividad_aggregate(
+      where: {
+        # hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "iniciado" } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    completo: actividad_aggregate(
+      where: {
+        # hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "completo" } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    verificado: actividad_aggregate(
+      where: {
+        # hito_id: { _eq: $hitoId }
+        metadatos: { _contains: { estatus: "verificado" } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
+const useStyles = makeStyles((theme) => ({
   margin: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   extendedIcon: {
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
 }));
 
-const AgaTooltip = withStyles(theme => ({
+const AgaTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.black,
     color: 'rgba(250, 250, 250, 0.87)',
     boxShadow: theme.shadows[1],
-    fontSize: 13
+    fontSize: 13,
   },
   arrow: {
-    color: theme.palette.common.black
-  }
+    color: theme.palette.common.black,
+  },
 }))(Tooltip);
 
 const LIST_QUERY = loader('../../queries/CompromisoList.graphql');
@@ -42,13 +95,24 @@ const CompromisoList = ({ where }) => {
     data: { plan: [plan] = [] } = {},
     loading,
     error,
-    refetch
+    refetch,
   } = useQuery(LIST_QUERY, {
     variables: {
-      compromisosWhere: where
+      compromisosWhere: where,
     },
-    fetchPolicy: 'cache-and-network'
+    fetchPolicy: 'cache-and-network',
   });
+
+  const {
+    data: {
+      total: { aggregate: { count: total } = {} } = {},
+      ninguno: { aggregate: { count: ninguno } = {} } = {},
+      iniciado: { aggregate: { count: iniciado } = {} } = {},
+      completo: { aggregate: { count: completo } = {} } = {},
+      verificado: { aggregate: { count: verificado } = {} } = {},
+    } = {},
+    refetch: statsRefetch,
+  } = useQuery(ACTIVIDAD_STATS);
 
   if (error) return <div>Error</div>;
   if (loading && !plan) return <LoadingIndicator />;
@@ -57,11 +121,18 @@ const CompromisoList = ({ where }) => {
   return (
     <div className="vertical-margin-bottom">
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={7}>
+        <Grid item xs={12} sm={5}>
           <h2>Compromisos</h2>
           <hr className="line" />
         </Grid>
-        <Grid item xs={12} sm={5} align="right">
+        <Grid item xs={12} sm={3}>
+          {/* <div>Total: {total}</div>
+          <div>Iniciados: {ninguno}</div>
+          <div>Iniciados: {iniciado}</div>
+          <div>Iniciados: {completo}</div>
+          <div>Iniciados: {verificado}</div> */}
+        </Grid>
+        <Grid item xs={12} sm={4} align="right">
           <Editable
             upload
             item={plan}
@@ -103,7 +174,7 @@ const CompromisoList = ({ where }) => {
           direction: 'row',
           justify: 'space-between',
           alignItems: 'flex-start',
-          container: true
+          container: true,
         }}
         axis="xy"
       />

@@ -33,56 +33,57 @@ import DataDisplay from '../DataDisplay';
 import LoadingIndicator from '../LoadingIndicator';
 import HitoList from '../Hito/HitoList.js';
 import Conversacion from '../Conversacion/Conversacion';
+import CompromisosPieChart from './CompromisosPieChart';
 
 const GET_QUERY = loader('../../queries/CompromisoGetBySlug.graphql');
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   root_grid: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   institucion: {
-    padding: theme.spacing(0, 0, 6, 0)
+    padding: theme.spacing(0, 0, 6, 0),
   },
   extendedIcon: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   box_panel: {
-    padding: theme.spacing(5, 0, 10, 0)
+    padding: theme.spacing(5, 0, 10, 0),
   },
   panel: {
-    width: '100%'
+    width: '100%',
   },
   panel_heading: {
     fontSize: theme.typography.pxToRem(18),
     fontWeight: theme.typography.fontWeightBold,
-    width: '100%'
+    width: '100%',
   },
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   input: {
-    display: 'none'
+    display: 'none',
   },
   sticky: {
-    marginTop: '100px'
-  }
+    marginTop: '100px',
+  },
 }));
 
-const AgaTooltip = withStyles(theme => ({
+const AgaTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.black,
     color: 'rgba(250, 250, 250, 0.87)',
     boxShadow: theme.shadows[1],
-    fontSize: 13
+    fontSize: 13,
   },
   arrow: {
-    color: theme.palette.common.black
-  }
+    color: theme.palette.common.black,
+  },
 }))(Tooltip);
 
 const CompromisoDetail = () => {
@@ -93,11 +94,11 @@ const CompromisoDetail = () => {
     data: { item: [compromiso] = [] } = {},
     loading,
     error,
-    refetch
+    refetch,
   } = useQuery(GET_QUERY, {
     variables: {
-      id: compromisoSlug
-    }
+      id: compromisoSlug,
+    },
   });
 
   if (error) return <div>Error</div>;
@@ -116,7 +117,7 @@ const CompromisoDetail = () => {
                 wasSticky,
                 distanceFromTop,
                 distanceFromBottom,
-                calculatedHeight
+                calculatedHeight,
               }) => (
                 <Box
                   fontSize={17}
@@ -208,18 +209,32 @@ const CompromisoDetail = () => {
 
             <hr className="line" />
 
-            <Box className={classes.descripcion}>
-              <h4>¿Cuál es el compromiso?</h4>
-              <Editable
-                html
-                item={compromiso}
-                label="Descripción"
-                path="metadatos.descripcion"
-                onUpdate={refetch}
-              >
-                <DataDisplay data={compromiso.metadatos?.descripcion || ''} />
-              </Editable>
-            </Box>
+            <Grid container>
+              <Grid item xs={12}>
+                <Box className={classes.descripcion}>
+                  <h4>¿Cuál es el compromiso?</h4>
+                  <Editable
+                    html
+                    item={compromiso}
+                    label="Descripción"
+                    path="metadatos.descripcion"
+                    onUpdate={refetch}
+                  >
+                    <DataDisplay
+                      data={compromiso.metadatos?.descripcion || ''}
+                    />
+                  </Editable>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box>
+                  <h4>Progreso del compromiso</h4>
+                  {compromiso && (
+                    <CompromisosPieChart compromisoId={compromiso.id} />
+                  )}
+                </Box>
+              </Grid>
+            </Grid>
             <Box className={classes.descripcion}>
               <h4 className="mt-3">Dependencias responsables</h4>
               <Editable
@@ -304,24 +319,24 @@ const compromisoTabs = [
   {
     key: 'objetivoSexenio',
     label: 'Objetivo al finalizar el sexenio',
-    icon: <BookmarksIcon />
+    icon: <BookmarksIcon />,
   },
   { key: 'problematica', label: 'Problemática', icon: <AssignmentLateIcon /> },
   {
     key: 'solucionPlanteada',
     label: '¿Cómo contribuye a resolver el problema?',
-    icon: <WbIncandescentIcon />
+    icon: <WbIncandescentIcon />,
   },
   { key: 'analisisRiesgo', label: 'Supuestos', icon: <ListAltIcon /> },
   {
     key: 'indicadorGlobal',
     label: 'Indicador global',
-    icon: <BookmarksIcon />
+    icon: <BookmarksIcon />,
   },
   {
     key: 'valores',
     label: 'Valores de Gobierno Abierto',
-    icon: <VerifiedUserIcon />
+    icon: <VerifiedUserIcon />,
   },
   {
     key: 'alineacion2030',
@@ -341,24 +356,24 @@ const compromisoTabs = [
         </IconButton>
       </span>
     ),
-    icon: <VerticalSplitIcon />
+    icon: <VerticalSplitIcon />,
   },
   {
     key: 'igualdadGenero',
     label: 'Alineación con perspectiva de igualdad de género',
-    icon: <VerticalSplitIcon />
+    icon: <VerticalSplitIcon />,
   },
   {
     key: 'ejePND',
     label: 'Eje del Plan Nacional de Desarrollo',
-    icon: <PeopleAltIcon />
+    icon: <PeopleAltIcon />,
   },
   {
     key: 'otrosActores',
     label: 'Otros actores involucrados',
-    icon: <PeopleAltIcon />
+    icon: <PeopleAltIcon />,
   },
-  { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> }
+  { key: 'adicional', label: 'Información adicional', icon: <MenuBookIcon /> },
 ];
 
 export default CompromisoDetail;

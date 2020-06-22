@@ -1,60 +1,57 @@
-import React, { Fragment } from "react";
-import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
-import Fab from "@material-ui/core/Fab";
-import Tooltip from "@material-ui/core/Tooltip";
-import DoneIcon from "@material-ui/icons/Done";
-import DoneAllIcon from "@material-ui/icons/DoneAll";
-import Button from "@material-ui/core/Button";
+import React from 'react';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+import DoneIcon from '@material-ui/icons/Done';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-import { makeStyles } from "@material-ui/core/styles";
-
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width:150,
-    height:50,
+    width: 150,
+    height: 50,
   },
 }));
 
 const ESTATUSES = {
   ninguno: {
     icon: <DoneIcon />,
-    title: "Por iniciar",
-    fabClassName: "grey lighten-2 white-text",
-    siguiente: "iniciado",
-    anterior: "ninguno ",
+    title: 'Por iniciar',
+    fabClassName: 'grey lighten-2 white-text',
+    siguiente: 'iniciado',
+    anterior: 'ninguno',
   },
   iniciado: {
     icon: <DoneAllIcon />,
-    title: "En proceso",
-    fabClassName: "amber white-text",
-    siguiente: "completo",
-    anterior: "ninguno",
+    title: 'En proceso',
+    fabClassName: 'amber white-text',
+    siguiente: 'completo',
+    anterior: 'ninguno',
   },
   completo: {
     icon: <DoneAllIcon />,
-    title: "Completo",
-    fabClassName: "lime darken-2 white-text",
-    siguiente: "verificado",
-    anterior: "iniciado",
+    title: 'Completo',
+    fabClassName: 'lime darken-2 white-text',
+    siguiente: 'verificado',
+    anterior: 'iniciado',
   },
   verificado: {
     icon: <DoneAllIcon />,
-    title: "verificado",
-    fabClassName: "lime darken-4 white-text",
-    siguiente: "verificado",
-    anterior: "completo",
+    title: 'verificado',
+    fabClassName: 'lime darken-4 white-text',
+    siguiente: 'verificado',
+    anterior: 'completo',
   },
 };
 
 const EstatusTooltip = ({ actividad, refetch }) => {
   const classes = useStyles();
-
-  const estatus = actividad.metadatos.estatus || "ninguno";
-
+  const estatus = actividad.metadatos.estatus || 'ninguno';
   const { icon, title, fabClassName, siguiente, anterior } = ESTATUSES[estatus];
 
   const [executeChangeEstatus] = useMutation(gql`
@@ -70,7 +67,7 @@ const EstatusTooltip = ({ actividad, refetch }) => {
 
   //console.log(actividad.id);
   const handleChangeEstatus = (newEstatus) => {
-    console.log("newEstatus: " + newEstatus);
+    console.log('newEstatus: ' + newEstatus);
     executeChangeEstatus({
       variables: {
         id: actividad.id,
@@ -84,7 +81,7 @@ const EstatusTooltip = ({ actividad, refetch }) => {
         refetch();
       })
       .catch((err) => {
-        console.error("Ocurrió error al cambiar estatus: ", err);
+        console.error('Ocurrió error al cambiar estatus: ', err);
       });
   };
 
@@ -94,39 +91,43 @@ const EstatusTooltip = ({ actividad, refetch }) => {
         <Fab
           size="small"
           aria-label="status"
-          style={{ margin: "10px" }}
+          style={{ margin: '10px' }}
           className={fabClassName}
         >
           {icon}
         </Fab>
       </Tooltip>
 
-      <ButtonGroup 
-        variant="text" 
-        color="primary" 
+      <ButtonGroup
+        variant="text"
+        color="primary"
         aria-label="text primary button group"
       >
         <Button
-            color="secondary"
-            size="small"
-            onClick={() => {
-              if (anterior) {
-                handleChangeEstatus(anterior);
-              }
-            }}
-            disabled={title === "Por iniciar"}
-        >{anterior}</Button>
-        
+          color="secondary"
+          size="small"
+          onClick={() => {
+            if (anterior) {
+              handleChangeEstatus(anterior);
+            }
+          }}
+          disabled={title === 'Por iniciar'}
+        >
+          {anterior}
+        </Button>
+
         <Button
-            color="primary"
-            size="small"
-            onClick={() => {
-              if (siguiente) {
-                handleChangeEstatus(siguiente);
-              }
-            }}
-            disabled={title === "verificado"}
-          >{siguiente}</Button>
+          color="primary"
+          size="small"
+          onClick={() => {
+            if (siguiente) {
+              handleChangeEstatus(siguiente);
+            }
+          }}
+          disabled={title === 'verificado'}
+        >
+          {siguiente}
+        </Button>
       </ButtonGroup>
     </div>
   );
