@@ -5,15 +5,16 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.1",
-    "@atlaskit/adf-schema": "^6.2.0",
+    "@atlaskit/adf-schema": "^10.0.0",
     "@atlaskit/avatar": "^17.1.5",
+    "@atlaskit/badge": "^13.1.10",
     "@atlaskit/comment": "^9.2.1",
-    "@atlaskit/editor-core": "^118.0.0",
+    "@atlaskit/editor-core": "^124.0.4",
     "@atlaskit/editor-json-transformer": "^7.0.1",
     "@atlaskit/locale": "^1.0.3",
     "@atlaskit/media-core": "^31.0.1",
-    "@atlaskit/renderer": "^54.0.1",
-    "@atlaskit/smart-card": "^12.7.0",
+    "@atlaskit/renderer": "^60.0.0",
+    "@atlaskit/smart-card": "^13.4.1",
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.9.1",
     "@react-keycloak/web": "^2.1",
@@ -28,6 +29,7 @@
     "apollo-boost": "^0.4.4",
     "array-move": "^2.2.0",
     "bootstrap": "^4.4.1",
+    "chunkinator": "^2.0.5",
     "cloudinary-react": "^1.4.0",
     "color-hash": "^1.0.3",
     "draft-js": "^0.11.2",
@@ -55,6 +57,7 @@
     "react-sortable-hoc": "^1.10.1",
     "react-sticky": "^6.0.3",
     "recharts": "^1.8.5",
+    "rxjs-compat": "^6.5.5",
     "uuid": "^7.0.2"
   },
   "scripts": {
@@ -62,6 +65,16 @@
     "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -79,6 +92,9 @@
     ]
   },
   "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
     "react-test-renderer": "^16.13.0"
   }
 }

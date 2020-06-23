@@ -4,21 +4,21 @@ import { useQuery } from '@apollo/react-hooks';
 import { ReactRenderer } from '@atlaskit/renderer';
 import Comment, {
   CommentTime,
-  // CommentAction,
-  // CommentEdited,
-  CommentAuthor
+  CommentAction,
+  // CommentEditedit
+  CommentAuthor,
 } from '@atlaskit/comment';
 import Avatar from '@atlaskit/avatar';
 import Box from '@material-ui/core/Box';
 // import Button from '@material-ui/core/Button';
-// import Chip from '@material-ui/core/Chip';
+import Chip from '@material-ui/core/Chip';
 import { useAuth } from '../../hooks';
 import moment from '../../utils/moment';
 import ConversacionEditor from './ConversacionEditor';
 
 import '../../assets/css/comentarios.css';
 
-const getQuery = type => gql`
+const getQuery = (type) => gql`
   query ConversacionQuery($id: uuid!, $limit: Int = 100) {
     conversaciones: conversacion(
       where: { ${type}_id: { _eq: $id } }
@@ -43,12 +43,12 @@ const getQuery = type => gql`
 `;
 
 const Conversacion = ({ item }) => {
-  const { authenticated, usuario } = useAuth();
+  const { authenticated, usuario, isAdministrador } = useAuth();
   const {
     data: { conversaciones } = {},
     loading,
     error,
-    refetch
+    refetch,
   } = useQuery(getQuery(item.__typename), { variables: { id: item.id } });
 
   if (error) return <div>Error</div>;
@@ -68,12 +68,11 @@ const Conversacion = ({ item }) => {
   }
 
   const compromisoAllowed =
-    authenticated && (
-    usuario?.administrador ||
-    usuario?.responsable_compromisos
-      .map(rc => rc.compromiso_id)
-      .includes(compromisoId)
-    )
+    authenticated &&
+    (isAdministrador ||
+      usuario?.responsable_compromisos
+        .map((rc) => rc.compromiso_id)
+        .includes(compromisoId));
 
   return (
     <Box className="comment-content horizontal-padding vertical-padding ">
@@ -83,7 +82,7 @@ const Conversacion = ({ item }) => {
         </Box>
       )}
       {!loading && !conversaciones?.length && <h4>Aún no hay comentarios</h4>}
-      {conversaciones?.map(conversacion => (
+      {conversaciones?.map((conversacion) => (
         <Box className="comment-border grey lighten-5 comment-padding comment-margin box-6">
           <Comment
             key={conversacion.id}
@@ -104,19 +103,19 @@ const Conversacion = ({ item }) => {
             content={
               <ReactRenderer document={JSON.parse(conversacion.contenido)} />
             }
-            // actions={
-            //   authenticated && [
-            //     <CommentAction>
-            //       <Chip size="small" label="Responder" />
-            //     </CommentAction>,
-            //     <CommentAction>
-            //       <Chip size="small" label="Eliminar" />
-            //     </CommentAction>,
-            //     <CommentAction>
-            //       <Chip size="small" label="Clickable" label="Marcar" />
-            //     </CommentAction>
-            //   ]
-            // }
+            actions={
+              authenticated && [
+                <CommentAction>
+                  <Chip size="small" label="Responder" />
+                </CommentAction>,
+                <CommentAction>
+                  <Chip size="small" label="Eliminar" />
+                </CommentAction>,
+                <CommentAction>
+                  <Chip size="small" label="Clickable" label="Marcar" />
+                </CommentAction>,
+              ]
+            }
           />
         </Box>
       ))}

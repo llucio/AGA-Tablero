@@ -7,7 +7,6 @@ import { AUTH_TOKEN_STORAGE_KEY } from './constants';
 const USUARIO_QUERY = loader('./queries/UsuarioGet.graphql');
 
 const initialState = { anonymousMode: false };
-// const { useGlobalState } = createGlobalState(initialState);
 const { useGlobalState } = createGlobalState(initialState);
 
 const useAuth = () => {
@@ -19,8 +18,8 @@ const useAuth = () => {
     {
       skip: !tokenParsed?.email,
       variables: {
-        id: tokenParsed?.email
-      }
+        id: tokenParsed?.email,
+      },
     }
   );
 
@@ -29,7 +28,7 @@ const useAuth = () => {
     claims: _.mapKeys(
       _.get(tokenParsed, ['https://hasura.io/jwt/claims'], {}),
       (_, key) => key.replace('x-hasura-', '').replace('-', '_')
-    )
+    ),
   };
 
   const administrador = _.get(profile.claims, 'allowed_roles', []).includes(
@@ -49,8 +48,8 @@ const useAuth = () => {
     anonymousMode,
     organizacion: usuario?.organizacion,
     administrador: !anonymousMode && administrador,
-    isAdministrador: administrador,
-    loading: !initialized || userLoading
+    isAdministrador: !anonymousMode && administrador,
+    loading: !initialized || userLoading,
   };
 };
 
