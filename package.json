@@ -7,6 +7,7 @@
     "@apollo/react-hooks": "^3.1.1",
     "@atlaskit/adf-schema": "^10.0.0",
     "@atlaskit/avatar": "^17.1.5",
+    "@atlaskit/badge": "^13.1.10",
     "@atlaskit/comment": "^9.2.1",
     "@atlaskit/editor-core": "^124.0.4",
     "@atlaskit/editor-json-transformer": "^7.0.1",
@@ -28,6 +29,7 @@
     "apollo-boost": "^0.4.4",
     "array-move": "^2.2.0",
     "bootstrap": "^4.4.1",
+    "chunkinator": "^2.0.5",
     "cloudinary-react": "^1.4.0",
     "color-hash": "^1.0.3",
     "draft-js": "^0.11.2",
@@ -55,6 +57,7 @@
     "react-sortable-hoc": "^1.10.1",
     "react-sticky": "^6.0.3",
     "recharts": "^1.8.5",
+    "rxjs-compat": "^6.5.5",
     "uuid": "^7.0.2"
   },
   "scripts": {
