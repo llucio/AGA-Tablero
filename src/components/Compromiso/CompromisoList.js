@@ -12,6 +12,7 @@ import Sortable from '../Sortable';
 import Editable from '../Editable';
 
 import CompromisoCard from './CompromisoCard';
+import CompromisoComboBox from './CompromisoComboBox';
 
 const ACTIVIDAD_STATS = gql`
   query CompromisosStats {
@@ -121,6 +122,23 @@ const CompromisoList = ({ where }) => {
   return (
     <div className="vertical-margin-bottom">
       <Grid container spacing={3}>
+
+      <Grid item xs={12} sm={4}>
+          <CompromisoComboBox 
+            label="dependencia"
+          />      
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <CompromisoComboBox 
+            label="institución"
+          />
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <CompromisoComboBox 
+            label="Miembro del comité "
+          />
+        </Grid>
+        
         <Grid item xs={12} sm={5}>
           <h2>Compromisos</h2>
           <hr className="line" />
