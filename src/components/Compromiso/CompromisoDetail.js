@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -18,7 +19,6 @@ import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { StickyContainer, Sticky } from 'react-sticky';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -34,6 +34,7 @@ import LoadingIndicator from '../LoadingIndicator';
 import HitoList from '../Hito/HitoList.js';
 import Conversacion from '../Conversacion/Conversacion';
 import CompromisosPieChart from './CompromisosPieChart';
+import ResponsableList from './ResponsableList';
 
 const GET_QUERY = loader('../../queries/CompromisoGetBySlug.graphql');
 
@@ -231,25 +232,37 @@ const CompromisoDetail = () => {
               </Grid>
 
               <Grid item xs={12}>
-                <Box>
-                  <h4>Responsables</h4>
-                  <Sortable
-                    typename="responsable_compromiso"
-                    items={compromiso.responsables}
-                    creatable="compromiso_id"
-                    parentId={compromiso.id}
-                    refetch={refetch}
-                    deletable
-                    axis="y"
-                    itemComponent={({ item: { usuario, id } }) => (
-                      <div key={`resposnable-${id}`}>
-                        {/* {usuario.email || 'Sin usuario'}
-                        <strong>{usuario.organizacion.nombre}</strong> */}
-                      </div>
-                    )}
-                  />
-                </Box>
+                <h4>Responsables</h4>
+                {/* <Grid container> */}
+                <ResponsableList compromisoId={compromiso.id} />
               </Grid>
+
+              {/* <Grid item xs={12}>
+                <h4>Responsables</h4>
+                <Sortable
+                  typename="responsable_compromiso"
+                  items={compromiso.responsables}
+                  creatable="compromiso_id"
+                  parentId={compromiso.id}
+                  refetch={refetch}
+                  containerComponent={Grid}
+                  deletable
+                  containerProps={{
+                    direction: 'row',
+                    spacing: 2,
+                    container: true,
+                  }}
+                  axis="xy"
+                  itemComponent={({ item: responsable }) => (
+                    <Grid item xs={12} md={6} xl={4}>
+                      <ResponsableCard
+                        key={`resposnable-${responsable.usuario_email}`}
+                        responsable={responsable}
+                      />
+                    </Grid>
+                  )}
+                />
+              </Grid> */}
 
               {compromiso && (
                 <Grid item xs={12}>
