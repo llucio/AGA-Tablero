@@ -6,6 +6,9 @@ fragment Compromiso on compromiso {
   fecha_creacion
   metadatos
   slug
+  responsables {
+    ...ResponsableCompromiso
+  }
 }
 
 fragment Actividad on actividad {
@@ -87,6 +90,9 @@ fragment Hito on hito {
   fecha_inicial
   fecha_final
   ponderacion
+  # responsables {
+  #   ...ResponsableHito
+  # }
   entregables_aggregate {
     aggregate {
       min {
@@ -129,15 +135,24 @@ fragment Conversacion on conversacion {
 }
 
 fragment ResponsableCompromiso on responsable_compromiso {
-  id
+  fecha_creacion
   compromiso_id
   metadatos
+  usuario_email
+  usuario {
+    ...Usuario
+  }
 }
 
-fragment ResponsableHito on responsable_compromiso {
-  id
+fragment ResponsableHito on responsable_hito {
+  fecha_creacion
   hito_id
   metadatos
+  usuario_email
+  organizacion_id
+  usuario {
+    ...Usuario
+  }
 }
 
 fragment Organizacion on organizacion {
@@ -152,4 +167,7 @@ fragment Usuario on usuario {
   nombre
   metadatos
   organizacion_id
+  organizacion {
+    ...Organizacion
+  }
 }

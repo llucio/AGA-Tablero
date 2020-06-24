@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import LoadingIndicator from '../LoadingIndicator';
 import { LinkContainer } from 'react-router-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
@@ -16,8 +16,8 @@ const BreadcrumbItem = () => {
     GET_QUERY,
     {
       variables: {
-        id: compromisoSlug
-      }
+        id: compromisoSlug,
+      },
     }
   );
 

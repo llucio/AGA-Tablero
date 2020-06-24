@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -33,7 +33,7 @@ const Deletable = ({ item, typename, refetch }) => {
 
   const handleConfirm = () => {
     execute({
-      variables: { id: item.id }
+      variables: { id: item.id },
     }).then(() => refetch());
   };
 

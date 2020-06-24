@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import Box from '@material-ui/core/Box';
 import Avatar from '@atlaskit/avatar';
 import { Editor, CollapsedEditor } from '@atlaskit/editor-core';
@@ -10,7 +10,7 @@ import IntlProvider from '../IntlProvider';
 
 const transformer = new JSONTransformer();
 
-const getMutation = type => gql`
+const getMutation = (type) => gql`
   mutation ConversationMutation($id: uuid!, $value: String!) {
     insert_conversacion(
       objects: { ${type}_id: $id, contenido: $value }
@@ -24,12 +24,12 @@ const ConversationContainer = ({ item, refetch }) => {
   const [mutate] = useMutation(getMutation(item.__typename));
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const onSave = editorView => {
+  const onSave = (editorView) => {
     mutate({
       variables: {
         id: item.id,
-        value: JSON.stringify(transformer.encode(editorView.state.doc))
-      }
+        value: JSON.stringify(transformer.encode(editorView.state.doc)),
+      },
     }).then(() => {
       refetch().then(() => {
         setIsExpanded(false);
@@ -54,7 +54,7 @@ const ConversationContainer = ({ item, refetch }) => {
                 allowTextAlignment={false}
                 textFormatting={{
                   disableCode: true,
-                  disableSuperscriptAndSubscript: true
+                  disableSuperscriptAndSubscript: true,
                 }}
                 appearance="comment"
                 shouldFocus

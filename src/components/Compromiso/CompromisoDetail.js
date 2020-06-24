@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
-  root_grid: {
+  gridRoot: {
     flexGrow: 1,
   },
   institucion: {
@@ -71,6 +71,9 @@ const useStyles = makeStyles((theme) => ({
   },
   sticky: {
     marginTop: '100px',
+  },
+  margin: {
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -106,7 +109,7 @@ const CompromisoDetail = () => {
   if (!compromiso) return <h1>No encontrado</h1>;
 
   return (
-    <div className={classes.root_grid}>
+    <div className={classes.gridRoot}>
       <StickyContainer>
         <Grid container spacing={3}>
           <Grid className="menuSidebar d-none d-lg-block" item xs={12} md={3}>
@@ -141,11 +144,11 @@ const CompromisoDetail = () => {
                     deletable
                     axis="y"
                     itemComponent={({ item: { titulo, id } }) => (
-                      <p key={`sidebar-${id}`}>
+                      <div key={`sidebar-${id}`} className={classes.margin}>
                         <Link href={`#hito-${id}`}>
                           {titulo || 'Sin título'}
                         </Link>
-                      </p>
+                      </div>
                     )}
                   />
                   <Divider variant="middle" />
@@ -226,14 +229,36 @@ const CompromisoDetail = () => {
                   </Editable>
                 </Box>
               </Grid>
+
               <Grid item xs={12}>
                 <Box>
-                  <h4>Progreso del compromiso</h4>
-                  {compromiso && (
-                    <CompromisosPieChart compromisoId={compromiso.id} />
-                  )}
+                  <h4>Responsables</h4>
+                  <Sortable
+                    typename="responsable_compromiso"
+                    items={compromiso.responsables}
+                    creatable="compromiso_id"
+                    parentId={compromiso.id}
+                    refetch={refetch}
+                    deletable
+                    axis="y"
+                    itemComponent={({ item: { usuario, id } }) => (
+                      <div key={`resposnable-${id}`}>
+                        {/* {usuario.email || 'Sin usuario'}
+                        <strong>{usuario.organizacion.nombre}</strong> */}
+                      </div>
+                    )}
+                  />
                 </Box>
               </Grid>
+
+              {compromiso && (
+                <Grid item xs={12}>
+                  <Box>
+                    <h4>Progreso del compromiso</h4>
+                    <CompromisosPieChart compromisoId={compromiso.id} />
+                  </Box>
+                </Grid>
+              )}
             </Grid>
             <Box className={classes.descripcion}>
               <h4 className="mt-3">Dependencias responsables</h4>

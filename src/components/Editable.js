@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -10,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
-// import ClearIcon from '@material-ui/icons/Delete';
 import ColorHash from 'color-hash';
 import { useAuth } from '../hooks';
 import HtmlEditor from './HtmlEditor';
@@ -19,34 +18,34 @@ import moment from '../utils/moment';
 
 const colorHash = new ColorHash();
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   adminWrapper: {
     border: `1px dashed`,
     width: '100%',
     margin: '6px 0',
-    padding: '3px'
+    padding: '3px',
   },
   root: {
     display: 'flex',
     fontFamily: '"Montserrat", sans-serif !important',
     alignItems: 'center',
-    width: '100%'
+    width: '100%',
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
-    width: '100%'
+    width: '100%',
   },
   editLabel: {
-    color: '#333333'
+    color: '#333333',
   },
   iconButton: {
-    padding: '2px'
+    padding: '2px',
   },
   divider: {
     height: 28,
-    margin: 4
-  }
+    margin: 4,
+  },
 }));
 
 const Editable = ({
@@ -61,7 +60,7 @@ const Editable = ({
   upload = false,
   label,
   uploadType = 'image',
-  type
+  type,
 }) => {
   const [open, setOpen] = useState(false);
   const { administrador } = useAuth();
@@ -72,7 +71,7 @@ const Editable = ({
     {
       variables: { id },
       skip: !id || (open && !administrador),
-      fetchPolicy: 'cache-and-network'
+      fetchPolicy: 'cache-and-network',
     }
   );
   const classes = useStyles();
@@ -87,8 +86,8 @@ const Editable = ({
     executeMutation({
       variables: {
         id,
-        value: subField ? { [subField]: finalValue } : finalValue
-      }
+        value: subField ? { [subField]: finalValue } : finalValue,
+      },
     }).then(() => {
       onUpdate && onUpdate();
       autoClose && setOpen(false);
@@ -101,7 +100,7 @@ const Editable = ({
     });
   };
 
-  const handleChange = value => {
+  const handleChange = (value) => {
     setValue(value);
   };
 
@@ -109,7 +108,7 @@ const Editable = ({
   //   handleSubmit(null, '');
   // };
 
-  const handleToggle = event => {
+  const handleToggle = (event) => {
     event.stopPropagation();
     setOpen(!open);
   };
@@ -128,7 +127,7 @@ const Editable = ({
     <div
       style={administrador ? { borderColor: colorHash.hex(typename) } : {}}
       className={administrador ? classes.adminWrapper : ''}
-      onClick={event => event.stopPropagation()}
+      onClick={(event) => event.stopPropagation()}
     >
       {!open && !!value && (children || value)}
       <div className={classes.root}>
@@ -152,10 +151,7 @@ const Editable = ({
                 type={type}
                 value={
                   type === 'date'
-                    ? value &&
-                      moment(value)
-                        .utc()
-                        .format(moment.HTML5_FMT.DATE)
+                    ? value && moment(value).utc().format(moment.HTML5_FMT.DATE)
                     : value
                 }
                 autoFocus
@@ -174,7 +170,7 @@ const Editable = ({
                   (uploadType === 'image' ? (
                     <img src={value} height={100} alt="imagen" />
                   ) : (
-                    <p>
+                    <div>
                       Archivo actual:
                       <br />
                       <a
@@ -185,11 +181,11 @@ const Editable = ({
                       >
                         {value}
                       </a>
-                    </p>
+                    </div>
                   ))}
                 <UploadButton
                   value={value}
-                  handleChange={value => {
+                  handleChange={(value) => {
                     setValue(value);
                     handleSubmit(null, value);
                   }}
@@ -253,7 +249,7 @@ const getMutation = ({ typename, field, subField, valueType = 'String' }) => {
 Editable.propTypes = {
   field: PropTypes.oneOf([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   metadatos: PropTypes.object,
   valueType: PropTypes.string,
@@ -262,8 +258,8 @@ Editable.propTypes = {
   autoClose: PropTypes.bool,
   item: PropTypes.shape({
     __typename: PropTypes.string,
-    id: PropTypes.any
-  })
+    id: PropTypes.any,
+  }),
 };
 
 export default Editable;

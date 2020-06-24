@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import arrayMove from 'array-move';
 import Box from '@material-ui/core/Box';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
@@ -42,7 +42,7 @@ const SortableList = ({
         }
         return mutateOrden({
           awaitRefetchQueries: true,
-          variables: { id, orden: index }
+          variables: { id, orden: index },
         });
       })
     )
