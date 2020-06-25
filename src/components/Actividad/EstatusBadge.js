@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import PrevIcon from '@material-ui/icons/SkipPrevious';
 import NextIcon from '@material-ui/icons/SkipNext';
+import Schedule from '@material-ui/icons/Schedule';
 import DoneIcon from '@material-ui/icons/Done';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import Chip from '@material-ui/core/Chip';
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ESTATUSES = {
   ninguno: {
-    icon: <DoneIcon />,
+    icon: <Schedule />,
     title: 'Por iniciar',
     fabClassName: 'grey lighten-2 white-text',
     siguiente: 'iniciado',
