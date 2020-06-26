@@ -7,9 +7,11 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useAuth } from '../hooks';
 import Deletable from './Deletable';
 import Creatable from './Creatable';
+import TextField from '@material-ui/core/TextField';
 
 const SortableList = ({
   items,
+  campoFilter,
   refetch,
   creatable,
   parentId,
@@ -21,6 +23,7 @@ const SortableList = ({
   itemProps = {},
   ...sortableProps
 }) => {
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const { administrador } = useAuth();
   const [mutateOrden] = useMutation(
@@ -33,18 +36,31 @@ const SortableList = ({
   `
   );
 
+  let filteredData = items;
+  if (campoFilter) {
+    filteredData = items.filter((data) => {
+      return (
+        data.metadatos[campoFilter]
+          .toLowerCase()
+          .indexOf(search.toLowerCase()) !== -1
+      );
+    });
+  }
+
   const onSort = ({ oldIndex, newIndex }) => {
     setLoading(true);
     Promise.all(
-      arrayMove(items, oldIndex, newIndex).map(({ id, orden }, index) => {
-        if (orden === index) {
-          return Promise.resolve();
+      arrayMove(filteredData, oldIndex, newIndex).map(
+        ({ id, orden }, index) => {
+          if (orden === index) {
+            return Promise.resolve();
+          }
+          return mutateOrden({
+            awaitRefetchQueries: true,
+            variables: { id, orden: index },
+          });
         }
-        return mutateOrden({
-          awaitRefetchQueries: true,
-          variables: { id, orden: index }
-        });
-      })
+      )
     )
       .then(() => {
         refetch().then(() => setLoading(false));
@@ -71,7 +87,7 @@ const SortableList = ({
   const Container = SortableContainer(({ items }) => {
     return (
       <ContainerComponent {...containerProps}>
-        {items.map((value, index) => (
+        {filteredData.map((value, index) => (
           <SortableItem
             key={`${typename}-${value.id}`}
             index={index}
@@ -84,6 +100,21 @@ const SortableList = ({
 
   return (
     <>
+      <TextField
+        id="standard-full-width"
+        label=""
+        style={{ margin: 1 }}
+        placeholder="Filtra los Comprimisos Puede ser por:
+        Dependencia Responsable, Institución de Organización Civil Responsable o
+        Miembro del comité coordinador"
+        helperText="Control para filtrar y/o ordenar compromisos"
+        fullWidth
+        margin="normal"
+        name="search"
+        value={search}
+        onChange={(event) => setSearch(event.target.value)}
+      />
+
       {administrador && creatable && (
         <Creatable
           parentKey={creatable}
