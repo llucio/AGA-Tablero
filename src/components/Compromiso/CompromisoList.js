@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Sortable from '../Sortable';
 import Editable from '../Editable';
 import CompromisoCard from './CompromisoCard';
+import TextField from '@material-ui/core/TextField';
 
 const ACTIVIDAD_STATS = gql`
   query CompromisosStats {
@@ -91,6 +92,8 @@ const LIST_QUERY = loader('../../queries/CompromisoList.graphql');
 const CompromisoList = ({ where }) => {
   const classes = useStyles();
 
+  const [search, setSearch] = useState('');
+
   const {
     data: { plan: [plan] = [] } = {},
     loading,
@@ -154,8 +157,26 @@ const CompromisoList = ({ where }) => {
             </AgaTooltip>
           </Editable>
         </Grid>
+
+        <TextField
+          id="standard-full-width"
+          label=""
+          style={{ margin: 1 }}
+          placeholder="Filtra los Comprimisos Puede ser por:
+          Dependencia Responsable, Institución de Organización Civil Responsable o
+          Miembro del comité coordinador"
+          helperText="Control para filtrar y/o ordenar compromisos"
+          fullWidth
+          margin="normal"
+          name="search"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+
         <Sortable
           items={plan.compromisos}
+          campoFilter="dependencia"
+          search={search}
           itemComponent={CompromisoCard}
           refetch={refetch}
           typename="compromiso"
@@ -169,22 +190,6 @@ const CompromisoList = ({ where }) => {
           axis="xy"
         />
       </Grid>
-
-      <Sortable
-        items={plan.compromisos}
-        campoFilter="dependencia"
-        itemComponent={CompromisoCard}
-        refetch={refetch}
-        typename="compromiso"
-        containerComponent={Grid}
-        containerProps={{
-          direction: 'row',
-          justify: 'space-between',
-          alignItems: 'flex-start',
-          container: true,
-        }}
-        axis="xy"
-      />
     </div>
   );
 };

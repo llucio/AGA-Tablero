@@ -7,11 +7,11 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useAuth } from '../hooks';
 import Deletable from './Deletable';
 import Creatable from './Creatable';
-import TextField from '@material-ui/core/TextField';
 
 const SortableList = ({
   items,
   campoFilter,
+  search,
   refetch,
   creatable,
   parentId,
@@ -23,7 +23,6 @@ const SortableList = ({
   itemProps = {},
   ...sortableProps
 }) => {
-  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const { administrador } = useAuth();
   const [mutateOrden] = useMutation(
@@ -100,21 +99,6 @@ const SortableList = ({
 
   return (
     <>
-      <TextField
-        id="standard-full-width"
-        label=""
-        style={{ margin: 1 }}
-        placeholder="Filtra los Comprimisos Puede ser por:
-        Dependencia Responsable, Institución de Organización Civil Responsable o
-        Miembro del comité coordinador"
-        helperText="Control para filtrar y/o ordenar compromisos"
-        fullWidth
-        margin="normal"
-        name="search"
-        value={search}
-        onChange={(event) => setSearch(event.target.value)}
-      />
-
       {administrador && creatable && (
         <Creatable
           parentKey={creatable}
