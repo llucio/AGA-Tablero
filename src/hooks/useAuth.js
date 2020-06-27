@@ -3,8 +3,9 @@ import { createGlobalState } from 'react-hooks-global-state';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import { useKeycloak } from '@react-keycloak/web';
-import { AUTH_TOKEN_STORAGE_KEY } from './constants';
-const USUARIO_QUERY = loader('./queries/UsuarioGet.graphql');
+import { AUTH_TOKEN_STORAGE_KEY } from '../constants';
+
+const USUARIO_QUERY = loader('../queries/UsuarioGet.graphql');
 
 const initialState = { anonymousMode: false };
 const { useGlobalState } = createGlobalState(initialState);
@@ -53,4 +54,4 @@ const useAuth = () => {
   };
 };
 
-export { useAuth };
+export default useAuth;
