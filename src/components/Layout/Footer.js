@@ -45,6 +45,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -62,6 +63,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -79,6 +81,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -105,6 +108,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -122,6 +126,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -139,6 +144,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -156,6 +162,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -173,6 +180,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -190,6 +198,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -216,6 +225,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -233,6 +243,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -250,6 +261,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -267,6 +279,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -284,6 +297,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia
@@ -301,6 +315,7 @@ const Footer = (props) => {
               <Link
                 href="https://www.gob.mx/sfp"
                 target="_blank"
+                rel="noopener noreferrer"
                 className={classes.link}
               >
                 <CardMedia

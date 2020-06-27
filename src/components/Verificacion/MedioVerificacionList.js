@@ -60,7 +60,12 @@ const MedioVerificacionList = ({ actividad }) => {
           ({ id, archivos: [url] = [], titulo, fecha_creacion }) => (
             <Box key={`mv-${id}`}>
               <div>
-                <Link target="_blank" href={url} color="inherit">
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={url}
+                  color="inherit"
+                >
                   {titulo}
                 </Link>
                 <blockquote>
