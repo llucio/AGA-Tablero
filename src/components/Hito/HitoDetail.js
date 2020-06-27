@@ -2,7 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import LoadingIndicator from '../LoadingIndicator';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';

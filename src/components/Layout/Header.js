@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -15,7 +15,7 @@ const defaultHeaderProps = {
   heading: '¡Conoce los avances de los compromisos de Gobierno Abierto',
   className: 'parallax elevation-3',
   subheading: null,
-  headerArrow: false
+  headerArrow: false,
 };
 
 const Header = ({ headerProps }) => {
@@ -24,13 +24,13 @@ const Header = ({ headerProps }) => {
   const { data: { item: [compromiso] = [] } = {} } = useQuery(GET_QUERY, {
     skip: !compromisoSlug,
     variables: {
-      id: compromisoSlug
-    }
+      id: compromisoSlug,
+    },
   });
 
   const finalHeaderProps = {
     ...defaultHeaderProps,
-    ...headerProps
+    ...headerProps,
   };
 
   const imageUrl = compromiso?.metadatos?.imagen || finalHeaderProps.image;

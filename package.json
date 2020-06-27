@@ -4,7 +4,9 @@
   "private": false,
   "license": "MIT",
   "dependencies": {
-    "@apollo/react-hooks": "^3.1.1",
+    "@apollo/client": "^3.0.0-rc.8",
+    "@apollo/link-batch-http": "^2.0.0-beta.3",
+    "@apollo/react-components": "^3.1.5",
     "@atlaskit/adf-schema": "^10.0.0",
     "@atlaskit/avatar": "^17.1.5",
     "@atlaskit/badge": "^13.1.10",
@@ -27,7 +29,6 @@
     "@uppy/react": "^1.4.0",
     "@uppy/url": "^1.4.0",
     "@uppy/xhr-upload": "^1.5.2",
-    "apollo-boost": "^0.4.4",
     "array-move": "^2.2.0",
     "bootstrap": "^4.4.1",
     "chunkinator": "^2.0.5",

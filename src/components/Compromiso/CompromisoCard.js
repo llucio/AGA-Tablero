@@ -10,14 +10,14 @@ import '../../assets/css/image-effects.css';
 // Para imágenes aleatorias (provisional)
 const defaultImage = 'https://picsum.photos/300/300';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
   },
   card: {
-    maxWidth: 340
-  }
+    maxWidth: 340,
+  },
 }));
 
 const CompromisoCard = ({ item: compromiso, index }) => {
@@ -34,7 +34,7 @@ const CompromisoCard = ({ item: compromiso, index }) => {
         style={{
           backgroundImage: `url(${imageUrl})`,
           backgroundSize: 'cover',
-          height: '320px'
+          height: '320px',
         }}
       >
         <Box className="img-gradiente box-4">

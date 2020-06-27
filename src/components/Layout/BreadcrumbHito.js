@@ -1,19 +1,19 @@
 import React from 'react';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import LoadingIndicator from '../LoadingIndicator';
 import Hidden from '@material-ui/core/Hidden';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 const GET_QUERY = loader('../../queries/HitoGet.graphql');
 
-const BreadcrumbHito = props => {
+const BreadcrumbHito = (props) => {
   const idItem = props.hitoId;
 
   const { data: { item } = {}, loading, error } = useQuery(GET_QUERY, {
     variables: {
-      id: idItem
-    }
+      id: idItem,
+    },
   });
 
   if (error) return <div>Error</div>;

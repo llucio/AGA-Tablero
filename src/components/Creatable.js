@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -33,7 +33,7 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
 
   const handleConfirm = () => {
     execute({
-      variables: { titulo }
+      variables: { titulo },
     })
       .then(() => refetch())
       .then(handleClose);
@@ -57,7 +57,7 @@ const Creatable = ({ typename, parentKey, parentId, refetch }) => {
               placeholder="Título"
               style={{ width: '400px' }}
               autoFocus
-              onChange={event => setTitulo(event.target.value)}
+              onChange={(event) => setTitulo(event.target.value)}
             />
           </DialogContentText>
         </DialogContent>
