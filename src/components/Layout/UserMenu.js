@@ -11,26 +11,25 @@ import PolicyIcon from '@material-ui/icons/Policy';
 import FaceIcon from '@material-ui/icons/Face';
 import { useAuth } from '../../hooks';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing(4, 1)
+    padding: theme.spacing(4, 1),
   },
   paper: {
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   fab: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   extendedIcon: {
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const UserMenu = () => {
-  const history = useHistory();
   const classes = useStyles();
   const {
     anonymousMode,
@@ -40,11 +39,11 @@ const UserMenu = () => {
     usuario,
     login,
     logout,
-    loading
+    loading,
   } = useAuth();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {

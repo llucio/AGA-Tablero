@@ -6,7 +6,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import BreadcrumbCompromiso from './BreadcrumbCompromiso';
 import BreadcrumbHito from './BreadcrumbHito';
 
-const BreadcrumbBar = props => {
+const BreadcrumbBar = (props) => {
   const { path } = useLocation();
 
   return (

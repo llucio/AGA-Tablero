@@ -12,13 +12,15 @@ const DataDisplay = ({ data, ...rest }) => {
   const {
     keyLabels,
     labelComponent: Label = 'h3',
-    listItemComponent: ListItem = 'div'
+    listItemComponent: ListItem = 'div',
   } = rest;
 
   // Un objeto key/value renderea llave y un DataDisplay recursivo con el valor
   if (_.isPlainObject(data)) {
-    const dataKeys = _.keys(keyLabels || data).filter(key => _.has(data, key));
-    return dataKeys.map(key => (
+    const dataKeys = _.keys(keyLabels || data).filter((key) =>
+      _.has(data, key)
+    );
+    return dataKeys.map((key) => (
       <Row key={key}>
         <Col xs="3">
           <Label>{_.get(keyLabels || {}, key, key)}</Label>
@@ -34,7 +36,7 @@ const DataDisplay = ({ data, ...rest }) => {
   else if (_.isArray(data)) {
     return (
       <Row>
-        {data.map(value => (
+        {data.map((value) => (
           <ListItem className="list-item" key={value}>
             <DataDisplay key={value} data={value} {...rest} />
           </ListItem>
@@ -68,7 +70,7 @@ DataDisplay.propTypes = {
   data: PropTypes.any.isRequired,
   keyLabels: PropTypes.object,
   labelComponent: PropTypes.elementType,
-  valueComponent: PropTypes.elementType
+  valueComponent: PropTypes.elementType,
 };
 
 export default DataDisplay;

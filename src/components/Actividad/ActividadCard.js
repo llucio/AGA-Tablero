@@ -3,46 +3,46 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   root_grid: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   margin: {
-    margin: theme.spacing(2)
+    margin: theme.spacing(2),
   },
   descripcion: {
-    padding: theme.spacing(0, 0, 6, 0)
+    padding: theme.spacing(0, 0, 6, 0),
   },
   institucion: {
-    padding: theme.spacing(0, 0, 6, 0)
+    padding: theme.spacing(0, 0, 6, 0),
   },
   extendedIcon: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   box_panel: {
-    padding: theme.spacing(5, 0, 10, 0)
+    padding: theme.spacing(5, 0, 10, 0),
   },
   panel: {
-    width: '100%'
+    width: '100%',
   },
   item: {
-    margin: '0.3em 1em'
+    margin: '0.3em 1em',
   },
   panel_heading: {
     fontSize: theme.typography.pxToRem(18),
-    fontWeight: theme.typography.fontWeightRegular
+    fontWeight: theme.typography.fontWeightRegular,
   },
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   input: {
-    display: 'none'
-  }
+    display: 'none',
+  },
 }));
 
 const ActividadCard = ({ item: actividad, refetch }) => {

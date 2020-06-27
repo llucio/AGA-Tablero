@@ -7,26 +7,26 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Link from '@material-ui/core/Link';
 import UserMenu from './UserMenu';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   box_one: {
     padding: theme.spacing(0),
     textAlign: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
   },
   box_two: {
     padding: theme.spacing(0, 2),
     textAlign: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
   },
   link: {
-    margin: theme.spacing(1)
-  }
+    margin: theme.spacing(1),
+  },
 }));
 
-const Footer = props => {
+const Footer = (props) => {
   const classes = useStyles();
 
   return (

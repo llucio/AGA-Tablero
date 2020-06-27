@@ -1,6 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 import { ReactRenderer } from '@atlaskit/renderer';
 import Comment, {
   CommentTime,

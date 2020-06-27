@@ -24,7 +24,7 @@ const HtmlEditor = ({ value, onChange }) => {
         editorState={editorState}
         onEditorStateChange={onEditorStateChange}
         localization={{
-          locale: 'es'
+          locale: 'es',
         }}
       />
     </div>

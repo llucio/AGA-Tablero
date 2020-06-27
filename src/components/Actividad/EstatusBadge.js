@@ -1,6 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 import PrevIcon from '@material-ui/icons/SkipPrevious';
 import NextIcon from '@material-ui/icons/SkipNext';
 import AccessAlarms from '@material-ui/icons/AccessAlarms';

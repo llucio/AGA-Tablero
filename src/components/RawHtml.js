@@ -11,7 +11,7 @@ const RawHtml = ({ children, as: Component = 'div', ...props }) => {
     <Component
       {...props}
       dangerouslySetInnerHTML={{
-        __html: children.replace(/\n/g, '').replace(/font-family:[^;]+;/g, '')
+        __html: children.replace(/\n/g, '').replace(/font-family:[^;]+;/g, ''),
       }}
     />
   ) : (

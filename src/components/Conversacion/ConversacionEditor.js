@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 import Box from '@material-ui/core/Box';
 import Avatar from '@atlaskit/avatar';
 import { Editor, CollapsedEditor } from '@atlaskit/editor-core';

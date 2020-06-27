@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
