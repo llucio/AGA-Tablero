@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import gql from 'graphql-tag';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 // import FuzzySearch from 'react-fuzzy';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import LoadingIndicator from '../LoadingIndicator';
@@ -114,7 +113,6 @@ const CompromisoList = ({ where }) => {
       completo: { aggregate: { count: completo } = {} } = {},
       verificado: { aggregate: { count: verificado } = {} } = {},
     } = {},
-    refetch: statsRefetch,
   } = useQuery(ACTIVIDAD_STATS);
 
   if (error) return <div>Error</div>;

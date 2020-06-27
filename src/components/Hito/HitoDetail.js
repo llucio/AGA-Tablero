@@ -1,18 +1,16 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/client';
-import LoadingIndicator from '../LoadingIndicator';
+import { useQuery, gql } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import LoadingIndicator from '../LoadingIndicator';
 import DataDisplay from '../DataDisplay';
 import Editable from '../Editable';
 import CalendarIcon from '../CalendarIcon';
 import ActividadTable from '../Actividad/ActividadTable';
 import Conversacion from '../Conversacion/Conversacion';
-
 import MultiColorProgressBar from '../MultiColorProgressBar';
 
 const GET_QUERY = loader('../../queries/HitoGet.graphql');
@@ -260,30 +258,7 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
       <Grid container>
         <Grid item xs={12} sm={12}>
           <MultiColorProgressBar readings={readings} />
-          {/* <Box className="progress mt-2">
-            <Box
-              className="progress-bar-dark light-green w-{"
-              role="progressbar"
-              aria-valuenow="40"
-              aria-valuemin="10"
-              aria-valuemax="100"
-            />
-          </Box> */}
         </Grid>
-        {/* <Grid item xs={12} sm={4}>
-          <Editable
-            item={hito}
-            path="ponderacion"
-            label="Ponderación"
-            valueType="Float"
-            onUpdate={() => {
-              refetch();
-            }}
-          >
-            <Box>Ponderación: {hito.ponderacion}%</Box>
-            <br className="clearfix" />
-          </Editable>
-        </Grid> */}
       </Grid>
     </Grid>
   );

@@ -36,4 +36,5 @@ const BreadcrumbItem = () => {
     </LinkContainer>
   );
 };
+
 export default BreadcrumbItem;

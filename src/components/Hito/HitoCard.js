@@ -1,11 +1,10 @@
 import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import { Link, useParams } from 'react-router-dom';
-import ActividadList from '../Actividad/ActividadList';
 import LinkIcon from '@material-ui/icons/Link';
-
+import ActividadList from '../Actividad/ActividadList';
 import Editable from '../Editable';
 
 const useStyles = makeStyles((theme) => ({

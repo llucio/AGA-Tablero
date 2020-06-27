@@ -8,13 +8,13 @@ import '../../assets/css/burguer-menu.css';
 
 const WEBSITE_BASE_URL = 'https://gobabiertomx.org';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   menuLink: {
-    marginRight: theme.spacing(2)
-  }
+    marginRight: theme.spacing(2),
+  },
 }));
 
-const MenuMovil = props => {
+const MenuMovil = (props) => {
   const classes = useStyles();
 
   return (

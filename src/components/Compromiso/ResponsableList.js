@@ -1,20 +1,20 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
-import CardActions from '@material-ui/core/CardActions';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import CardContent from '@material-ui/core/CardContent';
-import Divider from '@material-ui/core/Divider';
-// import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+// import CardActions from '@material-ui/core/CardActions';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+// import IconButton from '@material-ui/core/IconButton';
+// import CardContent from '@material-ui/core/CardContent';
+// import Divider from '@material-ui/core/Divider';
+// import Grid from '@material-ui/core/Grid';
 
 const responsablesQuery = gql`
   query OrganizacionesResponsables($id: uuid!) {

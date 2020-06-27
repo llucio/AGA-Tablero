@@ -13,22 +13,22 @@ import Button from '@material-ui/core/Button';
 
 const base = process.env.WEBSITE_BASE_URL || 'https://gobabiertomx.org';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
-    className: 'shadow-text'
+    className: 'shadow-text',
   },
   media: {
     height: 55,
     maxWidth: 60,
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 }));
 
 function ElevationScroll(props) {
@@ -36,20 +36,20 @@ function ElevationScroll(props) {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window() : undefined
+    target: window ? window() : undefined,
   });
 
   return React.cloneElement(children, {
-    elevation: trigger ? 10 : 0
+    elevation: trigger ? 10 : 0,
   });
 }
 
 ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
-  window: PropTypes.func
+  window: PropTypes.func,
 };
 
-const MenuPrincipal = props => {
+const MenuPrincipal = (props) => {
   const classes = useStyles();
 
   return (

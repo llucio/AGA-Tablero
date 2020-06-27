@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 import arrayMove from 'array-move';
-import Box from '@material-ui/core/Box';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import Box from '@material-ui/core/Box';
 import { useAuth } from '../hooks';
 import Deletable from './Deletable';
 import Creatable from './Creatable';

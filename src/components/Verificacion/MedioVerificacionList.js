@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { loader, gql } from 'graphql.macro';
 import { useQuery, useMutation } from '@apollo/client';
-import { Image, Transformation } from 'cloudinary-react';
+// import { Image, Transformation } from 'cloudinary-react';
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
@@ -14,7 +14,7 @@ import MedioCreatable from '../MedioCreatable';
 
 const LIST_QUERY = loader('../../queries/MedioVerificacionList.graphql');
 
-const storagePrefix = 'https://descarga.storage.apps.funcionpublica.gob.mx/';
+// const storagePrefix = 'https://descarga.storage.apps.funcionpublica.gob.mx/';
 
 const MedioVerificacionList = ({ actividad }) => {
   const { usuario, loading: authLoading, administrador } = useAuth();

@@ -1,6 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 const STATS_QUERY = gql`
@@ -54,7 +53,7 @@ const STATS_QUERY = gql`
 `;
 
 const CompromisosPieChart = ({ compromisoId }) => {
-  const { data: { hitos } = {}, refetch } = useQuery(STATS_QUERY, {
+  const { data: { hitos } = {} } = useQuery(STATS_QUERY, {
     variables: {
       compromisoId,
     },

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery, gql } from '@apollo/client';
+import ColorHash from 'color-hash';
 import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -10,11 +10,10 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
-import ColorHash from 'color-hash';
 import { useAuth } from '../hooks';
+import moment from '../utils/moment';
 import HtmlEditor from './HtmlEditor';
 import UploadButton from './UploadButton';
-import moment from '../utils/moment';
 
 const colorHash = new ColorHash();
 
