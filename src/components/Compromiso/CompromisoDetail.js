@@ -174,6 +174,7 @@ const CompromisoDetail = () => {
                           className={classes.button}
                           href={compromiso.metadatos?.descarga}
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           <GetAppIcon className={classes.extendedIcon} />
                           Hoja de ruta
@@ -233,36 +234,8 @@ const CompromisoDetail = () => {
 
               <Grid item xs={12}>
                 <h4>Responsables</h4>
-                {/* <Grid container> */}
                 <ResponsableList compromisoId={compromiso.id} />
               </Grid>
-
-              {/* <Grid item xs={12}>
-                <h4>Responsables</h4>
-                <Sortable
-                  typename="responsable_compromiso"
-                  items={compromiso.responsables}
-                  creatable="compromiso_id"
-                  parentId={compromiso.id}
-                  refetch={refetch}
-                  containerComponent={Grid}
-                  deletable
-                  containerProps={{
-                    direction: 'row',
-                    spacing: 2,
-                    container: true,
-                  }}
-                  axis="xy"
-                  itemComponent={({ item: responsable }) => (
-                    <Grid item xs={12} md={6} xl={4}>
-                      <ResponsableCard
-                        key={`resposnable-${responsable.usuario_email}`}
-                        responsable={responsable}
-                      />
-                    </Grid>
-                  )}
-                />
-              </Grid> */}
 
               {compromiso && (
                 <Grid item xs={12}>
@@ -383,6 +356,7 @@ const compromisoTabs = [
         Objetivos de Desarrollo Sostenible
         <IconButton
           target="_blank"
+          rel="noopener noreferrer"
           href="https://www.undp.org/content/undp/es/home/sustainable-development-goals.html"
           edge="start"
           size="small"

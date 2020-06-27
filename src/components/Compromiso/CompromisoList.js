@@ -144,6 +144,7 @@ const CompromisoList = ({ where }) => {
                 href={plan.metadatos?.descarga}
                 download
                 target="_blank"
+                rel="noopener noreferrer"
                 color="primary"
                 aria-label="descargar plan de acción"
                 style={{ width: '300px' }}
