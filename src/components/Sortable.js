@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import arrayMove from 'array-move';
 import Box from '@material-ui/core/Box';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
@@ -10,6 +10,8 @@ import Creatable from './Creatable';
 
 const SortableList = ({
   items,
+  campoFilter,
+  search,
   refetch,
   creatable,
   parentId,
@@ -33,18 +35,31 @@ const SortableList = ({
   `
   );
 
+  let filteredData = items;
+  if (campoFilter) {
+    filteredData = items.filter((data) => {
+      return (
+        data.metadatos[campoFilter]
+          .toLowerCase()
+          .indexOf(search.toLowerCase()) !== -1
+      );
+    });
+  }
+
   const onSort = ({ oldIndex, newIndex }) => {
     setLoading(true);
     Promise.all(
-      arrayMove(items, oldIndex, newIndex).map(({ id, orden }, index) => {
-        if (orden === index) {
-          return Promise.resolve();
+      arrayMove(filteredData, oldIndex, newIndex).map(
+        ({ id, orden }, index) => {
+          if (orden === index) {
+            return Promise.resolve();
+          }
+          return mutateOrden({
+            awaitRefetchQueries: true,
+            variables: { id, orden: index },
+          });
         }
-        return mutateOrden({
-          awaitRefetchQueries: true,
-          variables: { id, orden: index }
-        });
-      })
+      )
     )
       .then(() => {
         refetch().then(() => setLoading(false));
@@ -71,7 +86,7 @@ const SortableList = ({
   const Container = SortableContainer(({ items }) => {
     return (
       <ContainerComponent {...containerProps}>
-        {items.map((value, index) => (
+        {filteredData.map((value, index) => (
           <SortableItem
             key={`${typename}-${value.id}`}
             index={index}

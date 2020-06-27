@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
+// import FuzzySearch from 'react-fuzzy';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import LoadingIndicator from '../LoadingIndicator';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -10,8 +11,8 @@ import DownloadIcon from '@material-ui/icons/GetApp';
 import Grid from '@material-ui/core/Grid';
 import Sortable from '../Sortable';
 import Editable from '../Editable';
-
 import CompromisoCard from './CompromisoCard';
+import TextField from '@material-ui/core/TextField';
 
 const ACTIVIDAD_STATS = gql`
   query CompromisosStats {
@@ -91,6 +92,8 @@ const LIST_QUERY = loader('../../queries/CompromisoList.graphql');
 const CompromisoList = ({ where }) => {
   const classes = useStyles();
 
+  const [search, setSearch] = useState('');
+
   const {
     data: { plan: [plan] = [] } = {},
     loading,
@@ -125,13 +128,6 @@ const CompromisoList = ({ where }) => {
           <h2>Compromisos</h2>
           <hr className="line" />
         </Grid>
-        <Grid item xs={12} sm={3}>
-          {/* <div>Total: {total}</div>
-          <div>Iniciados: {ninguno}</div>
-          <div>Iniciados: {iniciado}</div>
-          <div>Iniciados: {completo}</div>
-          <div>Iniciados: {verificado}</div> */}
-        </Grid>
         <Grid item xs={12} sm={4} align="right">
           <Editable
             upload
@@ -151,33 +147,49 @@ const CompromisoList = ({ where }) => {
                 download
                 target="_blank"
                 color="primary"
-                aria-label="add"
-                variant="extend"
+                aria-label="descargar plan de acción"
                 style={{ width: '300px' }}
                 className={classes.margin}
               >
                 <DownloadIcon />
-                Descarga plan de acción
+                Descargar plan de acción
               </Fab>
             </AgaTooltip>
           </Editable>
         </Grid>
-      </Grid>
 
-      <Sortable
-        items={plan.compromisos}
-        itemComponent={CompromisoCard}
-        refetch={refetch}
-        typename="compromiso"
-        containerComponent={Grid}
-        containerProps={{
-          direction: 'row',
-          justify: 'space-between',
-          alignItems: 'flex-start',
-          container: true,
-        }}
-        axis="xy"
-      />
+        <TextField
+          id="standard-full-width"
+          label=""
+          style={{ margin: 1 }}
+          placeholder="Filtra los Comprimisos Puede ser por:
+          Dependencia Responsable, Institución de Organización Civil Responsable o
+          Miembro del comité coordinador"
+          helperText="Control para filtrar y/o ordenar compromisos"
+          fullWidth
+          margin="normal"
+          name="search"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+
+        <Sortable
+          items={plan.compromisos}
+          campoFilter="dependencia"
+          search={search}
+          itemComponent={CompromisoCard}
+          refetch={refetch}
+          typename="compromiso"
+          containerComponent={Grid}
+          containerProps={{
+            direction: 'row',
+            justify: 'space-between',
+            alignItems: 'flex-start',
+            container: true,
+          }}
+          axis="xy"
+        />
+      </Grid>
     </div>
   );
 };

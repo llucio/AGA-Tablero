@@ -6,7 +6,7 @@ import AwsS3 from '@uppy/aws-s3';
 import Spanish from '@uppy/locales/lib/es_ES';
 import DashboardModal from '@uppy/react/lib/DashboardModal';
 import Dashboard from '@uppy/react/lib/Dashboard';
-import uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
@@ -25,8 +25,8 @@ const locale = {
     myDevice: 'Subir archivo',
     done: 'Hecho',
     failedToFetch:
-      'No se ha podido descargar archivo. Verifica que la URL sea correcta'
-  }
+      'No se ha podido descargar archivo. Verifica que la URL sea correcta',
+  },
 };
 
 const uppy = Uppy({
@@ -36,25 +36,25 @@ const uppy = Uppy({
     maxFileSize: null,
     maxNumberOfFiles: 1,
     minNumberOfFiles: 1,
-    allowedFileTypes: null
+    allowedFileTypes: null,
   },
   locale,
-  onBeforeFileAdded: file => ({
+  onBeforeFileAdded: (file) => ({
     ...file,
-    name: uuidv4()
-  })
+    name: uuidv4(),
+  }),
 }).use(AwsS3, { companionUrl });
 
 const UploadButton = ({
   value,
   handleChange,
   label = 'Cambiar archivo',
-  modal = true
+  modal = true,
 }) => {
   const [open, setOpen] = useState(!value);
 
   useEffect(() => {
-    const onComplete = result => {
+    const onComplete = (result) => {
       const [file] = result.successful;
       if (file) {
         handleChange(file.uploadURL);

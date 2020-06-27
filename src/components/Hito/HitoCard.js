@@ -8,20 +8,20 @@ import LinkIcon from '@material-ui/icons/Link';
 
 import Editable from '../Editable';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   box_panel: {
-    padding: theme.spacing(5, 0, 10, 0)
+    padding: theme.spacing(5, 0, 10, 0),
   },
   panel: {
-    width: '100%'
+    width: '100%',
   },
   panel_heading: {
     fontSize: theme.typography.pxToRem(18),
-    fontWeight: theme.typography.fontWeightRegular
+    fontWeight: theme.typography.fontWeightRegular,
   },
   extendedIcon: {
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const HitoCard = ({ item: hito, refetch }) => {
@@ -37,7 +37,7 @@ const HitoCard = ({ item: hito, refetch }) => {
             <span>{hito.titulo || 'Sin título'}</span>
           </Editable>
         </h4>
-        <p>
+        <div>
           <Editable
             item={hito}
             path="ponderacion"
@@ -49,7 +49,7 @@ const HitoCard = ({ item: hito, refetch }) => {
           >
             Ponderación <span>{hito.ponderacion}%</span>
           </Editable>
-        </p>
+        </div>
         <Box>
           <Button
             to={`/compromiso/${compromisoSlug}/${hito.id}`}

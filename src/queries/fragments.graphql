@@ -129,15 +129,18 @@ fragment Conversacion on conversacion {
 }
 
 fragment ResponsableCompromiso on responsable_compromiso {
-  id
+  fecha_creacion
   compromiso_id
   metadatos
+  usuario_email
 }
 
-fragment ResponsableHito on responsable_compromiso {
-  id
+fragment ResponsableHito on responsable_hito {
+  fecha_creacion
   hito_id
   metadatos
+  usuario_email
+  organizacion_id
 }
 
 fragment Organizacion on organizacion {
@@ -152,4 +155,7 @@ fragment Usuario on usuario {
   nombre
   metadatos
   organizacion_id
+  organizacion {
+    ...Organizacion
+  }
 }

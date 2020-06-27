@@ -1,6 +1,6 @@
 import React from 'react';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import LoadingIndicator from '../LoadingIndicator';
 import Sortable from '../Sortable';
 import ActividadCard from './ActividadCard';
@@ -12,12 +12,12 @@ const ActividadList = ({ where, hitoId }) => {
     data: { items: actividades = [] } = {},
     loading,
     error,
-    refetch
+    refetch,
   } = useQuery(LIST_QUERY, {
     variables: {
-      where
+      where,
     },
-    fetchPolicy: 'cache-and-network'
+    fetchPolicy: 'cache-and-network',
   });
 
   if (error) return <div>Error</div>;

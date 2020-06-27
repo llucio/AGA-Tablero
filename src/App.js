@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Sentry from '@sentry/browser';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Container from 'react-bootstrap/Container';
@@ -28,25 +28,25 @@ const routes = [
     component: CompromisoList,
     headerProps: {
       subheading:
-        'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.'
-    }
+        'En este espacio podrás dar seguimiento y monitorear el avance de los compromisos que México adoptó en su 4° Plan de Acción Nacional 2019-2021 en la Alianza para el Gobierno Abierto.',
+    },
   },
   {
     path: '/compromiso/:compromisoSlug',
-    component: CompromisoDetail
+    component: CompromisoDetail,
   },
   {
     path: '/compromiso/:compromisoSlug/:hitoId',
-    component: HitoDetail
-  }
+    component: HitoDetail,
+  },
 ];
 
 const theme = {
   calendarIcon: {
     textColor: 'white',
     primaryColor: '#0da472',
-    backgroundColor: '#fafafa'
-  }
+    backgroundColor: '#fafafa',
+  },
 };
 
 const App = () => (

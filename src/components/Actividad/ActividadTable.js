@@ -1,6 +1,6 @@
 import React from 'react';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import LoadingIndicator from '../LoadingIndicator';
 import MedioVerificacionList from '../Verificacion/MedioVerificacionList';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
