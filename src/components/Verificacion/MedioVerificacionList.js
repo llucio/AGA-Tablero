@@ -44,13 +44,13 @@ const MedioVerificacionList = ({ actividad }) => {
 
   if (authLoading || dataLoading) return <LoadingIndicator />;
 
-  const responsableHito =
+  const responsableAccion =
     usuario &&
-    _.find(usuario.responsable_hitos, { hito_id: actividad.hito.id });
+    _.find(usuario.responsable_acciones, { accion_id: actividad.accion.id });
   const responsableCompromiso =
     usuario &&
     _.find(usuario.responsable_compromisos, {
-      compromiso_id: actividad.hito.compromiso_id,
+      compromiso_id: actividad.accion.compromiso_id,
     });
 
   return (
@@ -70,7 +70,7 @@ const MedioVerificacionList = ({ actividad }) => {
                 </Link>
                 <blockquote>
                   <date>Cargado el {moment(fecha_creacion).format('LL')}</date>
-                  {(responsableHito ||
+                  {(responsableAccion ||
                     responsableCompromiso ||
                     administrador) && (
                     <IconButton
@@ -90,7 +90,7 @@ const MedioVerificacionList = ({ actividad }) => {
           )
         )}
       </div>
-      {(responsableHito || responsableCompromiso || administrador) && (
+      {(responsableAccion || responsableCompromiso || administrador) && (
         <MedioCreatable
           typename="medio_verificacion"
           parentKey="actividad_id"

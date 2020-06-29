@@ -23,22 +23,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HitoCard = ({ item: hito, refetch }) => {
+const AccionCard = ({ item: accion, refetch }) => {
   const classes = useStyles();
   const { compromisoSlug } = useParams();
 
   return (
     <Box className={classes.panel}>
       <Box className="">
-        <a name={`hito-${hito.id}`} className="nameTopSpacing" />
+        <a name={`accion-${accion.id}`} className="nameTopSpacing" />
         <h4 className="extra-bold">
-          <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-            <span>{hito.titulo || 'Sin título'}</span>
+          <Editable
+            item={accion}
+            path="titulo"
+            label="Título"
+            onUpdate={refetch}
+          >
+            <span>{accion.titulo || 'Sin título'}</span>
           </Editable>
         </h4>
         <div>
           <Editable
-            item={hito}
+            item={accion}
             path="ponderacion"
             label="Ponderación"
             valueType="Float"
@@ -46,12 +51,12 @@ const HitoCard = ({ item: hito, refetch }) => {
               refetch();
             }}
           >
-            Ponderación <span>{hito.ponderacion}%</span>
+            Ponderación <span>{accion.ponderacion}%</span>
           </Editable>
         </div>
         <Box>
           <Button
-            to={`/compromiso/${compromisoSlug}/${hito.id}`}
+            to={`/compromiso/${compromisoSlug}/${accion.id}`}
             component={Link}
             color="primary"
             className="blue-grey lighten-5"
@@ -62,8 +67,8 @@ const HitoCard = ({ item: hito, refetch }) => {
         </Box>
         <Box>
           <ActividadList
-            hitoId={hito.id}
-            where={{ hito_id: { _eq: hito.id } }}
+            accionId={accion.id}
+            where={{ accion_id: { _eq: accion.id } }}
           />
         </Box>
       </Box>
@@ -71,4 +76,4 @@ const HitoCard = ({ item: hito, refetch }) => {
   );
 };
 
-export default HitoCard;
+export default AccionCard;

@@ -9,8 +9,8 @@ query UsuarioGet($id: String!) {
     responsable_compromisos {
       compromiso_id
     }
-    responsable_hitos {
-      hito_id
+    responsable_acciones {
+      accion_id
     }
   }
 }

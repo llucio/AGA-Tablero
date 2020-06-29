@@ -31,7 +31,7 @@ import Editable from '../Editable';
 import Sortable from '../Sortable';
 import DataDisplay from '../DataDisplay';
 import LoadingIndicator from '../LoadingIndicator';
-import HitoList from '../Hito/HitoList.js';
+import AccionList from '../Accion/AccionList.js';
 import Conversacion from '../Conversacion/Conversacion';
 import CompromisosPieChart from './CompromisosPieChart';
 import ResponsableList from './ResponsableList';
@@ -137,8 +137,8 @@ const CompromisoDetail = () => {
                     <strong>Acciones clave</strong>
                   </h6>
                   <Sortable
-                    typename="hito"
-                    items={compromiso.hitos}
+                    typename="accion"
+                    items={compromiso.acciones}
                     creatable="compromiso_id"
                     parentId={compromiso.id}
                     refetch={refetch}
@@ -146,7 +146,7 @@ const CompromisoDetail = () => {
                     axis="y"
                     itemComponent={({ item: { titulo, id } }) => (
                       <div key={`sidebar-${id}`} className={classes.margin}>
-                        <Link href={`#hito-${id}`}>
+                        <Link href={`#accion-${id}`}>
                           {titulo || 'Sin título'}
                         </Link>
                       </div>
@@ -166,13 +166,13 @@ const CompromisoDetail = () => {
                       aria-label="descarga"
                       placement="right"
                     >
-                      {compromiso.metadatos?.descarga && (
+                      {compromiso.metadatos.descarga && (
                         <Fab
                           variant="extended"
                           size="large"
                           color="primary"
                           className={classes.button}
-                          href={compromiso.metadatos?.descarga}
+                          href={compromiso.metadatos.descarga}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -206,7 +206,7 @@ const CompromisoDetail = () => {
               onUpdate={refetch}
             >
               <img
-                src={compromiso.metadatos?.imagen}
+                src={compromiso.metadatos.imagen}
                 alt="compromiso"
                 height={100}
               />
@@ -226,7 +226,7 @@ const CompromisoDetail = () => {
                     onUpdate={refetch}
                   >
                     <DataDisplay
-                      data={compromiso.metadatos?.descripcion || ''}
+                      data={compromiso.metadatos.descripcion || ''}
                     />
                   </Editable>
                 </Box>
@@ -255,7 +255,7 @@ const CompromisoDetail = () => {
                 label="Dependencia"
                 onUpdate={refetch}
               >
-                <DataDisplay data={compromiso.metadatos?.dependencia || ''} />
+                <DataDisplay data={compromiso.metadatos.dependencia || ''} />
               </Editable>
               <h4 className="mt-3">Organizaciones Corresponsables</h4>
               <Editable
@@ -265,49 +265,50 @@ const CompromisoDetail = () => {
                 label="Organización corresponsable"
                 onUpdate={refetch}
               >
-                <DataDisplay
-                  data={compromiso.metadatos?.corresponsable || ''}
-                />
+                <DataDisplay data={compromiso.metadatos.corresponsable || ''} />
               </Editable>
             </Box>
             <Box className="pt-3">
-              {compromisoTabs
-                .filter(
-                  ({ key }) =>
-                    administrador ||
-                    `${compromiso.metadatos?.[key] || ''}`.replace(
-                      /\s*<p>\s*<\/p>\s*/g,
-                      ''
-                    )
-                )
-                .map(({ key, label }, i) => (
-                  <ExpansionPanel className="elevation-0" key={i}>
-                    <ExpansionPanelSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls={`panel-content.${key}`}
-                      id={`panel-content-${key}`}
-                    >
-                      <Typography className="panel_heading extra-bold">
-                        {label}
-                      </Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                      <Typography className="light">
-                        <Editable
-                          item={compromiso}
-                          label={label}
-                          path={`metadatos.${key}`}
-                          onUpdate={refetch}
-                          html
-                        >
-                          <DataDisplay
-                            data={compromiso.metadatos?.[key] || ''}
-                          />
-                        </Editable>
-                      </Typography>
-                    </ExpansionPanelDetails>
-                  </ExpansionPanel>
-                ))}
+              {console.log(compromiso.metadatos) ||
+                compromisoTabs
+                  .filter(
+                    ({ key }) =>
+                      administrador ||
+                      `${compromiso.metadatos[key] || ''}`.replace(
+                        /\s*<p>\s*<\/p>\s*/g,
+                        ''
+                      )
+                  )
+                  .map(({ key, label }, i) => (
+                    <ExpansionPanel className="elevation-0" key={i}>
+                      <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls={`panel-content.${key}`}
+                        id={`panel-content-${key}`}
+                      >
+                        <Typography className="panel_heading extra-bold">
+                          {label}
+                        </Typography>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails>
+                        <Typography className="light">
+                          <Editable
+                            item={compromiso}
+                            label={label}
+                            path={`metadatos.${key}`}
+                            onUpdate={refetch}
+                            html
+                          >
+                            <>
+                              <DataDisplay
+                                data={compromiso.metadatos[key] || ''}
+                              />
+                            </>
+                          </Editable>
+                        </Typography>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                  ))}
             </Box>
             <Box className="pt-3">
               <h2>Discusión y comentarios</h2>
@@ -317,7 +318,7 @@ const CompromisoDetail = () => {
             <Box className="pt-4">
               <h2>Acciones clave</h2>
               <hr className="line" />
-              <HitoList where={{ compromiso_id: { _eq: compromiso.id } }} />
+              <AccionList where={{ compromiso_id: { _eq: compromiso.id } }} />
             </Box>
           </Grid>
         </Grid>

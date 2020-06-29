@@ -54,18 +54,19 @@ const Editable = ({
   onUpdate,
   autoClose = true,
   adminOnly = false,
-  children,
   html = false,
   upload = false,
   label,
-  uploadType = 'image',
   type,
+  uploadType = 'image',
+  children,
 }) => {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const { administrador } = useAuth();
   const [value, setValue] = useState();
   const [field, subField] = path.split('.');
-  const { data: { queryResult } = {} /* refetch */ } = useQuery(
+  const { data: { queryResult } = {} } = useQuery(
     getQuery({ typename, field, subField }),
     {
       variables: { id },
@@ -73,7 +74,6 @@ const Editable = ({
       fetchPolicy: 'cache-and-network',
     }
   );
-  const classes = useStyles();
 
   const [executeMutation] = useMutation(
     getMutation({ typename, field, subField, valueType })
@@ -159,10 +159,12 @@ const Editable = ({
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
             ) : html ? (
-              <HtmlEditor
-                value={value}
-                onChange={({ target: { value } = {} }) => handleChange(value)}
-              />
+              console.log('aiaiaiaiaiaiaiiaia') || (
+                <HtmlEditor
+                  value={value}
+                  onChange={({ target: { value } = {} }) => handleChange(value)}
+                />
+              )
             ) : upload ? (
               <div>
                 {value &&

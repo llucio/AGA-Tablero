@@ -34,7 +34,7 @@ const ACTIVIDAD_STATS = gql`
     }
     iniciado: actividad_aggregate(
       where: {
-        # hito_id: { _eq: $hitoId }
+        # accion_id: { _eq: $accionId }
         metadatos: { _contains: { estatus: "iniciado" } }
       }
     ) {
@@ -44,7 +44,7 @@ const ACTIVIDAD_STATS = gql`
     }
     completo: actividad_aggregate(
       where: {
-        # hito_id: { _eq: $hitoId }
+        # accion_id: { _eq: $accionId }
         metadatos: { _contains: { estatus: "completo" } }
       }
     ) {
@@ -54,7 +54,7 @@ const ACTIVIDAD_STATS = gql`
     }
     verificado: actividad_aggregate(
       where: {
-        # hito_id: { _eq: $hitoId }
+        # accion_id: { _eq: $accionId }
         metadatos: { _contains: { estatus: "verificado" } }
       }
     ) {

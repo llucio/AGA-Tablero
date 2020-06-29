@@ -8,7 +8,7 @@ query MedioVerificacionList($where: medio_verificacion_bool_exp) {
     ...MedioVerificacion
     actividad {
       id
-      hito {
+      accion {
         id
         compromiso_id
       }

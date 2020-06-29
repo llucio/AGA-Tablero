@@ -13,18 +13,18 @@ import ActividadTable from '../Actividad/ActividadTable';
 import Conversacion from '../Conversacion/Conversacion';
 import MultiColorProgressBar from '../MultiColorProgressBar';
 
-const GET_QUERY = loader('../../queries/HitoGet.graphql');
+const GET_QUERY = loader('../../queries/AccionGet.graphql');
 
 const ACTIVIDAD_STATS = gql`
-  query HitoStats($hitoId: uuid!) {
-    total: actividad_aggregate(where: { hito_id: { _eq: $hitoId } }) {
+  query AccionStats($accionId: uuid!) {
+    total: actividad_aggregate(where: { accion_id: { _eq: $accionId } }) {
       aggregate {
         count
       }
     }
     ninguno: actividad_aggregate(
       where: {
-        hito_id: { _eq: $hitoId }
+        accion_id: { _eq: $accionId }
         _or: [
           { metadatos: { _contains: { estatus: "ninguno" } } }
           { _not: { metadatos: { _has_key: "estatus" } } }
@@ -37,7 +37,7 @@ const ACTIVIDAD_STATS = gql`
     }
     iniciado: actividad_aggregate(
       where: {
-        hito_id: { _eq: $hitoId }
+        accion_id: { _eq: $accionId }
         metadatos: { _contains: { estatus: "iniciado" } }
       }
     ) {
@@ -47,7 +47,7 @@ const ACTIVIDAD_STATS = gql`
     }
     completo: actividad_aggregate(
       where: {
-        hito_id: { _eq: $hitoId }
+        accion_id: { _eq: $accionId }
         metadatos: { _contains: { estatus: "completo" } }
       }
     ) {
@@ -57,7 +57,7 @@ const ACTIVIDAD_STATS = gql`
     }
     verificado: actividad_aggregate(
       where: {
-        hito_id: { _eq: $hitoId }
+        accion_id: { _eq: $accionId }
         metadatos: { _contains: { estatus: "verificado" } }
       }
     ) {
@@ -83,28 +83,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HitoDetail = () => {
-  const { hitoId } = useParams();
+const AccionDetail = () => {
+  const { accionId } = useParams();
   const classes = useStyles();
 
-  const { data: { item: hito } = {}, loading, error, refetch } = useQuery(
+  const { data: { item: accion } = {}, loading, error, refetch } = useQuery(
     GET_QUERY,
     {
       variables: {
-        id: hitoId,
+        id: accionId,
       },
     }
   );
 
   if (error) return <div>Error</div>;
-  if (loading && !hito) return <LoadingIndicator />;
-  if (!hito) return <h1>No encontrado</h1>;
+  if (loading && !accion) return <LoadingIndicator />;
+  if (!accion) return <h1>No encontrado</h1>;
 
   return (
     <div className={classes.root}>
       <Box className="compromiso-content">
         <Grid className={classes.header}>
-          <HitoHeader hito={hito} refetch={refetch} />
+          <AccionHeader accion={accion} refetch={refetch} />
         </Grid>
 
         <Grid container spacing={1}>
@@ -114,12 +114,12 @@ const HitoDetail = () => {
             </h5>
             <Editable
               html
-              item={hito}
+              item={accion}
               path="metadatos.descripcion"
               label="Descripción"
               onUpdate={refetch}
             >
-              <DataDisplay data={hito.metadatos?.descripcion} />
+              <DataDisplay data={accion.metadatos?.descripcion} />
             </Editable>
           </Grid>
           <Grid item xs={12} md={4}>
@@ -128,14 +128,14 @@ const HitoDetail = () => {
             </h5>
             <Editable
               html
-              item={hito}
+              item={accion}
               path="metadatos.institucionesResponsables"
               label="Instituciones responsables"
               onUpdate={refetch}
             >
               <DataDisplay
                 className="d-block"
-                data={hito.metadatos?.institucionesResponsables}
+                data={accion.metadatos?.institucionesResponsables}
               />
             </Editable>
           </Grid>
@@ -143,16 +143,16 @@ const HitoDetail = () => {
         <Box className="pt-3">
           <h3>Discusión y comentarios</h3>
           <hr className="line" />
-          <Conversacion item={hito} refetch={refetch} />
+          <Conversacion item={accion} refetch={refetch} />
         </Box>
 
-        <ActividadTable where={{ hito_id: { _eq: hito.id } }} />
+        <ActividadTable where={{ accion_id: { _eq: accion.id } }} />
       </Box>
     </div>
   );
 };
 
-const HitoHeader = ({ hito, refetch: parentRefetch }) => {
+const AccionHeader = ({ accion, refetch: parentRefetch }) => {
   const {
     data: {
       total: { aggregate: { count: total } = {} } = {},
@@ -164,7 +164,7 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
     refetch: statsRefetch,
   } = useQuery(ACTIVIDAD_STATS, {
     variables: {
-      hitoId: hito.id,
+      accionId: accion.id,
     },
   });
 
@@ -206,8 +206,8 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} md={8}>
-        <Editable item={hito} path="titulo" label="Título" onUpdate={refetch}>
-          <h2 className="bold">{hito.titulo}</h2>
+        <Editable item={accion} path="titulo" label="Título" onUpdate={refetch}>
+          <h2 className="bold">{accion.titulo}</h2>
         </Editable>
       </Grid>
       <Grid
@@ -217,26 +217,26 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
         className="d-flex justify-content-around widget-calendar light-blue-text text-uppercase extra-bold text-center"
       >
         <Editable
-          item={hito}
+          item={accion}
           path="fecha_inicial"
           label="Fecha inicial"
           type="date"
           valueType="timestamptz"
           onUpdate={refetch}
         >
-          {!!hito.fecha_inicial && (
+          {!!accion.fecha_inicial && (
             <Box
               style={{
                 display: 'inline-block',
               }}
             >
-              <CalendarIcon date={hito.fecha_inicial} />
+              <CalendarIcon date={accion.fecha_inicial} />
               Inicio
             </Box>
           )}
         </Editable>
         <Editable
-          item={hito}
+          item={accion}
           path="fecha_final"
           label="Fecha final"
           type="date"
@@ -246,9 +246,9 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
             display: 'inline-block',
           }}
         >
-          {!!hito.fecha_final && (
+          {!!accion.fecha_final && (
             <Box>
-              <CalendarIcon date={hito.fecha_final} />
+              <CalendarIcon date={accion.fecha_final} />
               Fin
             </Box>
           )}
@@ -264,4 +264,4 @@ const HitoHeader = ({ hito, refetch: parentRefetch }) => {
   );
 };
 
-export default HitoDetail;
+export default AccionDetail;

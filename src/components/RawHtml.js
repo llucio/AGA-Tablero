@@ -8,12 +8,16 @@ TODO: Sanitizar para evitar exponer a usuarios a araques XSS
 
 const RawHtml = ({ children, as: Component = 'div', ...props }) => {
   return isString(children) ? (
-    <Component
-      {...props}
-      dangerouslySetInnerHTML={{
-        __html: children.replace(/\n/g, '').replace(/font-family:[^;]+;/g, ''),
-      }}
-    />
+    console.log('aaamxi') || (
+      <Component
+        {...props}
+        dangerouslySetInnerHTML={{
+          __html: children
+            .replace(/\n/g, '')
+            .replace(/font-family:[^;]+;/g, ''),
+        }}
+      />
+    )
   ) : (
     <Component>{children}</Component>
   );

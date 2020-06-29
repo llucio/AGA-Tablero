@@ -3,8 +3,8 @@ import { useQuery, gql } from '@apollo/client';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 const STATS_QUERY = gql`
-  query HitoStats($compromisoId: uuid!) {
-    hitos: hito(
+  query AccionStats($compromisoId: uuid!) {
+    acciones: accion(
       order_by: { orden: asc }
       where: { compromiso_id: { _eq: $compromisoId } }
     ) {
@@ -53,19 +53,19 @@ const STATS_QUERY = gql`
 `;
 
 const CompromisosPieChart = ({ compromisoId }) => {
-  const { data: { hitos } = {} } = useQuery(STATS_QUERY, {
+  const { data: { acciones } = {} } = useQuery(STATS_QUERY, {
     variables: {
       compromisoId,
     },
   });
 
-  const outer = hitos?.map((hito, i) => ({
-    name: hito.titulo,
-    value: hito.ponderacion,
+  const outer = acciones?.map((accion, i) => ({
+    name: accion.titulo,
+    value: accion.ponderacion,
     label: `${i + 1}`,
   }));
 
-  const inner = hitos
+  const inner = acciones
     ?.reduce(
       (acc, curr) => [
         ...acc,

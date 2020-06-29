@@ -57,7 +57,7 @@ const Conversacion = ({ item }) => {
     case 'compromiso':
       compromisoId = item.id;
       break;
-    case 'hito':
+    case 'accion':
       compromisoId = item.compromiso_id;
       break;
     case 'actividad':

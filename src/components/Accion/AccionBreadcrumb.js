@@ -5,10 +5,10 @@ import LoadingIndicator from '../LoadingIndicator';
 import Hidden from '@material-ui/core/Hidden';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
-const GET_QUERY = loader('../../queries/HitoGet.graphql');
+const GET_QUERY = loader('../../queries/AccionGet.graphql');
 
-const BreadcrumbHito = (props) => {
-  const idItem = props.hitoId;
+const AccionBreadcrumb = (props) => {
+  const idItem = props.accionId;
 
   const { data: { item } = {}, loading, error } = useQuery(GET_QUERY, {
     variables: {
@@ -30,4 +30,4 @@ const BreadcrumbHito = (props) => {
   );
 };
 
-export default BreadcrumbHito;
+export default AccionBreadcrumb;

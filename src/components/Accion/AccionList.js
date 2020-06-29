@@ -4,12 +4,12 @@ import { loader } from 'graphql.macro';
 import LoadingIndicator from '../LoadingIndicator';
 import Grid from '@material-ui/core/Grid';
 import Sortable from '../Sortable';
-import HitoCard from './HitoCard';
+import AccionCard from './AccionCard';
 
-const LIST_QUERY = loader('../../queries/HitoList.graphql');
+const LIST_QUERY = loader('../../queries/AccionList.graphql');
 
-const HitoList = ({ where }) => {
-  const { data: { items: hitos } = {}, loading, error, refetch } = useQuery(
+const AccionList = ({ where }) => {
+  const { data: { items: acciones } = {}, loading, error, refetch } = useQuery(
     LIST_QUERY,
     {
       variables: {
@@ -20,15 +20,15 @@ const HitoList = ({ where }) => {
   );
 
   if (error) return <div>Error</div>;
-  if (loading && !hitos) return <LoadingIndicator />;
-  if (!hitos) return null;
+  if (loading && !acciones) return <LoadingIndicator />;
+  if (!acciones) return null;
 
   return (
     <div className="vertical-margin">
       <Sortable
-        typeName="hito"
-        items={hitos}
-        itemComponent={HitoCard}
+        typeName="accion"
+        items={acciones}
+        itemComponent={AccionCard}
         containerComponent={Grid}
         containerProps={{
           direction: 'row',
@@ -43,4 +43,4 @@ const HitoList = ({ where }) => {
   );
 };
 
-export default HitoList;
+export default AccionList;

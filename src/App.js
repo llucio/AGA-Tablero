@@ -12,7 +12,7 @@ import BreadcrumbBar from './components/Layout/BreadcrumbBar';
 import Footer from './components/Layout/Footer';
 import CompromisoList from './components/Compromiso/CompromisoList';
 import CompromisoDetail from './components/Compromiso/CompromisoDetail';
-import HitoDetail from './components/Hito/HitoDetail';
+import AccionDetail from './components/Accion/AccionDetail';
 import ScrollToTop from './components/ScrollToTop';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -36,8 +36,8 @@ const routes = [
     component: CompromisoDetail,
   },
   {
-    path: '/compromiso/:compromisoSlug/:hitoId',
-    component: HitoDetail,
+    path: '/compromiso/:compromisoSlug/:accionId',
+    component: AccionDetail,
   },
 ];
 
