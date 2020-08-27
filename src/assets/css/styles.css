@@ -9,6 +9,42 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.aga-grey-1 {
+  background-color: #4f5357 !important;
+}
+
+.aga-grey-2 {
+  background-color: #839ea2 !important;
+}
+
+.aga-orange-1 {
+  background-color: #f89d45 !important;
+}
+
+.aga-red-1 {
+  background-color: #ee3e43 !important;
+}
+
+.aga-red-1 {
+  background-color: #ef5045 !important;
+}
+
+.aga-green-1 {
+  background-color: #dde86e !important;
+}
+
+.aga-green-2 {
+  background-color: #13a758 !important;
+}
+
+.aga-blue-1 {
+  background-color: #1390c8 !important;
+}
+
+.aga-blue-2 {
+  background-color: #1e3666 !important;
+}
+
 .light {
   font-weight: 300 !important;
 }

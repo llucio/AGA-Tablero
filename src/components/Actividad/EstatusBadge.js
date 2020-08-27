@@ -28,27 +28,27 @@ const ESTATUSES = {
   ninguno: {
     icon: <AccessAlarms />,
     title: 'Por iniciar',
-    fabClassName: 'grey lighten-2 white-text',
+    fabClassName: 'aga-grey-2 white-text',
     siguiente: 'iniciado',
   },
   iniciado: {
     icon: <Timelapse />,
     title: 'En proceso',
-    fabClassName: 'amber white-text',
+    fabClassName: 'aga-orange-1 white-text',
     siguiente: 'completo',
     anterior: 'ninguno',
   },
   completo: {
     icon: <DoneIcon />,
     title: 'Completo',
-    fabClassName: 'lime darken-2 white-text',
+    fabClassName: 'aga-blue-1 white-text',
     siguiente: 'verificado',
     anterior: 'iniciado',
   },
   verificado: {
     icon: <DoneAllIcon />,
     title: 'Verificado',
-    fabClassName: 'lime darken-4 white-text',
+    fabClassName: 'aga-green-2 white-text',
     anterior: 'completo',
   },
 };

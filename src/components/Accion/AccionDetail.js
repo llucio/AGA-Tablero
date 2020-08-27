@@ -177,29 +177,31 @@ const AccionHeader = ({ accion, refetch: parentRefetch }) => {
       name: `${verificado} ${
         verificado > 1 ? 'actividades verificadas' : 'actividad verificada'
       }`,
-      value: (verificado / total) * 100,
-      color: '#388e3c',
+      value: Math.floor((verificado / total) * 100),
+      color: '#13A758',
     },
     {
       name: `${completo} ${
-        completo > 1 ? 'actividades por ferificar' : 'actividad por verificar'
+        completo > 1
+          ? 'actividades completas por ferificar'
+          : 'actividad completa por verificar'
       }`,
-      value: (completo / total) * 100,
-      color: '#afb42b',
+      value: Math.floor((completo / total) * 100),
+      color: '#1390C8',
     },
     {
       name: `${iniciado} ${
         iniciado > 1 ? 'actividades iniciadas' : 'actividad iniciada'
       }`,
-      value: (iniciado / total) * 100,
-      color: '#ffc107',
+      value: Math.floor((iniciado / total) * 100),
+      color: '#F89D45',
     },
     {
       name: `${ninguno} ${
         ninguno > 1 ? 'actividades' : 'actividad'
       } sin iniciar`,
-      value: (ninguno / total) * 100,
-      color: '#cccccc',
+      value: Math.floor((ninguno / total) * 100),
+      color: '#839EA2',
     },
   ];
 

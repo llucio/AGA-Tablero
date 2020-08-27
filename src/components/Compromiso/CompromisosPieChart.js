@@ -76,7 +76,7 @@ const CompromisosPieChart = ({ compromisoId }) => {
             curr.total.aggregate.count,
           count: curr.ninguno.aggregate.count,
           type: 'Sin iniciar',
-          color: '#cccccc',
+          color: '#839EA2',
         },
         {
           name: curr.titulo,
@@ -85,7 +85,7 @@ const CompromisosPieChart = ({ compromisoId }) => {
             curr.total.aggregate.count,
           count: curr.iniciado.aggregate.count,
           type: 'Iniciado',
-          color: '#ffc107',
+          color: '#F89D45',
         },
         {
           name: curr.titulo,
@@ -94,7 +94,7 @@ const CompromisosPieChart = ({ compromisoId }) => {
             curr.total.aggregate.count,
           count: curr.completo.aggregate.count,
           type: 'Por verificar',
-          color: '#afb42b',
+          color: '#1390C8',
         },
         {
           name: curr.titulo,
@@ -103,7 +103,7 @@ const CompromisosPieChart = ({ compromisoId }) => {
             curr.total.aggregate.count,
           count: curr.verificado.aggregate.count,
           type: 'Verificado',
-          color: '#388e3c',
+          color: '#13A758',
         },
       ],
       []
@@ -120,7 +120,7 @@ const CompromisosPieChart = ({ compromisoId }) => {
             data={outer}
             dataKey="value"
             outerRadius={70}
-            fill="#3f51b5"
+            fill="#1E3666"
             labelLine={false}
             label={({ cx, cy, midAngle, innerRadius, outerRadius, label }) => {
               const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
