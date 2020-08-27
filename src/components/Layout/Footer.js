@@ -332,6 +332,44 @@ const Footer = (props) => {
 
         <Grid
           container
+          direction="column"
+          justify="center"
+          alignItems="flex-start"
+        >
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            style={{ maxWidth: '600px', margin: '0 auto' }}
+          >
+            <Box className={classes.box_one}>
+              <Link
+                href="https://gitlab.funcionpublica.gob.mx/aga"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.link}
+              >
+                <CardMedia
+                  component="img"
+                  alt="Gobierno Abierto"
+                  className={classes.media}
+                  style={{
+                    width: '120px',
+                    textAlign: 'center',
+                    margin: '0 auto',
+                  }}
+                  image="https://opensource.org/files/osi_greyscale_for_use_on_dark_backgrounds_logo_0.png"
+                  title="Código abierto"
+                />
+                <div style={{ color: 'white' }}>
+                  AGA es un proyecto de código abierto.
+                </div>
+              </Link>
+            </Box>
+          </Grid>
+        </Grid>
+        <Grid
+          container
           direction="row"
           justify="center"
           alignItems="flex-start"
