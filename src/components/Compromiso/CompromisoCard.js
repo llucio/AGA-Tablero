@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import '../../assets/css/efectos.css';
+import Flippy, { FrontSide, BackSide } from 'react-flippy';
+import draftToHtml from 'draftjs-to-html';
 import '../../assets/css/image-effects.css';
 
 // Para imágenes aleatorias (provisional)
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CompromisoCard = ({ item: compromiso, index }) => {
   const classes = useStyles();
+  const ref = useRef();
 
   const imageUrl =
     compromiso.metadatos?.imagen || `${defaultImage}?${compromiso.id}`;
@@ -37,20 +40,48 @@ const CompromisoCard = ({ item: compromiso, index }) => {
           height: '320px',
         }}
       >
-        <Box className="img-gradiente box-4">
-          <Link
-            to={`/compromiso/${compromiso.slug}`}
-            className="white-text shadow-text"
-          >
-            <Typography
-              gutterBottom
-              variant="h4"
-              className="image-over extra-bold"
-            >
-              {compromiso.titulo}
-            </Typography>
-          </Link>
-        </Box>
+        <Flippy
+          flipOnHover={true} // default false
+          flipOnClick={false} // default false
+          flipDirection="horizontal" // horizontal or vertical
+          // isFlipped
+          // ref={() =>}
+          // ref={(r) => (flippy = r)} // to use toggle method like this.flippy.toggle()
+          // if you pass isFlipped prop component will be controlled component.
+          // and other props, which will go to div
+          style={{ margin: 0, padding: 0, height: '320px' }} /// these are optional style, it is not necessary
+        >
+          <FrontSide style={{ padding: 0 }}>
+            <Box className="img-gradiente box-4">
+              <Link
+                to={`/compromiso/${compromiso.slug}`}
+                className="white-text shadow-text"
+              >
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  className="image-over extra-bold"
+                >
+                  {compromiso.titulo}
+                </Typography>
+              </Link>
+            </Box>
+          </FrontSide>
+          <BackSide style={{ padding: 0 }}>
+            <Box className="img-gradiente box-4">
+              <Link
+                to={`/compromiso/${compromiso.slug}`}
+                className="white-text"
+              >
+                <Typography gutterBottom variant="body" className="image-over">
+                  <div style={{ overflow: 'hidden' }}>
+                    {compromiso.metadatos.descripcion}
+                  </div>
+                </Typography>
+              </Link>
+            </Box>
+          </BackSide>
+        </Flippy>
       </Box>
     </Grid>
   );
