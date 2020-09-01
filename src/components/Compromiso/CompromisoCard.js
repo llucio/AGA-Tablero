@@ -64,6 +64,12 @@ const CompromisoCard = ({ item: compromiso, index }) => {
                 >
                   {compromiso.titulo}
                 </Typography>
+                <img
+                  src="/medal.png"
+                  width={70}
+                  style={{ position: 'absolute' }}
+                  alt="medalla"
+                />
               </Link>
             </Box>
           </FrontSide>
