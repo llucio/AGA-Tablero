@@ -12,54 +12,52 @@ import Sortable from '../Sortable';
 import Editable from '../Editable';
 import CompromisoCard from './CompromisoCard';
 import TextField from '@material-ui/core/TextField';
+import StackedBar from './StackedBar';
 
 const ACTIVIDAD_STATS = gql`
-  query CompromisosStats {
-    total: actividad_aggregate {
-      aggregate {
-        count
-      }
-    }
-    ninguno: actividad_aggregate(
-      where: {
-        _or: [
-          { metadatos: { _contains: { estatus: "ninguno" } } }
-          { _not: { metadatos: { _has_key: "estatus" } } }
-        ]
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    iniciado: actividad_aggregate(
-      where: {
-        # accion_id: { _eq: $accionId }
-        metadatos: { _contains: { estatus: "iniciado" } }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    completo: actividad_aggregate(
-      where: {
-        # accion_id: { _eq: $accionId }
-        metadatos: { _contains: { estatus: "completo" } }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    verificado: actividad_aggregate(
-      where: {
-        # accion_id: { _eq: $accionId }
-        metadatos: { _contains: { estatus: "verificado" } }
-      }
-    ) {
-      aggregate {
-        count
+  query Stats {
+    compromisos: compromiso(order_by: { orden: asc }) {
+      slug
+      titulo
+      acciones {
+        total: actividades_aggregate {
+          aggregate {
+            count
+          }
+        }
+        ninguno: actividades_aggregate(
+          where: {
+            _or: [
+              { metadatos: { _contains: { estatus: "ninguno" } } }
+              { _not: { metadatos: { _has_key: "estatus" } } }
+            ]
+          }
+        ) {
+          aggregate {
+            count
+          }
+        }
+        iniciado: actividades_aggregate(
+          where: { metadatos: { _contains: { estatus: "iniciado" } } }
+        ) {
+          aggregate {
+            count
+          }
+        }
+        completo: actividades_aggregate(
+          where: { metadatos: { _contains: { estatus: "completo" } } }
+        ) {
+          aggregate {
+            count
+          }
+        }
+        verificado: actividades_aggregate(
+          where: { metadatos: { _contains: { estatus: "verificado" } } }
+        ) {
+          aggregate {
+            count
+          }
+        }
       }
     }
   }
@@ -105,15 +103,7 @@ const CompromisoList = ({ where }) => {
     fetchPolicy: 'cache-and-network',
   });
 
-  const {
-    data: {
-      total: { aggregate: { count: total } = {} } = {},
-      ninguno: { aggregate: { count: ninguno } = {} } = {},
-      iniciado: { aggregate: { count: iniciado } = {} } = {},
-      completo: { aggregate: { count: completo } = {} } = {},
-      verificado: { aggregate: { count: verificado } = {} } = {},
-    } = {},
-  } = useQuery(ACTIVIDAD_STATS);
+  const { data: { compromisos } = {} } = useQuery(ACTIVIDAD_STATS);
 
   if (error) return <div>Error</div>;
   if (loading && !plan) return <LoadingIndicator />;
@@ -157,37 +147,48 @@ const CompromisoList = ({ where }) => {
           </Editable>
         </Grid>
 
-        <TextField
-          id="standard-full-width"
-          label=""
-          style={{ margin: 1 }}
-          placeholder="Filtra los Comprimisos Puede ser por:
+        <Grid item xs={12}>
+          <TextField
+            id="standard-full-width"
+            label=""
+            style={{ margin: 1 }}
+            placeholder="Filtra los Comprimisos Puede ser por:
           Dependencia Responsable, Institución de Organización Civil Responsable o
           Miembro del comité coordinador"
-          helperText="Control para filtrar y/o ordenar compromisos"
-          fullWidth
-          margin="normal"
-          name="search"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
+            helperText="Control para filtrar y/o ordenar compromisos"
+            fullWidth
+            margin="normal"
+            name="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </Grid>
 
-        <Sortable
-          items={plan.compromisos}
-          campoFilter="dependencia"
-          search={search}
-          itemComponent={CompromisoCard}
-          refetch={refetch}
-          typename="compromiso"
-          containerComponent={Grid}
-          containerProps={{
-            direction: 'row',
-            justify: 'space-between',
-            alignItems: 'flex-start',
-            container: true,
-          }}
-          axis="xy"
-        />
+        <Grid item xs={12}>
+          <Sortable
+            items={plan.compromisos}
+            campoFilter="dependencia"
+            search={search}
+            itemComponent={CompromisoCard}
+            refetch={refetch}
+            typename="compromiso"
+            containerComponent={Grid}
+            containerProps={{
+              direction: 'row',
+              justify: 'space-between',
+              alignItems: 'flex-start',
+              container: true,
+            }}
+            axis="xy"
+          />
+        </Grid>
+
+        {compromisos && (
+          <Grid item xs={12}>
+            <StackedBar data={compromisos} horizontal />
+            <StackedBar data={compromisos} />
+          </Grid>
+        )}
       </Grid>
     </div>
   );
