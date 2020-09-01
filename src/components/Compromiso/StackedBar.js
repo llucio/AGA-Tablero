@@ -17,7 +17,7 @@ const StackedBar = ({
   const series = [
     {
       name: 'Por iniciar',
-      color: 'lightgrey',
+      color: '#4f5357',
       data: sum('ninguno'),
     },
     {
