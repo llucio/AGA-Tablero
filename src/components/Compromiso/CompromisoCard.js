@@ -52,7 +52,10 @@ const CompromisoCard = ({ item: compromiso, index }) => {
           style={{ margin: 0, padding: 0, height: '320px' }} /// these are optional style, it is not necessary
         >
           <FrontSide style={{ padding: 0 }}>
-            <Box className="img-gradiente box-4">
+            <Box
+              className="img-gradiente box-4"
+              style={{ position: 'relative' }}
+            >
               <Link
                 to={`/compromiso/${compromiso.slug}`}
                 className="white-text shadow-text"
@@ -66,8 +69,8 @@ const CompromisoCard = ({ item: compromiso, index }) => {
                 </Typography>
                 <img
                   src="/medal.png"
-                  width={70}
-                  style={{ position: 'absolute' }}
+                  width={80}
+                  style={{ position: 'absolute', top: -10 }}
                   alt="medalla"
                 />
               </Link>
