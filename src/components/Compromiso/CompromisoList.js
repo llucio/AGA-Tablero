@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery, gql } from '@apollo/client';
 // import FuzzySearch from 'react-fuzzy';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './MultiColorProgressBar.css';
 
 const MultiColorProgressBar = ({ readings = [] }) => {

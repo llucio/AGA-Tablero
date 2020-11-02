@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { useMutation, useQuery, gql } from '@apollo/client';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import MenuMovil from './MenuMovil';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -39,7 +39,7 @@ function ElevationScroll(props) {
     target: window ? window() : undefined,
   });
 
-  return React.cloneElement(children, {
+  return cloneElement(children, {
     elevation: trigger ? 10 : 0,
   });
 }

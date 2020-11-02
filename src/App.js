@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import * as Sentry from '@sentry/browser';
 import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -62,7 +62,7 @@ const App = () => (
                 path={path}
                 exact={exact}
                 component={() => (
-                  <React.Fragment>
+                  <Fragment>
                     <MenuPrincipal />
                     <Header headerProps={headerProps} />
                     <section id="one" className="vertical-margin-top-middle">
@@ -72,7 +72,7 @@ const App = () => (
                       </Container>
                     </section>
                     <Footer />
-                  </React.Fragment>
+                  </Fragment>
                 )}
               />
             )

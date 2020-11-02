@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 

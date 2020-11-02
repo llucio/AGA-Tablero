@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';

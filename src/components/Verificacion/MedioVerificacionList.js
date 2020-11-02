@@ -1,4 +1,3 @@
-import React from 'react';
 import _ from 'lodash';
 import { loader, gql } from 'graphql.macro';
 import { useQuery, useMutation } from '@apollo/client';

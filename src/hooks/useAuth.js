@@ -11,7 +11,7 @@ const initialState = { anonymousMode: false };
 const { useGlobalState } = createGlobalState(initialState);
 
 const useAuth = () => {
-  const [keycloak, initialized] = useKeycloak();
+  const { keycloak, initialized } = useKeycloak();
   const { login, logout, authenticated, tokenParsed } = keycloak;
   const [anonymousMode, setAnonymousMode] = useGlobalState('anonymousMode');
   const { data: { usuario } = {}, loading: userLoading } = useQuery(

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { ReactRenderer } from '@atlaskit/renderer';
 import Comment, {

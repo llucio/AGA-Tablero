@@ -1,4 +1,3 @@
-import React from 'react';
 import { useMutation, gql } from '@apollo/client';
 import PrevIcon from '@material-ui/icons/SkipPrevious';
 import NextIcon from '@material-ui/icons/SkipNext';

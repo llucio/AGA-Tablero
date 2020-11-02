@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 const CompromisoCard = ({ item: compromiso, index }) => {
   const classes = useStyles();
-  const ref = useRef();
+
+  console.log(compromiso);
 
   const imageUrl =
     compromiso.metadatos?.imagen || `${defaultImage}?${compromiso.id}`;

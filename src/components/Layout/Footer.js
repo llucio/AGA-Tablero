@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
@@ -362,7 +361,7 @@ const Footer = (props) => {
                   title="Código abierto"
                 />
                 <div style={{ color: 'white' }}>
-                  AGA es un proyecto de código abierto.
+                  Este sitio es un proyecto de código abierto.
                 </div>
               </Link>
             </Box>

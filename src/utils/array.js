@@ -1,4 +1,4 @@
-eport const convertArrayToObject = (array, key) => {
+export const convertArrayToObject = (array, key) => {
   const initialValue = {};
   return array.reduce((obj, item) => {
     return {
