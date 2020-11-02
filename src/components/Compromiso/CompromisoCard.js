@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const CompromisoCard = ({ item: compromiso, index }) => {
   const classes = useStyles();
 
-  console.log(compromiso);
+  const conMedalla = false; // TODO: según comprosmiso completo/incompleto
 
   const imageUrl =
     compromiso.metadatos?.imagen || `${defaultImage}?${compromiso.id}`;
@@ -42,14 +42,9 @@ const CompromisoCard = ({ item: compromiso, index }) => {
         }}
       >
         <Flippy
-          flipOnHover={true} // default false
-          flipOnClick={false} // default false
-          flipDirection="horizontal" // horizontal or vertical
-          // isFlipped
-          // ref={() =>}
-          // ref={(r) => (flippy = r)} // to use toggle method like this.flippy.toggle()
-          // if you pass isFlipped prop component will be controlled component.
-          // and other props, which will go to div
+          flipOnHover
+          flipOnClick={false}
+          flipDirection="horizontal"
           style={{ margin: 0, padding: 0, height: '320px' }} /// these are optional style, it is not necessary
         >
           <FrontSide style={{ padding: 0 }}>
@@ -68,12 +63,14 @@ const CompromisoCard = ({ item: compromiso, index }) => {
                 >
                   {compromiso.titulo}
                 </Typography>
-                <img
-                  src="/medal.png"
-                  width={80}
-                  style={{ position: 'absolute', top: -10 }}
-                  alt="medalla"
-                />
+                {conMedalla && (
+                  <img
+                    src="/medal.png"
+                    width={80}
+                    style={{ position: 'absolute', top: -10 }}
+                    alt="medalla"
+                  />
+                )}
               </Link>
             </Box>
           </FrontSide>
@@ -84,9 +81,12 @@ const CompromisoCard = ({ item: compromiso, index }) => {
                 className="white-text"
               >
                 <Typography gutterBottom variant="body" className="image-over">
-                  <div style={{ overflow: 'hidden' }}>
-                    {compromiso.metadatos.descripcion}
-                  </div>
+                  <div
+                    style={{ overflow: 'hidden', height: '266px' }}
+                    dangerouslySetInnerHTML={{
+                      __html: compromiso.metadatos.descripcion,
+                    }}
+                  ></div>
                 </Typography>
               </Link>
             </Box>
