@@ -112,11 +112,11 @@ const CompromisoList = ({ where }) => {
   return (
     <div className="vertical-margin-bottom">
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} md={8}>
           <h2>Compromisos</h2>
           <hr className="line" />
         </Grid>
-        <Grid item xs={12} sm={4} align="right">
+        <Grid item xs={12} md={4} align="right">
           <Editable
             upload
             item={plan}
@@ -138,6 +138,7 @@ const CompromisoList = ({ where }) => {
                 color="primary"
                 aria-label="descargar plan de acción"
                 style={{ width: '300px' }}
+                variant="extended"
                 className={classes.margin}
               >
                 <DownloadIcon />
@@ -147,7 +148,7 @@ const CompromisoList = ({ where }) => {
           </Editable>
         </Grid>
 
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <TextField
             id="standard-full-width"
             label=""
@@ -162,7 +163,7 @@ const CompromisoList = ({ where }) => {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={12}>
           <Sortable
@@ -185,6 +186,8 @@ const CompromisoList = ({ where }) => {
 
         {compromisos && (
           <Grid item xs={12}>
+            <h2>Visualización de avance</h2>
+            <hr className="line" />
             <StackedBar data={compromisos} horizontal />
             <StackedBar data={compromisos} />
           </Grid>

@@ -3,7 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 const StackedBar = ({
   data,
   horizontal = false,
-  title = 'Progreso de avance',
+  title = 'Progreso de acciones y actividades por compromiso',
 }) => {
   const sum = (estatus) => {
     return data.map(({ acciones }) =>
