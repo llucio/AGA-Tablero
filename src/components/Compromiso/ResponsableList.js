@@ -64,7 +64,7 @@ const ResponsableList = ({ compromisoId }) => {
   return (
     <Grid container spacing={1}>
       {organizaciones.map((org) => (
-        <Grid item md={6}>
+        <Grid item md={6} key={org.id}>
           <Typography variant="h6">{org.nombre}</Typography>
           <List className={classes.root}>
             {org.usuarios.map((usuario) => (

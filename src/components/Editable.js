@@ -159,12 +159,10 @@ const Editable = ({
                 onChange={({ target: { value } = {} }) => handleChange(value)}
               />
             ) : html ? (
-              console.log('aiaiaiaiaiaiaiiaia') || (
-                <HtmlEditor
-                  value={value}
-                  onChange={({ target: { value } = {} }) => handleChange(value)}
-                />
-              )
+              <HtmlEditor
+                value={value}
+                onChange={({ target: { value } = {} }) => handleChange(value)}
+              />
             ) : upload ? (
               <div>
                 {value &&

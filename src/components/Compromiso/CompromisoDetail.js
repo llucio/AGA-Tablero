@@ -20,9 +20,9 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Link from '@material-ui/core/Link';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useAuth } from '../../hooks';
@@ -106,7 +106,8 @@ const CompromisoDetail = () => {
 
   if (error) return <div>Error</div>;
   if (authLoading || (loading && !compromiso)) return <LoadingIndicator />;
-  if (!compromiso) return <h1>No encontrado</h1>;
+  if (!compromiso)
+    return <h1>No se encuentra la información solicitada. Verifica la URL</h1>;
 
   return (
     <div className={classes.gridRoot}>
@@ -279,8 +280,8 @@ const CompromisoDetail = () => {
                       )
                   )
                   .map(({ key, label }, i) => (
-                    <ExpansionPanel className="elevation-0" key={i}>
-                      <ExpansionPanelSummary
+                    <Accordion className="elevation-0" key={i}>
+                      <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls={`panel-content.${key}`}
                         id={`panel-content-${key}`}
@@ -288,8 +289,8 @@ const CompromisoDetail = () => {
                         <Typography className="panel_heading extra-bold">
                           {label}
                         </Typography>
-                      </ExpansionPanelSummary>
-                      <ExpansionPanelDetails>
+                      </AccordionSummary>
+                      <AccordionDetails>
                         <Typography className="light">
                           <Editable
                             item={compromiso}
@@ -305,8 +306,8 @@ const CompromisoDetail = () => {
                             </>
                           </Editable>
                         </Typography>
-                      </ExpansionPanelDetails>
-                    </ExpansionPanel>
+                      </AccordionDetails>
+                    </Accordion>
                   ))}
             </Box>
             <Box className="pt-3">
