@@ -103,10 +103,6 @@ const Editable = ({
     setValue(value);
   };
 
-  // const handleClear = () => {
-  //   handleSubmit(null, '');
-  // };
-
   const handleToggle = (event) => {
     event.stopPropagation();
     setOpen(!open);

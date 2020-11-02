@@ -109,6 +109,9 @@ const CompromisoDetail = () => {
   if (!compromiso)
     return <h1>No se encuentra la información solicitada. Verifica la URL</h1>;
 
+  const showResponsables = false;
+  const showProgreso = false;
+
   return (
     <div className={classes.gridRoot}>
       <StickyContainer>
@@ -232,12 +235,14 @@ const CompromisoDetail = () => {
                 </Box>
               </Grid>
 
-              <Grid item xs={12}>
-                <h4>Responsables</h4>
-                <ResponsableList compromisoId={compromiso.id} />
-              </Grid>
+              {showResponsables && (
+                <Grid item xs={12}>
+                  <h4>Responsables</h4>
+                  <ResponsableList compromisoId={compromiso.id} />
+                </Grid>
+              )}
 
-              {compromiso && (
+              {compromiso && showProgreso && (
                 <Grid item xs={12}>
                   <Box>
                     <h4>Progreso del compromiso</h4>
