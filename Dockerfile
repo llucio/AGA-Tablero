@@ -24,7 +24,7 @@ RUN GENERATE_SOURCEMAP=false yarn run build --production
 RUN echo $KEYCLOAK_CLIENT_CONFIG > build/keycloak.json
 
 # Fase II: Ejecución
-FROM nginx:1.16-alpine
+FROM nginx:1.18-alpine
 
 # Copiar distribuible a directorio configurado en nginx
 COPY --from=build /app/build /www
