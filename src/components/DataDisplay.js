@@ -1,5 +1,13 @@
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import {
+  isArray,
+  isBoolean,
+  isPlainObject,
+  isString,
+  has,
+  get,
+  keys,
+} from 'lodash';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import RawHtml from './RawHtml';
@@ -15,14 +23,13 @@ const DataDisplay = ({ data, ...rest }) => {
   } = rest;
 
   // Un objeto key/value renderea llave y un DataDisplay recursivo con el valor
-  if (_.isPlainObject(data)) {
-    const dataKeys = _.keys(keyLabels || data).filter((key) =>
-      _.has(data, key)
-    );
+  if (isPlainObject(data)) {
+    const dataKeys = keys(keyLabels || data).filter((key) => has(data, key));
+
     return dataKeys.map((key) => (
       <Row key={key}>
         <Col xs="3">
-          <Label>{_.get(keyLabels || {}, key, key)}</Label>
+          <Label>{get(keyLabels || {}, key, key)}</Label>
         </Col>
         <Col>
           <DataDisplay data={data[key]} {...rest} />
@@ -32,7 +39,7 @@ const DataDisplay = ({ data, ...rest }) => {
   }
 
   // Una lista de valores renderea DataDisplay recursivamente
-  else if (_.isArray(data)) {
+  else if (isArray(data)) {
     return (
       <Row>
         {data.map((value) => (
@@ -45,12 +52,12 @@ const DataDisplay = ({ data, ...rest }) => {
   }
 
   // Un Boolean renderea el texto "Sí" o "No"
-  else if (_.isBoolean(data)) {
+  else if (isBoolean(data)) {
     return <DataDisplay data={data ? 'Sí' : 'No'} {...rest} />;
   }
 
   // Un String renderea un párrafo
-  else if (_.isString(data)) {
+  else if (isString(data)) {
     return (
       <RawHtml as="span" className="compromiso-content">
         {data}
@@ -60,7 +67,7 @@ const DataDisplay = ({ data, ...rest }) => {
 
   // Valor de tipo desconocido
   else {
-    console.error('Unexpected data', data);
+    console.error('Unexpected type of: ', data);
     return null;
   }
 };

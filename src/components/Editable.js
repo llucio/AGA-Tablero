@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { get } from 'lodash';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import ColorHash from 'color-hash';
 import { makeStyles } from '@material-ui/core/styles';
@@ -66,6 +66,9 @@ const Editable = ({
   const { administrador } = useAuth();
   const [value, setValue] = useState();
   const [field, subField] = path.split('.');
+  const [executeMutation] = useMutation(
+    getMutation({ typename, field, subField, valueType })
+  );
   const { data: { queryResult } = {} } = useQuery(
     getQuery({ typename, field, subField }),
     {
@@ -73,10 +76,6 @@ const Editable = ({
       skip: !id || (open && !administrador),
       fetchPolicy: 'cache-and-network',
     }
-  );
-
-  const [executeMutation] = useMutation(
-    getMutation({ typename, field, subField, valueType })
   );
 
   const handleSubmit = (event, val) => {
@@ -110,104 +109,104 @@ const Editable = ({
 
   useEffect(() => {
     if (queryResult) {
-      setValue(_.get(queryResult, path, ''));
+      setValue(get(queryResult, path, ''));
     }
   }, [queryResult, path, open]);
 
   if (!administrador) {
-    return !adminOnly && !!value && <span>{children}</span>;
-  }
-
-  return (
-    <div
-      style={administrador ? { borderColor: colorHash.hex(typename) } : {}}
-      className={administrador ? classes.adminWrapper : ''}
-      onClick={(event) => event.stopPropagation()}
-    >
-      {!open && !!value && (children || value)}
-      <div className={classes.root}>
-        <IconButton
-          fontSize="small"
-          onClick={handleToggle}
-          color={open ? 'secondary' : 'primary'}
-          className={classes.iconButton}
-        >
-          {open ? <CloseIcon /> : <EditIcon />}
-        </IconButton>
-        {!open && (
-          <span className={classes.editLabel}>
-            <small>{label || subField || field}</small>
-          </span>
-        )}
-        {open && (
-          <Fragment>
-            {!!type ? (
-              <Input
-                type={type}
-                value={
-                  type === 'date'
-                    ? value && moment(value).utc().format(moment.HTML5_FMT.DATE)
-                    : value
-                }
-                autoFocus
-                label={label || subField || field}
-                placeholder={label || subField || field}
-                onChange={({ target: { value } = {} }) => handleChange(value)}
-              />
-            ) : html ? (
-              <HtmlEditor
-                value={value}
-                onChange={({ target: { value } = {} }) => handleChange(value)}
-              />
-            ) : upload ? (
-              <div>
-                {value &&
-                  (uploadType === 'image' ? (
-                    <img src={value} height={100} alt="imagen" />
-                  ) : (
-                    <div>
-                      Archivo actual:
-                      <br />
-                      <a
-                        href={value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        download
-                      >
-                        {value}
-                      </a>
-                    </div>
-                  ))}
-                <UploadButton
-                  value={value}
-                  handleChange={(value) => {
-                    setValue(value);
-                    handleSubmit(null, value);
-                  }}
+    return !adminOnly && <span>{children}</span>;
+  } else
+    return (
+      <div
+        style={administrador ? { borderColor: colorHash.hex(typename) } : {}}
+        className={administrador ? classes.adminWrapper : ''}
+        onClick={(event) => event.stopPropagation()}
+      >
+        {!open && !!value && (children || value)}
+        <div className={classes.root}>
+          <IconButton
+            fontSize="small"
+            onClick={handleToggle}
+            color={open ? 'secondary' : 'primary'}
+            className={classes.iconButton}
+          >
+            {open ? <CloseIcon /> : <EditIcon />}
+          </IconButton>
+          {!open && (
+            <span className={classes.editLabel}>
+              <small>{label || subField || field}</small>
+            </span>
+          )}
+          {open && (
+            <Fragment>
+              {!!type ? (
+                <Input
+                  type={type}
+                  value={
+                    type === 'date'
+                      ? value &&
+                        moment(value).utc().format(moment.HTML5_FMT.DATE)
+                      : value
+                  }
+                  autoFocus
+                  label={label || subField || field}
+                  placeholder={label || subField || field}
+                  onChange={({ target: { value } = {} }) => handleChange(value)}
                 />
-              </div>
-            ) : (
-              <TextareaAutosize
-                value={value}
-                autoFocus
-                aria-label="minimum height"
-                rows={1}
-                label={label || subField || field}
-                placeholder={label || subField || field}
-                onChange={({ target: { value } = {} }) => handleChange(value)}
-              />
-            )}
-            <IconButton onClick={handleSubmit} className={classes.iconButton}>
-              <SaveIcon color="success" />
-            </IconButton>
-            {/*<IconButton onClick={handleClear} className={classes.iconButton}>
+              ) : html ? (
+                <HtmlEditor
+                  value={value}
+                  onChange={({ target: { value } = {} }) => handleChange(value)}
+                />
+              ) : upload ? (
+                <div>
+                  {value &&
+                    (uploadType === 'image' ? (
+                      <img src={value} height={100} alt="imagen" />
+                    ) : (
+                      <div>
+                        Archivo actual:
+                        <br />
+                        <a
+                          href={value}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          download
+                        >
+                          {value}
+                        </a>
+                      </div>
+                    ))}
+                  <UploadButton
+                    value={value}
+                    handleChange={(value) => {
+                      setValue(value);
+                      handleSubmit(null, value);
+                    }}
+                  />
+                </div>
+              ) : (
+                <TextareaAutosize
+                  value={value}
+                  autoFocus
+                  aria-label="minimum height"
+                  rows={1}
+                  label={label || subField || field}
+                  placeholder={label || subField || field}
+                  onChange={({ target: { value } = {} }) => handleChange(value)}
+                />
+              )}
+              <IconButton onClick={handleSubmit} className={classes.iconButton}>
+                <SaveIcon color="success" />
+              </IconButton>
+              {/*<IconButton onClick={handleClear} className={classes.iconButton}>
               <ClearIcon />
             </IconButton>*/}
-          </Fragment>
-        )}
+            </Fragment>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 const getQuery = ({ typename, field, subField }) => {
