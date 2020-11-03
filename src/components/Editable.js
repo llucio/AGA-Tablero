@@ -215,6 +215,7 @@ const getQuery = ({ typename, field, subField }) => {
       queryResult: ${typename}_by_pk(
         id: $id
       ) {
+        id
         ${field}
       }
     }
