@@ -64,7 +64,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   button: {
-    margin: theme.spacing(1),
+    width: '90% !important',
+    marginTop: '2em',
   },
   input: {
     display: 'none',
@@ -75,7 +76,14 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     marginTop: theme.spacing(1),
   },
+  link: {
+    borderTop: '1px solid black',
+    marginBottom: '20px',
+    display: 'block',
+  },
 }));
+
+const comentariosEnabled = false;
 
 const AgaTooltip = withStyles((theme) => ({
   tooltip: {
@@ -149,7 +157,7 @@ const CompromisoDetail = () => {
                     axis="y"
                     itemComponent={({ item: { titulo, id } }) => (
                       <div key={`sidebar-${id}`} className={classes.margin}>
-                        <Link href={`#accion-${id}`}>
+                        <Link href={`#accion-${id}`} className={classes.link}>
                           {titulo || 'Sin título'}
                         </Link>
                       </div>
@@ -172,7 +180,7 @@ const CompromisoDetail = () => {
                       {compromiso.metadatos.descarga && (
                         <Fab
                           variant="extended"
-                          size="large"
+                          size="medium"
                           color="primary"
                           className={classes.button}
                           href={compromiso.metadatos.descarga}
@@ -315,11 +323,13 @@ const CompromisoDetail = () => {
                     </Accordion>
                   ))}
             </Box>
-            <Box className="pt-3">
-              <h2>Discusión y comentarios</h2>
-              <hr className="line" />
-              <Conversacion item={compromiso} />
-            </Box>
+            {comentariosEnabled && (
+              <Box className="pt-3">
+                <h2>Discusión y comentarios</h2>
+                <hr className="line" />
+                <Conversacion item={compromiso} />
+              </Box>
+            )}
             <Box className="pt-4">
               <h2>Acciones clave</h2>
               <hr className="line" />

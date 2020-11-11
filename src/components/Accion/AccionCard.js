@@ -29,7 +29,11 @@ const AccionCard = ({ item: accion, refetch }) => {
   return (
     <Box className={classes.panel}>
       <Box className="">
-        <a name={`accion-${accion.id}`} className="nameTopSpacing" />
+        <a
+          name={`accion-${accion.id}`}
+          style={{ paddingTop: '5em' }}
+          className="nameTopSpacing"
+        />
         <h4 className="extra-bold">
           <Editable
             item={accion}
@@ -40,7 +44,8 @@ const AccionCard = ({ item: accion, refetch }) => {
             <span>{accion.titulo || 'Sin título'}</span>
           </Editable>
         </h4>
-        <div>
+        <hr className="line" />
+        <div style={{ fontWeight: 'bold', fontSize: '1.2em' }}>
           <Editable
             item={accion}
             path="ponderacion"
@@ -50,20 +55,22 @@ const AccionCard = ({ item: accion, refetch }) => {
               refetch();
             }}
           >
-            Ponderación <span>{accion.ponderacion}%</span>
+            Ponderación: <span>{accion.ponderacion}%</span>
           </Editable>
         </div>
-        <Box>
+        <Box style={{ margin: '1em 0 1em 0' }}>
           <Button
             to={`/compromiso/${compromisoSlug}/${accion.id}`}
             component={Link}
             color="primary"
             className="blue-grey lighten-5"
+            style={{ padding: '0.5em 1em' }}
           >
             <LinkIcon className={classes.extendedIcon} />
-            Detalles y avance
+            Ver detalles y avance
           </Button>
         </Box>
+        <h5 style={{ fontWeight: 'bold' }}>Actividades:</h5>
         <Box>
           <ActividadList
             accionId={accion.id}

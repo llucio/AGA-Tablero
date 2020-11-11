@@ -55,8 +55,17 @@ const StackedBar = ({
     title: {
       text: title,
     },
+    yaxis: {
+      labels: {
+        maxWidth: 400,
+      },
+    },
     xaxis: {
-      categories: data.map(({ slug }) => slug.toUpperCase().replace(/-/g, ' ')),
+      categories: data.map(({ slug, titulo }) => titulo),
+      labels: {
+        trim: false,
+        hideOverlappingLabels: false,
+      },
     },
     tooltip: {
       y: {

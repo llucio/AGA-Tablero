@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery, gql } from '@apollo/client';
-// import FuzzySearch from 'react-fuzzy';
+import Button from '@material-ui/core/Button';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import LoadingIndicator from '../LoadingIndicator';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -86,6 +86,8 @@ const AgaTooltip = withStyles((theme) => ({
 
 const LIST_QUERY = loader('../../queries/CompromisoList.graphql');
 
+const enableFiltros = false;
+
 const CompromisoList = ({ where }) => {
   const classes = useStyles();
 
@@ -148,22 +150,24 @@ const CompromisoList = ({ where }) => {
           </Editable>
         </Grid>
 
-        {/* <Grid item xs={12}>
-          <TextField
-            id="standard-full-width"
-            label=""
-            style={{ margin: 1 }}
-            placeholder="Filtra los Comprimisos Puede ser por:
+        {enableFiltros && (
+          <Grid item xs={12}>
+            <TextField
+              id="standard-full-width"
+              label=""
+              style={{ margin: 1 }}
+              placeholder="Filtra los Comprimisos Puede ser por:
           Dependencia Responsable, Institución de Organización Civil Responsable o
           Miembro del comité coordinador"
-            helperText="Control para filtrar y/o ordenar compromisos"
-            fullWidth
-            margin="normal"
-            name="search"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </Grid> */}
+              helperText="Control para filtrar y/o ordenar compromisos"
+              fullWidth
+              margin="normal"
+              name="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
+          </Grid>
+        )}
 
         <Grid item xs={12}>
           <Sortable
@@ -186,10 +190,23 @@ const CompromisoList = ({ where }) => {
 
         {compromisos && (
           <Grid item xs={12}>
-            <h2>Visualización de avance</h2>
+            <h2>
+              Avance y validación del cumplimiento
+              <Button
+                href="https://storage.apps.funcionpublica.gob.mx/descarga/AGACodigoColores.pdf"
+                target="_blank"
+                rel="noreferrer noopener"
+                variant="outlined"
+                className="blue-grey lighten-5"
+                style={{ padding: '0.5em 1em', marginLeft: '2em' }}
+              >
+                <DownloadIcon className={classes.extendedIcon} />
+                Código de colores
+              </Button>
+            </h2>
             <hr className="line" />
+
             <StackedBar data={compromisos} horizontal />
-            <StackedBar data={compromisos} />
           </Grid>
         )}
       </Grid>
