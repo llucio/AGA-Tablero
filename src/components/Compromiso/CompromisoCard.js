@@ -82,7 +82,7 @@ const CompromisoCard = ({ item: compromiso, index }) => {
               >
                 <Typography gutterBottom variant="body" className="image-over">
                   <div
-                    style={{ overflow: 'hidden', height: '266px' }}
+                    style={{ overflow: 'auto', height: '266px' }}
                     dangerouslySetInnerHTML={{
                       __html: compromiso.metadatos.descripcion,
                     }}
