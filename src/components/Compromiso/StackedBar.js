@@ -70,7 +70,7 @@ const StackedBar = ({
     tooltip: {
       y: {
         formatter: function (val) {
-          return `${val} puntos de avance`;
+          return ``;
         },
       },
       x: {

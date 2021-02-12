@@ -127,7 +127,7 @@ const CompromisoList = ({ where }) => {
             onUpdate={refetch}
           >
             <AgaTooltip
-              title="Descarga de las minutas de progreso"
+              title="Descarga las minutas de las sesiones de los grupos de trabajo"
               aria-label="descarga"
               placement="left"
             >
