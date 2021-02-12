@@ -115,11 +115,37 @@ const CompromisoList = ({ where }) => {
   return (
     <div className="vertical-margin-bottom">
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={6}>
           <h2>Compromisos</h2>
           <hr className="line" />
         </Grid>
-        <Grid item xs={12} md={4} align="right">
+        <Grid item xs={12} md={6} align="right">
+          <Editable
+            item={plan}
+            label="Descarga de minutas"
+            path="metadatos.minutas"
+            onUpdate={refetch}
+          >
+            <AgaTooltip
+              title="Descarga de las minutas de progreso"
+              aria-label="descarga"
+              placement="left"
+            >
+              <Fab
+                href={plan.metadatos?.minutas}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                color="info"
+                aria-label="descargar minutas"
+                variant="extended"
+                className={classes.margin}
+              >
+                <DownloadIcon />
+                Ver minutas
+              </Fab>
+            </AgaTooltip>
+          </Editable>
           <Editable
             upload
             item={plan}
