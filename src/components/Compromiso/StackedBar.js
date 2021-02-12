@@ -8,7 +8,7 @@ const StackedBar = ({
   const sum = (estatus) => {
     return data.map(({ acciones }) =>
       acciones.reduce((acc, curr) => {
-        return acc + curr[estatus].aggregate.count;
+        return acc + curr[estatus].aggregate.count * curr.ponderacion;
       }, 0)
     );
   };

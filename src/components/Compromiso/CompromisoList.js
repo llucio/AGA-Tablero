@@ -20,6 +20,7 @@ const ACTIVIDAD_STATS = gql`
       slug
       titulo
       acciones {
+        ponderacion
         total: actividades_aggregate {
           aggregate {
             count
