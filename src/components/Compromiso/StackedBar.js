@@ -59,9 +59,13 @@ const StackedBar = ({
       text: title,
     },
     yaxis: {
+      decimalsInFloat: 1,
       labels: {
         maxWidth: 400,
       },
+    },
+    dataLabels: {
+      formatter: (val) => `${Math.round(val * 100 + Number.EPSILON) / 100} %`,
     },
     xaxis: {
       categories: data.map(({ slug, titulo }) => titulo),
@@ -72,9 +76,7 @@ const StackedBar = ({
     },
     tooltip: {
       y: {
-        formatter: function (val) {
-          return `${Math.round(val * 100 + Number.EPSILON) / 100} %`;
-        },
+        formatter: (val) => `${Math.round(val * 100 + Number.EPSILON) / 100} %`,
       },
       x: {
         sbow: true,
