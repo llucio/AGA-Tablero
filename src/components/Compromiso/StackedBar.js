@@ -73,7 +73,7 @@ const StackedBar = ({
     tooltip: {
       y: {
         formatter: function (val) {
-          return ``;
+          return `${Math.round(val * 100 + Number.EPSILON) / 100} %`;
         },
       },
       x: {
