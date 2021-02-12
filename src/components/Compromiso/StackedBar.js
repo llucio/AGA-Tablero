@@ -15,14 +15,9 @@ const StackedBar = ({
 
   const series = [
     {
-      name: 'Por iniciar',
-      color: '#4f5357',
-      data: sum('ninguno'),
-    },
-    {
-      name: 'Iniciados',
-      color: '#f89d45',
-      data: sum('iniciado'),
+      name: 'Verificados',
+      color: '#13a758',
+      data: sum('verificado'),
     },
     {
       name: 'Completados',
@@ -30,9 +25,14 @@ const StackedBar = ({
       data: sum('completo'),
     },
     {
-      name: 'Verificados',
-      color: '#13a758',
-      data: sum('verificado'),
+      name: 'Iniciados',
+      color: '#f89d45',
+      data: sum('iniciado'),
+    },
+    {
+      name: 'Por iniciar',
+      color: '#4f5357',
+      data: sum('ninguno'),
     },
   ];
 
