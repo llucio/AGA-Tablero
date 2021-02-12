@@ -5,13 +5,16 @@ const StackedBar = ({
   horizontal = false,
   title = 'Progreso de acciones y actividades por compromiso',
 }) => {
-  const sum = (estatus) => {
-    return data.map(({ acciones }) =>
-      acciones.reduce((acc, curr) => {
-        return acc + curr[estatus].aggregate.count * curr.ponderacion;
+  const sum = (estatus) =>
+    data.map(({ acciones }) =>
+      acciones.reduce((total, accion) => {
+        return (
+          total +
+          (accion[estatus].aggregate.count * accion.ponderacion) /
+            accion.total.aggregate.count
+        );
       }, 0)
     );
-  };
 
   const series = [
     {
