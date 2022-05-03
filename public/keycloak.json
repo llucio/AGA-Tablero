@@ -1,6 +1,6 @@
 {
   "realm": "aga",
-  "auth-server-url": "https://aga-keycloak.k8s.funcionpublica.gob.mx/auth/",
+  "auth-server-url": "https://aga-keycloak2.apps.funcionpublica.gob.mx/auth/",
   "ssl-required": "external",
   "resource": "web-app",
   "public-client": true,
